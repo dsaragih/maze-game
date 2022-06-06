@@ -13,7 +13,7 @@ public class Session {
                 //get shit
                 System.out.print("Login:\nUsername: ");
                 username = in.nextLine();
-                System.out.print("Password");
+                System.out.print("Password:");
                 password = in.nextLine();
                 this.user = UserManager.login(username, password);
             } while (user != null);
