@@ -2,16 +2,15 @@ public class User {
     //variables
     private String userName;
     private String password;
-    private final int userid = lastid;
+    private final int userid;
     private boolean admin;
-    private boolean temporarySuspended;
-
+    private boolean temporarySuspended = false;
     //Constructor
-    public User(String userName, String password, boolean admin){
+    public User(String userName, String password, boolean admin, int userid){
         this.userName = userName;
         this.password = password;
         this.admin = admin;
-        this.temporarySuspended = false;
+        this.userid = userid;
     }
     //getters and setters
     public String getUserName(){
@@ -31,15 +30,5 @@ public class User {
     }
     public void setUserName(String newUserName){
         userName = newUserName;
-    }
-    public void banUser(String name) {
-        if (this.admin){
-            UserManager.banUser(name);
-        }
-    }
-    public void temporarybanUser(String name, int time) {
-        if (this.admin){
-            UserManager.temporaryBanUser(name, time);
-        }
     }
 }
