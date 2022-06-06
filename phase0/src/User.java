@@ -3,10 +3,12 @@ public class User {
     private String userName;
     private String password;
     private final int userid = lastid;
+    private boolean admin;
     //Constructor
-    public User(String userName, String password){
+    public User(String userName, String password, boolean admin){
         this.userName = userName;
         this.password = password;
+        this.admin = admin;
     }
     //getters and setters
     public String getUserName(){
@@ -17,6 +19,9 @@ public class User {
     }
     public int getUserid(){
         return userid;
+    }
+    public boolean isAdmin(){
+        return admin;
     }
     public void setPassword(String newPassword){
         password = newPassword;
