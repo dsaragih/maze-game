@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Session {
-
+    private User user;
     public Session(){
 
     }
