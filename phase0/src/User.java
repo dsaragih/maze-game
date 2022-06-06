@@ -2,7 +2,7 @@ public class User {
     //variables
     private String userName;
     private String password;
-    private final int userid = lastid;
+    private int userid;
     private boolean admin;
     //Constructor
     public User(String userName, String password, boolean admin){
