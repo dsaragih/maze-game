@@ -1,3 +1,3 @@
-public class AdminUser {
+public class AdminUser extends User{
 
 }
