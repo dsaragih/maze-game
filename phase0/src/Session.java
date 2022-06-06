@@ -20,7 +20,7 @@ public class Session {
 
                 System.out.print("Username: ");
                 username = in.nextLine();
-                System.out.print("Password:");
+                System.out.print("Password: ");
                 password = in.nextLine();
                 user = UserManager.login(username, password);
 
@@ -36,7 +36,7 @@ public class Session {
                 System.out.print("Username: ");
                 username = in.nextLine();
 
-                System.out.print("Password:");
+                System.out.print("Password: ");
                 password = in.nextLine();
 
                 if(!UserManager.addUser(username, password,false)){

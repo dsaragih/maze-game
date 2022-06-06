@@ -14,6 +14,7 @@ public class UserManager {
             }
         }
         User newUser = new User(userName, password, isAdmin, lastId);
+        users.add(newUser);
         ++lastId;
         return true;
     }
