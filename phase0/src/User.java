@@ -12,6 +12,7 @@ public class User {
         this.admin = admin;
         this.userid = userid;
     }
+
     //getters and setters
     public String getUserName(){
         return userName;

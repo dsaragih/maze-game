@@ -21,7 +21,7 @@ public class UserManager {
 
     public static User login(String userName, String password){
         for (User user : users){
-            if (user.getUserName() == userName && user.getPassword() == password){
+            if (user.getUserName().equals(userName) && user.getPassword().equals(password)){
                 return user;
             }
         }
