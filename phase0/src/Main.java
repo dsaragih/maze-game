@@ -1,9 +1,6 @@
 import java.util.Scanner;
 public class Main {
     User user;
-    UserManager manager = new UserManager();
-
-
 
     public void run () {
         Scanner in = new Scanner(System.in);
@@ -15,7 +12,7 @@ public class Main {
                 username = in.nextLine();
                 System.out.print("Password");
                 password = in.nextLine();
-                this.user = manager.login(username, password);
+                this.user = UserManager.login(username, password);
             } while (user != null);
 
         }
