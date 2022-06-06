@@ -14,7 +14,8 @@ public class UserManager {
                 return false;
             }
         }
-        User newUser = new User(userName, password, isAdmin);
+        User newUser = new User(userName, password, isAdmin, lastId);
+        ++lastId;
         return true;
     }
 
