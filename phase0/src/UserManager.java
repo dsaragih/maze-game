@@ -1,10 +1,7 @@
 import java.util.ArrayList;
 
 public class UserManager {
-    //variables
-    //constructors
-    //getters and setters
-    //methods
+
     private static int lastId = 0;
     private static ArrayList<User> users = new ArrayList<User>();
     public static boolean addUser(String userName, String password, boolean isAdmin){
@@ -22,6 +19,7 @@ public class UserManager {
     public static User login(String userName, String password){
         for (User user : users){
             if (user.getUserName().equals(userName) && user.getPassword().equals(password)){
+                user.recordLoginDate();
                 return user;
             }
         }

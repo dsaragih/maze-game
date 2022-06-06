@@ -1,11 +1,48 @@
+import java.util.Date;
 import java.util.Scanner;
 
 public class Session {
     private User user;
-    public Session(){
-    }
     public void run () {
         Scanner in = new Scanner(System.in);
+        getUserFromConsole(in);
+
+        System.out.println("");
+        System.out.println("Welcome " + user.getUserName());
+        System.out.println("Choose from the following commands:");
+        System.out.println("log, AddUser, DeleteUser, BanUser, UnbanUser, UnbanUser, Exit");
+        while (true) {
+            String cmd = in.nextLine();
+            if (cmd == "log") {
+                System.out.println();
+                for(Date logInDate : user.getLoginDates()){
+                    System.out.println(logInDate);
+                }
+            }
+            if (cmd == "AddUser") {
+
+            }
+            if (cmd == "DeleteUser") {
+
+            }
+            if (cmd == "BanUser") {
+
+            }
+            if (cmd == "UnbanUser") {
+
+            }
+            if (cmd.equals("Exit")){
+                user = null;
+                System.out.println("You have been logged out");
+                System.out.println("========================");
+
+                getUserFromConsole(in);
+            }
+
+        }
+    }
+
+    private void getUserFromConsole(Scanner in) {
         String username = "", password = "";
 
         while(user == null)
@@ -47,31 +84,6 @@ public class Session {
                     System.out.println("User added!");
                 }
             }
-        }
-
-
-        System.out.println("Welcome " + user.getUserName());
-        while (true) {
-            String cmd = in.nextLine();
-            if (cmd == "log") {
-                //do stuff
-            }
-            if (cmd == "AddUser") {
-
-            }
-            if (cmd == "DeleteUser") {
-
-            }
-            if (cmd == "BanUser") {
-
-            }
-            if (cmd == "UnbanUser") {
-
-            }
-            if (cmd.equals("Exit")){
-                return;
-            }
-
         }
     }
 }

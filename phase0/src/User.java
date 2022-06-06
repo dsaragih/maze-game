@@ -1,16 +1,23 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Date;
+
 public class User {
-    //variables
     private String userName;
     private String password;
     private final int userid;
     private boolean admin;
-    private boolean temporarySuspended = false;
-    //Constructor
+
+    private Date signUpDate;
+    private ArrayList<Date> loginDates = new ArrayList<Date>();
+
     public User(String userName, String password, boolean admin, int userid){
         this.userName = userName;
         this.password = password;
         this.admin = admin;
         this.userid = userid;
+
+        signUpDate = new Date();
     }
 
     //getters and setters
@@ -19,6 +26,13 @@ public class User {
     }
     public String getPassword(){
         return password;
+    }
+    public void recordLoginDate(){
+        loginDates.add(new Date());
+    }
+
+    public ArrayList<Date> getLoginDates(){
+        return loginDates;
     }
     public int getUserid(){
         return userid;
