@@ -6,18 +6,19 @@ public class User {
     private String userName;
     private String password;
     private final int userid;
-    private boolean admin;
+    private final boolean admin;
 
-    private Date signUpDate;
-    private ArrayList<Date> loginDates = new ArrayList<Date>();
+    private final Date signUpDate;
+    private ArrayList<Date> loginDates;
+
 
     public User(String userName, String password, boolean admin, int userid){
         this.userName = userName;
         this.password = password;
         this.admin = admin;
         this.userid = userid;
-
         signUpDate = new Date();
+        loginDates = new ArrayList<>();
     }
 
     //getters and setters
@@ -45,5 +46,15 @@ public class User {
     }
     public void setUserName(String newUserName){
         userName = newUserName;
+    }
+    public void banUser(int id){
+        if (admin){
+            UserManager.delete(id);
+        }
+    }
+    public void suspendUser(int id, Date date){
+        if (admin){
+            UserManager.suspend(id, date);
+        }
     }
 }
