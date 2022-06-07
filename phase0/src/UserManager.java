@@ -5,58 +5,38 @@ import java.util.HashMap;
 public class UserManager {
 
     private static int lastId = 0;
-    private static ArrayList<User> users = new ArrayList<>();
+    private static Map<String, User> users = new HashMap<>();
     private static Map<User, Date> suspendedUsers = new HashMap<>();
     public static boolean addUser(String userName, String password, boolean isAdmin){
-        for (User oldUser : users){
-            if (oldUser.getUserName().equals(userName)){
+            if (users.get(userName) != null){
                 return false;
             }
-        }
         User newUser = new User(userName, password, isAdmin, lastId);
-        users.add(newUser);
+        users.put(userName, newUser);
         ++lastId;
         return true;
     }
 
     public static User login(String userName, String password){
-        for (User user : users){
-            Date today = new Date();
+        Date today = new Date();
 
-            if (user.getUserName().equals(userName) && user.getPassword().equals(password)
-                    && (!suspendedUsers.containsKey(user) || today.after(suspendedUsers.get(user)))){
-                user.recordLoginDate();
-                return user;
-            }
+        if (users.get(userName).getUserName().equals(userName) && users.get(userName).getPassword().equals(password)
+                && (!suspendedUsers.containsKey(users.get(userName)) || today.after(suspendedUsers.get(users.get(userName))))){
+            users.get(userName).recordLoginDate();
+            return users.get(userName);
         }
         return null;
     }
-    public static void delete(int userid){
-        User toBeDeleted = null;
-        boolean findDeleted = false;
-        for (User user: users){
-            if (user.getUserid() == userid){
-                toBeDeleted = user;
-                findDeleted = true;
-                break;
-            }
-        }
-        if (findDeleted && !toBeDeleted.isAdmin()){
-            users.remove(toBeDeleted);
+    public static void delete(String userName){
+        User toBeDeleted = users.get(userName);
+        if (toBeDeleted != null && !toBeDeleted.isAdmin()){
+            users.remove(userName);
             System.out.println("The user" + toBeDeleted.getUserName() +"is deleted.");
         }
     }
-    public static void suspend(int userid, Date date){
-        User toBeSuspended = null;
-        boolean findSuspended = false;
-        for (User user: users){
-            if (user.getUserid() == userid){
-                toBeSuspended = user;
-                findSuspended = true;
-                break;
-            }
-        }
-        if (findSuspended && !toBeSuspended.isAdmin()){
+    public static void suspend(String userName, Date date){
+        User toBeSuspended = users.get(userName);
+        if (toBeSuspended != null && !toBeSuspended.isAdmin()){
             suspendedUsers.put(toBeSuspended, date);
             System.out.println("The user" + toBeSuspended.getUserName() + "is suspended until" + date);
         }

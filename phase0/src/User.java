@@ -47,14 +47,14 @@ public class User {
     public void setUserName(String newUserName){
         userName = newUserName;
     }
-    public void banUser(int id){
+    public void banUser(String name){
         if (admin){
-            UserManager.delete(id);
+            UserManager.delete(name);
         }
     }
-    public void suspendUser(int id, Date date){
+    public void suspendUser(String name, Date date){
         if (admin){
-            UserManager.suspend(id, date);
+            UserManager.suspend(name, date);
         }
     }
 }
