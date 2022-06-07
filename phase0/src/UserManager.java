@@ -8,9 +8,9 @@ public class UserManager {
     private static Map<String, User> users = new HashMap<>();
     private static Map<User, Date> suspendedUsers = new HashMap<>();
     public static boolean addUser(String userName, String password, boolean isAdmin){
-            if (users.get(userName) != null){
-                return false;
-            }
+        if (users.get(userName) != null){
+            return false;
+        }
         User newUser = new User(userName, password, isAdmin, lastId);
         users.put(userName, newUser);
         ++lastId;
@@ -19,6 +19,10 @@ public class UserManager {
 
     public static User login(String userName, String password){
         Date today = new Date();
+
+        if (users.get(userName) == null) return null;
+        // If we try to log in an invalid user, program will crash as we will be calling
+        // .getUserName() on null. So we check deal with the null case separately.
 
         if (users.get(userName).getUserName().equals(userName) && users.get(userName).getPassword().equals(password)
                 && (!suspendedUsers.containsKey(users.get(userName)) || today.after(suspendedUsers.get(users.get(userName))))){
@@ -31,14 +35,21 @@ public class UserManager {
         User toBeDeleted = users.get(userName);
         if (toBeDeleted != null && !toBeDeleted.isAdmin()){
             users.remove(userName);
-            System.out.println("The user" + toBeDeleted.getUserName() +"is deleted.");
+            System.out.println("The user " + toBeDeleted.getUserName() +" is deleted.");
         }
     }
     public static void suspend(String userName, Date date){
         User toBeSuspended = users.get(userName);
         if (toBeSuspended != null && !toBeSuspended.isAdmin()){
             suspendedUsers.put(toBeSuspended, date);
-            System.out.println("The user" + toBeSuspended.getUserName() + "is suspended until" + date);
+            System.out.println("The user " + toBeSuspended.getUserName() + " is suspended until " + date);
         }
+    }
+
+    public static Map<String, User> getUsers() {
+        return users;
+    }
+    public static Map<User, Date> getSuspendedUsers() {
+        return suspendedUsers;
     }
 }
