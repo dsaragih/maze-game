@@ -6,7 +6,7 @@ public class UserManager {
 
     private static int lastId = 0;
     private static Map<String, User> users = new HashMap<>();
-    private static Map<User, Date> suspendedUsers = new HashMap<>();
+    private static Map<String, Date> suspendedUsers = new HashMap<>();
     public static boolean addUser(String userName, String password, boolean isAdmin){
         if (users.get(userName) != null){
             return false;
@@ -25,7 +25,7 @@ public class UserManager {
         // .getUserName() on null. So we check deal with the null case separately.
 
         if (users.get(userName).getUserName().equals(userName) && users.get(userName).getPassword().equals(password)
-                && (!suspendedUsers.containsKey(users.get(userName)) || today.after(suspendedUsers.get(users.get(userName))))){
+                && (!suspendedUsers.containsKey(userName) || today.after(suspendedUsers.get(userName)))){
             users.get(userName).recordLoginDate();
             return users.get(userName);
         }
@@ -37,19 +37,29 @@ public class UserManager {
             users.remove(userName);
             System.out.println("The user " + toBeDeleted.getUserName() +" is deleted.");
         }
+        else System.out.println("Unable to delete " + userName);
     }
     public static void suspend(String userName, Date date){
         User toBeSuspended = users.get(userName);
-        if (toBeSuspended != null && !toBeSuspended.isAdmin()){
-            suspendedUsers.put(toBeSuspended, date);
+        if (toBeSuspended != null && !toBeSuspended.isAdmin()) {
+            suspendedUsers.put(userName, date);
             System.out.println("The user " + toBeSuspended.getUserName() + " is suspended until " + date);
         }
+        else System.out.println("Unable to suspend " + userName);
+    }
+
+    public static void unban(String userName) {
+        if (suspendedUsers.containsKey(userName)) {
+            suspendedUsers.remove(userName);
+            System.out.println("The user " + userName + " has been unbanned.");
+        }
+        else System.out.println("Unable to unban " + userName);
     }
 
     public static Map<String, User> getUsers() {
         return users;
     }
-    public static Map<User, Date> getSuspendedUsers() {
+    public static Map<String, Date> getSuspendedUsers() {
         return suspendedUsers;
     }
 }

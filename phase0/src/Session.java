@@ -1,9 +1,13 @@
+import org.w3c.dom.CDATASection;
+
+import java.text.ParseException;
 import java.util.Date;
 import java.util.Scanner;
+import java.text.SimpleDateFormat;
 
 public class Session {
     private User user;
-    public void run () {
+    public void run () throws ParseException {
         Scanner in = new Scanner(System.in);
         getUserFromConsole(in);
 
@@ -13,23 +17,55 @@ public class Session {
         System.out.println("log, AddUser, DeleteUser, BanUser, UnbanUser, UnbanUser, Exit");
         while (true) {
             String cmd = in.nextLine();
-            if (cmd == "log") {
+            if (cmd.equals("log")) {
                 System.out.println();
                 for(Date logInDate : user.getLoginDates()){
                     System.out.println(logInDate);
                 }
             }
-            if (cmd == "AddUser") {
-
+            if (cmd.equals("AddUser")) {
+                // All users added are never admin
+                System.out.println("Enter username: ");
+                String userName = in.nextLine();
+                System.out.println("Enter password: ");
+                String password = in.nextLine();
+                UserManager.addUser(userName, password, false);
             }
-            if (cmd == "DeleteUser") {
-
+            if (cmd.equals("DeleteUser")) {
+                if (!user.isAdmin()) {
+                    System.out.println("Unable to delete users.");
+                    continue;
+                }
+                else {
+                    System.out.println("Delete user: ");
+                    String userName = in.nextLine();
+                    UserManager.delete(userName);
+                }
             }
-            if (cmd == "BanUser") {
-
+            if (cmd.equals("BanUser")) {
+                if (!user.isAdmin()) {
+                    System.out.println("Unable to ban users.");
+                    continue;
+                }
+                else {
+                    System.out.println("Suspend user: ");
+                    String userName = in.nextLine();
+                    System.out.println("Suspend until ");
+                    String dateString = in.nextLine();
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                    UserManager.suspend(userName, formatter.parse(dateString));
+                }
             }
-            if (cmd == "UnbanUser") {
-
+            if (cmd.equals("UnbanUser")) {
+                if (!user.isAdmin()) {
+                    System.out.println("Unable to delete users.");
+                    continue;
+                }
+                else {
+                    System.out.println("Unban user: ");
+                    String userName = in.nextLine();
+                    UserManager.unban(userName);
+                }
             }
             if (cmd.equals("Exit")){
                 user = null;
@@ -76,7 +112,7 @@ public class Session {
                 System.out.print("Password: ");
                 password = in.nextLine();
 
-                if(!UserManager.addUser(username, password,false)){
+                if(!UserManager.addUser(username, password,true)){
                     System.out.println("The username " + username + " is already taken.");
                 }
                 else
