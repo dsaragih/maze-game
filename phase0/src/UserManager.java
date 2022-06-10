@@ -22,7 +22,7 @@ public class UserManager {
 
         if (users.get(userName) == null) return null;
         // If we try to log in an invalid user, program will crash as we will be calling
-        // .getUserName() on null. So we check deal with the null case separately.
+        // .getUserName() on null. So we deal with the null case separately.
 
         if (users.get(userName).getUserName().equals(userName) && users.get(userName).getPassword().equals(password)
                 && (!suspendedUsers.containsKey(userName) || today.after(suspendedUsers.get(userName)))){
