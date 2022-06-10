@@ -1,5 +1,3 @@
-import org.w3c.dom.CDATASection;
-
 import java.text.ParseException;
 import java.util.Date;
 import java.util.Scanner;
@@ -13,9 +11,10 @@ public class Session {
 
         System.out.println("");
         System.out.println("Welcome " + user.getUserName());
-        System.out.println("Choose from the following commands:");
-        System.out.println("log, AddUser, DeleteUser, BanUser, UnbanUser, UnbanUser, Exit");
+
         while (true) {
+            System.out.println("Choose from the following commands:");
+            System.out.println("log, AddUser, DeleteUser, BanUser, UnbanUser, UnbanUser, Exit");
             String cmd = in.nextLine();
             if (cmd.equals("log")) {
                 System.out.println();
