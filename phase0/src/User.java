@@ -11,7 +11,6 @@ public class User {
     private final Date signUpDate;
     private ArrayList<Date> loginDates;
 
-
     public User(String userName, String password, boolean admin, int userid){
         this.userName = userName;
         this.password = password;
