@@ -1,16 +1,16 @@
-﻿Name:Jack Sun
+﻿Name: Jack Sun
 Email Address:jialiang.sun@mail.utoronto.ca
-Contact Details discord: Jack Sun#9211
+Contact Details: discord Jack Sun#9211
 
-Name:Aaron Ma
+Name: Aaron Ma
 Email Address:aa.ma@mail.utoronto.ca
-Contact Details: use email
+Contact Details: email
 
-Name:Ian Ewing
+Name: Ian Ewing
 Email Address:ian.ewing@mail.utoronto.ca
 Contact Details: email or discord @god#5085
 
-Name:Daniel Saragih
+Name: Daniel Saragih
 Email Address:daniel.saragih@mail.utoronto.ca
 Contact Details: email or discord moronovich#7015
 
@@ -25,3 +25,7 @@ Contact details: email or discord Kevinliu#5134
 Name: Botao Su (You can also call me Brown)
 Email Address: botao.su@mail.utoronto.ca
 Contact details: email or discord BabyA7#9009
+
+Name: Ivan Vorobyov
+Email Address: ivan.vorobyov@mail.utoronto.ca
+Contact details: email or discord ic9119#7587
