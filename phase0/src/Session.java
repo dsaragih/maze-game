@@ -16,13 +16,13 @@ public class Session {
             System.out.println("Choose from the following commands:");
             System.out.println("log, AddUser, DeleteUser, BanUser, UnbanUser, UnbanUser, Exit");
             String cmd = in.nextLine();
-            if (cmd.equals("log")) {
+            if (cmd.equalsIgnoreCase("log")) {
                 System.out.println();
                 for(Date logInDate : user.getLoginDates()){
                     System.out.println(logInDate);
                 }
             }
-            if (cmd.equals("AddUser")) {
+            if (cmd.equalsIgnoreCase("AddUser")) {
                 // All users added are never admin
                 System.out.println("Enter username: ");
                 String userName = in.nextLine();
@@ -30,7 +30,7 @@ public class Session {
                 String password = in.nextLine();
                 UserManager.addUser(userName, password, false);
             }
-            if (cmd.equals("DeleteUser")) {
+            if (cmd.equalsIgnoreCase("DeleteUser")) {
                 if (!user.isAdmin()) {
                     System.out.println("Unable to delete users.");
                     continue;
@@ -41,7 +41,7 @@ public class Session {
                     UserManager.delete(userName);
                 }
             }
-            if (cmd.equals("BanUser")) {
+            if (cmd.equalsIgnoreCase("BanUser")) {
                 if (!user.isAdmin()) {
                     System.out.println("Unable to ban users.");
                     continue;
@@ -55,7 +55,7 @@ public class Session {
                     UserManager.suspend(userName, formatter.parse(dateString));
                 }
             }
-            if (cmd.equals("UnbanUser")) {
+            if (cmd.equalsIgnoreCase("UnbanUser")) {
                 if (!user.isAdmin()) {
                     System.out.println("Unable to delete users.");
                     continue;
@@ -66,7 +66,7 @@ public class Session {
                     UserManager.unban(userName);
                 }
             }
-            if (cmd.equals("Exit")){
+            if (cmd.equalsIgnoreCase("Exit")){
                 user = null;
                 System.out.println("You have been logged out");
                 System.out.println("========================");
