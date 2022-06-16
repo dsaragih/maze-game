@@ -1,12 +1,11 @@
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 import java.util.HashMap;
 public class UserManager {
 
     private static int lastId = 0;
-    private static Map<String, User> users = new HashMap<>();
-    private static Map<String, Date> suspendedUsers = new HashMap<>();
+    private static final Map<String, User> users = new HashMap<>();
+    private static final Map<String, Date> suspendedUsers = new HashMap<>();
     public static boolean addUser(String userName, String password, boolean isAdmin){
         if (users.get(userName) != null){
             return false;
@@ -19,41 +18,46 @@ public class UserManager {
 
     public static User login(String userName, String password){
         Date today = new Date();
-
-        if (users.get(userName) == null) return null;
+        User user = users.get(userName);
+        if (user == null){
+            return null;
+        }
         // If we try to log in an invalid user, program will crash as we will be calling
         // .getUserName() on null. So we deal with the null case separately.
 
-        if (users.get(userName).getUserName().equals(userName) && users.get(userName).getPassword().equals(password)
-                && (!suspendedUsers.containsKey(userName) || today.after(suspendedUsers.get(userName)))){
-            users.get(userName).recordLoginDate();
-            return users.get(userName);
+        if (user.getPassword().equals(password) && (!suspendedUsers.containsKey(userName) || today.after(suspendedUsers.get(userName)))){
+            user.recordLoginDate();
+            return user;
         }
         return null;
     }
-    public static void delete(String userName){
+    public static boolean delete(String userName){
         User toBeDeleted = users.get(userName);
         if (toBeDeleted != null && !toBeDeleted.isAdmin()){
             users.remove(userName);
-            System.out.println("The user " + toBeDeleted.getUserName() +" is deleted.");
+            return true;
         }
-        else System.out.println("Unable to delete " + userName);
+        return false;
     }
-    public static void suspend(String userName, Date date){
+    public static boolean ban(String userName, Date date){
         User toBeSuspended = users.get(userName);
         if (toBeSuspended != null && !toBeSuspended.isAdmin()) {
             suspendedUsers.put(userName, date);
-            System.out.println("The user " + toBeSuspended.getUserName() + " is suspended until " + date);
+            return true;
         }
-        else System.out.println("Unable to suspend " + userName);
+        return false;
     }
 
-    public static void unban(String userName) {
+    public static boolean unban(String userName) {
         if (suspendedUsers.containsKey(userName)) {
             suspendedUsers.remove(userName);
-            System.out.println("The user " + userName + " has been unbanned.");
+            return true;
         }
-        else System.out.println("Unable to unban " + userName);
+        return false;
+    }
+
+    public static boolean doesUserExist(String username){
+        return users.get(username) != null;
     }
 
     public static Map<String, User> getUsers() {
