@@ -1,8 +1,8 @@
-import java.lang.reflect.Array;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class User {
+public class User implements Serializable {
     private String userName;
     private String password;
     private final int userid;
