@@ -7,7 +7,13 @@ import java.util.function.Predicate;
 
 public class Session {
     private User user;
+    private InputController inputController;
     Scanner in = new Scanner(System.in);
+    public Session(){
+        this.inputController = new InputController();
+
+
+    }
 
     public void run () throws ParseException, IOException {
 
@@ -16,7 +22,7 @@ public class Session {
         writeln("");
         writeln("Welcome " + user.getUserName());
 
-        while(true){
+        while (true) {
             displayTitle("Menu");
             writeln("Choose from the following commands:");
             writeln("1) Log");
@@ -26,6 +32,8 @@ public class Session {
             writeln("5) UnbanUser");
             writeln("6) Exit");
             int input = getNumInRange(1, 6);
+
+
             switch (input) {
                 case 1 -> {
                     displayTitle("Log");
@@ -35,7 +43,7 @@ public class Session {
                 }
                 case 2 -> {
                     displayTitle("Add user");
-                    String userName = getInputFromUser("Enter username", s -> !isStringNullOrEmpty(s) && !UserManager.doesUserExist(s), "This username is already taken");
+                    String userName = getInputFromUser("Enter username", s -> !isStringNullOrEmpty(s) && !inputController.doesUserExist(s), "This username is already taken");
                     String password = getInputFromUser("Enter password", s -> !isStringNullOrEmpty(s), "The password cannot be empty");
                     if (UserManager.addUser(userName, password, false)) {
                         writeln("User added");
@@ -47,12 +55,11 @@ public class Session {
                     displayTitle("Delete user");
                     if (!user.isAdmin()) {
                         writeln("Unable to delete users.");
-                    }
-                    else {
+                    } else {
                         String userName = getInputFromUser("Enter is the username of the user you would like to delete", s -> !isStringNullOrEmpty(s) && !UserManager.doesUserExist(s), "This user does not exist.");
-                        if(UserManager.delete(userName)){
-                            writeln("The user " + userName +" is deleted.");
-                        }else{
+                        if (UserManager.delete(userName)) {
+                            writeln("The user " + userName + " is deleted.");
+                        } else {
                             writeln("Unable to delete " + userName);
                         }
                     }
@@ -61,14 +68,13 @@ public class Session {
                     displayTitle("Ban user");
                     if (!user.isAdmin()) {
                         writeln("Unable to ban users.");
-                    }
-                    else {
+                    } else {
                         String userName = getInputFromUser("Enter is the username of the user you would like to ban", s -> !isStringNullOrEmpty(s) && !UserManager.doesUserExist(s), "This user does not exist.");
                         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                         String dateString = getInputFromUser("Suspend until", s -> isValidDate(s, formatter), "This user does not exist.");
-                        if(UserManager.ban(userName, formatter.parse(dateString))){
+                        if (UserManager.ban(userName, formatter.parse(dateString))) {
                             writeln("The user " + userName + " is suspended until " + formatter.parse(dateString));
-                        }else{
+                        } else {
                             writeln("Unable to suspend " + userName);
                         }
                     }
@@ -77,12 +83,11 @@ public class Session {
                     displayTitle("Unban user");
                     if (!user.isAdmin()) {
                         writeln("Unable to delete users.");
-                    }
-                    else {
+                    } else {
                         String userName = getInputFromUser("Enter is the username of the user you would like to ban", s -> !isStringNullOrEmpty(s) && !UserManager.doesUserExist(s), "This user does not exist.");
-                        if(UserManager.unban(userName)){
+                        if (UserManager.unban(userName)) {
                             writeln("The user " + userName + " has been unbanned.");
-                        }else{
+                        } else {
                             writeln("Unable to unban " + userName);
                         }
                     }
@@ -97,7 +102,6 @@ public class Session {
             }
         }
     }
-
     private boolean isValidDate(String text, SimpleDateFormat formatter){
         try{
             formatter.parse(text);
