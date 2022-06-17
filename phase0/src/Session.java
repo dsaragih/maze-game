@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.Scanner;
@@ -8,7 +9,7 @@ public class Session {
     private User user;
     Scanner in = new Scanner(System.in);
 
-    public void run () throws ParseException {
+    public void run () throws ParseException, IOException {
 
         getUserFromConsole(in);
 
@@ -161,7 +162,7 @@ public class Session {
         writeSeparator();
     }
 
-    private void getUserFromConsole(Scanner in) {
+    private void getUserFromConsole(Scanner in) throws IOException {
         String username = "", password = "";
         int state = 0;
         while(user == null){
