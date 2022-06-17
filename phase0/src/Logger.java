@@ -1,30 +1,22 @@
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
 
 public class Logger{
+    private FileOutputStream fileOut;
 
-    public static FileWriter logWriter;
-
-    static {
-        try {
-            logWriter = new FileWriter("logins.txt");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public void logToFile(ArrayList<User> users) throws IOException {
+        fileOut = new FileOutputStream("/usersData.ser");
+        ObjectOutputStream out = new ObjectOutputStream(fileOut);
+        out.writeObject(users);
+        out.close();
+        fileOut.close();
     }
 
-    public Logger() throws IOException {
-    }
-
-    public static void addToLog(User user) throws IOException{
-
-        try {
-            logWriter.write(user.getUserName() + " " + user.getPassword() + " " + user.getUserid());
-            logWriter.write("\r\n");
-            logWriter.flush();
-        } catch (IOException e){
-            System.out.println("Exception caught.");
-        }
-
+    public ArrayList<User> readFromFile() throws IOException, ClassNotFoundException {
+        FileInputStream fileIn = new FileInputStream("/usersData.ser");
+        ObjectInputStream in = new ObjectInputStream(fileIn);
+        ArrayList<User> users = (ArrayList<User>) in.readObject();
+        in.close();
+        fileIn.close();
     }
 }
