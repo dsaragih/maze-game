@@ -7,11 +7,10 @@ import java.util.function.Predicate;
 
 public class Session {
     private User user;
-    private InputController inputController;
+    private final InputController inputController;
     Scanner in = new Scanner(System.in);
     public Session(){
         this.inputController = new InputController();
-
 
     }
 
@@ -42,66 +41,88 @@ public class Session {
                     }
                 }
                 case 2 -> {
-                    displayTitle("Add user");
-                    String userName = getInputFromUser("Enter username", s -> !isStringNullOrEmpty(s) && !inputController.doesUserExist(s), "This username is already taken");
-                    String password = getInputFromUser("Enter password", s -> !isStringNullOrEmpty(s), "The password cannot be empty");
-                    if (UserManager.addUser(userName, password, false)) {
-                        writeln("User added");
-                    } else {
-                        writeln("Unable to add user");
-                    }
+                    addUser();
                 }
                 case 3 -> {
-                    displayTitle("Delete user");
-                    if (!user.isAdmin()) {
-                        writeln("Unable to delete users.");
-                    } else {
-                        String userName = getInputFromUser("Enter is the username of the user you would like to delete", s -> !isStringNullOrEmpty(s) && !UserManager.doesUserExist(s), "This user does not exist.");
-                        if (UserManager.delete(userName)) {
-                            writeln("The user " + userName + " is deleted.");
-                        } else {
-                            writeln("Unable to delete " + userName);
-                        }
-                    }
+                    removeUser();
                 }
                 case 4 -> {
-                    displayTitle("Ban user");
-                    if (!user.isAdmin()) {
-                        writeln("Unable to ban users.");
-                    } else {
-                        String userName = getInputFromUser("Enter is the username of the user you would like to ban", s -> !isStringNullOrEmpty(s) && !UserManager.doesUserExist(s), "This user does not exist.");
-                        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-                        String dateString = getInputFromUser("Suspend until", s -> isValidDate(s, formatter), "This user does not exist.");
-                        if (UserManager.ban(userName, formatter.parse(dateString))) {
-                            writeln("The user " + userName + " is suspended until " + formatter.parse(dateString));
-                        } else {
-                            writeln("Unable to suspend " + userName);
-                        }
-                    }
+                    banUser();
                 }
                 case 5 -> {
-                    displayTitle("Unban user");
-                    if (!user.isAdmin()) {
-                        writeln("Unable to delete users.");
-                    } else {
-                        String userName = getInputFromUser("Enter is the username of the user you would like to ban", s -> !isStringNullOrEmpty(s) && !UserManager.doesUserExist(s), "This user does not exist.");
-                        if (UserManager.unban(userName)) {
-                            writeln("The user " + userName + " has been unbanned.");
-                        } else {
-                            writeln("Unable to unban " + userName);
-                        }
-                    }
+                    unbanUser();
                 }
                 case 6 -> {
                     user = null;
                     writeln("You have been logged out");
                     writeln("========================");
-
-                    getUserFromConsole(in);
+                    return;
                 }
             }
         }
     }
+    private void addUser() throws IOException{
+        displayTitle("Add user");
+        String userName = getInputFromUser("Enter username", s -> !isStringNullOrEmpty(s) && !inputController.doesUserExist(s), "This username is already taken");
+        String password = getInputFromUser("Enter password", s -> !isStringNullOrEmpty(s), "The password cannot be empty");
+        if (inputController.addUser(userName, password)) {
+            writeln("User added");
+        } else {
+            writeln("Unable to add user");
+        }
+    }
+
+    private void removeUser(){
+        displayTitle("Delete user");
+        if (!user.isAdmin()) {
+            writeln("Unable to delete users.");
+        } else {
+            String userName = getInputFromUser("Enter is the username of the user you would like to delete",
+                    s -> !isStringNullOrEmpty(s) && !inputController.doesUserExist(s),
+                    "This user does not exist.");
+            if (inputController.removeUser(userName, user)) {
+                writeln("The user " + userName + " is deleted.");
+            } else {
+                writeln("Unable to delete " + userName);
+            }
+        }
+    }
+
+    private void banUser() throws ParseException {
+        displayTitle("Ban user");
+        if (!user.isAdmin()) {
+            writeln("Unable to ban users.");
+        } else {
+            String userName = getInputFromUser("Enter is the username of the user you would like to ban", s -> !isStringNullOrEmpty(s) && !inputController.doesUserExist(s), "This user does not exist.");
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            String dateString = getInputFromUser("Suspend until", s -> isValidDate(s, formatter), "This user does not exist.");
+            if (inputController.banUser(userName, formatter.parse(dateString), user)) {
+                writeln("The user " + userName + " is suspended until " + formatter.parse(dateString));
+            } else {
+                writeln("Unable to suspend " + userName);
+            }
+        }
+    }
+
+    private void unbanUser(){
+        displayTitle("Unban user");
+        if (!user.isAdmin()) {
+            writeln("Unable to delete users.");
+        } else {
+            String userName = getInputFromUser(
+                    "Enter is the username of the user you would like to ban",
+                    s -> !isStringNullOrEmpty(s) && !inputController.doesUserExist(s),
+                    "This user does not exist.");
+            if (inputController.unbanUser(userName, user)) {
+                writeln("The user " + userName + " has been unbanned.");
+            } else {
+                writeln("Unable to unban " + userName);
+            }
+        }
+    }
+
+
+
     private boolean isValidDate(String text, SimpleDateFormat formatter){
         try{
             formatter.parse(text);
@@ -179,7 +200,7 @@ public class Session {
                     displayTitle("Login");
                     username = getInputFromUser("Enter username", s -> !isStringNullOrEmpty(s), "Username cannot be empty");
                     password = getInputFromUser("Enter password", s -> !isStringNullOrEmpty(s), "The password cannot be empty");
-                    user = UserManager.login(username, password);
+                    user = inputController.login(username, password);
 
                     if(user == null){
                         writeln("Username or password incorrect");
@@ -188,9 +209,9 @@ public class Session {
                 }
                 case 2 -> {
                     displayTitle("Signup");
-                    username = getInputFromUser("Enter username", s -> !isStringNullOrEmpty(s) && !UserManager.doesUserExist(s), "This username is already taken");
+                    username = getInputFromUser("Enter username", s -> !isStringNullOrEmpty(s) && !inputController.doesUserExist(s), "This username is already taken");
                     password = getInputFromUser("Enter password", s -> !isStringNullOrEmpty(s), "The password cannot be empty");
-                    if (UserManager.addUser(username, password, false)) {
+                    if (inputController.addUser(username, password)) {
                         writeln("User added");
                     } else {
                         writeln("Unable to signup");
