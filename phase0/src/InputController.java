@@ -37,11 +37,10 @@ public class InputController{
             return manager.unban(toUnban);
         }
         return false;
-
     }
 
     public boolean doesUserExist(String username){
-        return !manager.doesUserExist(username);
+        return manager.doesUserExist(username);
     }
 
     public User login(String username, String password){

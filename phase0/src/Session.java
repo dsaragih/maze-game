@@ -7,15 +7,10 @@ import java.util.function.Predicate;
 
 public class Session {
     private User user;
-    private final InputController inputController;
-    Scanner in = new Scanner(System.in);
-    public Session(){
-        this.inputController = new InputController();
-
-    }
+    private final InputController inputController = new InputController();
+    private final Scanner in = new Scanner(System.in);
 
     public void run () throws ParseException, IOException {
-
         getUserFromConsole();
 
         writeln("");
@@ -32,7 +27,6 @@ public class Session {
             writeln("6) UnbanUser");
             writeln("7) Exit");
             int input = getNumInRange("Please enter a number between ", 1, 7);
-
 
             switch (input) {
                 case 1 -> {
