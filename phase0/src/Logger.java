@@ -18,5 +18,6 @@ public class Logger{
         ArrayList<User> users = (ArrayList<User>) in.readObject();
         in.close();
         fileIn.close();
+        return users;
     }
 }

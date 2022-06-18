@@ -35,8 +35,8 @@ public class Session {
                 }
                 case 2 -> {
                     displayTitle("Add user");
-                    String userName = getInputFromUser("Enter username", s -> !isStringNullOrEmpty(s) && !UserManager.doesUserExist(s), "This username is already taken");
-                    String password = getInputFromUser("Enter password", s -> !isStringNullOrEmpty(s), "The password cannot be empty");
+                    String userName = getInputFromUser("Enter username", s -> isStringNullOrEmpty(s) && !UserManager.doesUserExist(s), "This username is already taken");
+                    String password = getInputFromUser("Enter password", s -> isStringNullOrEmpty(s), "The password cannot be empty");
                     if (UserManager.addUser(userName, password, false)) {
                         writeln("User added");
                     } else {
@@ -49,7 +49,7 @@ public class Session {
                         writeln("Unable to delete users.");
                     }
                     else {
-                        String userName = getInputFromUser("Enter is the username of the user you would like to delete", s -> !isStringNullOrEmpty(s) && !UserManager.doesUserExist(s), "This user does not exist.");
+                        String userName = getInputFromUser("Enter is the username of the user you would like to delete", s -> isStringNullOrEmpty(s) && !UserManager.doesUserExist(s), "This user does not exist.");
                         if(UserManager.delete(userName)){
                             writeln("The user " + userName +" is deleted.");
                         }else{
@@ -63,7 +63,7 @@ public class Session {
                         writeln("Unable to ban users.");
                     }
                     else {
-                        String userName = getInputFromUser("Enter is the username of the user you would like to ban", s -> !isStringNullOrEmpty(s) && !UserManager.doesUserExist(s), "This user does not exist.");
+                        String userName = getInputFromUser("Enter is the username of the user you would like to ban", s -> isStringNullOrEmpty(s) && !UserManager.doesUserExist(s), "This user does not exist.");
                         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                         String dateString = getInputFromUser("Suspend until", s -> isValidDate(s, formatter), "This user does not exist.");
                         if(UserManager.ban(userName, formatter.parse(dateString))){
@@ -79,7 +79,7 @@ public class Session {
                         writeln("Unable to delete users.");
                     }
                     else {
-                        String userName = getInputFromUser("Enter is the username of the user you would like to ban", s -> !isStringNullOrEmpty(s) && !UserManager.doesUserExist(s), "This user does not exist.");
+                        String userName = getInputFromUser("Enter is the username of the user you would like to ban", s -> isStringNullOrEmpty(s) && !UserManager.doesUserExist(s), "This user does not exist.");
                         if(UserManager.unban(userName)){
                             writeln("The user " + userName + " has been unbanned.");
                         }else{
@@ -107,7 +107,7 @@ public class Session {
         }
     }
     private boolean isStringNullOrEmpty(String text){
-        return text == null || text.length() == 0;
+        return text != null && text.length() != 0;
     }
 
     private void writeSeparator(){
@@ -173,8 +173,8 @@ public class Session {
                 }
                 case 1 -> {
                     displayTitle("Login");
-                    username = getInputFromUser("Enter username", s -> !isStringNullOrEmpty(s), "Username cannot be empty");
-                    password = getInputFromUser("Enter password", s -> !isStringNullOrEmpty(s), "The password cannot be empty");
+                    username = getInputFromUser("Enter username", s -> isStringNullOrEmpty(s), "Username cannot be empty");
+                    password = getInputFromUser("Enter password", s -> isStringNullOrEmpty(s), "The password cannot be empty");
                     user = UserManager.login(username, password);
 
                     if(user == null){
@@ -184,8 +184,8 @@ public class Session {
                 }
                 case 2 -> {
                     displayTitle("Signup");
-                    username = getInputFromUser("Enter username", s -> !isStringNullOrEmpty(s) && !UserManager.doesUserExist(s), "This username is already taken");
-                    password = getInputFromUser("Enter password", s -> !isStringNullOrEmpty(s), "The password cannot be empty");
+                    username = getInputFromUser("Enter username", s -> isStringNullOrEmpty(s) && !UserManager.doesUserExist(s), "This username is already taken");
+                    password = getInputFromUser("Enter password", s -> isStringNullOrEmpty(s), "The password cannot be empty");
                     if (UserManager.addUser(username, password, false)) {
                         writeln("User added");
                     } else {
