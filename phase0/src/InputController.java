@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.Date;
 
 public class InputController{
@@ -8,10 +7,10 @@ public class InputController{
         this.manager = new UserManager();
     }
 
-    public boolean addUser(String username, String password) throws IOException {
+    public boolean addUser(String username, String password) {
         return manager.addUser(username, password, false);
     }
-    public boolean addAdminUser(String username, String password, User u) throws IOException {
+    public boolean addAdminUser(String username, String password, User u) {
         if(u.isAdmin()){
             return manager.addUser(username, password, true);
         }
@@ -42,13 +41,11 @@ public class InputController{
     }
 
     public boolean doesUserExist(String username){
-        return manager.doesUserExist(username);
+        return !manager.doesUserExist(username);
     }
 
     public User login(String username, String password){
         return manager.login(username,password);
 
     }
-
-
 }

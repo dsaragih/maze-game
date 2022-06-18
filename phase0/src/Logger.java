@@ -2,10 +2,9 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Logger{
-    private FileOutputStream fileOut;
 
     public void logToFile(ArrayList<User> users) throws IOException {
-        fileOut = new FileOutputStream("/usersData.ser");
+        FileOutputStream fileOut  = new FileOutputStream("/usersData.ser");
         ObjectOutputStream out = new ObjectOutputStream(fileOut);
         out.writeObject(users);
         out.close();

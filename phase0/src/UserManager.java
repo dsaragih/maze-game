@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.Date;
 import java.util.Map;
 import java.util.HashMap;
@@ -6,7 +5,7 @@ public class UserManager {
     private int lastId = 0;
     private final Map<String, User> users = new HashMap<>();
     private final Map<String, Date> suspendedUsers = new HashMap<>();
-    public boolean addUser(String userName, String password, boolean isAdmin) throws IOException {
+    public boolean addUser(String userName, String password, boolean isAdmin) {
         if (users.get(userName) != null){
             return false;
         }

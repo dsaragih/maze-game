@@ -1,20 +1,20 @@
 import org.junit.*;
 
-import java.io.IOException;
 import java.util.Date;
 
 import static org.junit.Assert.*;
 
 public class UserManagerTests {
 
+    private final UserManager UserManager = new UserManager();
     @Test(timeout = 50)
-    public void testLoginNonAdmin() throws IOException {
+    public void testLoginNonAdmin(){
         UserManager.addUser("Alice", "AlicePass", false);
         assertNotNull("Was unable to add non-admin user",
                 UserManager.login("Alice", "AlicePass"));
     }
     @Test(timeout = 50)
-    public void testLoginAdmin() throws IOException {
+    public void testLoginAdmin(){
         UserManager.addUser("Alice", "AlicePass", true);
         assertNotNull("Was unable to add non-admin user",
                 UserManager.login("Alice", "AlicePass"));
@@ -25,14 +25,14 @@ public class UserManagerTests {
     }
 
     @Test(timeout = 50)
-    public void testDeleteUser() throws IOException {
+    public void testDeleteUser(){
         UserManager.addUser("Bob the Vanquished", "BobPass", false);
         UserManager.delete("Bob the Vanquished");
         assertFalse(UserManager.getUsers().containsKey("Bob the Vanquished"));
     }
 
     @Test(timeout = 200)
-    public void testSuspendUser() throws IOException {
+    public void testSuspendUser(){
         // For some reason this test takes longer than 50ms (maybe Date creation idk)
         UserManager.addUser("Bob the Banned", "BobPass", false);
         UserManager.ban("Bob the Banned", new Date());
