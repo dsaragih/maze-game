@@ -11,3 +11,5 @@ To log in, enter 1 followed by your username and password.
 
 After login, you are able to access login history, add user, delete user and exit by following the command table. To get administrative permission, contact the software developer.
 
+IMPORTANT: Terminating the program through console (instead of selecting the exit option) will prevent any new data from being saved
+Note: "cancel" is not a valid username (capitalization of the "cancel" does not matter - it is also invalid)
