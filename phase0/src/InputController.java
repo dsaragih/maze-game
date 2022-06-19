@@ -1,10 +1,13 @@
+import org.w3c.dom.Text;
+
 import java.util.Date;
 
 public class InputController{
     public UserManager manager;
-
-    public InputController(){
-        this.manager = new UserManager();
+    private final TextFileLogger logger = new TextFileLogger("userManager.ser");
+    public InputController() {
+        UserManager storedManager = (UserManager)logger.readFromFile();
+        this.manager = storedManager == null ? new UserManager() : storedManager;
     }
 
     public boolean addUser(String username, String password) {
@@ -29,7 +32,6 @@ public class InputController{
             return manager.ban(toBan, date);
         }
         return false;
-
     }
 
     public boolean unbanUser(String toUnban, User u){
@@ -45,6 +47,9 @@ public class InputController{
 
     public User login(String username, String password){
         return manager.login(username,password);
+    }
 
+    public boolean saveUserManager(){
+        return logger.logToFile(manager);
     }
 }

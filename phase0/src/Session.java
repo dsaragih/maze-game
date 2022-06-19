@@ -44,10 +44,15 @@ public class Session {
                     user = null;
                     writeln("You have been logged out");
                     writeln("========================");
+                    if(!inputController.saveUserManager()){
+                        System.out.println("Error saving");
+                    }
                     return;
                 }
             }
         }
+
+
     }
     private void addUser(){
         displayTitle("Add user");

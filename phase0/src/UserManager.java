@@ -1,9 +1,8 @@
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
 import java.util.HashMap;
-public class UserManager {
-
-    private Logger logger = new Logger();
+public class UserManager implements Serializable {
     private int lastId = 0;
     private final Map<String, User> users = new HashMap<>();
     private final Map<String, Date> suspendedUsers = new HashMap<>();
