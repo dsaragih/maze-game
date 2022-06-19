@@ -11,10 +11,6 @@ public class TextFileLogger {
 
     public boolean logToFile(Serializable obj) {
         try{
-            boolean fileExistsOrCreated = ensureFileCreated(filePath);
-            if(!fileExistsOrCreated){
-                return false;
-            }
             FileOutputStream fileOut  = new FileOutputStream(filePath);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(obj);
@@ -39,10 +35,5 @@ public class TextFileLogger {
             return null;
         }
 
-    }
-
-    private boolean ensureFileCreated(String filePath) throws IOException {
-        File myObj = new File(filePath);
-        return myObj.createNewFile();
     }
 }
