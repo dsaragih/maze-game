@@ -3,13 +3,13 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class User implements Serializable {
-    private String userName;
-    private String password;
+    private final String userName;
+    private final String password;
     private final int userid;
     private final boolean admin;
 
     private final Date signUpDate;
-    private ArrayList<Date> loginDates;
+    private final ArrayList<Date> loginDates;
 
     public User(String userName, String password, boolean admin, int userid){
         this.userName = userName;
@@ -34,17 +34,8 @@ public class User implements Serializable {
     public ArrayList<Date> getLoginDates(){
         return loginDates;
     }
-    public int getUserid(){
-        return userid;
-    }
     public boolean isAdmin(){
         return admin;
-    }
-    public void setPassword(String newPassword){
-        password = newPassword;
-    }
-    public void setUserName(String newUserName){
-        userName = newUserName;
     }
 
 }

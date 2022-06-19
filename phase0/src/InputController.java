@@ -11,10 +11,13 @@ public class InputController{
     }
 
     public boolean addUser(String username, String password) {
+        if(username.equalsIgnoreCase("cancel")){
+            return false;
+        }
         return manager.addUser(username, password, false);
     }
-    public boolean addAdminUser(String username, String password, User u) {
-        if(u.isAdmin()){
+    public boolean addAdminUser(String username, String password, User user) {
+        if(user.isAdmin()){
             return manager.addUser(username, password, true);
         }
         return false;
@@ -27,18 +30,18 @@ public class InputController{
         return false;
     }
 
-    public boolean banUser(String toBan, Date date, User u){
-        if(u.isAdmin()){
-            return manager.ban(toBan, date);
+    public boolean banUser(String toBan, User user){
+        if(!user.isAdmin()){
+            return false;
         }
-        return false;
+        return manager.ban(toBan);
     }
 
-    public boolean unbanUser(String toUnban, User u){
-        if(u.isAdmin()){
-            return manager.unban(toUnban);
+    public boolean unbanUser(String toUnban, User user){
+        if(!user.isAdmin()){
+            return false;
         }
-        return false;
+        return manager.unban(toUnban);
     }
 
     public boolean doesUserExist(String username){

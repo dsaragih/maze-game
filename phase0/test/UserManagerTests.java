@@ -33,9 +33,9 @@ public class UserManagerTests {
 
     @Test(timeout = 200)
     public void testSuspendUser(){
-        // For some reason this test takes longer than 50ms (maybe Date creation idk)
+        // For some reason this test takes longer than 50ms
         UserManager.addUser("Bob the Banned", "BobPass", false);
-        UserManager.ban("Bob the Banned", new Date());
-        assertTrue(UserManager.getSuspendedUsers().containsKey("Bob the Banned"));
+        UserManager.ban("Bob the Banned");
+        assertTrue(UserManager.getBannedUsers().contains("Bob the Banned"));
     }
 }
