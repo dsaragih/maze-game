@@ -19,7 +19,3 @@ There are two build in users:
 Username: TestAdmin
 Password: 123
 This user is an admin
-
-Username: User1
-Password: 123
-This user is not an admin
