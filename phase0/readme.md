@@ -1,7 +1,7 @@
 # CSC207 Project Phase 0
 
 ## Requirements
-You need JDK 14 to run this program. 
+You need JDK 18 to run this program. 
 ## Instructions
 To execute this program, you have to run the Main class.
 
