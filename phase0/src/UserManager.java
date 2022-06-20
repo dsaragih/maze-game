@@ -9,6 +9,9 @@ public class UserManager implements Serializable {
     private final Map<String, User> users = new HashMap<>();
     private final ArrayList<String> bannedUsers = new ArrayList<>();
 
+    public UserManager(){
+        addUser("TestAdmin", "123", true);
+    }
     public boolean addUser(String userName, String password, boolean isAdmin) {
         if (users.get(userName) != null){
             return false;
