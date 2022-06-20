@@ -3,7 +3,7 @@
 ## Requirements
 You need JDK 18 to run this program. 
 ## Instructions
-To execute this program, you have to run the Main class.
+To execute this program, you have to run the Main class (Have the console open as large as you can to not miss any text).
 
 Then, enter 2 followed by return key in the console to sign up. Your username cannot be the same as someone else's.
 

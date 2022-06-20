@@ -32,7 +32,7 @@ public class Session {
             writeln("5) BanUser");
             writeln("6) UnbanUser");
             writeln("7) Exit");
-            int input = getNumInRange("Please enter a number between ", 1, 7);
+            int input = getNumInRange("Please enter a number between ", 7);
 
             switch (input) {
                 case 1 -> log();
@@ -210,8 +210,8 @@ public class Session {
         }
     }
 
-    private int getNumInRange(String prompt, int min, int max) {
-        String input = getInputFromUser(prompt, s -> isStringANumberInRange(s, min, max));
+    private int getNumInRange(String prompt, int max) {
+        String input = getInputFromUser(prompt, s -> isStringANumberInRange(s, 1, max));
 
         return Integer.parseInt(input);
     }
@@ -251,7 +251,7 @@ public class Session {
             switch (state) {
                 case 0 -> {
                     displayTitle("Welcome");
-                    state = getNumInRange("Login (1) or signup (2) or exit (3)", 1, 3);
+                    state = getNumInRange("Login (1) or signup (2) or exit (3)", 3);
                 }
                 case 1 -> {
                     displayTitle("Login");
