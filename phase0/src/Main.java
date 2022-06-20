@@ -6,7 +6,7 @@ public class Main {
         try {
             s.run();
         } catch (ParseException | IOException e) {
-            System.out.println("Exception caught");
+            System.out.println("Exception caught:, " + e.getMessage());
         }
     }
 }

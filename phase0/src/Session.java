@@ -14,14 +14,15 @@ public class Session {
 
     public void run() throws ParseException, IOException {
 
-        getUserFromConsole();
+        loginOrSignupFromConsole();
         if (user == null) {
             return;
         }
         writeln("");
         writeln("Welcome " + user.getUserName());
 
-        while (true) {
+        boolean shouldExit = false;
+        while (!shouldExit) {
             displayTitle("Menu");
             writeln("Choose from the following commands:");
             writeln("1) Log");
@@ -34,29 +35,28 @@ public class Session {
             int input = getNumInRange("Please enter a number between ", 1, 7);
 
             switch (input) {
-                case 1 -> {
-                    displayTitle("Log");
-                    for (Date logInDate : user.getLoginDates()) {
-                        writeln(logInDate);
-                    }
-                }
+                case 1 -> log();
                 case 2 -> addUser();
                 case 3 -> addAdminUser();
                 case 4 -> removeUser();
                 case 5 -> banUser();
                 case 6 -> unbanUser();
-                case 7 -> {
-                    writeln("You have been logged out");
-                    writeln("========================");
-                    if (!inputController.saveUserManager()) {
-                        System.out.println("Error saving");
-                    }
-                    return;
-                }
+                case 7 -> shouldExit = true;
             }
         }
+        writeln("You have been logged out");
+        writeln("========================");
+        if (!inputController.saveUserManager()) {
+            System.out.println("Error saving");
+        }
 
+    }
 
+    private void log() {
+        displayTitle("Log");
+        for (Date logInDate : user.getLoginDates()) {
+            writeln(logInDate);
+        }
     }
 
     private void addUser() {
@@ -244,7 +244,7 @@ public class Session {
         writeSeparator();
     }
 
-    private void getUserFromConsole() {
+    private void loginOrSignupFromConsole() {
         String username, password;
         int state = 0;
         while (user == null) {
