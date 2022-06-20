@@ -13,3 +13,13 @@ After login, you are able to access login history, add user, delete user and exi
 
 IMPORTANT: Terminating the program through console (instead of selecting the exit option) will prevent any new data from being saved
 Note: "cancel" is not a valid username (capitalization of the "cancel" does not matter - it is also invalid)
+
+There are two build in users:
+
+Username: TestAdmin
+Password: 123
+This user is an admin
+
+Username: User1
+Password: 123
+This user is not an admin
