@@ -1,11 +1,19 @@
 package g0241.ent;
 
-public class Player extends Entity{
+import java.util.ArrayList;
+
+public class Player extends Entity implements Collidable, Drawable {
+    public float health, xp;
+    public ArrayList<ItemData> inventory;
 
     public Player(float x, float y) {
         super(x, y);
-        r = 8;
+        width = 10;
+        height = 50;
         speed = 5;
+        health = 100;
+        xp = 0;
+        inventory = new ArrayList<ItemData>();
     }
 
     @Override
