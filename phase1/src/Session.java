@@ -251,7 +251,7 @@ public class Session {
             switch (state) {
                 case 0 -> {
                     displayTitle("Welcome");
-                    state = getNumInRange("Login (1) or signup (2) or exit (3)", 3);
+                    state = getNumInRange("Login (1) or signup (2) or exit (3) or Demo4 (4)", 4);
                 }
                 case 1 -> {
                     displayTitle("Login");
@@ -283,6 +283,11 @@ public class Session {
 
                 case 3 -> {
                     return;
+                }
+
+                case 4 -> {
+                    DisplayGraphics.main();
+                    state = 0;
                 }
             }
         }
