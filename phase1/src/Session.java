@@ -14,14 +14,15 @@ public class Session {
 
     public void run() throws ParseException, IOException {
 
-        getUserFromConsole();
+        loginOrSignupFromConsole();
         if (user == null) {
             return;
         }
         writeln("");
         writeln("Welcome " + user.getUserName());
 
-        while (true) {
+        boolean shouldExit = false;
+        while (!shouldExit) {
             displayTitle("Menu");
             writeln("Choose from the following commands:");
             writeln("1) Log");
@@ -31,32 +32,31 @@ public class Session {
             writeln("5) BanUser");
             writeln("6) UnbanUser");
             writeln("7) Exit");
-            int input = getNumInRange("Please enter a number between ", 1, 7);
+            int input = getNumInRange("Please enter a number between ", 7);
 
             switch (input) {
-                case 1 -> {
-                    displayTitle("Log");
-                    for (Date logInDate : user.getLoginDates()) {
-                        writeln(logInDate);
-                    }
-                }
+                case 1 -> log();
                 case 2 -> addUser();
                 case 3 -> addAdminUser();
                 case 4 -> removeUser();
                 case 5 -> banUser();
                 case 6 -> unbanUser();
-                case 7 -> {
-                    writeln("You have been logged out");
-                    writeln("========================");
-                    if (!inputController.saveUserManager()) {
-                        System.out.println("Error saving");
-                    }
-                    return;
-                }
+                case 7 -> shouldExit = true;
             }
         }
+        writeln("You have been logged out");
+        writeln("========================");
+        if (!inputController.saveUserManager()) {
+            System.out.println("Error saving");
+        }
 
+    }
 
+    private void log() {
+        displayTitle("Log");
+        for (Date logInDate : user.getLoginDates()) {
+            writeln(logInDate);
+        }
     }
 
     private void addUser() {
@@ -210,8 +210,8 @@ public class Session {
         }
     }
 
-    private int getNumInRange(String prompt, int min, int max) {
-        String input = getInputFromUser(prompt, s -> isStringANumberInRange(s, min, max));
+    private int getNumInRange(String prompt, int max) {
+        String input = getInputFromUser(prompt, s -> isStringANumberInRange(s, 1, max));
 
         return Integer.parseInt(input);
     }
@@ -244,14 +244,14 @@ public class Session {
         writeSeparator();
     }
 
-    private void getUserFromConsole() {
+    private void loginOrSignupFromConsole() {
         String username, password;
         int state = 0;
         while (user == null) {
             switch (state) {
                 case 0 -> {
                     displayTitle("Welcome");
-                    state = getNumInRange("Login (1) or signup (2) or exit (3)", 1, 3);
+                    state = getNumInRange("Login (1) or signup (2) or exit (3)", 3);
                 }
                 case 1 -> {
                     displayTitle("Login");
