@@ -18,6 +18,5 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="lwjgl-assimp-javadoc" level="project" />
   </component>
 </module>
