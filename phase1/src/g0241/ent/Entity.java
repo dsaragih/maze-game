@@ -3,7 +3,7 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import javax.swing.ImageIcon;
 abstract public class Entity {
-    float x, y, speed
+    float x, y, speed;
     int width, height;
     Image image;
     boolean visible;
