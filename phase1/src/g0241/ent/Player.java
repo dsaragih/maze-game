@@ -2,9 +2,9 @@ package g0241.ent;
 
 import java.util.ArrayList;
 
-public class Player extends Entity implements Collidable, Drawable {
+public class Player extends Entity {
     public float health, xp;
-    public ArrayList<ItemData> inventory;
+    //public ArrayList<ItemData> inventory;
 
     public Player(float x, float y) {
         super(x, y);
@@ -13,7 +13,7 @@ public class Player extends Entity implements Collidable, Drawable {
         speed = 5;
         health = 100;
         xp = 0;
-        inventory = new ArrayList<ItemData>();
+        //inventory = new ArrayList<ItemData>();
     }
 
     @Override
