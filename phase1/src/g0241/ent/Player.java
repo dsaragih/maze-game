@@ -18,15 +18,15 @@ public class Player extends Entity {
 
     public void move() {
 
-        x += dx;
-        y += dy;
+        cords.setX(cords.getX() + dx);
+        cords.setY(cords.getY() + dy);
 
-        if (x < 1) {
-            x = 0;
+        if (cords.getX() < 1) {
+            cords.setX(0);
         }
 
-        if (y < 1) {
-            y = 0;
+        if (cords.getY() < 1) {
+            cords.setY(0);
         }
     }
     @Override
