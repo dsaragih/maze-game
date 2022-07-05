@@ -5,8 +5,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public abstract class DrawableEntity extends Entity implements Drawable {
-    float width, height;
-    Image image;
+    int width, height;
+    Image[] images;
     int state;
 
     public DrawableEntity(float x, float y) {
@@ -15,38 +15,22 @@ public abstract class DrawableEntity extends Entity implements Drawable {
 
     protected void getImageDimensions() {
 
-        width = image[state].getWidth(null);
-        height = image[state].getHeight(null);
+        width = images[state].getWidth(null);
+        height = images[state].getHeight(null);
     }
 
     protected void loadImage(String[] imageNames) {
 
-        ImageIcon ii = new ImageIcon(imageName);
-        image = ii.getImage();
+        ImageIcon ii = new ImageIcon(imageNames[state]);
+        images[state] = ii.getImage();
     }
 
     public Image getImage() {
-        return image;
-    }
-
-    public float getX() {
-        return x;
-    }
-
-    public float getY() {
-        return y;
-    }
-
-    public boolean isVisible() {
-        return visible;
-    }
-
-    public void setVisible(Boolean visible) {
-        this.visible = visible;
+        return images[state];
     }
 
     public Rectangle getBounds() {
-        return new Rectangle(Math.round(x), Math.round(y), width, height);
+        return new Rectangle(Math.round(cords.getX()), Math.round(cords.getY()), width, height);
     }
 
     abstract void act();
