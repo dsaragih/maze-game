@@ -8,6 +8,13 @@ public class Point {
         this.y = y;
     }
 
+    public void add(Point p){
+        x += p.x;
+        y += p.y;
+    }
+
+
+
     public void setPos(float x, float y){
         this.x = x;
         this.y = y;
@@ -17,7 +24,7 @@ public class Point {
         setPos(x, this.y);
     }
     public void setY(float y){
-        setPos(x, this.y);
+        setPos(this.x, y);
     }
 
     public float getX(){
