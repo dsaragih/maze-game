@@ -8,9 +8,6 @@ public class Player extends Entity {
 
     public Player(float x, float y) {
         super(x, y);
-        width = 10;
-        height = 50;
-        speed = 5;
         health = 100;
         xp = dx = dy = 0;
         //inventory = new ArrayList<ItemData>();
