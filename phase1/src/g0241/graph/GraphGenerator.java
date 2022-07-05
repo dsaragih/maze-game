@@ -15,14 +15,16 @@ public class GraphGenerator {
 
         float theta = 0, r = 0;
 
-        PlanarNode n0 = new PlanarNode(r*Math.cos(theta), r*Math.sin(theta);
+        PlanarNode n0 = new PlanarNode(r*(float)Math.cos(theta), r*(float)Math.sin(theta)), first = n0;
 
         while (theta < 2*Math.PI) {
             theta += Math.random()*avg_rotation;
-            r += (float)Math.random()*avg_radius;
-            PlanarNode n1 = new PlanarNode(r*(float)Math.cos(theta), r*(float)Math.sin(theta);
-            graph.addNode(n1);
-            graph.joinUndirected(n0,n1);
+            if (theta < 2*Math.PI) {
+                r += (float) Math.random() * avg_radius;
+                PlanarNode n1 = new PlanarNode(r * (float) Math.cos(theta), r * (float) Math.sin(theta));
+                graph.addNode(n1);
+                graph.joinUndirected(n0, n1);
+            }
         }
 
 
