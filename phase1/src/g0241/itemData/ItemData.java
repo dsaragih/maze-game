@@ -1,5 +1,5 @@
 package g0241.itemData;
-
+import g0241.graphics.DrawData;
 public class ItemData {
     //    WARNING: JACK WILL DO THIS PART.
 //    Represents items that are not entities. All the
@@ -8,10 +8,11 @@ public class ItemData {
 //speed factor, type of ammo, image to be
 //displayed in inventory, number of available
 //uses, etc.
-    private float damagePerShot, speedFactor;
-    private String typeOfAmmo;
-    private int numberOfAvailableUses;
-    private g0241.graphics.DrawData image;
+    private final float damagePerShot;
+    private final float speedFactor;
+    private final String typeOfAmmo;
+    private final int numberOfAvailableUses;
+    private final DrawData image;
     public ItemData(float damagePerShot, float speedFactor, String typeOfAmmo,
                     int numberOfAvailableUses, g0241.graphics.DrawData image){
         this.damagePerShot = damagePerShot;
