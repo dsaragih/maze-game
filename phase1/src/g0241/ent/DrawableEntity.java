@@ -12,6 +12,9 @@ public abstract class DrawableEntity extends Entity implements Drawable {
     public DrawableEntity(float x, float y) {
         super(x, y);
     }
+    public DrawableEntity(int x, int y){
+        super(x,y);
+    }
 
     protected void getImageDimensions() {
 
@@ -33,5 +36,5 @@ public abstract class DrawableEntity extends Entity implements Drawable {
         return new Rectangle(Math.round(cords.getX()), Math.round(cords.getY()), width, height);
     }
 
-    abstract void act();
+    protected abstract void act();
 }

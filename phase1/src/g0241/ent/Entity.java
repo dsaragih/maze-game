@@ -15,6 +15,10 @@ abstract public class Entity {
         this.cords = cords;
     }
 
+    // written for the Room class
+
+    public Entity(int x, int y){cords = new Point(x,y);}
+
     abstract void act();
 
 
