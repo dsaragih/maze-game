@@ -19,7 +19,7 @@ abstract public class Entity {
 
     public Entity(int x, int y){cords = new Point(x,y);}
 
-    public void updatePos(int x, int y){cords = new Point(x,y);}
+    public void updatePos(float x, float y){ cords.setPos(x, y); }
 
     abstract void act();
 

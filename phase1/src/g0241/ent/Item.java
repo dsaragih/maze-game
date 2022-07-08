@@ -5,7 +5,7 @@ import g0241.itemData.ItemData;
 import g0241.Point;
 
 abstract public class Item extends Entity implements Collidable{
-    private ItemData itemData;
+    public ItemData itemData;
     Point cords;
     public Item(g0241.itemData.ItemData itemData, Point cords){
         super(cords);

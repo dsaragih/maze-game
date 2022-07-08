@@ -11,7 +11,7 @@ public class ItemData {
     private final float damagePerShot;
     private final float speedFactor;
     private final String typeOfAmmo;
-    private final int numberOfAvailableUses;
+    private int numberOfAvailableUses;
     private final DrawData image;
     public ItemData(float damagePerShot, float speedFactor, String typeOfAmmo,
                     int numberOfAvailableUses, g0241.graphics.DrawData image){
@@ -44,4 +44,13 @@ public class ItemData {
     public g0241.graphics.DrawData getImage(){
         return image;
     }
+    public void updateNumberOfAvailableUses(int change) {
+        this.numberOfAvailableUses += change;
+        if (this.numberOfAvailableUses <= 0) {
+            // do something
+        }
+    }
+
+    // There should be a method that checks if the item has run out of available uses, and somehow
+    // disables/deletes the item.
 }
