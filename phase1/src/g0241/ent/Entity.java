@@ -19,6 +19,8 @@ abstract public class Entity {
 
     public Entity(int x, int y){cords = new Point(x,y);}
 
+    public void updatePos(int x, int y){cords = new Point(x,y);}
+
     abstract void act();
 
 
