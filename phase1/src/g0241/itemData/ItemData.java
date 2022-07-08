@@ -21,6 +21,14 @@ public class ItemData {
         this.numberOfAvailableUses = numberOfAvailableUses;
         this.image = image;
     }
+    public ItemData(int numberOfAvailableUses, g0241.graphics.DrawData image) {
+        // Items such as Ammo or Consumable should not have damagePerShot, speedFactor, or typeOfAmmo
+        // As a temporary measure, I'll set these values to 0.
+        this.numberOfAvailableUses = numberOfAvailableUses;
+        this.image = image;
+        this.speedFactor = this.damagePerShot = 0;
+        this.typeOfAmmo = "";
+    }
     public float getDamagePerShot(){
         return damagePerShot;
     }
