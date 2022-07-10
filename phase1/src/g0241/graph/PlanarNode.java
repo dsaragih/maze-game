@@ -8,7 +8,6 @@ public class PlanarNode extends Point {
 
     private Set<PlanarNode> neighbors;
 
-
     public PlanarNode(float x, float y){
         super(x,y);
         neighbors = new HashSet<PlanarNode>();

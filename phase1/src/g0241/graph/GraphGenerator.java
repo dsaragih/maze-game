@@ -5,7 +5,7 @@ public class GraphGenerator {
 
 
 
-    public PlanarGraph<PlanarNode> generate_cycle(){
+    public PlanarGraph<PlanarNode> generateCycle(){
 
         // generate cycle
 
@@ -27,16 +27,6 @@ public class GraphGenerator {
             }
         }
 
-
         return graph;
-
-
-
     }
-
-
-
-
-
-
 }
