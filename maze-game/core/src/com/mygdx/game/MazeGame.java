@@ -11,6 +11,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.Input.Keys;
+import com.mygdx.game.graph.GraphGenerator;
+import com.mygdx.game.graph.PlanarGraph;
+import com.mygdx.game.graph.PlanarNode;
 
 public class MazeGame extends ApplicationAdapter {
 	ShapeRenderer shapeRenderer;
@@ -19,7 +22,7 @@ public class MazeGame extends ApplicationAdapter {
 	private final int SCREEN_HEIGHT = 540;
 
 	private Player player;
-
+	private Level level;
 	
 	@Override
 	public void create () {
@@ -28,6 +31,8 @@ public class MazeGame extends ApplicationAdapter {
 		camera.setToOrtho(false, SCREEN_WIDTH, SCREEN_HEIGHT);
 
 		player = new Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, shapeRenderer);
+		level = new Level();
+
 	}
 
 	@Override
@@ -43,15 +48,17 @@ public class MazeGame extends ApplicationAdapter {
 
 	private void update(){
 		player.update();
+		level.update(player);
 	}
 
 	private void draw() {
-		ScreenUtils.clear(0, 0, 1, 1);
+		ScreenUtils.clear(0, 0, 0, 1);
 		camera.update();
 		shapeRenderer.setProjectionMatrix(camera.combined);
-		player.draw();
+		shapeRenderer.begin(ShapeType.Filled);
+		level.draw(shapeRenderer);
+		player.draw(shapeRenderer);
+		shapeRenderer.end();
 
 	}
-
-
 }
