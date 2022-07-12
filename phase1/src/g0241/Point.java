@@ -1,7 +1,7 @@
 package g0241;
 
 public class Point {
-    float x,y;
+    private float x,y;
 
     public Point(float x, float y) {
         this.x = x;
@@ -13,7 +13,10 @@ public class Point {
         y += p.y;
     }
 
-
+    public void multiply(float scalar){
+        x *= scalar;
+        y *= scalar;
+    }
 
     public void setPos(float x, float y){
         this.x = x;
@@ -21,10 +24,10 @@ public class Point {
     }
 
     public void setX(float x){
-        setPos(x, this.y);
+        this.x = x;
     }
     public void setY(float y){
-        setPos(this.x, y);
+        this.y = y;
     }
 
     public float getX(){
