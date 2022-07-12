@@ -24,6 +24,7 @@ public class PlanarGraph <T extends PlanarNode> {
         joinDirected(n2,n1);
         joinDirected(n1,n2);
     }
+    public Set<T> getNodes(){return nodes;}
 
     public void check_planarity(){
         //TOOO probably just like check
