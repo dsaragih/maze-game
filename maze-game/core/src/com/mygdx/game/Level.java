@@ -27,9 +27,19 @@ public class Level {
                 if(!edges.get(pair)){
                     Room r1 = nodeToRoom.get(node);
                     Room r2 = nodeToRoom.get(neighbour);
-                    Door door = new Door(r1, r2);
-                    r1.addDoor(door);
-                    r2.addDoor(door);
+
+                    Door door1 = new Door();
+                    Door door2 = new Door();
+
+                    door1.setRoom(r1);
+                    door2.setRoom(r2);
+
+                    door1.setDoor(door2);
+                    door2.setDoor(door1);
+
+                    r1.addDoor(door1);
+                    r2.addDoor(door2);
+
                     edges.put(pair, true);
                 }
             }
@@ -40,7 +50,7 @@ public class Level {
     }
 
     public void update(Player player){
-        currentRoom.update(player);
+        currentRoom = currentRoom.update(player);
     }
 
     public void draw(ShapeRenderer shapeRenderer){

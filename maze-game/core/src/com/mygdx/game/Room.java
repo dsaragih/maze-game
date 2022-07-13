@@ -13,12 +13,14 @@ public class Room {
         doors.add(door);
     }
 
-    public void update(Player player){
+    public Room update(Player player){
         for(Door door: doors){
             if(door.getCollisionBox().intersects(player.getCollisionBox())){
-                door.collideWith(player);
+                return door.collideWith(player);
             }
         }
+
+        return this;
     }
 
     public void draw(ShapeRenderer shapeRenderer){

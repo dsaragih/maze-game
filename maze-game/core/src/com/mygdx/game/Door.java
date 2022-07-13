@@ -8,13 +8,19 @@ import java.util.Random;
 public class Door {
     private Point pos;
     private final float radius = 10;
-    public Room room1;
-    public Room room2;
+    public Room room;
+    public Door door;
     private final Random rand = new Random();
-    public  Door(Room room1, Room room2){
+    public  Door(){
         this.pos = new Point(rand.nextFloat() * 960, rand.nextFloat() * 540);
-        this.room1 = room1;
-        this.room2 = room2;
+    }
+
+    public void setDoor(Door door){
+        this.door = door;
+    }
+
+    public void setRoom(Room room){
+        this.room = room;
     }
     public void draw(ShapeRenderer shapeRenderer){
         shapeRenderer.setColor(Color.GREEN);
@@ -25,8 +31,8 @@ public class Door {
         return new Circle(pos, radius);
     }
 
-    public boolean collideWith(Player player){
-        return true;
+    public Room collideWith(Player player){
+        return door.room;
     }
 }
 
