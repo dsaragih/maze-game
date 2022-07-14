@@ -2,13 +2,21 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.mygdx.game.Entities.Player;
+import com.mygdx.game.graphics.room.IRoomDrawer;
+import com.mygdx.game.graphics.room.SimpleShapeRoomDrawer;
 
 import java.util.*;
 
 public class Room {
     private List<Door> doors = new ArrayList<>();
-    private final float width = 960;
-    private final float height = 540;
+    private final int width = 960;
+    private final int height = 540;
+    private IRoomDrawer roomDrawer;
+
+    public Room(IRoomDrawer roomDrawer){
+        this.roomDrawer = roomDrawer;
+    }
     public void addDoor(Door door){
         doors.add(door);
     }
@@ -23,11 +31,7 @@ public class Room {
         return this;
     }
 
-    public void draw(ShapeRenderer shapeRenderer){
-        shapeRenderer.setColor(Color.GRAY);
-        shapeRenderer.rect(0, 0, width, height);
-        for(Door door: doors){
-            door.draw(shapeRenderer);
-        }
+    public void draw(){
+        roomDrawer.drawRoom(doors, width, height);
     }
 }

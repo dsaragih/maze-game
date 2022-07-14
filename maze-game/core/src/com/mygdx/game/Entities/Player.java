@@ -1,10 +1,11 @@
-package com.mygdx.game;
+package com.mygdx.game.Entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.geometry.Circle;
+import com.mygdx.game.geometry.Point;
 
 public class Player {
     private Point pos;

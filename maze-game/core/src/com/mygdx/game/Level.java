@@ -1,22 +1,30 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.mygdx.game.graph.GraphGenerator;
+import com.mygdx.game.Entities.Player;
 import com.mygdx.game.graph.PlanarGraph;
 import com.mygdx.game.graph.PlanarNode;
 import com.mygdx.game.graph.TestGraphGenerator;
+import com.mygdx.game.graphics.IPresenter;
+import com.mygdx.game.graphics.door.IDoorDrawer;
+import com.mygdx.game.graphics.room.IRoomDrawer;
 
 import java.util.*;
 
 public class Level {
     private Collection<Room> rooms;
     private Room currentRoom;
-    public Level(){
+    private IPresenter presenter;
+    public Level(IPresenter presenter){
+        this.presenter = presenter;
+        IDoorDrawer doorDrawer = presenter.getDoorDrawer();
+        IRoomDrawer roomDrawer = presenter.getRoomDrawer();
+
         PlanarGraph levelLayout = new TestGraphGenerator().generate();
         Map<Set<PlanarNode>, Boolean> edges = getEdgeMap(levelLayout);
         Map<PlanarNode, Room> nodeToRoom = new HashMap<>();
         for(PlanarNode node: levelLayout){
-            nodeToRoom.put(node, new Room());
+            nodeToRoom.put(node, new Room(roomDrawer));
         }
 
         for (PlanarNode node: levelLayout) {
@@ -28,8 +36,8 @@ public class Level {
                     Room r1 = nodeToRoom.get(node);
                     Room r2 = nodeToRoom.get(neighbour);
 
-                    Door door1 = new Door();
-                    Door door2 = new Door();
+                    Door door1 = new Door(doorDrawer);
+                    Door door2 = new Door(doorDrawer);
 
                     door1.setRoom(r1);
                     door2.setRoom(r2);
@@ -54,7 +62,7 @@ public class Level {
     }
 
     public void draw(ShapeRenderer shapeRenderer){
-        currentRoom.draw(shapeRenderer);
+        currentRoom.draw();
     }
 
     private Map<Set<PlanarNode>, Boolean> getEdgeMap(PlanarGraph levelLayout){

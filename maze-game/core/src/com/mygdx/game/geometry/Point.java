@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.geometry;
 
 public class Point {
     public float x,y;

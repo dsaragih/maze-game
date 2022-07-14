@@ -1,19 +1,13 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.Input.Keys;
-import com.mygdx.game.graph.GraphGenerator;
-import com.mygdx.game.graph.PlanarGraph;
-import com.mygdx.game.graph.PlanarNode;
+import com.mygdx.game.Entities.Player;
+import com.mygdx.game.graphics.IPresenter;
+import com.mygdx.game.graphics.ShapePresenter;
 
 public class MazeGame extends ApplicationAdapter {
 	ShapeRenderer shapeRenderer;
@@ -23,15 +17,17 @@ public class MazeGame extends ApplicationAdapter {
 
 	private Player player;
 	private Level level;
+	private IPresenter presenter;
 	
 	@Override
 	public void create () {
 		shapeRenderer = new ShapeRenderer();
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, SCREEN_WIDTH, SCREEN_HEIGHT);
+		presenter = new ShapePresenter(shapeRenderer);
 
 		player = new Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, shapeRenderer);
-		level = new Level();
+		level = new Level(presenter);
 
 	}
 

@@ -1,6 +1,6 @@
 package com.mygdx.game.graph;
 
-import com.mygdx.game.Point;
+import com.mygdx.game.geometry.Point;
 
 import java.util.HashSet;
 import java.util.Objects;
