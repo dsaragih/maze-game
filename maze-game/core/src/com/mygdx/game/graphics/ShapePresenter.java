@@ -23,4 +23,5 @@ public class ShapePresenter implements IPresenter {
     public IRoomDrawer getRoomDrawer() {
         return new SimpleShapeRoomDrawer(shapeRenderer);
     }
+
 }

@@ -8,7 +8,7 @@ import com.mygdx.game.geometry.Circle;
 import com.mygdx.game.geometry.Point;
 
 public class Player {
-    private Point pos;
+    public Point pos;
     private int radius = 20;
     private float speed = 200;
 
@@ -19,7 +19,8 @@ public class Player {
         Point dir = new Point(0,0);
         dir.x = dirCalc(Gdx.input.isKeyPressed(Input.Keys.A), Gdx.input.isKeyPressed(Input.Keys.D));
         dir.y = dirCalc(Gdx.input.isKeyPressed(Input.Keys.S), Gdx.input.isKeyPressed(Input.Keys.W));
-        pos = add(pos, multiply(dir, speed * Gdx.graphics.getDeltaTime()));
+        dir.multiply(speed * Gdx.graphics.getDeltaTime());
+        pos.add(dir);
     }
 
     public void draw(ShapeRenderer shapeRenderer){
