@@ -7,6 +7,7 @@ import com.mygdx.game.graph.PlanarNode;
 import com.mygdx.game.graph.TestGraphGenerator;
 import com.mygdx.game.graphics.IPresenter;
 import com.mygdx.game.graphics.door.IDoorDrawer;
+import com.mygdx.game.graphics.level.ILevelDrawer;
 import com.mygdx.game.graphics.room.IRoomDrawer;
 
 import java.util.*;
@@ -14,9 +15,9 @@ import java.util.*;
 public class Level {
     private Collection<Room> rooms;
     private Room currentRoom;
-    private IPresenter presenter;
+    private ILevelDrawer levelDrawer;
     public Level(IPresenter presenter){
-        this.presenter = presenter;
+        levelDrawer = presenter.getLevelDrawer();
         IDoorDrawer doorDrawer = presenter.getDoorDrawer();
         IRoomDrawer roomDrawer = presenter.getRoomDrawer();
 
@@ -61,8 +62,8 @@ public class Level {
         currentRoom = currentRoom.update(player);
     }
 
-    public void draw(ShapeRenderer shapeRenderer){
-        currentRoom.draw();
+    public void draw(){
+        levelDrawer.drawLevel(currentRoom);
     }
 
     private Map<Set<PlanarNode>, Boolean> getEdgeMap(PlanarGraph levelLayout){

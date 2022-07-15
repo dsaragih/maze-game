@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.mygdx.game.Entities.Player;
+import com.mygdx.game.geometry.Point;
 import com.mygdx.game.graphics.IPresenter;
 import com.mygdx.game.graphics.ShapePresenter;
 
@@ -26,7 +27,7 @@ public class MazeGame extends ApplicationAdapter {
 		camera.setToOrtho(false, SCREEN_WIDTH, SCREEN_HEIGHT);
 		presenter = new ShapePresenter(shapeRenderer);
 
-		player = new Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, shapeRenderer);
+		player = new Player(new Point(SCREEN_WIDTH/2, SCREEN_HEIGHT/2), presenter.getPlayerDrawer());
 		level = new Level(presenter);
 
 	}
@@ -52,8 +53,8 @@ public class MazeGame extends ApplicationAdapter {
 		camera.update();
 		shapeRenderer.setProjectionMatrix(camera.combined);
 		shapeRenderer.begin(ShapeType.Filled);
-		level.draw(shapeRenderer);
-		player.draw(shapeRenderer);
+		level.draw();
+		player.draw();
 		shapeRenderer.end();
 
 	}

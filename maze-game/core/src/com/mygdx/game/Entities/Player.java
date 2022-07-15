@@ -6,14 +6,15 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.geometry.Circle;
 import com.mygdx.game.geometry.Point;
+import com.mygdx.game.graphics.player.IPlayerDrawer;
 
-public class Player {
-    private Point pos;
-    private int radius = 20;
+public class Player extends Entity{
     private float speed = 200;
+    private IPlayerDrawer playerDrawer;
 
-    public Player(int x, int y, ShapeRenderer shapeRenderer){
-        pos = new Point(x, y);
+    public Player(Point pos, IPlayerDrawer playerDrawer){
+        super(pos);
+        this.playerDrawer = playerDrawer;
     }
     public void update(){
         Point dir = new Point(0,0);
@@ -22,13 +23,12 @@ public class Player {
         pos = add(pos, multiply(dir, speed * Gdx.graphics.getDeltaTime()));
     }
 
-    public void draw(ShapeRenderer shapeRenderer){
-        shapeRenderer.setColor(Color.GOLD);
-        shapeRenderer.circle(pos.x, pos.y, radius);
+    public void draw(){
+        playerDrawer.drawPlayer(pos);
     }
 
     public Circle getCollisionBox(){
-        return new Circle(pos, radius);
+        return new Circle(pos, 10);
     }
 
     private int dirCalc(boolean a, boolean b){
