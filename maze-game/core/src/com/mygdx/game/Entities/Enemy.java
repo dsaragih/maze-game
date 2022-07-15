@@ -1,11 +1,9 @@
 package com.mygdx.game.Entities;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.geometry.Circle;
 import com.mygdx.game.geometry.Point;
-import com.mygdx.game.graphics.room.IEntityDrawer;
+import com.mygdx.game.graphics.entities.IEntityDrawer;
 
 public class Enemy extends Entity {
     private float speed;

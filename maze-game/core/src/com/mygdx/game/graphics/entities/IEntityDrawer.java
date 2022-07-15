@@ -1,4 +1,4 @@
-package com.mygdx.game.graphics.room;
+package com.mygdx.game.graphics.entities;
 import com.mygdx.game.geometry.Point;
 import com.badlogic.gdx.graphics.Color;
 

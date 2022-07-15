@@ -1,10 +1,9 @@
 package com.mygdx.game.Entities;
 
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.geometry.Point;
 import com.mygdx.game.graphics.IDrawble;
 import com.badlogic.gdx.graphics.Color;
-import com.mygdx.game.graphics.room.IEntityDrawer;
+import com.mygdx.game.graphics.entities.IEntityDrawer;
 
 public abstract class Entity implements IDrawble {
     Point pos;

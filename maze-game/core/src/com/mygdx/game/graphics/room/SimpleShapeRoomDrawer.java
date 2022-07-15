@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.Door;
 import com.mygdx.game.Entities.Entity;
+import com.mygdx.game.graphics.entities.CircleEntityDrawer;
+import com.mygdx.game.graphics.entities.IEntityDrawer;
 
 import java.util.List;
 
@@ -24,8 +26,5 @@ public class SimpleShapeRoomDrawer implements IRoomDrawer{
             ent.draw();
         }
     }
-    @Override
-    public IEntityDrawer getEntityDrawer() {
-        return new CircleEntityDrawer(shapeRenderer);
-    }
+
 }
