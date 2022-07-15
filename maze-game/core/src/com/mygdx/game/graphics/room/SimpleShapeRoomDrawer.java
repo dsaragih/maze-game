@@ -24,4 +24,8 @@ public class SimpleShapeRoomDrawer implements IRoomDrawer{
             ent.draw();
         }
     }
+    @Override
+    public IEntityDrawer getEntityDrawer() {
+        return new CircleEntityDrawer(shapeRenderer);
+    }
 }

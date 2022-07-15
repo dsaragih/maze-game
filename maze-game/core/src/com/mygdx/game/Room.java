@@ -15,10 +15,11 @@ public class Room {
     private final int width = 960;
     private final int height = 540;
     private IRoomDrawer roomDrawer;
-    private ArrayList<Entity> entities = new ArrayList<>(new Enemy());
+    private ArrayList<Entity> entities = new ArrayList<>();
 
     public Room(IRoomDrawer roomDrawer){
         this.roomDrawer = roomDrawer;
+        entities.add(new Enemy(width / 4, height / 4, roomDrawer.getEntityDrawer()));
     }
     public void addDoor(Door door){
         doors.add(door);

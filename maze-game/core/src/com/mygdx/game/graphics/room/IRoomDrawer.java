@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface IRoomDrawer {
     public void drawRoom(List<Entity> entities, List<Door> doors, int width, int height);
+    public IEntityDrawer getEntityDrawer();
 }

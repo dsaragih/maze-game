@@ -4,16 +4,17 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.geometry.Point;
 import com.mygdx.game.graphics.IDrawble;
 import com.badlogic.gdx.graphics.Color;
+import com.mygdx.game.graphics.room.IEntityDrawer;
 
 public abstract class Entity implements IDrawble {
     Point pos;
     int radius;
     Color color;
-    ShapeRenderer shapeRenderer;
+    IEntityDrawer entityDrawer;
 
-    public Entity(float x, float y, ShapeRenderer shapeRenderer) {
+    public Entity(float x, float y, IEntityDrawer entityDrawer) {
         pos = new Point(x,y);
-        this.shapeRenderer = shapeRenderer;
+        this.entityDrawer = entityDrawer;
     }
 
     public Entity(Point pos) {
@@ -22,7 +23,6 @@ public abstract class Entity implements IDrawble {
 
     @Override
     public void draw() {
-        shapeRenderer.setColor(color);
-        shapeRenderer.circle(pos.x, pos.y, radius);
+        entityDrawer.drawEntity(pos, radius, color);
     }
 }
