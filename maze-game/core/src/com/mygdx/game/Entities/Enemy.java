@@ -12,7 +12,7 @@ public class Enemy extends Entity {
         super(x, y, entityDrawer);
         color = Color.RED;
         radius = 15;
-        speed = 200;
+        speed = 150;
     }
 
     public Circle getCollisionBox(){
@@ -21,7 +21,7 @@ public class Enemy extends Entity {
 
     public void update(Player player) {
         Point dir = pos.separation(player.pos).normalized();
-        dir.multiply(speed * Gdx.graphics.getDeltaTime());
+        dir.multiply(-speed * Gdx.graphics.getDeltaTime());
         pos.add(dir);
     }
 }

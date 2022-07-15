@@ -35,6 +35,9 @@ public class Room {
                 return door.collideWith(player);
             }
         }
+        for (Entity entity : entities) {
+            entity.update(player);
+        }
 
         return this;
     }

@@ -24,4 +24,7 @@ public abstract class Entity implements IDrawble {
     public void draw() {
         entityDrawer.drawEntity(pos, radius, color);
     }
+    public void update(Player player) {
+
+    }
 }
