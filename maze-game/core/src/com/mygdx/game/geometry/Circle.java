@@ -10,7 +10,7 @@ public class Circle {
     }
 
     public boolean intersects(Circle other){
-        Point dist = Point.add(center, Point.multiply(other.center, -1));
+        Point dist = center.separation(other.center);
         return dist.length() <= radius + other.radius;
     }
 }
