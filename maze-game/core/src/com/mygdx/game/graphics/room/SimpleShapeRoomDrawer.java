@@ -3,6 +3,9 @@ package com.mygdx.game.graphics.room;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.Door;
+import com.mygdx.game.Entities.Entity;
+import com.mygdx.game.graphics.entities.CircleEntityDrawer;
+import com.mygdx.game.graphics.entities.IEntityDrawer;
 
 import java.util.List;
 
@@ -13,11 +16,15 @@ public class SimpleShapeRoomDrawer implements IRoomDrawer{
         this.shapeRenderer = shapeRenderer;
     }
     @Override
-    public void drawRoom(List<Door> doors, int width, int height) {
+    public void drawRoom(List<Entity> entities, List<Door> doors, int width, int height) {
         shapeRenderer.setColor(Color.GRAY);
         shapeRenderer.rect(0, 0, width, height);
         for(Door door: doors){
             door.draw();
         }
+        for (Entity ent: entities) {
+            ent.draw();
+        }
     }
+
 }

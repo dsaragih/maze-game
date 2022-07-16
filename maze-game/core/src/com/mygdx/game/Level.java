@@ -7,8 +7,8 @@ import com.mygdx.game.graph.PlanarNode;
 import com.mygdx.game.graph.TestGraphGenerator;
 import com.mygdx.game.graphics.IPresenter;
 import com.mygdx.game.graphics.door.IDoorDrawer;
-import com.mygdx.game.graphics.level.ILevelDrawer;
 import com.mygdx.game.graphics.room.IRoomDrawer;
+import org.graalvm.compiler.nodes.calc.IntegerEqualsNode;
 
 import java.util.*;
 
@@ -25,7 +25,7 @@ public class Level {
         Map<Set<PlanarNode>, Boolean> edges = getEdgeMap(levelLayout);
         Map<PlanarNode, Room> nodeToRoom = new HashMap<>();
         for(PlanarNode node: levelLayout){
-            nodeToRoom.put(node, new Room(roomDrawer));
+            nodeToRoom.put(node, new Room(roomDrawer, entityDrawer));
         }
 
         for (PlanarNode node: levelLayout) {

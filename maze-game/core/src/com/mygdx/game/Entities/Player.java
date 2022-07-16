@@ -8,7 +8,13 @@ import com.mygdx.game.geometry.Circle;
 import com.mygdx.game.geometry.Point;
 import com.mygdx.game.graphics.player.IPlayerDrawer;
 
+<<<<<<< HEAD
 public class Player extends Entity{
+=======
+public class Player {
+    public Point pos;
+    private int radius = 20;
+>>>>>>> 5a0ec28ca78b9c27d4e070c331478c710adf1e65
     private float speed = 200;
     private IPlayerDrawer playerDrawer;
 
@@ -20,7 +26,8 @@ public class Player extends Entity{
         Point dir = new Point(0,0);
         dir.x = dirCalc(Gdx.input.isKeyPressed(Input.Keys.A), Gdx.input.isKeyPressed(Input.Keys.D));
         dir.y = dirCalc(Gdx.input.isKeyPressed(Input.Keys.S), Gdx.input.isKeyPressed(Input.Keys.W));
-        pos = add(pos, multiply(dir, speed * Gdx.graphics.getDeltaTime()));
+        dir.multiply(speed * Gdx.graphics.getDeltaTime());
+        pos.add(dir);
     }
 
     public void draw(){
