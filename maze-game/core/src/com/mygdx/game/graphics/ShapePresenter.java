@@ -1,23 +1,38 @@
 package com.mygdx.game.graphics;
 
-import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.mygdx.game.geometry.Point;
 import com.mygdx.game.graphics.door.CircleDoorDrawer;
 import com.mygdx.game.graphics.door.IDoorDrawer;
+import com.mygdx.game.graphics.entities.enemy.CircleEnemyDrawer;
 import com.mygdx.game.graphics.entities.enemy.IEnemyDrawer;
 import com.mygdx.game.graphics.entities.enemy.SquareEnemyDrawer;
 import com.mygdx.game.graphics.level.ILevelDrawer;
 import com.mygdx.game.graphics.level.LevelDrawer;
-import com.mygdx.game.graphics.player.CirclePlayerDrawer;
-import com.mygdx.game.graphics.player.IPlayerDrawer;
+import com.mygdx.game.graphics.entities.player.CirclePlayerDrawer;
+import com.mygdx.game.graphics.entities.player.IPlayerDrawer;
 import com.mygdx.game.graphics.room.IRoomDrawer;
 import com.mygdx.game.graphics.room.SimpleShapeRoomDrawer;
 
 public class ShapePresenter implements IPresenter {
     private final ShapeRenderer shapeRenderer;
-    public ShapePresenter(ShapeRenderer shapeRenderer){
+    int screenWidth;
+    int screenHeight;
+    public ShapePresenter(ShapeRenderer shapeRenderer, int screenWidth, int screenHeight){
         this.shapeRenderer = shapeRenderer;
+        this.screenWidth = screenWidth;
+        this.screenHeight = screenHeight;
+    }
+
+    @Override
+    public void start(Camera camera) {
+        shapeRenderer.setProjectionMatrix(camera.combined);
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+    }
+
+    @Override
+    public void end() {
+        shapeRenderer.end();
     }
 
     @Override
@@ -27,7 +42,7 @@ public class ShapePresenter implements IPresenter {
 
     @Override
     public IRoomDrawer getRoomDrawer() {
-        return new SimpleShapeRoomDrawer(shapeRenderer);
+        return new SimpleShapeRoomDrawer(shapeRenderer, screenWidth, screenHeight);
     }
 
     @Override
@@ -42,6 +57,6 @@ public class ShapePresenter implements IPresenter {
 
     @Override
     public IEnemyDrawer getEnemyDrawer() {
-        return new SquareEnemyDrawer(shapeRenderer);
+        return new CircleEnemyDrawer(shapeRenderer);
     }
 }

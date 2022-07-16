@@ -25,10 +25,10 @@ public class MazeGame extends ApplicationAdapter {
 		shapeRenderer = new ShapeRenderer();
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, SCREEN_WIDTH, SCREEN_HEIGHT);
-		presenter = new ShapePresenter(shapeRenderer);
+		presenter = new ShapePresenter(shapeRenderer, SCREEN_WIDTH, SCREEN_HEIGHT);
 
 		player = new Player(new Point(SCREEN_WIDTH/2, SCREEN_HEIGHT/2), presenter.getPlayerDrawer());
-		level = new Level(presenter);
+		level = new Level(presenter, player, SCREEN_WIDTH, SCREEN_HEIGHT);
 
 	}
 
@@ -44,18 +44,16 @@ public class MazeGame extends ApplicationAdapter {
 	}
 
 	private void update(){
-		player.update();
-		level.update(player);
+		level.update();
 	}
 
 	private void draw() {
 		ScreenUtils.clear(0, 0, 0, 1);
 		camera.update();
-		shapeRenderer.setProjectionMatrix(camera.combined);
-		shapeRenderer.begin(ShapeType.Filled);
+		presenter.start(camera);
 		level.draw();
 		player.draw();
-		shapeRenderer.end();
+		presenter.end();
 
 	}
 }

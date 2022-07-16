@@ -1,8 +1,9 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.mygdx.game.Entities.Door;
 import com.mygdx.game.Entities.Enemy;
 import com.mygdx.game.Entities.Player;
+import com.mygdx.game.geometry.Point;
 import com.mygdx.game.graph.PlanarGraph;
 import com.mygdx.game.graph.PlanarNode;
 import com.mygdx.game.graph.TestGraphGenerator;
@@ -13,12 +14,17 @@ import com.mygdx.game.graphics.room.IRoomDrawer;
 
 import java.util.*;
 
-public class Level {
+public class Level implements IRoomContainer {
     private Collection<Room> rooms;
     private Room currentRoom;
     private ILevelDrawer levelDrawer;
     private Random rnd = new Random();
-    public Level(IPresenter presenter){
+    private final int screenWidth;
+    private final int screenHeight;
+    public Level(IPresenter presenter, Player player, int screenWidth, int screenHeight){
+        this.screenWidth = screenWidth;
+        this.screenHeight = screenHeight;
+
         levelDrawer = presenter.getLevelDrawer();
         IDoorDrawer doorDrawer = presenter.getDoorDrawer();
         IRoomDrawer roomDrawer = presenter.getRoomDrawer();
@@ -39,8 +45,8 @@ public class Level {
                     Room r1 = nodeToRoom.get(node);
                     Room r2 = nodeToRoom.get(neighbour);
 
-                    Door door1 = new Door(doorDrawer);
-                    Door door2 = new Door(doorDrawer);
+                    Door door1 = new Door(getRandomPointOnScreen(), doorDrawer, this  );
+                    Door door2 = new Door(getRandomPointOnScreen(), doorDrawer, this);
 
                     door1.setRoom(r1);
                     door2.setRoom(r2);
@@ -48,8 +54,8 @@ public class Level {
                     door1.setDoor(door2);
                     door2.setDoor(door1);
 
-                    r1.addDoor(door1);
-                    r2.addDoor(door2);
+                    r1.addCollidableEntity(door1);
+                    r2.addCollidableEntity(door2);
 
                     edges.put(pair, true);
                 }
@@ -59,17 +65,23 @@ public class Level {
         rooms = nodeToRoom.values();
         int numEnemies = 0;
         for(Room room: rooms){
+            room.addCollidableEntity(player);
             numEnemies = rnd.nextInt(1, 6);
             for(int i = 0; i < numEnemies; ++i){
-                room.addEntities(new Enemy(room.getRandomPointInRoom(), presenter.getEnemyDrawer()));
+                Enemy enemy = new Enemy(getRandomPointOnScreen(), presenter.getEnemyDrawer());
+                player.addObserver(enemy);
+                room.addCollidableEntity(enemy);
             }
         }
 
         currentRoom = rooms.iterator().next();
     }
+    public void setNewRoom(Room room){
+        currentRoom = room;
+    }
 
-    public void update(Player player){
-        currentRoom = currentRoom.update(player);
+    public void update(){
+        currentRoom.update();
     }
 
     public void draw(){
@@ -90,5 +102,9 @@ public class Level {
         }
 
         return edges;
+    }
+
+    private Point getRandomPointOnScreen(){
+        return new Point(rnd.nextInt(0, screenWidth), rnd.nextInt(0, screenHeight));
     }
 }

@@ -1,30 +1,56 @@
 package com.mygdx.game.Entities;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.mygdx.game.geometry.Circle;
 import com.mygdx.game.geometry.Point;
-import com.mygdx.game.graphics.entities.IEntityDrawer;
 import com.mygdx.game.graphics.entities.enemy.IEnemyDrawer;
 
-public class Enemy extends Entity {
-    private float speed;
+public class Enemy extends CollidableEnitity implements IPlayerObserver {
+    private Point velocity = new Point(0,0);
+    private final float ACCELERATION = 10;
+    private final float FRICTION = 0.02f;
+    private final float MAX_SPEED = 20;
     private IEnemyDrawer enemyDrawer;
+    private boolean isDead = false;
+    private int damage = 25;
+
+    private Point target = null;
 
     public Enemy(int x, int y, IEnemyDrawer enemyDrawer) {
         super(x, y);
-        speed = 150;
         this.enemyDrawer = enemyDrawer;
     }
 
     public Enemy(Point pos, IEnemyDrawer enemyDrawer) {
         super(pos);
-        speed = 150;
-
         this.enemyDrawer = enemyDrawer;
     }
 
     public Circle getCollisionBox(){
-        return new Circle(pos, 10);
+        return new Circle(pos, 15);
+    }
+
+
+    @Override
+    public void informCollision(ICollidable other) {
+        other.collideWith(this);
+    }
+
+    public void collideWith(Player player) {
+        Point dir = player.pos.distanceVector(pos).normalized();
+        dir.multiply(-2);
+        velocity.add(dir);
+    }
+
+    @Override
+    public void collideWith(Enemy enemy) {
+        Point dir = enemy.pos.distanceVector(pos).normalized();
+        dir.multiply(-2);
+        velocity.add(dir);
+    }
+
+    @Override
+    public void collideWith(Door door) {
+
     }
 
     @Override
@@ -32,9 +58,32 @@ public class Enemy extends Entity {
         enemyDrawer.drawEnemy(pos);
     }
 
-    public void update(Player player) {
-        Point dir = pos.separation(player.pos).normalized();
-        dir.multiply(-speed * Gdx.graphics.getDeltaTime());
-        pos.add(dir);
+    public void update() {
+        if(target == null){
+            return;
+        }
+
+        Point dirVector = target.distanceVector(pos).normalized();
+        dirVector.multiply(ACCELERATION * Gdx.graphics.getDeltaTime());
+        velocity.add(dirVector);
+        velocity.multiply(1 - FRICTION);
+        if(velocity.isZero()){
+            return;
+        }
+        Point newDir = velocity.normalized();
+        if(newDir.length() > MAX_SPEED){
+            newDir.multiply(MAX_SPEED);
+            velocity = newDir;
+        }
+
+        pos.add(velocity);
+    }
+
+    public int getDamage(){
+        return damage;
+    }
+
+    public void setTarget(Point newTarget){
+        target = newTarget;
     }
 }

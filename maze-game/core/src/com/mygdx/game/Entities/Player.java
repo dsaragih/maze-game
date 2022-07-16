@@ -2,15 +2,18 @@ package com.mygdx.game.Entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.geometry.Circle;
 import com.mygdx.game.geometry.Point;
-import com.mygdx.game.graphics.player.IPlayerDrawer;
+import com.mygdx.game.graphics.entities.player.IPlayerDrawer;
 
-public class Player extends Entity{
+import java.util.ArrayList;
+import java.util.Collection;
+
+public class Player extends CollidableEnitity {
     private float speed = 200;
+    private int health = 100;
     private IPlayerDrawer playerDrawer;
+    private Collection<IPlayerObserver> observers = new ArrayList<>();
 
     public Player(Point pos, IPlayerDrawer playerDrawer){
         super(pos);
@@ -22,6 +25,10 @@ public class Player extends Entity{
         dir.y = dirCalc(Gdx.input.isKeyPressed(Input.Keys.S), Gdx.input.isKeyPressed(Input.Keys.W));
         dir.multiply(speed * Gdx.graphics.getDeltaTime());
         pos.add(dir);
+
+        for(IPlayerObserver observer: observers){
+            observer.setTarget(pos);
+        }
     }
 
     public void draw(){
@@ -32,6 +39,21 @@ public class Player extends Entity{
         return new Circle(pos, 10);
     }
 
+    @Override
+    public void collideWith(Player player) {
+
+    }
+
+
+    public void collideWith(Enemy enemy) {
+        health -= enemy.getDamage();
+    }
+
+    @Override
+    public void collideWith(Door door) {
+
+    }
+
     private int dirCalc(boolean a, boolean b){
         if(a == b){
             return 0;
@@ -40,11 +62,12 @@ public class Player extends Entity{
         return b ? 1 : -1;
     }
 
-    private Point add(Point v1, Point v2){
-        return new Point(v1.x + v2.x , v1.y + v2.y);
+    @Override
+    public void informCollision(ICollidable other) {
+        other.collideWith(this);
     }
 
-    private Point multiply(Point v1, float scalar){
-        return new Point(v1.x * scalar , v1.y * scalar);
+    public void addObserver(IPlayerObserver observer){
+        observers.add(observer);
     }
 }
