@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.geometry;
 
 public class Point {
     public float x,y;
@@ -18,11 +18,16 @@ public class Point {
         y *= scalar;
     }
 
+
     public float lengthSquared() {
         return x * x + y * y;
     }
     public float length(){
         return (float) Math.sqrt(lengthSquared());
+    }
+
+    public Point separation(Point p) {
+        return new Point(x - p.x, y - p.y);
     }
 
     public Point normalized(){
@@ -33,11 +38,4 @@ public class Point {
         return new Point(x/length, y /length);
     }
 
-    public static Point add(Point p1, Point p2){
-        return new Point(p1.x + p2.x, p1.y + p2.y);
-    }
-
-    public static Point multiply(Point p1, float scalar){
-        return new Point(p1.x * scalar, p1.y * scalar);
-    }
 }

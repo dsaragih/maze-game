@@ -1,33 +1,35 @@
-package com.mygdx.game;
+package com.mygdx.game.Entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.geometry.Circle;
+import com.mygdx.game.geometry.Point;
+import com.mygdx.game.graphics.player.IPlayerDrawer;
 
-public class Player {
-    private Point pos;
-    private int radius = 20;
+public class Player extends Entity{
     private float speed = 200;
+    private IPlayerDrawer playerDrawer;
 
-    public Player(int x, int y, ShapeRenderer shapeRenderer){
-        pos = new Point(x, y);
+    public Player(Point pos, IPlayerDrawer playerDrawer){
+        super(pos);
+        this.playerDrawer = playerDrawer;
     }
     public void update(){
         Point dir = new Point(0,0);
         dir.x = dirCalc(Gdx.input.isKeyPressed(Input.Keys.A), Gdx.input.isKeyPressed(Input.Keys.D));
         dir.y = dirCalc(Gdx.input.isKeyPressed(Input.Keys.S), Gdx.input.isKeyPressed(Input.Keys.W));
-        pos = add(pos, multiply(dir, speed * Gdx.graphics.getDeltaTime()));
+        dir.multiply(speed * Gdx.graphics.getDeltaTime());
+        pos.add(dir);
     }
 
-    public void draw(ShapeRenderer shapeRenderer){
-        shapeRenderer.setColor(Color.GOLD);
-        shapeRenderer.circle(pos.x, pos.y, radius);
+    public void draw(){
+        playerDrawer.drawPlayer(pos);
     }
 
     public Circle getCollisionBox(){
-        return new Circle(pos, radius);
+        return new Circle(pos, 10);
     }
 
     private int dirCalc(boolean a, boolean b){

@@ -1,22 +1,33 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.mygdx.game.graph.GraphGenerator;
+import com.mygdx.game.Entities.Enemy;
+import com.mygdx.game.Entities.Player;
 import com.mygdx.game.graph.PlanarGraph;
 import com.mygdx.game.graph.PlanarNode;
 import com.mygdx.game.graph.TestGraphGenerator;
+import com.mygdx.game.graphics.IPresenter;
+import com.mygdx.game.graphics.door.IDoorDrawer;
+import com.mygdx.game.graphics.level.ILevelDrawer;
+import com.mygdx.game.graphics.room.IRoomDrawer;
 
 import java.util.*;
 
 public class Level {
     private Collection<Room> rooms;
     private Room currentRoom;
-    public Level(){
+    private ILevelDrawer levelDrawer;
+    private Random rnd = new Random();
+    public Level(IPresenter presenter){
+        levelDrawer = presenter.getLevelDrawer();
+        IDoorDrawer doorDrawer = presenter.getDoorDrawer();
+        IRoomDrawer roomDrawer = presenter.getRoomDrawer();
+
         PlanarGraph levelLayout = new TestGraphGenerator().generate();
         Map<Set<PlanarNode>, Boolean> edges = getEdgeMap(levelLayout);
         Map<PlanarNode, Room> nodeToRoom = new HashMap<>();
         for(PlanarNode node: levelLayout){
-            nodeToRoom.put(node, new Room());
+            nodeToRoom.put(node, new Room(roomDrawer));
         }
 
         for (PlanarNode node: levelLayout) {
@@ -27,24 +38,42 @@ public class Level {
                 if(!edges.get(pair)){
                     Room r1 = nodeToRoom.get(node);
                     Room r2 = nodeToRoom.get(neighbour);
-                    Door door = new Door(r1, r2);
-                    r1.addDoor(door);
-                    r2.addDoor(door);
+
+                    Door door1 = new Door(doorDrawer);
+                    Door door2 = new Door(doorDrawer);
+
+                    door1.setRoom(r1);
+                    door2.setRoom(r2);
+
+                    door1.setDoor(door2);
+                    door2.setDoor(door1);
+
+                    r1.addDoor(door1);
+                    r2.addDoor(door2);
+
                     edges.put(pair, true);
                 }
             }
         }
 
         rooms = nodeToRoom.values();
+        int numEnemies = 0;
+        for(Room room: rooms){
+            numEnemies = rnd.nextInt(1, 6);
+            for(int i = 0; i < numEnemies; ++i){
+                room.addEntities(new Enemy(room.getRandomPointInRoom(), presenter.getEnemyDrawer()));
+            }
+        }
+
         currentRoom = rooms.iterator().next();
     }
 
     public void update(Player player){
-        currentRoom.update(player);
+        currentRoom = currentRoom.update(player);
     }
 
-    public void draw(ShapeRenderer shapeRenderer){
-        currentRoom.draw(shapeRenderer);
+    public void draw(){
+        levelDrawer.drawLevel(currentRoom);
     }
 
     private Map<Set<PlanarNode>, Boolean> getEdgeMap(PlanarGraph levelLayout){

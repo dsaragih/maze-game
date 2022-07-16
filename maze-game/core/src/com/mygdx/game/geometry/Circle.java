@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.geometry;
 
 public class Circle {
     public Point center;
@@ -10,7 +10,7 @@ public class Circle {
     }
 
     public boolean intersects(Circle other){
-        Point dist = Point.add(center, Point.multiply(other.center, -1));
+        Point dist = center.separation(other.center);
         return dist.length() <= radius + other.radius;
     }
 }
