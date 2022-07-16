@@ -4,19 +4,32 @@ import com.badlogic.gdx.graphics.Color;
 import com.mygdx.game.geometry.Circle;
 import com.mygdx.game.geometry.Point;
 import com.mygdx.game.graphics.entities.IEntityDrawer;
+import com.mygdx.game.graphics.entities.enemy.IEnemyDrawer;
 
 public class Enemy extends Entity {
     private float speed;
+    private IEnemyDrawer enemyDrawer;
 
-    public Enemy(int x, int y, IEntityDrawer entityDrawer) {
-        super(x, y, entityDrawer);
-        color = Color.RED;
-        radius = 15;
+    public Enemy(int x, int y, IEnemyDrawer enemyDrawer) {
+        super(x, y);
         speed = 150;
+        this.enemyDrawer = enemyDrawer;
+    }
+
+    public Enemy(Point pos, IEnemyDrawer enemyDrawer) {
+        super(pos);
+        speed = 150;
+
+        this.enemyDrawer = enemyDrawer;
     }
 
     public Circle getCollisionBox(){
-        return new Circle(pos, radius);
+        return new Circle(pos, 10);
+    }
+
+    @Override
+    public void draw() {
+        enemyDrawer.drawEnemy(pos);
     }
 
     public void update(Player player) {

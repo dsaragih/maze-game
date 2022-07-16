@@ -2,6 +2,7 @@ package com.mygdx.game.graphics;
 
 import com.mygdx.game.geometry.Point;
 import com.mygdx.game.graphics.door.IDoorDrawer;
+import com.mygdx.game.graphics.entities.enemy.IEnemyDrawer;
 import com.mygdx.game.graphics.level.ILevelDrawer;
 import com.mygdx.game.graphics.player.IPlayerDrawer;
 import com.mygdx.game.graphics.room.IRoomDrawer;
@@ -13,5 +14,7 @@ public interface IPresenter {
     public ILevelDrawer getLevelDrawer();
 
     public IPlayerDrawer getPlayerDrawer();
+
+    public IEnemyDrawer getEnemyDrawer();
 
 }

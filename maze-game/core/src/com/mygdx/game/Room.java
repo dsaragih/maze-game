@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.Entities.Entity;
 import com.mygdx.game.Entities.Player;
+import com.mygdx.game.geometry.Point;
 import com.mygdx.game.graphics.entities.IEntityDrawer;
 import com.mygdx.game.graphics.room.IRoomDrawer;
 import com.mygdx.game.graphics.room.SimpleShapeRoomDrawer;
@@ -16,13 +17,11 @@ public class Room {
     private final int width = 960;
     private final int height = 540;
     private IRoomDrawer roomDrawer;
-    private IEntityDrawer entityDrawer;
     private ArrayList<Entity> entities = new ArrayList<>();
+    private Random rnd = new Random();
 
-    public Room(IRoomDrawer roomDrawer, IEntityDrawer entityDrawer){
+    public Room(IRoomDrawer roomDrawer){
         this.roomDrawer = roomDrawer;
-        this.entityDrawer = entityDrawer;
-        addEntities(new Enemy(width / 4, height / 4, entityDrawer));
     }
     public void addDoor(Door door){
         doors.add(door);
@@ -44,5 +43,9 @@ public class Room {
 
     public void draw(){
         roomDrawer.drawRoom(entities, doors, width, height);
+    }
+
+    public Point getRandomPointInRoom(){
+        return new Point(rnd.nextInt(0, width), rnd.nextInt(0, height));
     }
 }

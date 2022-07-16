@@ -8,13 +8,7 @@ import com.mygdx.game.geometry.Circle;
 import com.mygdx.game.geometry.Point;
 import com.mygdx.game.graphics.player.IPlayerDrawer;
 
-<<<<<<< HEAD
 public class Player extends Entity{
-=======
-public class Player {
-    public Point pos;
-    private int radius = 20;
->>>>>>> 5a0ec28ca78b9c27d4e070c331478c710adf1e65
     private float speed = 200;
     private IPlayerDrawer playerDrawer;
 

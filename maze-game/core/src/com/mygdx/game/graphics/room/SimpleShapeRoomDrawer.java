@@ -11,7 +11,7 @@ import java.util.List;
 
 public class SimpleShapeRoomDrawer implements IRoomDrawer{
 
-    private ShapeRenderer shapeRenderer;
+    private final ShapeRenderer shapeRenderer;
     public SimpleShapeRoomDrawer(ShapeRenderer shapeRenderer){
         this.shapeRenderer = shapeRenderer;
     }

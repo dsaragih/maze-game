@@ -1,14 +1,15 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.mygdx.game.Entities.Enemy;
 import com.mygdx.game.Entities.Player;
 import com.mygdx.game.graph.PlanarGraph;
 import com.mygdx.game.graph.PlanarNode;
 import com.mygdx.game.graph.TestGraphGenerator;
 import com.mygdx.game.graphics.IPresenter;
 import com.mygdx.game.graphics.door.IDoorDrawer;
+import com.mygdx.game.graphics.level.ILevelDrawer;
 import com.mygdx.game.graphics.room.IRoomDrawer;
-import org.graalvm.compiler.nodes.calc.IntegerEqualsNode;
 
 import java.util.*;
 
@@ -16,6 +17,7 @@ public class Level {
     private Collection<Room> rooms;
     private Room currentRoom;
     private ILevelDrawer levelDrawer;
+    private Random rnd = new Random();
     public Level(IPresenter presenter){
         levelDrawer = presenter.getLevelDrawer();
         IDoorDrawer doorDrawer = presenter.getDoorDrawer();
@@ -25,7 +27,7 @@ public class Level {
         Map<Set<PlanarNode>, Boolean> edges = getEdgeMap(levelLayout);
         Map<PlanarNode, Room> nodeToRoom = new HashMap<>();
         for(PlanarNode node: levelLayout){
-            nodeToRoom.put(node, new Room(roomDrawer, entityDrawer));
+            nodeToRoom.put(node, new Room(roomDrawer));
         }
 
         for (PlanarNode node: levelLayout) {
@@ -55,6 +57,14 @@ public class Level {
         }
 
         rooms = nodeToRoom.values();
+        int numEnemies = 0;
+        for(Room room: rooms){
+            numEnemies = rnd.nextInt(1, 6);
+            for(int i = 0; i < numEnemies; ++i){
+                room.addEntities(new Enemy(room.getRandomPointInRoom(), presenter.getEnemyDrawer()));
+            }
+        }
+
         currentRoom = rooms.iterator().next();
     }
 

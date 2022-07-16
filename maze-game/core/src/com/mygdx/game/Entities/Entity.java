@@ -7,13 +7,9 @@ import com.mygdx.game.graphics.entities.IEntityDrawer;
 
 public abstract class Entity implements IDrawble {
     Point pos;
-    int radius;
-    Color color;
-    IEntityDrawer entityDrawer;
 
-    public Entity(float x, float y, IEntityDrawer entityDrawer) {
+    public Entity(float x, float y) {
         pos = new Point(x,y);
-        this.entityDrawer = entityDrawer;
     }
 
     public Entity(Point pos) {
@@ -21,9 +17,7 @@ public abstract class Entity implements IDrawble {
     }
 
     @Override
-    public void draw() {
-        entityDrawer.drawEntity(pos, radius, color);
-    }
+    public abstract void draw();
     public void update(Player player) {
 
     }
