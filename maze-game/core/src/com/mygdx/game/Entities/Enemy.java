@@ -10,8 +10,8 @@ public class Enemy extends CollidableEnitity implements IPlayerObserver {
     private final float FRICTION = 0.02f;
     private final float MAX_SPEED = 20;
     private IEnemyDrawer enemyDrawer;
-    private boolean isDead = false;
-    private int damage = 25;
+    private int health = 100;
+    private int damage = 1;
 
     private Point target = null;
 
@@ -37,14 +37,14 @@ public class Enemy extends CollidableEnitity implements IPlayerObserver {
 
     public void collideWith(Player player) {
         Point dir = player.pos.distanceVector(pos).normalized();
-        dir.multiply(-2);
+        dir.multiply(-1f);
         velocity.add(dir);
     }
 
     @Override
     public void collideWith(Enemy enemy) {
         Point dir = enemy.pos.distanceVector(pos).normalized();
-        dir.multiply(-2);
+        dir.multiply(-1f);
         velocity.add(dir);
     }
 

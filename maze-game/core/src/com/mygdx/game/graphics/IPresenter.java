@@ -3,6 +3,7 @@ package com.mygdx.game.graphics;
 import com.badlogic.gdx.graphics.Camera;
 import com.mygdx.game.graphics.door.IDoorDrawer;
 import com.mygdx.game.graphics.entities.enemy.IEnemyDrawer;
+import com.mygdx.game.graphics.gun.IGunDrawer;
 import com.mygdx.game.graphics.level.ILevelDrawer;
 import com.mygdx.game.graphics.entities.player.IPlayerDrawer;
 import com.mygdx.game.graphics.room.IRoomDrawer;
@@ -19,5 +20,6 @@ public interface IPresenter {
     public IPlayerDrawer getPlayerDrawer();
 
     public IEnemyDrawer getEnemyDrawer();
+    public IGunDrawer getGunDrawer();
 
 }

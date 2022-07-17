@@ -4,11 +4,12 @@ import com.mygdx.game.Entities.CollidableEnitity;
 import com.mygdx.game.Entities.Entity;
 import com.mygdx.game.Entities.ICollidable;
 import com.mygdx.game.Entities.Player;
+import com.mygdx.game.graphics.IDrawble;
 import com.mygdx.game.graphics.room.IRoomDrawer;
 
 import java.util.*;
 
-public class Room {
+public class Room implements IDrawble {
     private final IRoomDrawer roomDrawer;
     private final ArrayList<Entity> nonCollidableEntities = new ArrayList<>();
     private final ArrayList<CollidableEnitity> collidableEntities = new ArrayList<>();

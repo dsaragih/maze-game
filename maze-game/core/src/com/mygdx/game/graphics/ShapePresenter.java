@@ -7,6 +7,8 @@ import com.mygdx.game.graphics.door.IDoorDrawer;
 import com.mygdx.game.graphics.entities.enemy.CircleEnemyDrawer;
 import com.mygdx.game.graphics.entities.enemy.IEnemyDrawer;
 import com.mygdx.game.graphics.entities.enemy.SquareEnemyDrawer;
+import com.mygdx.game.graphics.gun.CircleGunDrawer;
+import com.mygdx.game.graphics.gun.IGunDrawer;
 import com.mygdx.game.graphics.level.ILevelDrawer;
 import com.mygdx.game.graphics.level.LevelDrawer;
 import com.mygdx.game.graphics.entities.player.CirclePlayerDrawer;
@@ -16,8 +18,9 @@ import com.mygdx.game.graphics.room.SimpleShapeRoomDrawer;
 
 public class ShapePresenter implements IPresenter {
     private final ShapeRenderer shapeRenderer;
-    int screenWidth;
-    int screenHeight;
+    private int screenWidth;
+    private int screenHeight;
+
     public ShapePresenter(ShapeRenderer shapeRenderer, int screenWidth, int screenHeight){
         this.shapeRenderer = shapeRenderer;
         this.screenWidth = screenWidth;
@@ -58,5 +61,10 @@ public class ShapePresenter implements IPresenter {
     @Override
     public IEnemyDrawer getEnemyDrawer() {
         return new CircleEnemyDrawer(shapeRenderer);
+    }
+
+    @Override
+    public IGunDrawer getGunDrawer() {
+        return new CircleGunDrawer(shapeRenderer);
     }
 }

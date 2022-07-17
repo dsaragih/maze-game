@@ -14,25 +14,35 @@ public class Player extends CollidableEnitity {
     private int health = 100;
     private IPlayerDrawer playerDrawer;
     private Collection<IPlayerObserver> observers = new ArrayList<>();
+    private Point gunDirection = new Point(0,0);
+    private Gun gun;
 
-    public Player(Point pos, IPlayerDrawer playerDrawer){
+    public Player(Point pos, IPlayerDrawer playerDrawer, Gun gun){
         super(pos);
         this.playerDrawer = playerDrawer;
+        this.gun = gun;
     }
-    public void update(){
-        Point dir = new Point(0,0);
-        dir.x = dirCalc(Gdx.input.isKeyPressed(Input.Keys.A), Gdx.input.isKeyPressed(Input.Keys.D));
-        dir.y = dirCalc(Gdx.input.isKeyPressed(Input.Keys.S), Gdx.input.isKeyPressed(Input.Keys.W));
-        dir.multiply(speed * Gdx.graphics.getDeltaTime());
-        pos.add(dir);
+
+    public void move(Point direction){
+        direction.multiply(speed * Gdx.graphics.getDeltaTime());
+        pos.add(direction);
 
         for(IPlayerObserver observer: observers){
             observer.setTarget(pos);
         }
+        gun.setPosition(playerDrawer.getGunPos(pos, gunDirection));
+    }
+
+    public void setMousePos(Point mousePos){
+        gunDirection = mousePos.distanceVector(pos);
+        if(!gunDirection.isZero()){
+            gunDirection = gunDirection.normalized();
+        }
     }
 
     public void draw(){
-        playerDrawer.drawPlayer(pos);
+        playerDrawer.drawPlayer(pos, gunDirection);
+        gun.draw();
     }
 
     public Circle getCollisionBox(){
@@ -54,14 +64,6 @@ public class Player extends CollidableEnitity {
 
     }
 
-    private int dirCalc(boolean a, boolean b){
-        if(a == b){
-            return 0;
-        }
-
-        return b ? 1 : -1;
-    }
-
     @Override
     public void informCollision(ICollidable other) {
         other.collideWith(this);
@@ -69,5 +71,9 @@ public class Player extends CollidableEnitity {
 
     public void addObserver(IPlayerObserver observer){
         observers.add(observer);
+    }
+
+    public int getHealth(){
+        return health;
     }
 }

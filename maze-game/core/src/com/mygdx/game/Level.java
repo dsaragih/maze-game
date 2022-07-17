@@ -15,10 +15,10 @@ import com.mygdx.game.graphics.room.IRoomDrawer;
 import java.util.*;
 
 public class Level implements IRoomContainer {
-    private Collection<Room> rooms;
+    private final Collection<Room> rooms;
     private Room currentRoom;
-    private ILevelDrawer levelDrawer;
-    private Random rnd = new Random();
+    private final ILevelDrawer levelDrawer;
+    private final Random rnd = new Random();
     private final int screenWidth;
     private final int screenHeight;
     public Level(IPresenter presenter, Player player, int screenWidth, int screenHeight){

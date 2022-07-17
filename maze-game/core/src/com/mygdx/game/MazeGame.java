@@ -1,10 +1,16 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.mygdx.game.Entities.Gun;
 import com.mygdx.game.Entities.Player;
 import com.mygdx.game.geometry.Point;
 import com.mygdx.game.graphics.IPresenter;
@@ -19,17 +25,27 @@ public class MazeGame extends ApplicationAdapter {
 	private Player player;
 	private Level level;
 	private IPresenter presenter;
+
+	private SpriteBatch batch;
+	private BitmapFont font;
+	private InputController controller;
 	
 	@Override
 	public void create () {
+		batch = new SpriteBatch();
+		font = new BitmapFont();
+		font.setColor(Color.RED);
+
 		shapeRenderer = new ShapeRenderer();
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, SCREEN_WIDTH, SCREEN_HEIGHT);
 		presenter = new ShapePresenter(shapeRenderer, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-		player = new Player(new Point(SCREEN_WIDTH/2, SCREEN_HEIGHT/2), presenter.getPlayerDrawer());
+		Gun gun = new Gun(new Point(SCREEN_WIDTH/2f, SCREEN_HEIGHT/2f), presenter.getGunDrawer());
+		player = new Player(new Point(SCREEN_WIDTH/2f, SCREEN_HEIGHT/2f), presenter.getPlayerDrawer(), gun);
 		level = new Level(presenter, player, SCREEN_WIDTH, SCREEN_HEIGHT);
 
+		controller = new InputController(camera, player);
 	}
 
 	@Override
@@ -41,9 +57,15 @@ public class MazeGame extends ApplicationAdapter {
 	@Override
 	public void dispose () {
 		shapeRenderer.dispose();
+		batch.dispose();
+		font.dispose();
 	}
 
 	private void update(){
+		if(player.getHealth() <= 0){
+			return;
+		}
+		controller.checkForInput();
 		level.update();
 	}
 
@@ -54,6 +76,13 @@ public class MazeGame extends ApplicationAdapter {
 		level.draw();
 		player.draw();
 		presenter.end();
+		batch.begin();
+		if(player.getHealth() <= 0){
+			font.draw(batch, "YOU DIED", SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
+		}else{
+			font.draw(batch, "Health: " + player.getHealth(), 10, 20);
+		}
+		batch.end();
 
 	}
 }
