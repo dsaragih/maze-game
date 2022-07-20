@@ -65,6 +65,11 @@ public class Player extends CollidableEnitity {
     }
 
     @Override
+    public void collideWith(Bullet bullet) {
+
+    }
+
+    @Override
     public void informCollision(ICollidable other) {
         other.collideWith(this);
     }

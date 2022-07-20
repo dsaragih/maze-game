@@ -53,7 +53,7 @@ public class Enemy extends CollidableEnitity implements IPlayerObserver {
 
     }
     public void collideWith(Bullet bullet) {
-
+        health -= bullet.getDamage();
     }
 
     @Override

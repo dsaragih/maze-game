@@ -7,11 +7,14 @@ import com.mygdx.game.graphics.gun.IBulletDrawer;
 
 public class Bullet extends CollidableEnitity{
     private IBulletDrawer bulletDrawer;
+    float damage;
 
-    public Bullet(Point pos, IBulletDrawer bulletDrawer) {
+    public Bullet(Point pos, float damage, IBulletDrawer bulletDrawer) {
         super(pos);
+        this.damage = damage;
         this.bulletDrawer = bulletDrawer;
     }
+    public float getDamage() { return damage; }
     @Override
     public void draw() {
         bulletDrawer.drawBullet(pos);
@@ -36,8 +39,13 @@ public class Bullet extends CollidableEnitity{
     public void collideWith(Door door) {
 
     }
+    @Override
+    public void collideWith(Bullet bullet) {
+
+    }
 
     @Override
     public void informCollision(ICollidable other) {
+        other.collideWith(this);
     }
 }
