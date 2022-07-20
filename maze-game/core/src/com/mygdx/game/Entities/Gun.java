@@ -13,7 +13,7 @@ public class Gun extends Entity {
     }
 
     private void fire(Point direction){
-        
+
     }
 
     public void setPosition(Point pos){
