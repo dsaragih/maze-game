@@ -52,9 +52,6 @@ public class Enemy extends CollidableEnitity implements IPlayerObserver {
     public void collideWith(Door door) {
 
     }
-    public void collideWith(Bullet bullet) {
-
-    }
 
     @Override
     public void collideWith(Bullet bullet) {
