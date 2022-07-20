@@ -78,7 +78,7 @@ public class MazeGame extends ApplicationAdapter {
 		presenter.end();
 		batch.begin();
 		if(player.getHealth() <= 0){
-			font.draw(batch, "YOU DIED", SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
+			font.draw(batch, "YOU DIED", SCREEN_WIDTH/2f, SCREEN_HEIGHT/2f);
 		}else{
 			font.draw(batch, "Health: " + player.getHealth(), 10, 20);
 		}
