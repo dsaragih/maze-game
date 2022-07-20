@@ -4,16 +4,19 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Vector3;
+import com.mygdx.game.Entities.Gun;
 import com.mygdx.game.Entities.Player;
 import com.mygdx.game.geometry.Point;
 
 public class InputController {
     private final Player player;
     private final Camera camera;
+    private final Gun gun;
 
-    public InputController(Camera camera, Player player){
+    public InputController(Camera camera, Player player, Gun gun){
         this.player = player;
         this.camera = camera;
+        this.gun = gun;
     }
 
     public void checkForInput(){
@@ -28,6 +31,11 @@ public class InputController {
         mousePos = new Point(unprotectedMousePos.x, unprotectedMousePos.y);
 
         player.setMousePos(mousePos);
+
+        // if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
+        //    gun.fire(mousePos);
+        //}
+
     }
 
     private int dirCalc(boolean a, boolean b){

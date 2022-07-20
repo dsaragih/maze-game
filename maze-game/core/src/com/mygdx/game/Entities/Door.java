@@ -51,6 +51,11 @@ public class Door extends CollidableEnitity {
     public void collideWith(Door door) {
 
     }
+
+    @Override
+    public void collideWith(Bullet bullet) {
+
+    }
 }
 
 
