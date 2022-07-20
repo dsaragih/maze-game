@@ -36,7 +36,7 @@ public class Bullet extends CollidableEnitity{
 
     @Override
     public void collideWith(Enemy enemy) {
-        //enemy.collideWith(this);
+       // enemy.collideWith(this);
     }
 
     @Override
@@ -51,7 +51,7 @@ public class Bullet extends CollidableEnitity{
 
     @Override
     public void informCollision(ICollidable other) {
-        other.collideWith(this);
+
     }
 
     public void update() {
