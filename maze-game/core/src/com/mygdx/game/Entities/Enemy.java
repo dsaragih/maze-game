@@ -56,10 +56,6 @@ public class Enemy extends CollidableEnitity implements IPlayerObserver {
         health -= bullet.getDamage();
     }
 
-    @Override
-    public void collideWith(Bullet bullet) {
-        this.health -= bullet.getDamage();
-    }
 
     @Override
     public void draw() {
