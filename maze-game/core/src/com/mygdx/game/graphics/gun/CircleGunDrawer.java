@@ -1,19 +1,19 @@
-package com.mygdx.game.graphics.player;
+package com.mygdx.game.graphics.gun;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.geometry.Point;
 
-public class CirclePlayerDrawer implements IPlayerDrawer{
+public class CircleGunDrawer implements IGunDrawer{
 
-    private int radius = 10;
+    private int radius = 2;
     private ShapeRenderer shapeRenderer;
-    public CirclePlayerDrawer(ShapeRenderer shapeRenderer){
+    public CircleGunDrawer(ShapeRenderer shapeRenderer){
         this.shapeRenderer = shapeRenderer;
     }
     @Override
-    public void drawPlayer(Point pos) {
-        shapeRenderer.setColor(Color.GOLD);
+    public void drawGun(Point pos) {
+        shapeRenderer.setColor(Color.BLACK);
         shapeRenderer.circle(pos.x, pos.y, radius);
     }
 }

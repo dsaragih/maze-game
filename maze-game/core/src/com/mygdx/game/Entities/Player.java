@@ -2,49 +2,78 @@ package com.mygdx.game.Entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.geometry.Circle;
 import com.mygdx.game.geometry.Point;
-import com.mygdx.game.graphics.player.IPlayerDrawer;
+import com.mygdx.game.graphics.entities.player.IPlayerDrawer;
 
-public class Player extends Entity{
+import java.util.ArrayList;
+import java.util.Collection;
+
+public class Player extends CollidableEnitity {
     private float speed = 200;
+    private int health = 100;
     private IPlayerDrawer playerDrawer;
+    private Collection<IPlayerObserver> observers = new ArrayList<>();
+    private Point gunDirection = new Point(0,0);
+    private Gun gun;
 
-    public Player(Point pos, IPlayerDrawer playerDrawer){
+    public Player(Point pos, IPlayerDrawer playerDrawer, Gun gun){
         super(pos);
         this.playerDrawer = playerDrawer;
+        this.gun = gun;
     }
-    public void update(){
-        Point dir = new Point(0,0);
-        dir.x = dirCalc(Gdx.input.isKeyPressed(Input.Keys.A), Gdx.input.isKeyPressed(Input.Keys.D));
-        dir.y = dirCalc(Gdx.input.isKeyPressed(Input.Keys.S), Gdx.input.isKeyPressed(Input.Keys.W));
-        dir.multiply(speed * Gdx.graphics.getDeltaTime());
-        pos.add(dir);
+
+    public void move(Point direction){
+        direction.multiply(speed * Gdx.graphics.getDeltaTime());
+        pos.add(direction);
+
+        for(IPlayerObserver observer: observers){
+            observer.setTarget(pos);
+        }
+        gun.setPosition(playerDrawer.getGunPos(pos, gunDirection));
+    }
+
+    public void setMousePos(Point mousePos){
+        gunDirection = mousePos.distanceVector(pos);
+        if(!gunDirection.isZero()){
+            gunDirection = gunDirection.normalized();
+        }
     }
 
     public void draw(){
-        playerDrawer.drawPlayer(pos);
+        playerDrawer.drawPlayer(pos, gunDirection);
+        gun.draw();
     }
 
     public Circle getCollisionBox(){
         return new Circle(pos, 10);
     }
 
-    private int dirCalc(boolean a, boolean b){
-        if(a == b){
-            return 0;
-        }
+    @Override
+    public void collideWith(Player player) {
 
-        return b ? 1 : -1;
     }
 
-    private Point add(Point v1, Point v2){
-        return new Point(v1.x + v2.x , v1.y + v2.y);
+
+    public void collideWith(Enemy enemy) {
+        health -= enemy.getDamage();
     }
 
-    private Point multiply(Point v1, float scalar){
-        return new Point(v1.x * scalar , v1.y * scalar);
+    @Override
+    public void collideWith(Door door) {
+
+    }
+
+    @Override
+    public void informCollision(ICollidable other) {
+        other.collideWith(this);
+    }
+
+    public void addObserver(IPlayerObserver observer){
+        observers.add(observer);
+    }
+
+    public int getHealth(){
+        return health;
     }
 }

@@ -2,7 +2,6 @@ package com.mygdx.game.geometry;
 
 public class Point {
     public float x,y;
-
     public Point(float x, float y) {
         this.x = x;
         this.y = y;
@@ -26,7 +25,7 @@ public class Point {
         return (float) Math.sqrt(lengthSquared());
     }
 
-    public Point separation(Point p) {
+    public Point distanceVector(Point p) {
         return new Point(x - p.x, y - p.y);
     }
 
@@ -36,6 +35,10 @@ public class Point {
             throw new IllegalArgumentException("Cannot normalize the 0 vector");
         }
         return new Point(x/length, y /length);
+    }
+
+    public boolean isZero(){
+        return x ==0 && y ==0;
     }
 
 }
