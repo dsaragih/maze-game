@@ -11,20 +11,20 @@ import java.util.*;
 
 public class Room implements IDrawble {
     private final IRoomDrawer roomDrawer;
-    private final ArrayList<Entity> nonCollidableEntities = new ArrayList<>();
+    private final ArrayList<Entity> Entities = new ArrayList<>();
     private final ArrayList<CollidableEnitity> collidableEntities = new ArrayList<>();
 
     public Room(IRoomDrawer roomDrawer){
         this.roomDrawer = roomDrawer;
     }
-    public void addNonCollidableEntity (Entity ent) {nonCollidableEntities.add(ent);}
+    public void addNonCollidableEntity (Entity ent) {Entities.add(ent);}
     public void addCollidableEntity (CollidableEnitity ent) {
         collidableEntities.add(ent);
-        nonCollidableEntities.add(ent);
+        Entities.add(ent);
     }
 
     public void update(){
-        for(Entity entity: nonCollidableEntities){
+        for(Entity entity: Entities){
             entity.update();
         }
 
@@ -40,8 +40,12 @@ public class Room implements IDrawble {
             }
         }
     }
+    public void removeCollidableEntity (CollidableEnitity ent) {
+        collidableEntities.remove(ent);
+        Entities.remove(ent);
+    }
 
     public void draw(){
-        roomDrawer.drawRoom(nonCollidableEntities);
+        roomDrawer.drawRoom(Entities);
     }
 }

@@ -3,39 +3,37 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class User implements Serializable {
-    private final String userName;
-    private final String password;
-    private final int userid;
-    private final boolean admin;
+    private String userName;
+    private String password;
+    private int userid;
+    private boolean admin;
+    private boolean banned;
 
-    private final Date signUpDate;
-    private final ArrayList<Date> loginDates;
-
+    private Date signUpDate; //saved but never accessed.
     public User(String userName, String password, boolean admin, int userid){
         this.userName = userName;
         this.password = password;
         this.admin = admin;
         this.userid = userid;
+        this.banned = false;
         signUpDate = new Date();
-        loginDates = new ArrayList<>();
     }
 
     //getters and setters
+    public int getUserid() { return userid; }
     public String getUserName(){
         return userName;
     }
     public String getPassword(){
         return password;
     }
-    public void recordLoginDate(){
-        loginDates.add(new Date());
-    }
-
-    public ArrayList<Date> getLoginDates(){
-        return loginDates;
-    }
     public boolean isAdmin(){
         return admin;
+    }
+    public boolean isBanned() { return banned; }
+
+    public void setBanned(boolean banned) {
+        this.banned = banned;
     }
 
 }

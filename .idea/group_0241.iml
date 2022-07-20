@@ -8,6 +8,8 @@
       <sourceFolder url="file://$MODULE_DIR$/phase1/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/phase1/Phase1 test" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/maze-game/desktop/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/phase1/test" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/phase0" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
