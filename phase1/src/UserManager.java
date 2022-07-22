@@ -7,71 +7,31 @@ import java.util.HashMap;
 public class UserManager implements Serializable {
     private int lastId = 0;
     private final Map<String, User> users = new HashMap<>();
-    private final ArrayList<String> bannedUsers = new ArrayList<>();
+    private final ArrayList<Log> logHistory = new ArrayList<>();
 
     public UserManager(){
-        addUser("TestAdmin", "123", true);
+        if(users.isEmpty())
+            addUser("admin", "123", true); //was "TestAdmin" before made "admin"
     }
-    public boolean addUser(String userName, String password, boolean isAdmin) {
-        if (users.get(userName) != null){
-            return false;
-        }
+    public void addUser(String userName, String password, boolean isAdmin) {
+        //int lastId = users.values().stream().mapToInt(User::getUserid).max().orElse(0);
         User newUser = new User(userName, password, isAdmin, lastId);
         users.put(userName, newUser);
         ++lastId;
-        return true;
+    }
+    public User getUser(String username){
+        return users.get(username);
+    }
+    public void delete(String userName){
+        users.remove(userName);
     }
 
-    public User login(String userName, String password){
-        User user = users.get(userName);
-        if (user == null){
-            return null;
-        }
-
-        if (user.getPassword().equals(password) && !bannedUsers.contains(userName)){
-            user.recordLoginDate();
-            return user;
-        }
-        return null;
-    }
-    public boolean delete(String userName){
-        User toBeDeleted = users.get(userName);
-        if (toBeDeleted != null && !toBeDeleted.isAdmin()){
-            users.remove(userName);
-            return true;
-        }
-        return false;
-    }
-    public boolean ban(String userName){
-        if(!doesUserExist(userName) || bannedUsers.contains(userName)){
-            return false;
-        }
-
-        User toBeSuspended = users.get(userName);
-        if(toBeSuspended.isAdmin()){
-            return false;
-        }
-
-        bannedUsers.add(userName);
-        return true;
+    public void recordLoginDate(int userid){
+        Log log = new Log(userid, new Date());
+        logHistory.add(log);
     }
 
-    public boolean unban(String userName) {
-        if(!doesUserExist(userName) || !bannedUsers.contains(userName)){
-            return false;
-        }
-        bannedUsers.remove(userName);
-        return true;
-    }
-
-    public boolean doesUserExist(String username){
-        return users.get(username) != null;
-    }
-
-    public Map<String, User> getUsers() {
-        return users;
-    }
-    public ArrayList<String> getBannedUsers() {
-        return bannedUsers;
+    public ArrayList<Log> getLogs(){
+        return logHistory;
     }
 }

@@ -2,9 +2,9 @@ import java.io.IOException;
 import java.text.ParseException;
 public class Main {
     public static void main(String[]args){
-        Session s = new Session();
+        AppUI appUI = new AppUI();
         try {
-            s.run();
+            appUI.run();
         } catch (ParseException | IOException e) {
             System.out.println("Exception caught:, " + e.getMessage());
         }
