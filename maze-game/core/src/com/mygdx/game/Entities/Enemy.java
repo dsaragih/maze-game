@@ -4,7 +4,7 @@ import com.mygdx.game.geometry.Circle;
 import com.mygdx.game.geometry.Point;
 import com.mygdx.game.graphics.entities.enemy.IEnemyDrawer;
 
-public class Enemy extends CollidableEnitity implements IPlayerObserver {
+public class Enemy extends CollidableEntity implements IPlayerObserver {
     private Point velocity = new Point(0,0);
     private final float ACCELERATION = 10;
     private final float FRICTION = 0.02f;

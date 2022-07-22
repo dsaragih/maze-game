@@ -1,6 +1,6 @@
 package com.mygdx.game;
 
-import com.mygdx.game.Entities.CollidableEnitity;
+import com.mygdx.game.Entities.CollidableEntity;
 import com.mygdx.game.Entities.Entity;
 import com.mygdx.game.Entities.ICollidable;
 
@@ -8,29 +8,47 @@ import java.util.ArrayList;
 
 public class RoomEntityManager implements IRoomEntityManager{
     private final ArrayList<Entity> Entities;
-    private final ArrayList<CollidableEnitity> collidableEntities;
+    private final ArrayList<CollidableEntity> collidableEntities;
+    private final ArrayList<Entity> toBeAddedEntities;
+    private final ArrayList<Entity> toBeRemovedEntities;
+    private final ArrayList<CollidableEntity> toBeAddedCollidable;
+    private final ArrayList<CollidableEntity> toBeRemovedCollidable;
 
 
     public RoomEntityManager () {
         Entities = new ArrayList<>();
         collidableEntities = new ArrayList<>();
+        toBeAddedEntities = new ArrayList<>();
+        toBeRemovedEntities = new ArrayList<>();
+        toBeAddedCollidable = new ArrayList<>();
+        toBeRemovedCollidable = new ArrayList<>();
     }
     @Override
-    public void addNonCollidableEntity (Entity ent) {Entities.add(ent);}
+    public void addNonCollidableEntity (Entity ent) {toBeAddedEntities.add(ent);}
     @Override
-    public void addCollidableEntity (CollidableEnitity ent) {
-        collidableEntities.add(ent);
-        Entities.add(ent);
+    public void addCollidableEntity (CollidableEntity ent) {
+        toBeAddedCollidable.add(ent);
+        toBeAddedEntities.add(ent);
     }
     @Override
-    public void removeCollidableEntity (CollidableEnitity ent) {
-        collidableEntities.remove(ent);
-        Entities.remove(ent);
+    public void removeCollidableEntity (CollidableEntity ent) {
+        toBeRemovedCollidable.add(ent);
+        toBeRemovedEntities.add(ent);
     }
     @Override
-    public void removeNonCollidableEntity (Entity ent) {Entities.remove(ent);}
+    public void removeNonCollidableEntity (Entity ent) {toBeRemovedEntities.add(ent);}
 
     public void update(){
+        Entities.addAll(toBeAddedEntities);
+        collidableEntities.addAll(toBeAddedCollidable);
+        Entities.removeAll(toBeRemovedEntities);
+        collidableEntities.removeAll(toBeRemovedCollidable);
+
+        toBeAddedEntities.clear();
+        toBeAddedCollidable.clear();
+        toBeRemovedEntities.clear();
+        toBeRemovedCollidable.clear();
+
         for(Entity entity: Entities){
             entity.update();
         }
