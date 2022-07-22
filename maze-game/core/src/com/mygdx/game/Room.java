@@ -1,51 +1,39 @@
 package com.mygdx.game;
+import com.badlogic.gdx.math.MathUtils;
 
-import com.mygdx.game.Entities.CollidableEnitity;
-import com.mygdx.game.Entities.Entity;
-import com.mygdx.game.Entities.ICollidable;
-import com.mygdx.game.Entities.Player;
+import com.mygdx.game.Entities.*;
+import com.mygdx.game.geometry.Point;
 import com.mygdx.game.graphics.IDrawble;
-import com.mygdx.game.graphics.room.IRoomDrawer;
-
-import java.util.*;
+import com.mygdx.game.graphics.IPresenter;
 
 public class Room implements IDrawble {
-    private final IRoomDrawer roomDrawer;
-    private final ArrayList<Entity> Entities = new ArrayList<>();
-    private final ArrayList<CollidableEnitity> collidableEntities = new ArrayList<>();
+    private final IPresenter presenter;
+    public final RoomEntityManager entityManager;
 
-    public Room(IRoomDrawer roomDrawer){
-        this.roomDrawer = roomDrawer;
+    public Room(IPresenter presenter, RoomEntityManager entityManager ){
+        this.presenter = presenter;
+        this.entityManager = entityManager;
     }
-    public void addNonCollidableEntity (Entity ent) {Entities.add(ent);}
-    public void addCollidableEntity (CollidableEnitity ent) {
-        collidableEntities.add(ent);
-        Entities.add(ent);
+
+    public void create(Player player, int screenWidth, int screenHeight) {
+        entityManager.addCollidableEntity(player);
+        player.gun.setEntityManager(entityManager);
+        int numEnemies = MathUtils.random(1, 6);
+        for(int i = 0; i < numEnemies; ++i){
+            Point enemy_pos = new Point(MathUtils.random(0, screenWidth), MathUtils.random(0, screenHeight));
+            System.out.println(enemy_pos.x + " " + enemy_pos.y);
+            Enemy enemy = new Enemy(enemy_pos, presenter.getEnemyDrawer());
+            player.addObserver(enemy);
+            entityManager.addCollidableEntity(enemy);
+        }
     }
 
     public void update(){
-        for(Entity entity: Entities){
-            entity.update();
-        }
-
-        for(ICollidable e1: collidableEntities){
-            for(ICollidable e2: collidableEntities){
-                if(e1 == e2){
-                    continue;
-                }
-                if(e1.getCollisionBox().intersects(e2.getCollisionBox())){
-                    e1.informCollision(e2);
-                    e2.informCollision(e1);
-                }
-            }
-        }
-    }
-    public void removeCollidableEntity (CollidableEnitity ent) {
-        collidableEntities.remove(ent);
-        Entities.remove(ent);
+        entityManager.update();
     }
 
     public void draw(){
-        roomDrawer.drawRoom(Entities);
+        presenter.getRoomDrawer().drawRoom();
+        entityManager.draw();
     }
 }

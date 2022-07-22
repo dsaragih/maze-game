@@ -15,7 +15,7 @@ public class Player extends CollidableEnitity {
     private IPlayerDrawer playerDrawer;
     private Collection<IPlayerObserver> observers = new ArrayList<>();
     private Point gunDirection = new Point(0,0);
-    private Gun gun;
+    public Gun gun;
 
     public Player(Point pos, IPlayerDrawer playerDrawer, Gun gun){
         super(pos);
@@ -38,6 +38,10 @@ public class Player extends CollidableEnitity {
         if(!gunDirection.isZero()){
             gunDirection = gunDirection.normalized();
         }
+    }
+    public Point getGunDirection() {
+        System.out.println(gunDirection.x + " " + gunDirection.y);
+        return gunDirection;
     }
 
     public void draw(){

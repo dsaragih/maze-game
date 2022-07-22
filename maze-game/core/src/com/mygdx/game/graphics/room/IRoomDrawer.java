@@ -6,5 +6,5 @@ import com.mygdx.game.Entities.Entity;
 import java.util.List;
 
 public interface IRoomDrawer {
-    public void drawRoom(List<Entity> entities);
+    public void drawRoom();
 }
