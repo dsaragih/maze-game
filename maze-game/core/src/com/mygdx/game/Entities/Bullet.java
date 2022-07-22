@@ -39,7 +39,7 @@ public class Bullet extends CollidableEntity {
 
     public void collideWith(Enemy enemy) {
        enemy.collideWith(this);
-       //entityManager.removeCollidableEntity(this);
+       entityManager.removeCollidableEntity(this);
         /*
          * The main issue with this is that a List is being edited while iterating on it
          * to check collisions. Consider adding "toBeAdded" and "toBeRemoved" Lists in EntityManager.

@@ -1,5 +1,6 @@
 package com.mygdx.game.Entities;
 import com.badlogic.gdx.Gdx;
+import com.mygdx.game.IRoomEntityManager;
 import com.mygdx.game.geometry.Circle;
 import com.mygdx.game.geometry.Point;
 import com.mygdx.game.graphics.entities.enemy.IEnemyDrawer;
@@ -12,17 +13,20 @@ public class Enemy extends CollidableEntity implements IPlayerObserver {
     private IEnemyDrawer enemyDrawer;
     private int health = 100;
     private int damage = 1;
+    private IRoomEntityManager entityManager;
 
     private Point target = null;
 
-    public Enemy(int x, int y, IEnemyDrawer enemyDrawer) {
+    public Enemy(int x, int y, IEnemyDrawer enemyDrawer, IRoomEntityManager entityManager) {
         super(x, y);
         this.enemyDrawer = enemyDrawer;
+        this.entityManager = entityManager;
     }
 
-    public Enemy(Point pos, IEnemyDrawer enemyDrawer) {
+    public Enemy(Point pos, IEnemyDrawer enemyDrawer, IRoomEntityManager entityManager) {
         super(pos);
         this.enemyDrawer = enemyDrawer;
+        this.entityManager = entityManager;
     }
 
     public Circle getCollisionBox(){
@@ -69,6 +73,7 @@ public class Enemy extends CollidableEntity implements IPlayerObserver {
         if(target == null){
             return;
         }
+        if (health <= 0) entityManager.removeCollidableEntity(this);
 
         Point dirVector = target.distanceVector(pos).normalized();
         dirVector.multiply(ACCELERATION * Gdx.graphics.getDeltaTime());
