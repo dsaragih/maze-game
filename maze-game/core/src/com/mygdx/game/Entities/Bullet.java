@@ -30,7 +30,7 @@ public class Bullet extends CollidableEntity {
 
     @Override
     public Circle getCollisionBox() {
-        return new Circle(this.pos, 2);
+        return new Circle(this.pos, 4);
     }
 
     public void collideWith(Player player) {
