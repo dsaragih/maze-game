@@ -10,6 +10,7 @@ public class RoomEntityManager implements IRoomEntityManager{
     private final ArrayList<Entity> Entities;
     private final ArrayList<CollidableEnitity> collidableEntities;
 
+
     public RoomEntityManager () {
         Entities = new ArrayList<>();
         collidableEntities = new ArrayList<>();
