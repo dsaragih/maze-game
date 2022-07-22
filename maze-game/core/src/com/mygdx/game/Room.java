@@ -17,11 +17,11 @@ public class Room implements IDrawble {
 
     public void create(Player player, int screenWidth, int screenHeight) {
         entityManager.addCollidableEntity(player);
+        System.out.println(System.identityHashCode(entityManager));
         player.gun.setEntityManager(entityManager);
         int numEnemies = MathUtils.random(1, 6);
         for(int i = 0; i < numEnemies; ++i){
             Point enemy_pos = new Point(MathUtils.random(0, screenWidth), MathUtils.random(0, screenHeight));
-            System.out.println(enemy_pos.x + " " + enemy_pos.y);
             Enemy enemy = new Enemy(enemy_pos, presenter.getEnemyDrawer());
             player.addObserver(enemy);
             entityManager.addCollidableEntity(enemy);

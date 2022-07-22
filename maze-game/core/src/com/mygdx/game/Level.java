@@ -29,7 +29,6 @@ public class Level implements IRoomContainer {
 
         levelDrawer = presenter.getLevelDrawer();
         IDoorDrawer doorDrawer = presenter.getDoorDrawer();
-        IRoomDrawer roomDrawer = presenter.getRoomDrawer();
 
         PlanarGraph levelLayout = new TestGraphGenerator().generate();
         Map<Set<PlanarNode>, Boolean> edges = getEdgeMap(levelLayout);
@@ -65,22 +64,13 @@ public class Level implements IRoomContainer {
         }
 
         rooms = nodeToRoom.values();
-//        int numEnemies = 0;
-//        for(Room room: rooms){
-//            room.entityManager.addCollidableEntity(player);
-//            numEnemies = rnd.nextInt(1, 6);
-//            for(int i = 0; i < numEnemies; ++i){
-//                Enemy enemy = new Enemy(getRandomPointOnScreen(), presenter.getEnemyDrawer());
-//                player.addObserver(enemy);
-//                room.entityManager.addCollidableEntity(enemy);
-//            }
-//        }
 
         currentRoom = rooms.iterator().next();
         currentRoom.create(player, screenWidth, screenHeight);
     }
     public void setNewRoom(Room room){
         room.create(player, screenWidth, screenHeight);
+        System.out.println("Room created!");
         currentRoom = room;
     }
 

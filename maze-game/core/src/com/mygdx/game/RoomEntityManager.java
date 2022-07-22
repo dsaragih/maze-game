@@ -7,9 +7,13 @@ import com.mygdx.game.Entities.ICollidable;
 import java.util.ArrayList;
 
 public class RoomEntityManager implements IRoomEntityManager{
-    private final ArrayList<Entity> Entities = new ArrayList<>();
-    private final ArrayList<CollidableEnitity> collidableEntities = new ArrayList<>();
+    private final ArrayList<Entity> Entities;
+    private final ArrayList<CollidableEnitity> collidableEntities;
 
+    public RoomEntityManager () {
+        Entities = new ArrayList<>();
+        collidableEntities = new ArrayList<>();
+    }
     @Override
     public void addNonCollidableEntity (Entity ent) {Entities.add(ent);}
     @Override
