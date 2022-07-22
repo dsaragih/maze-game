@@ -1,7 +1,6 @@
 package com.mygdx.game.Entities;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.mygdx.game.geometry.Circle;
 import com.mygdx.game.geometry.Point;
 import com.mygdx.game.graphics.entities.player.IPlayerDrawer;
@@ -9,7 +8,7 @@ import com.mygdx.game.graphics.entities.player.IPlayerDrawer;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class Player extends CollidableEnitity {
+public class Player extends CollidableEntity {
     private float speed = 200;
     private int health = 100;
     private IPlayerDrawer playerDrawer;

@@ -1,12 +1,11 @@
 package com.mygdx.game.Entities;
 
-import com.badlogic.gdx.Gdx;
 import com.mygdx.game.IRoomEntityManager;
 import com.mygdx.game.geometry.Circle;
 import com.mygdx.game.geometry.Point;
 import com.mygdx.game.graphics.bullet.IBulletDrawer;
 
-public class Bullet extends CollidableEnitity{
+public class Bullet extends CollidableEntity {
 
     private int BULLET_DAMAGE = 25;
     private Point velocity;
@@ -40,10 +39,12 @@ public class Bullet extends CollidableEnitity{
 
     public void collideWith(Enemy enemy) {
        enemy.collideWith(this);
-       //entityManager.removeCollidableEntity(this);
+       entityManager.removeCollidableEntity(this);
         /*
          * The main issue with this is that a List is being edited while iterating on it
          * to check collisions. Consider adding "toBeAdded" and "toBeRemoved" Lists in EntityManager.
+         *
+         * This is done now, keeping comment just in case
          */
     }
 
