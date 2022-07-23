@@ -70,7 +70,8 @@ public class Level implements IRoomContainer {
     }
     public void setNewRoom(Room room){
         room.create(player, screenWidth, screenHeight);
-        // For some reason this is being called more than once if the Player walks through a door.
+
+        // Bug: For some reason this is being called more than once if the Player walks through a door.
         System.out.println("Room created!");
 
         currentRoom = room;
