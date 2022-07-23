@@ -1,10 +1,11 @@
 package com.mygdx.game.Entities;
 import com.badlogic.gdx.Gdx;
+import com.mygdx.game.IRoomEntityManager;
 import com.mygdx.game.geometry.Circle;
 import com.mygdx.game.geometry.Point;
 import com.mygdx.game.graphics.entities.enemy.IEnemyDrawer;
 
-public class Enemy extends CollidableEnitity implements IPlayerObserver {
+public class Enemy extends CollidableEntity implements IPlayerObserver {
     private Point velocity = new Point(0,0);
     private final float ACCELERATION = 10;
     private final float FRICTION = 0.02f;
@@ -12,17 +13,20 @@ public class Enemy extends CollidableEnitity implements IPlayerObserver {
     private IEnemyDrawer enemyDrawer;
     private int health = 100;
     private int damage = 1;
+    private IRoomEntityManager entityManager;
 
     private Point target = null;
 
-    public Enemy(int x, int y, IEnemyDrawer enemyDrawer) {
+    public Enemy(int x, int y, IEnemyDrawer enemyDrawer, IRoomEntityManager entityManager) {
         super(x, y);
         this.enemyDrawer = enemyDrawer;
+        this.entityManager = entityManager;
     }
 
-    public Enemy(Point pos, IEnemyDrawer enemyDrawer) {
+    public Enemy(Point pos, IEnemyDrawer enemyDrawer, IRoomEntityManager entityManager) {
         super(pos);
         this.enemyDrawer = enemyDrawer;
+        this.entityManager = entityManager;
     }
 
     public Circle getCollisionBox(){
@@ -48,12 +52,16 @@ public class Enemy extends CollidableEnitity implements IPlayerObserver {
         velocity.add(dir);
     }
 
-    @Override
     public void collideWith(Door door) {
 
     }
-    public void collideWith(Bullet bullet) {
 
+    @Override
+    public void collideWith(Bullet bullet) {
+        this.health -= bullet.getDamage();
+        Point dir = bullet.pos.distanceVector(pos).normalized();
+        dir.multiply(-1f);
+        velocity.add(dir);
     }
 
     @Override
@@ -65,6 +73,7 @@ public class Enemy extends CollidableEnitity implements IPlayerObserver {
         if(target == null){
             return;
         }
+        if (health <= 0) entityManager.removeCollidableEntity(this);
 
         Point dirVector = target.distanceVector(pos).normalized();
         dirVector.multiply(ACCELERATION * Gdx.graphics.getDeltaTime());

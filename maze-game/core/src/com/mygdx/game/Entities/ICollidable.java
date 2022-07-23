@@ -7,5 +7,6 @@ public interface ICollidable {
     public void collideWith(Player player);
     public void collideWith(Enemy enemy);
     public void collideWith(Door door);
+    public void collideWith(Bullet bullet);
     public void informCollision(ICollidable other);
 }

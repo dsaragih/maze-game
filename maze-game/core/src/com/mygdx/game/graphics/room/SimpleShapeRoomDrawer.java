@@ -18,12 +18,9 @@ public class SimpleShapeRoomDrawer implements IRoomDrawer{
         this.screenHeight = screenHeight;
     }
     @Override
-    public void drawRoom(List<Entity> entities) {
+    public void drawRoom() {
         shapeRenderer.setColor(Color.GRAY);
         shapeRenderer.rect(0, 0, screenWidth, screenHeight);
-        for (Entity ent: entities) {
-            ent.draw();
-        }
     }
 
 }

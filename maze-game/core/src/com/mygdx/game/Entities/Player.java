@@ -1,7 +1,6 @@
 package com.mygdx.game.Entities;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.mygdx.game.geometry.Circle;
 import com.mygdx.game.geometry.Point;
 import com.mygdx.game.graphics.entities.player.IPlayerDrawer;
@@ -9,13 +8,13 @@ import com.mygdx.game.graphics.entities.player.IPlayerDrawer;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class Player extends CollidableEnitity {
+public class Player extends CollidableEntity {
     private float speed = 200;
     private int health = 100;
     private IPlayerDrawer playerDrawer;
     private Collection<IPlayerObserver> observers = new ArrayList<>();
     private Point gunDirection = new Point(0,0);
-    private Gun gun;
+    public Gun gun;
 
     public Player(Point pos, IPlayerDrawer playerDrawer, Gun gun){
         super(pos);
@@ -39,6 +38,10 @@ public class Player extends CollidableEnitity {
             gunDirection = gunDirection.normalized();
         }
     }
+    public Point getGunDirection() {
+        System.out.println(gunDirection.x + " " + gunDirection.y);
+        return gunDirection;
+    }
 
     public void draw(){
         playerDrawer.drawPlayer(pos, gunDirection);
@@ -61,6 +64,11 @@ public class Player extends CollidableEnitity {
 
     @Override
     public void collideWith(Door door) {
+
+    }
+
+    @Override
+    public void collideWith(Bullet bullet) {
 
     }
 

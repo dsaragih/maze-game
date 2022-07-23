@@ -6,7 +6,7 @@ import com.mygdx.game.geometry.Circle;
 import com.mygdx.game.geometry.Point;
 import com.mygdx.game.graphics.door.IDoorDrawer;
 
-public class Door extends CollidableEnitity {
+public class Door extends CollidableEntity {
     public Room room;
     public Door door;
     private IDoorDrawer doorDrawer;
@@ -49,6 +49,11 @@ public class Door extends CollidableEnitity {
 
     @Override
     public void collideWith(Door door) {
+
+    }
+
+    @Override
+    public void collideWith(Bullet bullet) {
 
     }
 }
