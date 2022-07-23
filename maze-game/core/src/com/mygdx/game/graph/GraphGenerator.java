@@ -1,18 +1,18 @@
 package com.mygdx.game.graph;
 
-public class GraphGenerator implements IGraphGenerator{
-    public PlanarGraph generate(){
-
-        // generate cycle
-        PlanarGraph graph = new PlanarGraph();
-
-        float avgRotation = (float)Math.PI/5;
-        int avgRadius = 100;
-
-
-        float theta = 0;
-        float r = 0;
-
+public class GraphGenerator {
+//    public PlanarGraph generate(){
+//
+//        // generate cycle
+//        PlanarGraph graph = new PlanarGraph();
+//
+//        float avgRotation = (float)Math.PI/5;
+//        int avgRadius = 100;
+//
+//
+//        float theta = 0;
+//        float r = 0;
+//
 //        PlanarNode n0 = new PlanarNode<>(r*(float)Math.cos(theta), r*(float)Math.sin(theta));
 //
 //        while (theta < 2*Math.PI) {
@@ -24,7 +24,7 @@ public class GraphGenerator implements IGraphGenerator{
 //                graph.joinUndirected(n0, n1);
 //            }
 //        }
-        return graph;
-    }
+//        return graph;
+//    }
 
 }

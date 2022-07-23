@@ -2,15 +2,25 @@ package com.mygdx.game.graph;
 import com.mygdx.game.geometry.Point;
 
 import java.util.ArrayList;
-public class PolygonGenerator{
-    public PlanarGraph generate(Point center, int n, float radius, float angle){
+public class PolygonGenerator implements IGraphGenerator{
+    Point center;
+    int n;
+    float radius;
+    float angle;
+    public PolygonGenerator(Point center, int n, float radius, float angle){
+        this.center = center;
+        this.n = n;
+        this.radius = radius;
+        this.angle = angle;
+    }
+    public PlanarGraph generate(){
 
         // generate cycle
         PlanarGraph graph = new PlanarGraph();
         //Convert to radian
         float initialRadian = (float)Math.toRadians(angle);
         float radianIncrement = (float) Math.toRadians(360.0/n);
-        ArrayList<PlanarNode> lst = new ArrayList<PlanarNode>();
+        ArrayList<PlanarNode> lst = new ArrayList<>();
         //Create the vertices
         for (int i=0; i<n; i++){
             PlanarNode n1 = new PlanarNode(center.x+radius*(float)Math.cos(initialRadian+radianIncrement),

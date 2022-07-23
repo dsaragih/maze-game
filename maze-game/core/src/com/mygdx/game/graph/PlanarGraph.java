@@ -6,7 +6,7 @@ import java.util.Set;
 
 public class PlanarGraph implements Iterable<PlanarNode>{
 
-    private Set<PlanarNode> nodes = new HashSet<PlanarNode>();
+    private final Set<PlanarNode> nodes = new HashSet<>();
 
     public Set<PlanarNode> getNodes(){
         return this.nodes;
@@ -27,7 +27,7 @@ public class PlanarGraph implements Iterable<PlanarNode>{
 
     public void mergeGraph(PlanarGraph g1){
         for (PlanarNode node: g1.getNodes()){
-            this.addNode(node)
+            this.addNode(node);
         }
     }
 
