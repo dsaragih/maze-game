@@ -19,23 +19,24 @@ public class TestGraphGenerator implements IGraphGenerator{
         PlanarNode n13 = new PlanarNode(1,3);
         PlanarNode n14 = new PlanarNode(4,3);
 
-        PlanarNode.joinUndirected(n1, n5);
-        PlanarNode.joinUndirected(n1, n3);
-        PlanarNode.joinUndirected(n2, n3);
-        PlanarNode.joinUndirected(n3, n7);
-        PlanarNode.joinUndirected(n4, n7);
-        PlanarNode.joinUndirected(n4, n8);
-        PlanarNode.joinUndirected(n5, n6);
-        PlanarNode.joinUndirected(n6, n10);
-        PlanarNode.joinUndirected(n6, n11);
-        PlanarNode.joinUndirected(n7, n11);
-        PlanarNode.joinUndirected(n8, n9);
-        PlanarNode.joinUndirected(n8, n11);
-        PlanarNode.joinUndirected(n10, n12);
-        PlanarNode.joinUndirected(n10, n13);
-        PlanarNode.joinUndirected(n11, n14);
-        PlanarNode.joinUndirected(n12, n13);
-        PlanarNode.joinUndirected(n13, n14);
+        n1.joinUndirected(n5);
+        n1.joinUndirected(n3);
+        n2.joinUndirected(n5);
+        n3.joinUndirected(n7);
+        n4.joinUndirected(n7);
+        n4.joinUndirected(n8);
+        n5.joinUndirected(n6);
+        n6.joinUndirected(n10);
+        n6.joinUndirected(n11);
+        n7.joinUndirected(n11);
+        n8.joinUndirected(n9);
+        n8.joinUndirected(n11);
+        n10.joinUndirected(n12);
+        n10.joinUndirected(n13);
+        n11.joinUndirected(n14);
+        n12.joinUndirected(n13);
+        n13.joinUndirected(n14);
+
 
         graph.addNode(n1);
         graph.addNode(n2);
