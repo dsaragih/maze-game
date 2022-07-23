@@ -71,6 +71,8 @@ public class Level implements IRoomContainer {
         gun.setEntityManager(currentRoom.getEntityManager());
     }
     public void setNewRoom(Room room){
+
+        // For some reason this is being called more than once if the Player walks through a door.
         currentRoom = room;
         player.setGunEntityManager(currentRoom.getEntityManager());
     }
