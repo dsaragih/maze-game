@@ -32,9 +32,9 @@ public class InputController {
 
         player.setMousePos(mousePos);
 
-        // if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
-        //    gun.fire(mousePos);
-        //}
+         if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
+            gun.fire(mousePos);
+         }
 
     }
 

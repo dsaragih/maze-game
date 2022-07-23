@@ -6,7 +6,7 @@ import com.mygdx.game.Entities.Bullet;
 import com.mygdx.game.geometry.Point;
 
 public class CircleBulletDrawer implements IBulletDrawer{
-    private int radius = 1;
+    private int radius = 4;
     private ShapeRenderer shapeRenderer;
 
     public CircleBulletDrawer(ShapeRenderer shapeRenderer){

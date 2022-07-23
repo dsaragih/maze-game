@@ -1,22 +1,26 @@
 package com.mygdx.game.Entities;
 
-import com.badlogic.gdx.Gdx;
+import com.mygdx.game.IRoomEntityManager;
 import com.mygdx.game.geometry.Circle;
 import com.mygdx.game.geometry.Point;
 import com.mygdx.game.graphics.bullet.IBulletDrawer;
 
-public class Bullet extends CollidableEnitity{
+public class Bullet extends CollidableEntity {
 
     private int BULLET_DAMAGE = 25;
-    private Point velocity = new Point(0, 0);
-    private final Point target;
+    private Point velocity;
+    private float speed = 30;
 
     private IBulletDrawer bulletDrawer;
+    private IRoomEntityManager entityManager;
 
 
-    public Bullet(float x, float y, Point target) {
-        super(x, y);
-        this.target = target;
+    public Bullet(Point pos, Point direction, IBulletDrawer bulletDrawer, IRoomEntityManager entityManager) {
+        super(pos);
+        direction.multiply(speed);
+        this.velocity = direction;
+        this.bulletDrawer = bulletDrawer;
+        this.entityManager = entityManager;
     }
 
     @Override
@@ -26,17 +30,22 @@ public class Bullet extends CollidableEnitity{
 
     @Override
     public Circle getCollisionBox() {
-        return new Circle(this.pos, 1);
+        return new Circle(this.pos, 4);
     }
 
-    @Override
     public void collideWith(Player player) {
 
     }
 
-    @Override
     public void collideWith(Enemy enemy) {
-       // enemy.collideWith(this);
+       enemy.collideWith(this);
+       entityManager.removeCollidableEntity(this);
+        /*
+         * The main issue with this is that a List is being edited while iterating on it
+         * to check collisions. Consider adding "toBeAdded" and "toBeRemoved" Lists in EntityManager.
+         *
+         * This is done now, keeping comment just in case
+         */
     }
 
     @Override
@@ -55,16 +64,6 @@ public class Bullet extends CollidableEnitity{
     }
 
     public void update() {
-        if(target == null){
-            return;
-        }
-
-        Point dirVector = target.distanceVector(pos).normalized();
-        velocity.add(dirVector);
-        if(velocity.isZero()){
-            return;
-        }
-
         pos.add(velocity);
     }
 

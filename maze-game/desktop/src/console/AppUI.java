@@ -1,3 +1,4 @@
+package console;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -38,22 +39,24 @@ public class AppUI {
         int state = -1;
         while (user == null) {
             switch (state) {
-                case -1 -> {
+                case -1: {
                     displayTitle("Welcome");
                     state = getNumInRange("Exit (0) or Login (1) or Signup (2) or Play Demo (3)", 3);
+                    break;
                 }
-                case 0 -> {
+                case 0: {
                     return;
                 }
-                case 1 -> {
+                case 1: {
                     displayTitle("Login");
                     user = userController.login(enter("username"), enter("password"));
                     if (user == null) {
                         writeln("Username or password incorrect (or you're just banned).");
                     }
                     state = -1;
+                    break;
                 }
-                case 2 -> {
+                case 2: {
                     displayTitle("Signup");
                     String username = enter("username");
                     String password = enter("password");
@@ -61,9 +64,10 @@ public class AppUI {
                     writeln(outcome);
                     user = userController.login(username, password);
                     state = -1;
+                    break;
                 }
-                case 3 -> {
-                    //should call Desktop Launcher
+                case 3: {
+                    com.mygdx.game.DesktopLauncher.main(new String[]{});
                     state = -1;
                 }
             }
@@ -86,15 +90,13 @@ public class AppUI {
             int input = getNumInRange("Please enter a number between ", user.isAdmin() ? 6 : 2);
 
             switch (input) {
-                case 0 -> {
-                    return;
-                }
-                case 1 -> log();
-                case 2 -> addUser(false);
-                case 3 -> addUser(true);
-                case 4 -> deleteUser();
-                case 5 -> banUser();
-                case 6 -> unbanUser();
+                case 0: return;
+                case 1: log(); break;
+                case 2: addUser(false); break;
+                case 3: addUser(true); break;
+                case 4: deleteUser(); break;
+                case 5: banUser(); break;
+                case 6: unbanUser();
             }
         }
     }

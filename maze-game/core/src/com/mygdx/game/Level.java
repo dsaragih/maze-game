@@ -17,23 +17,24 @@ import java.util.*;
 public class Level implements IRoomContainer {
     private final Collection<Room> rooms;
     private Room currentRoom;
+    private Player player;
     private final ILevelDrawer levelDrawer;
     private final Random rnd = new Random();
     private final int screenWidth;
     private final int screenHeight;
     public Level(IPresenter presenter, Player player, int screenWidth, int screenHeight){
+        this.player = player;
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
 
         levelDrawer = presenter.getLevelDrawer();
         IDoorDrawer doorDrawer = presenter.getDoorDrawer();
-        IRoomDrawer roomDrawer = presenter.getRoomDrawer();
 
         PlanarGraph levelLayout = new TestGraphGenerator().generate();
         Map<Set<PlanarNode>, Boolean> edges = getEdgeMap(levelLayout);
         Map<PlanarNode, Room> nodeToRoom = new HashMap<>();
         for(PlanarNode node: levelLayout){
-            nodeToRoom.put(node, new Room(roomDrawer));
+            nodeToRoom.put(node, new Room(presenter, new RoomEntityManager()));
         }
 
         for (PlanarNode node: levelLayout) {
@@ -54,8 +55,8 @@ public class Level implements IRoomContainer {
                     door1.setDoor(door2);
                     door2.setDoor(door1);
 
-                    r1.addCollidableEntity(door1);
-                    r2.addCollidableEntity(door2);
+                    r1.entityManager.addCollidableEntity(door1);
+                    r2.entityManager.addCollidableEntity(door2);
 
                     edges.put(pair, true);
                 }
@@ -63,20 +64,15 @@ public class Level implements IRoomContainer {
         }
 
         rooms = nodeToRoom.values();
-        int numEnemies = 0;
-        for(Room room: rooms){
-            room.addCollidableEntity(player);
-            numEnemies = rnd.nextInt(1, 6);
-            for(int i = 0; i < numEnemies; ++i){
-                Enemy enemy = new Enemy(getRandomPointOnScreen(), presenter.getEnemyDrawer());
-                player.addObserver(enemy);
-                room.addCollidableEntity(enemy);
-            }
-        }
 
         currentRoom = rooms.iterator().next();
+        currentRoom.create(player, screenWidth, screenHeight);
     }
     public void setNewRoom(Room room){
+        room.create(player, screenWidth, screenHeight);
+        // For some reason this is being called more than once if the Player walks through a door.
+        System.out.println("Room created!");
+
         currentRoom = room;
     }
 
