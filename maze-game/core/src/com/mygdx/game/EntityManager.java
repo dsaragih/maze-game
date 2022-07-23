@@ -6,7 +6,7 @@ import com.mygdx.game.Entities.ICollidable;
 
 import java.util.ArrayList;
 
-public class RoomEntityManager implements IRoomEntityManager{
+public class EntityManager {
     private final ArrayList<Entity> Entities;
     private final ArrayList<CollidableEntity> collidableEntities;
     private final ArrayList<Entity> toBeAddedEntities;
@@ -15,7 +15,7 @@ public class RoomEntityManager implements IRoomEntityManager{
     private final ArrayList<CollidableEntity> toBeRemovedCollidable;
 
 
-    public RoomEntityManager () {
+    public EntityManager() {
         Entities = new ArrayList<>();
         collidableEntities = new ArrayList<>();
         toBeAddedEntities = new ArrayList<>();
@@ -23,22 +23,24 @@ public class RoomEntityManager implements IRoomEntityManager{
         toBeAddedCollidable = new ArrayList<>();
         toBeRemovedCollidable = new ArrayList<>();
     }
-    @Override
     public void addNonCollidableEntity (Entity ent) {toBeAddedEntities.add(ent);}
-    @Override
     public void addCollidableEntity (CollidableEntity ent) {
         toBeAddedCollidable.add(ent);
         toBeAddedEntities.add(ent);
     }
-    @Override
-    public void removeCollidableEntity (CollidableEntity ent) {
+    public void removeEntity (CollidableEntity ent) {
         toBeRemovedCollidable.add(ent);
         toBeRemovedEntities.add(ent);
     }
-    @Override
-    public void removeNonCollidableEntity (Entity ent) {toBeRemovedEntities.add(ent);}
+    public void removeEntity (Entity ent) {toBeRemovedEntities.add(ent);}
 
     public void update(){
+        for(Entity entitie : Entities){
+            if(entitie.shouldBeRemoved()){
+                removeEntity(entitie);
+            }
+        }
+
         Entities.addAll(toBeAddedEntities);
         collidableEntities.addAll(toBeAddedCollidable);
         Entities.removeAll(toBeRemovedEntities);

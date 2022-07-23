@@ -11,12 +11,10 @@ import com.mygdx.game.geometry.Point;
 public class InputController {
     private final Player player;
     private final Camera camera;
-    private final Gun gun;
 
-    public InputController(Camera camera, Player player, Gun gun){
+    public InputController(Camera camera, Player player){
         this.player = player;
         this.camera = camera;
-        this.gun = gun;
     }
 
     public void checkForInput(){
@@ -33,7 +31,7 @@ public class InputController {
         player.setMousePos(mousePos);
 
          if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
-            gun.fire(mousePos);
+            player.fire(mousePos);
          }
 
     }

@@ -1,7 +1,7 @@
 package com.mygdx.game;
 
 import com.mygdx.game.Entities.Door;
-import com.mygdx.game.Entities.Enemy;
+import com.mygdx.game.Entities.Gun;
 import com.mygdx.game.Entities.Player;
 import com.mygdx.game.geometry.Point;
 import com.mygdx.game.graph.PlanarGraph;
@@ -10,22 +10,25 @@ import com.mygdx.game.graph.TestGraphGenerator;
 import com.mygdx.game.graphics.IPresenter;
 import com.mygdx.game.graphics.door.IDoorDrawer;
 import com.mygdx.game.graphics.level.ILevelDrawer;
-import com.mygdx.game.graphics.room.IRoomDrawer;
 
 import java.util.*;
 
 public class Level implements IRoomContainer {
     private final Collection<Room> rooms;
     private Room currentRoom;
-    private Player player;
     private final ILevelDrawer levelDrawer;
     private final Random rnd = new Random();
     private final int screenWidth;
     private final int screenHeight;
+   private final Player player;
+
     public Level(IPresenter presenter, Player player, int screenWidth, int screenHeight){
         this.player = player;
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
+
+        Gun gun = new Gun(new Point(screenWidth / 2f, screenHeight / 2f), presenter.getGunDrawer(), presenter.getBulletDrawer());
+        player.setGun(gun);
 
         levelDrawer = presenter.getLevelDrawer();
         IDoorDrawer doorDrawer = presenter.getDoorDrawer();
@@ -34,7 +37,7 @@ public class Level implements IRoomContainer {
         Map<Set<PlanarNode>, Boolean> edges = getEdgeMap(levelLayout);
         Map<PlanarNode, Room> nodeToRoom = new HashMap<>();
         for(PlanarNode node: levelLayout){
-            nodeToRoom.put(node, new Room(presenter, new RoomEntityManager()));
+            nodeToRoom.put(node, new Room(presenter, player, screenWidth, screenHeight));
         }
 
         for (PlanarNode node: levelLayout) {
@@ -46,17 +49,17 @@ public class Level implements IRoomContainer {
                     Room r1 = nodeToRoom.get(node);
                     Room r2 = nodeToRoom.get(neighbour);
 
-                    Door door1 = new Door(getRandomPointOnScreen(), doorDrawer, this  );
+                    Door door1 = new Door(getRandomPointOnScreen(), doorDrawer, this);
                     Door door2 = new Door(getRandomPointOnScreen(), doorDrawer, this);
 
                     door1.setRoom(r1);
                     door2.setRoom(r2);
 
-                    door1.setDoor(door2);
-                    door2.setDoor(door1);
+                    door1.setCorrespondingDoor(door2);
+                    door2.setCorrespondingDoor(door1);
 
-                    r1.entityManager.addCollidableEntity(door1);
-                    r2.entityManager.addCollidableEntity(door2);
+                    r1.addDoor(door1);
+                    r2.addDoor(door2);
 
                     edges.put(pair, true);
                 }
@@ -64,16 +67,12 @@ public class Level implements IRoomContainer {
         }
 
         rooms = nodeToRoom.values();
-
         currentRoom = rooms.iterator().next();
-        currentRoom.create(player, screenWidth, screenHeight);
+        gun.setEntityManager(currentRoom.getEntityManager());
     }
     public void setNewRoom(Room room){
-        room.create(player, screenWidth, screenHeight);
-        // For some reason this is being called more than once if the Player walks through a door.
-        System.out.println("Room created!");
-
         currentRoom = room;
+        player.setGunEntityManager(currentRoom.getEntityManager());
     }
 
     public void update(){

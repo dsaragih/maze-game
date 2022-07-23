@@ -41,11 +41,10 @@ public class MazeGame extends ApplicationAdapter {
 		camera.setToOrtho(false, SCREEN_WIDTH, SCREEN_HEIGHT);
 		presenter = new ShapePresenter(shapeRenderer, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-		Gun gun = new Gun(new Point(SCREEN_WIDTH / 2f, SCREEN_HEIGHT / 2f), presenter.getGunDrawer(), presenter.getBulletDrawer());
-		player = new Player(new Point(SCREEN_WIDTH/2f, SCREEN_HEIGHT/2f), presenter.getPlayerDrawer(), gun);
+		player = new Player(new Point(SCREEN_WIDTH/2f, SCREEN_HEIGHT/2f), presenter.getPlayerDrawer());
 		level = new Level(presenter, player, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-		controller = new InputController(camera, player, gun);
+		controller = new InputController(camera, player);
 	}
 
 	@Override

@@ -8,21 +8,16 @@ import com.mygdx.game.graphics.IPresenter;
 
 public class Room implements IDrawble {
     private final IPresenter presenter;
-    public final RoomEntityManager entityManager;
+    private final EntityManager entityManager = new EntityManager();
 
-    public Room(IPresenter presenter, RoomEntityManager entityManager ){
+    public Room(IPresenter presenter, Player player, int screenWidth, int screenHeight){
         this.presenter = presenter;
-        this.entityManager = entityManager;
-    }
-
-    public void create(Player player, int screenWidth, int screenHeight) {
         entityManager.addCollidableEntity(player);
-        System.out.println(System.identityHashCode(entityManager));
-        player.gun.setEntityManager(entityManager);
+
         int numEnemies = MathUtils.random(1, 2);
         for(int i = 0; i < numEnemies; ++i){
             Point enemy_pos = new Point(MathUtils.random(0, screenWidth), MathUtils.random(0, screenHeight));
-            Enemy enemy = new Enemy(enemy_pos, presenter.getEnemyDrawer(), entityManager);
+            Enemy enemy = new Enemy(enemy_pos, presenter.getEnemyDrawer());
             player.addObserver(enemy);
             entityManager.addCollidableEntity(enemy);
         }
@@ -32,8 +27,16 @@ public class Room implements IDrawble {
         entityManager.update();
     }
 
+    public void addDoor(Door door){
+        entityManager.addCollidableEntity(door);
+    }
+
     public void draw(){
         presenter.getRoomDrawer().drawRoom();
         entityManager.draw();
+    }
+
+    public EntityManager getEntityManager(){
+        return entityManager;
     }
 }

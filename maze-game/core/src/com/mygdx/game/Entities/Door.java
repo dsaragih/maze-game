@@ -7,17 +7,18 @@ import com.mygdx.game.geometry.Point;
 import com.mygdx.game.graphics.door.IDoorDrawer;
 
 public class Door extends CollidableEntity {
+
     public Room room;
     public Door door;
-    private IDoorDrawer doorDrawer;
-    private IRoomContainer roomContainer;
+    private final IDoorDrawer doorDrawer;
+    private final IRoomContainer roomContainer;
     public  Door(Point pos, IDoorDrawer doorDrawer, IRoomContainer roomContainer){
         super(pos);
         this.doorDrawer = doorDrawer;
         this.roomContainer = roomContainer;
     }
 
-    public void setDoor(Door door){
+    public void setCorrespondingDoor(Door door){
         this.door = door;
     }
 
