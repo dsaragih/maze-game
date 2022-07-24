@@ -6,6 +6,9 @@ import com.mygdx.game.geometry.Point;
 import com.mygdx.game.graphics.IDrawble;
 import com.mygdx.game.graphics.IPresenter;
 
+/**
+ * Represents a room
+ */
 public class Room implements IDrawble {
     private final IPresenter presenter;
     private final EntityManager entityManager = new EntityManager();
@@ -23,19 +26,33 @@ public class Room implements IDrawble {
         }
     }
 
+    /**
+     * Update the entity manager
+     */
     public void update(){
         entityManager.update();
     }
 
+    /**
+     * Add a door
+     * @param door a door
+     */
     public void addDoor(Door door){
         entityManager.addCollidableEntity(door);
     }
 
+    /**
+     * Draw the room
+     */
     public void draw(){
         presenter.getRoomDrawer().drawRoom();
         entityManager.draw();
     }
 
+    /**
+     * Get the entity manager
+     * @return returnthe entity manager
+     */
     public EntityManager getEntityManager(){
         return entityManager;
     }

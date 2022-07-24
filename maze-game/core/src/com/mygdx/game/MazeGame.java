@@ -16,6 +16,11 @@ import com.mygdx.game.geometry.Point;
 import com.mygdx.game.graphics.IPresenter;
 import com.mygdx.game.graphics.ShapePresenter;
 
+/**
+ * Represents a mazegame
+ * @author Ethan
+ * @author Daniel
+ */
 public class MazeGame extends ApplicationAdapter {
 	ShapeRenderer shapeRenderer;
 	private OrthographicCamera camera;
@@ -29,7 +34,10 @@ public class MazeGame extends ApplicationAdapter {
 	private SpriteBatch batch;
 	private BitmapFont font;
 	private InputController controller;
-	
+
+	/**
+	 * Create a new game
+	 */
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
@@ -47,12 +55,18 @@ public class MazeGame extends ApplicationAdapter {
 		controller = new InputController(camera, level);
 	}
 
+	/**
+	 * Do update and draw
+	 */
 	@Override
 	public void render () {
 		update();
 		draw();
 	}
-	
+
+	/**
+	 * Dispose the shape renderer, batch and font
+	 */
 	@Override
 	public void dispose () {
 		shapeRenderer.dispose();
@@ -60,6 +74,9 @@ public class MazeGame extends ApplicationAdapter {
 		font.dispose();
 	}
 
+	/**
+	 * Update the player, controller and level status
+	 */
 	private void update(){
 		if(player.getHealth() <= 0){
 			return;
@@ -68,6 +85,9 @@ public class MazeGame extends ApplicationAdapter {
 		level.update();
 	}
 
+	/**
+	 * Draw the game
+	 */
 	private void draw() {
 		ScreenUtils.clear(0, 0, 0, 1);
 		camera.update();

@@ -52,7 +52,7 @@ public class InputController {
 
     /**
      * Calculate the direction
-     * @param a
+     * @param a a
      * @param b
      * @return
      */
