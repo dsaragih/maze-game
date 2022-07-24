@@ -6,7 +6,7 @@ import com.mygdx.game.Entities.ICollidable;
 
 import java.util.ArrayList;
 
-public class EntityManager {
+public class EntityManager implements IEntityManager{
     private final ArrayList<Entity> Entities;
     private final ArrayList<CollidableEntity> collidableEntities;
     private final ArrayList<Entity> toBeAddedEntities;

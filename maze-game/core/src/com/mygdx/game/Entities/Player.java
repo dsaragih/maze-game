@@ -1,7 +1,7 @@
 package com.mygdx.game.Entities;
 
 import com.badlogic.gdx.Gdx;
-import com.mygdx.game.EntityManager;
+import com.mygdx.game.IEntityManager;
 import com.mygdx.game.geometry.Circle;
 import com.mygdx.game.geometry.Point;
 import com.mygdx.game.graphics.entities.player.IPlayerDrawer;
@@ -37,7 +37,7 @@ public class Player extends CollidableEntity {
      * Set up a gun manager for player
      * @param entityManager The manager of the player's guns
      */
-    public void setGunEntityManager(EntityManager entityManager){
+    public void setGunEntityManager(IEntityManager entityManager){
         gun.setEntityManager(entityManager);
     }
 

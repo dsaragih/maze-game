@@ -1,6 +1,6 @@
 package com.mygdx.game.Entities;
 
-import com.mygdx.game.EntityManager;
+import com.mygdx.game.IEntityManager;
 import com.mygdx.game.geometry.Point;
 
 public abstract class CollidableEntity extends Entity implements ICollidable{
@@ -23,7 +23,7 @@ public abstract class CollidableEntity extends Entity implements ICollidable{
     }
 
     @Override
-    public void removeSelf(EntityManager entityManager){
+    public void removeSelf(IEntityManager entityManager){
         entityManager.removeEntity(this);
     }
 }

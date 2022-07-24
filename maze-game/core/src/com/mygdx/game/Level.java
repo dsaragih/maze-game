@@ -14,7 +14,6 @@ import com.mygdx.game.graphics.level.ILevelDrawer;
 import java.util.*;
 
 public class Level implements IRoomContainer {
-    private final Collection<Room> rooms;
     private Room currentRoom;
     private final ILevelDrawer levelDrawer;
     private final Random rnd = new Random();
@@ -31,7 +30,7 @@ public class Level implements IRoomContainer {
         player.setGun(gun);
 
         levelDrawer = presenter.getLevelDrawer();
-        IDoorDrawer doorDrawer = presenter.getDoorDrawer();
+
 
         PlanarGraph levelLayout = new TestGraphGenerator().generate();
         Map<Set<PlanarNode>, Boolean> edges = getEdgeMap(levelLayout);
@@ -49,6 +48,7 @@ public class Level implements IRoomContainer {
                     Room r1 = nodeToRoom.get(node);
                     Room r2 = nodeToRoom.get(neighbour);
 
+                    IDoorDrawer doorDrawer = presenter.getDoorDrawer();
                     Door door1 = new Door(getRandomPointOnScreen(), doorDrawer, this);
                     Door door2 = new Door(getRandomPointOnScreen(), doorDrawer, this);
 
@@ -66,7 +66,7 @@ public class Level implements IRoomContainer {
             }
         }
 
-        rooms = nodeToRoom.values();
+        Collection<Room> rooms = nodeToRoom.values();
         currentRoom = rooms.iterator().next();
         gun.setEntityManager(currentRoom.getEntityManager());
     }

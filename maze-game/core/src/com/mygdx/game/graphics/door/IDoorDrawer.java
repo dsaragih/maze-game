@@ -1,7 +1,8 @@
 package com.mygdx.game.graphics.door;
 
+import com.badlogic.gdx.graphics.Color;
 import com.mygdx.game.geometry.Point;
 
 public interface IDoorDrawer {
-    public void drawDoor(Point position);
+    void drawDoor(Point position);
 }

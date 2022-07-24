@@ -36,7 +36,7 @@ public class Room implements IDrawble {
         entityManager.draw();
     }
 
-    public EntityManager getEntityManager(){
+    public IEntityManager getEntityManager(){
         return entityManager;
     }
 }

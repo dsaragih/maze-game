@@ -6,6 +6,5 @@ import com.mygdx.game.Entities.Entity;
 public interface IEntityManager {
     void addNonCollidableEntity(Entity ent);
     void addCollidableEntity(CollidableEntity ent);
-    void removeNonCollidableEntity(Entity ent);
-    void removeCollidableEntity(CollidableEntity ent);
+    void removeEntity(Entity ent);
 }
