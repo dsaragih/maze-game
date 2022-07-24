@@ -9,7 +9,7 @@ import com.mygdx.game.graphics.bullet.IBulletDrawer;
  */
 public class Bullet extends CollidableEntity {
 
-    private int BULLET_DAMAGE = 5;
+    private int BULLET_DAMAGE = 15;
     private final Point velocity;
     private final float speed = 30;
     private boolean isHit = false;

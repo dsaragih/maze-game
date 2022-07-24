@@ -53,9 +53,6 @@ public class EntityManager implements IEntityManager{
      */
     public void removeEntity (Entity ent) {
         toBeRemovedEntities.add(ent);
-        if (ent instanceof CollidableEntity) {
-            toBeRemovedCollidable.add((CollidableEntity) ent);
-        }
     }
 
     /**

@@ -3,6 +3,8 @@ package com.mygdx.game;
 import com.mygdx.game.Entities.CollidableEntity;
 import com.mygdx.game.Entities.Entity;
 
+import java.util.Collection;
+
 // Represents an entity manager interface
 // @author Daniel
 // @author Ethan
@@ -27,6 +29,7 @@ public interface IEntityManager {
      * @param ent entity being removed
      */
     void removeEntity(Entity ent);
+    void removeEntity(CollidableEntity ent);
 
     void update();
 
