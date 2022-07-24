@@ -37,7 +37,7 @@ public class EntityManager {
     public void update(){
         for(Entity entity : Entities){
             if(entity.shouldBeRemoved()){
-                removeEntity(entity);
+                entity.removeSelf(this);
             }
         }
 

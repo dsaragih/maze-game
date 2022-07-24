@@ -1,5 +1,7 @@
 package com.mygdx.game.Entities;
 
+import com.mygdx.game.EntityManager;
+import com.mygdx.game.IEntityManager;
 import com.mygdx.game.geometry.Point;
 import com.mygdx.game.graphics.IDrawble;
 
@@ -47,5 +49,9 @@ public abstract class Entity implements IDrawble {
      */
     public boolean shouldBeRemoved(){
         return false;
+    }
+
+    public void removeSelf(EntityManager entityManager){
+        entityManager.removeEntity(this);
     }
 }
