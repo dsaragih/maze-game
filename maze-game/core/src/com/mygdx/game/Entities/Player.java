@@ -65,7 +65,7 @@ public class Player extends CollidableEntity {
 
     /**
      * Set the mouse position for player
-     * @param mousePos
+     * @param mousePos the mouse position.
      */
     public void setMousePos(Point mousePos){
         gunDirection = mousePos.distanceVector(pos);
@@ -74,52 +74,95 @@ public class Player extends CollidableEntity {
         }
     }
 
+    /**
+     * Set the gun that is hold by player
+     * @param gun the gun hold by player
+     */
     public void setGun(Gun gun){
         this.gun = gun;
     }
+
+    /**
+     * Get the gun direction.
+     * @return the gun direction
+     */
     public Point getGunDirection() {
         System.out.println(gunDirection.x + " " + gunDirection.y);
         return gunDirection;
     }
 
+    /**
+     * Draw the player.
+     */
     public void draw(){
         playerDrawer.drawPlayer(pos, gunDirection);
         gun.draw();
     }
 
+    /**
+     * Get the collision box
+     * @return the circle representation of the collision box.
+     */
     public Circle getCollisionBox(){
         return new Circle(pos, 10);
     }
 
+    /**
+     * Collide with another player.
+     * @param player the player collided with the player
+     */
     @Override
     public void collideWith(Player player) {
 
     }
 
-
+    /**
+     * Collide with another enemy.
+     * @param enemy the enemy collided with player
+     */
     public void collideWith(Enemy enemy) {
         health -= enemy.getDamage();
     }
 
+    /**
+     * Collide with another door.
+     * @param door the door collided with player
+     */
     @Override
     public void collideWith(Door door) {
 
     }
 
+    /**
+     * Collide with another bullet.
+     * @param bullet the bullet collided with player
+     */
     @Override
     public void collideWith(Bullet bullet) {
 
     }
 
+    /**
+     * Inform others being collided by player.
+     * @param other the object collided with the player
+     */
     @Override
     public void informCollision(ICollidable other) {
         other.collideWith(this);
     }
 
+    /**
+     * Add an observer
+     * @param observer the observer added
+     */
     public void addObserver(IPlayerObserver observer){
         observers.add(observer);
     }
 
+    /**
+     * Get the health of player
+     * @return the health value of player.
+     */
     public int getHealth(){
         return health;
     }
