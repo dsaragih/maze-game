@@ -2,17 +2,35 @@ package com.mygdx.game.graph;
 import com.mygdx.game.geometry.Point;
 
 import java.util.ArrayList;
+
+/**
+ * A graph generator to generate polygon
+ * @author Jack
+ */
 public class PolygonGenerator implements IGraphGenerator{
     Point center;
     int n;
     float radius;
     float angle;
+
+    /**
+     * Create a polygon generator.
+     * @param center the center of polygon
+     * @param n the number of edges
+     * @param radius the radius from center to vertex
+     * @param angle the angle of counterclockwise rotation
+     */
     public PolygonGenerator(Point center, int n, float radius, float angle){
         this.center = center;
         this.n = n;
         this.radius = radius;
         this.angle = angle;
     }
+
+    /**
+     * Return an n-gon planar graph
+     * @return n-gon planar graph
+     */
     public PlanarGraph generate(){
 
         // generate cycle
