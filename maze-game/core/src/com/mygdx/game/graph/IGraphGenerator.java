@@ -3,7 +3,7 @@ package com.mygdx.game.graph;
 /**
  * Represents a graph generator
  * @author Ethan
- * @author Jack
+ * @author Jack Sun
  */
 public interface IGraphGenerator {
     /**
