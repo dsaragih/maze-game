@@ -3,6 +3,7 @@ package com.mygdx.game.geometry;
 /**
  * Represents a point
  * @author Ethan.
+ * @author Daniel
  */
 public class Point {
     public float x,y;
