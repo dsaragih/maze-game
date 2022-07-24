@@ -8,15 +8,29 @@ import com.mygdx.game.Entities.Gun;
 import com.mygdx.game.Entities.Player;
 import com.mygdx.game.geometry.Point;
 
+/**
+ * Represents an input controller
+ * @author Ethan
+ * @author Ian
+ * @author Daniel
+ */
 public class InputController {
     private final Level level;
     private final Camera camera;
 
+    /**
+     * Create an input controller
+     * @param camera the camera
+     * @param level the level
+     */
     public InputController(Camera camera, Level level){
         this.level = level;
         this.camera = camera;
     }
 
+    /**
+     * Check for input
+     */
     public void checkForInput(){
         Point dir = new Point(0,0);
         dir.x = dirCalc(Gdx.input.isKeyPressed(Input.Keys.A), Gdx.input.isKeyPressed(Input.Keys.D));
@@ -36,6 +50,12 @@ public class InputController {
 
     }
 
+    /**
+     * Calculate the direction
+     * @param a
+     * @param b
+     * @return
+     */
     private int dirCalc(boolean a, boolean b){
         if(a == b){
             return 0;
