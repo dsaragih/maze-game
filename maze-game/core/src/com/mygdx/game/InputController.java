@@ -9,11 +9,11 @@ import com.mygdx.game.Entities.Player;
 import com.mygdx.game.geometry.Point;
 
 public class InputController {
-    private final Player player;
+    private final Level level;
     private final Camera camera;
 
-    public InputController(Camera camera, Player player){
-        this.player = player;
+    public InputController(Camera camera, Level level){
+        this.level = level;
         this.camera = camera;
     }
 
@@ -22,16 +22,16 @@ public class InputController {
         dir.x = dirCalc(Gdx.input.isKeyPressed(Input.Keys.A), Gdx.input.isKeyPressed(Input.Keys.D));
         dir.y = dirCalc(Gdx.input.isKeyPressed(Input.Keys.S), Gdx.input.isKeyPressed(Input.Keys.W));
 
-        player.move(dir);
+        level.movePlayer(dir);
 
         Point mousePos = new Point(Gdx.input.getX(), Gdx.input.getY());
         Vector3 unprotectedMousePos = camera.unproject(new Vector3(mousePos.x, mousePos.y, 0));
         mousePos = new Point(unprotectedMousePos.x, unprotectedMousePos.y);
 
-        player.setMousePos(mousePos);
+        level.setMousePos(mousePos);
 
          if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
-            player.fire(mousePos);
+            level.mouseClick(mousePos);
          }
 
     }

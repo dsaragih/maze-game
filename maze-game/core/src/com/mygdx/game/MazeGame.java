@@ -44,7 +44,7 @@ public class MazeGame extends ApplicationAdapter {
 		player = new Player(new Point(SCREEN_WIDTH/2f, SCREEN_HEIGHT/2f), presenter.getPlayerDrawer());
 		level = new Level(presenter, player, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-		controller = new InputController(camera, player);
+		controller = new InputController(camera, level);
 	}
 
 	@Override

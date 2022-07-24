@@ -35,9 +35,9 @@ public class EntityManager {
     public void removeEntity (Entity ent) {toBeRemovedEntities.add(ent);}
 
     public void update(){
-        for(Entity entitie : Entities){
-            if(entitie.shouldBeRemoved()){
-                removeEntity(entitie);
+        for(Entity entity : Entities){
+            if(entity.shouldBeRemoved()){
+                removeEntity(entity);
             }
         }
 

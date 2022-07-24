@@ -104,4 +104,16 @@ public class Level implements IRoomContainer {
     private Point getRandomPointOnScreen(){
         return new Point(rnd.nextInt(0, screenWidth), rnd.nextInt(0, screenHeight));
     }
+
+    public void movePlayer(Point dir){
+        player.move(dir);
+    }
+
+    public void setMousePos(Point mousePos){
+        player.setMousePos(mousePos);
+    }
+
+    public void mouseClick(Point mouseDir){
+        player.fire(mouseDir);
+    }
 }
