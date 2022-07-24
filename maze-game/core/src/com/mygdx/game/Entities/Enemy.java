@@ -95,9 +95,6 @@ public class Enemy extends CollidableEntity implements IPlayerObserver {
     @Override
     public void collideWith(Bullet bullet) {
         this.health -= bullet.getDamage();
-        Point dir = bullet.pos.distanceVector(pos).normalized();
-        dir.multiply(-1f);
-        velocity.add(dir);
     }
 
     /**

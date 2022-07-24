@@ -56,6 +56,7 @@ public class EntityManager implements IEntityManager{
     /**
      * Update the manager
      */
+    @Override
     public void update(){
         for(Entity entity : Entities){
             if(entity.shouldBeRemoved()){
@@ -93,6 +94,7 @@ public class EntityManager implements IEntityManager{
     /**
      * Draw the entities.
      */
+    @Override
     public void draw() {
         for (Entity ent: Entities) {
             ent.draw();

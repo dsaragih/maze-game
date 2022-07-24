@@ -8,7 +8,7 @@ import com.mygdx.game.graphics.IPresenter;
 
 public class Room implements IDrawble {
     private final IPresenter presenter;
-    private final EntityManager entityManager = new EntityManager();
+    private final IEntityManager entityManager = new EntityManager();
 
     public Room(IPresenter presenter, Player player, int screenWidth, int screenHeight){
         this.presenter = presenter;
