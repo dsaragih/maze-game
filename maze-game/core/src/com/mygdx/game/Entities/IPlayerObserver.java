@@ -3,7 +3,7 @@ package com.mygdx.game.Entities;
 import com.mygdx.game.geometry.Point;
 
 /**
- * Represents the player observer
+ * Represents the player observer interface
  * @author Ethan
  */
 public interface IPlayerObserver {

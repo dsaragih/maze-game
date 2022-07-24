@@ -6,6 +6,12 @@ import com.mygdx.game.Entities.ICollidable;
 
 import java.util.ArrayList;
 
+/**
+ * Represent an entity manager
+ * @author Daniel
+ * @author Ian
+ * @author Ethan
+ */
 public class EntityManager {
     private final ArrayList<Entity> Entities;
     private final ArrayList<CollidableEntity> collidableEntities;
@@ -14,7 +20,9 @@ public class EntityManager {
     private final ArrayList<CollidableEntity> toBeAddedCollidable;
     private final ArrayList<CollidableEntity> toBeRemovedCollidable;
 
-
+    /**
+     * Create an entity manager
+     */
     public EntityManager() {
         Entities = new ArrayList<>();
         collidableEntities = new ArrayList<>();
@@ -23,17 +31,39 @@ public class EntityManager {
         toBeAddedCollidable = new ArrayList<>();
         toBeRemovedCollidable = new ArrayList<>();
     }
+
+    /**
+     * Add a non-collidable entity to manager
+     * @param ent an entity
+     */
     public void addNonCollidableEntity (Entity ent) {toBeAddedEntities.add(ent);}
+
+    /**
+     * Add a collidable entity to manager
+     * @param ent a collidable entity
+     */
     public void addCollidableEntity (CollidableEntity ent) {
         toBeAddedCollidable.add(ent);
         toBeAddedEntities.add(ent);
     }
+    /**
+     * Remove a collidable entity from manager
+     * @param ent a collidable entity
+     */
     public void removeEntity (CollidableEntity ent) {
         toBeRemovedCollidable.add(ent);
         toBeRemovedEntities.add(ent);
     }
+
+    /**
+     * Remove an entity to manager
+     * @param ent an entity
+     */
     public void removeEntity (Entity ent) {toBeRemovedEntities.add(ent);}
 
+    /**
+     * Update the manager
+     */
     public void update(){
         for(Entity entity : Entities){
             if(entity.shouldBeRemoved()){
@@ -67,6 +97,10 @@ public class EntityManager {
             }
         }
     }
+
+    /**
+     * Draw the entities.
+     */
     public void draw() {
         for (Entity ent: Entities) {
             ent.draw();

@@ -3,7 +3,7 @@ package com.mygdx.game.Entities;
 import com.mygdx.game.geometry.Circle;
 
 /**
- * Represents the collidable.
+ * Represents the collidable interface
  * @author Ethan
  * @author Daniel
  */

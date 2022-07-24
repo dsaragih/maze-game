@@ -1,7 +1,7 @@
 package com.mygdx.game.graph;
 
 /**
- * Represents a graph generator
+ * Represents a graph generator interface
  * @author Ethan
  * @author Jack Sun
  */
