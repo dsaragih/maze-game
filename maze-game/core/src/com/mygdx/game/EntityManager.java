@@ -51,7 +51,12 @@ public class EntityManager implements IEntityManager{
      * Remove an entity to manager
      * @param ent an entity
      */
-    public void removeEntity (Entity ent) {toBeRemovedEntities.add(ent);}
+    public void removeEntity (Entity ent) {
+        toBeRemovedEntities.add(ent);
+        if (ent instanceof CollidableEntity) {
+            toBeRemovedCollidable.add((CollidableEntity) ent);
+        }
+    }
 
     /**
      * Update the manager
@@ -85,7 +90,6 @@ public class EntityManager implements IEntityManager{
                 }
                 if(e1.getCollisionBox().intersects(e2.getCollisionBox())){
                     e1.informCollision(e2);
-                    e2.informCollision(e1);
                 }
             }
         }
