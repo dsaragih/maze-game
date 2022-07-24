@@ -9,6 +9,12 @@ import com.mygdx.game.graphics.entities.player.IPlayerDrawer;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * Represents the player
+ * @author Ian
+ * @author Ethan
+ * @author Daniel.
+ */
 public class Player extends CollidableEntity {
     private final float speed = 200;
     private int health = 100;
@@ -17,19 +23,36 @@ public class Player extends CollidableEntity {
     private Point gunDirection = new Point(0,0);
     public Gun gun;
 
+    /**
+     * Create a player
+     * @param pos The position of player
+     * @param playerDrawer The drawer of player
+     */
     public Player(Point pos, IPlayerDrawer playerDrawer){
         super(pos);
         this.playerDrawer = playerDrawer;
     }
 
+    /**
+     * Set up a gun manager for player
+     * @param entityManager The manager of the player's guns
+     */
     public void setGunEntityManager(EntityManager entityManager){
         gun.setEntityManager(entityManager);
     }
 
+    /**
+     * Set player's attack direction
+     * @param direction The direction of player
+     */
     public void fire(Point direction){
         gun.fire(direction);
     }
 
+    /**
+     * Set player's move direction
+     * @param direction The direction of player
+     */
     public void move(Point direction){
         direction.multiply(speed * Gdx.graphics.getDeltaTime());
         pos.add(direction);
@@ -40,6 +63,10 @@ public class Player extends CollidableEntity {
         gun.setPosition(playerDrawer.getGunPos(pos, gunDirection));
     }
 
+    /**
+     * Set the mouse position for player
+     * @param mousePos
+     */
     public void setMousePos(Point mousePos){
         gunDirection = mousePos.distanceVector(pos);
         if(!gunDirection.isZero()){
