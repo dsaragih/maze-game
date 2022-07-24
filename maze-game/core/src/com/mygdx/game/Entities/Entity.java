@@ -19,4 +19,8 @@ public abstract class Entity implements IDrawble {
     public void update() {
 
     }
+
+    public boolean shouldBeRemoved(){
+        return false;
+    }
 }

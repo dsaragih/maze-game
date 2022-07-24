@@ -13,6 +13,7 @@ public class PlanarNode extends Point {
         neighbors = new HashSet<PlanarNode>();
     }
 
+
     public Set<PlanarNode> getNeighboors(){
         return neighbors;
     }
@@ -21,9 +22,12 @@ public class PlanarNode extends Point {
         neighbors.add(node);
     }
 
-    public static void joinUndirected(PlanarNode n1, PlanarNode n2){
-        n1.addNeighbor(n2);
-        n2.addNeighbor(n1);
+    //I made it non-static
+    public void joinUndirected(PlanarNode n2){
+        this.addNeighbor(n2);
+        n2.addNeighbor(this);
+//        n1.addNeighbor(n2);
+//        n2.addNeighbor(n1);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.mygdx.game.Entities;
 
 import com.badlogic.gdx.Gdx;
+import com.mygdx.game.EntityManager;
 import com.mygdx.game.geometry.Circle;
 import com.mygdx.game.geometry.Point;
 import com.mygdx.game.graphics.entities.player.IPlayerDrawer;
@@ -9,17 +10,24 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class Player extends CollidableEntity {
-    private float speed = 200;
+    private final float speed = 200;
     private int health = 100;
-    private IPlayerDrawer playerDrawer;
-    private Collection<IPlayerObserver> observers = new ArrayList<>();
+    private final IPlayerDrawer playerDrawer;
+    private final Collection<IPlayerObserver> observers = new ArrayList<>();
     private Point gunDirection = new Point(0,0);
     public Gun gun;
 
-    public Player(Point pos, IPlayerDrawer playerDrawer, Gun gun){
+    public Player(Point pos, IPlayerDrawer playerDrawer){
         super(pos);
         this.playerDrawer = playerDrawer;
-        this.gun = gun;
+    }
+
+    public void setGunEntityManager(EntityManager entityManager){
+        gun.setEntityManager(entityManager);
+    }
+
+    public void fire(Point direction){
+        gun.fire(direction);
     }
 
     public void move(Point direction){
@@ -37,6 +45,10 @@ public class Player extends CollidableEntity {
         if(!gunDirection.isZero()){
             gunDirection = gunDirection.normalized();
         }
+    }
+
+    public void setGun(Gun gun){
+        this.gun = gun;
     }
     public Point getGunDirection() {
         System.out.println(gunDirection.x + " " + gunDirection.y);

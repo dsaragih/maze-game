@@ -1,6 +1,7 @@
 package com.mygdx.game.Entities;
 
-import com.mygdx.game.IRoomEntityManager;
+import com.mygdx.game.EntityManager;
+import com.mygdx.game.IEntityManager;
 import com.mygdx.game.geometry.Circle;
 import com.mygdx.game.geometry.Point;
 import com.mygdx.game.graphics.bullet.IBulletDrawer;
@@ -8,19 +9,18 @@ import com.mygdx.game.graphics.bullet.IBulletDrawer;
 public class Bullet extends CollidableEntity {
 
     private int BULLET_DAMAGE = 25;
-    private Point velocity;
-    private float speed = 30;
+    private final Point velocity;
+    private final float speed = 30;
+    private boolean isHit = false;
 
-    private IBulletDrawer bulletDrawer;
-    private IRoomEntityManager entityManager;
+    private final IBulletDrawer bulletDrawer;
 
 
-    public Bullet(Point pos, Point direction, IBulletDrawer bulletDrawer, IRoomEntityManager entityManager) {
+    public Bullet(Point pos, Point direction, IBulletDrawer bulletDrawer) {
         super(pos);
         direction.multiply(speed);
         this.velocity = direction;
         this.bulletDrawer = bulletDrawer;
-        this.entityManager = entityManager;
     }
 
     @Override
@@ -30,7 +30,7 @@ public class Bullet extends CollidableEntity {
 
     @Override
     public Circle getCollisionBox() {
-        return new Circle(this.pos, 2);
+        return new Circle(this.pos, 4);
     }
 
     public void collideWith(Player player) {
@@ -38,14 +38,7 @@ public class Bullet extends CollidableEntity {
     }
 
     public void collideWith(Enemy enemy) {
-       enemy.collideWith(this);
-       entityManager.removeCollidableEntity(this);
-        /*
-         * The main issue with this is that a List is being edited while iterating on it
-         * to check collisions. Consider adding "toBeAdded" and "toBeRemoved" Lists in EntityManager.
-         *
-         * This is done now, keeping comment just in case
-         */
+        isHit = true;
     }
 
     @Override
@@ -60,7 +53,7 @@ public class Bullet extends CollidableEntity {
 
     @Override
     public void informCollision(ICollidable other) {
-
+        other.collideWith(this);
     }
 
     public void update() {
@@ -71,7 +64,8 @@ public class Bullet extends CollidableEntity {
         return BULLET_DAMAGE;
     }
 
-    public void setDamage(int BULLET_DAMAGE) {
-        this.BULLET_DAMAGE = BULLET_DAMAGE;
+    @Override
+    public boolean shouldBeRemoved() {
+        return isHit;
     }
 }
