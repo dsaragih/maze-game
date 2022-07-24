@@ -23,17 +23,39 @@ public class EntityManager implements IEntityManager{
         toBeAddedCollidable = new ArrayList<>();
         toBeRemovedCollidable = new ArrayList<>();
     }
+
+    /**
+     * Add a non-collidable entity to manager
+     * @param ent an entity
+     */
     public void addNonCollidableEntity (Entity ent) {toBeAddedEntities.add(ent);}
+
+    /**
+     * Add a collidable entity to manager
+     * @param ent a collidable entity
+     */
     public void addCollidableEntity (CollidableEntity ent) {
         toBeAddedCollidable.add(ent);
         toBeAddedEntities.add(ent);
     }
+    /**
+     * Remove a collidable entity from manager
+     * @param ent a collidable entity
+     */
     public void removeEntity (CollidableEntity ent) {
         toBeRemovedCollidable.add(ent);
         toBeRemovedEntities.add(ent);
     }
+
+    /**
+     * Remove an entity to manager
+     * @param ent an entity
+     */
     public void removeEntity (Entity ent) {toBeRemovedEntities.add(ent);}
 
+    /**
+     * Update the manager
+     */
     public void update(){
         for(Entity entity : Entities){
             if(entity.shouldBeRemoved()){
@@ -67,6 +89,10 @@ public class EntityManager implements IEntityManager{
             }
         }
     }
+
+    /**
+     * Draw the entities.
+     */
     public void draw() {
         for (Entity ent: Entities) {
             ent.draw();
