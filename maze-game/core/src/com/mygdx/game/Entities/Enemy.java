@@ -5,7 +5,13 @@ import com.mygdx.game.geometry.Circle;
 import com.mygdx.game.geometry.Point;
 import com.mygdx.game.graphics.entities.enemy.IEnemyDrawer;
 
+/** Represents an enemy
+ * @author Ethan
+ * @author Ian Curtis Ewing\
+ * @author Daniel
+ */
 public class Enemy extends CollidableEntity implements IPlayerObserver {
+
     private Point velocity = new Point(0,0);
     private final float ACCELERATION = 10;
     private final float FRICTION = 0.02f;
@@ -16,32 +22,57 @@ public class Enemy extends CollidableEntity implements IPlayerObserver {
 
     private Point target = null;
 
+    /**
+     * Create an enemy
+     * @param x the x-coordinate of enemy
+     * @param y the y-coordinate of enemy
+     * @param enemyDrawer the drawer of enemy
+     */
     public Enemy(int x, int y, IEnemyDrawer enemyDrawer) {
         super(x, y);
         this.enemyDrawer = enemyDrawer;
     }
 
+    /**
+     * Create an enemy
+     * @param pos the position of the enemy
+     * @param enemyDrawer the drawer of enemy
+     */
     public Enemy(Point pos, IEnemyDrawer enemyDrawer) {
         super(pos);
         this.enemyDrawer = enemyDrawer;
     }
 
+    /**
+     * Return the collision box of the enemy
+     * @return the circle representation of the collision box.
+     */
     public Circle getCollisionBox(){
         return new Circle(pos, 15);
     }
 
-
+    /**
+     * Inform the other objects being collided with.
+     */
     @Override
     public void informCollision(ICollidable other) {
         other.collideWith(this);
     }
 
+    /**
+     * Collide with the player.
+     * @param player
+     */
     public void collideWith(Player player) {
         Point dir = player.pos.distanceVector(pos).normalized();
         dir.multiply(-1f);
         velocity.add(dir);
     }
 
+    /**
+     * Collide with the enemy
+     * @param enemy the enemy being collided with the enemy
+     */
     @Override
     public void collideWith(Enemy enemy) {
         Point dir = enemy.pos.distanceVector(pos).normalized();
@@ -49,10 +80,18 @@ public class Enemy extends CollidableEntity implements IPlayerObserver {
         velocity.add(dir);
     }
 
+    /**
+     * Collide with the door
+     * @param door the door being collided with the door
+     */
     public void collideWith(Door door) {
 
     }
 
+    /**
+     * Collide with the bullet
+     * @param bullet the bullet being collided with the door
+     */
     @Override
     public void collideWith(Bullet bullet) {
         this.health -= bullet.getDamage();
@@ -61,17 +100,26 @@ public class Enemy extends CollidableEntity implements IPlayerObserver {
         velocity.add(dir);
     }
 
+    /**
+     * Draw the enemy
+     */
     @Override
     public void draw() {
         enemyDrawer.drawEnemy(pos);
     }
 
-
+    /**
+     * Determine whether the enemy should be removed.
+     * @return whether the health is non-positive.
+     */
     @Override
     public boolean shouldBeRemoved() {
         return health <= 0;
     }
 
+    /**
+     * Update the movement of the enemy.
+     */
     public void update() {
         if(target == null){
             return;
@@ -93,10 +141,18 @@ public class Enemy extends CollidableEntity implements IPlayerObserver {
         pos.add(velocity);
     }
 
+    /**
+     * Get the damage that the enemy can deal
+     * @return the damage
+     */
     public int getDamage(){
         return damage;
     }
 
+    /**
+     * Set the target point of the enemy
+     * @param newTarget The target of enemy.
+     */
     public void setTarget(Point newTarget){
         target = newTarget;
     }
