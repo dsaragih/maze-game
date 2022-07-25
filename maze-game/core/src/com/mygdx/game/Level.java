@@ -160,4 +160,11 @@ public class Level implements IRoomContainer {
     public void mouseClick(Point mouseDir){
         player.fire(mouseDir);
     }
+
+    /*
+    * Returns tru if player is dead, false otherwise
+    * */
+    public boolean isOver(){
+        return player.getHealth() <= 0;
+    }
 }

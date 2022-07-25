@@ -78,7 +78,7 @@ public class MazeGame extends ApplicationAdapter {
 	 * Update the player, controller and level status
 	 */
 	private void update(){
-		if(player.getHealth() <= 0){
+		if(level.isOver()){
 			return;
 		}
 		controller.checkForInput();
@@ -96,7 +96,7 @@ public class MazeGame extends ApplicationAdapter {
 		player.draw();
 		presenter.end();
 		batch.begin();
-		if(player.getHealth() <= 0){
+		if(level.isOver()){
 			font.draw(batch, "YOU DIED", SCREEN_WIDTH/2f, SCREEN_HEIGHT/2f);
 		}else{
 			font.draw(batch, "Health: " + player.getHealth(), 10, 20);
