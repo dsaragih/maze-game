@@ -6,6 +6,13 @@ import com.mygdx.game.Entities.ICollidable;
 
 import java.util.ArrayList;
 
+/**
+ * Represents an entity manager.
+ * @author Ian
+ * @author Jack Sun
+ * @author Daniel
+ * @author Ethan
+ */
 public class EntityManager implements IEntityManager{
     private final ArrayList<Entity> Entities;
     private final ArrayList<CollidableEntity> collidableEntities;
@@ -15,6 +22,9 @@ public class EntityManager implements IEntityManager{
     private final ArrayList<CollidableEntity> toBeRemovedCollidable;
 
 
+    /**
+     * Create an entity manager
+     */
     public EntityManager() {
         Entities = new ArrayList<>();
         collidableEntities = new ArrayList<>();
