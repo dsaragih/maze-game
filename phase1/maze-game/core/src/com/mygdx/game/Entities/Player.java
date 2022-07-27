@@ -54,7 +54,21 @@ public class Player extends CollidableEntity {
      * @param direction The direction of player
      */
     public void move(Point direction){
+
         direction.multiply(speed * Gdx.graphics.getDeltaTime());
+        //Don't allow the player to get out of the screen
+        if(pos.x > 960 && direction.x > 0){
+            direction.x = 0;
+        }
+        if(pos.y > 540 && direction.y > 0){
+            direction.y = 0;
+        }
+        if(pos.x < 0 && direction.x < 0){
+            direction.x = 0;
+        }
+        if(pos.y < 0 && direction.y <0){
+            direction.y = 0;
+        }
         pos.add(direction);
 
         for(IPlayerObserver observer: observers){
