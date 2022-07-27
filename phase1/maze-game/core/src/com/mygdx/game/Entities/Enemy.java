@@ -124,6 +124,18 @@ public class Enemy extends CollidableEntity implements IPlayerObserver {
 
         Point dirVector = target.distanceVector(pos).normalized();
         dirVector.multiply(ACCELERATION * Gdx.graphics.getDeltaTime());
+        if(pos.x > 960 && velocity.x > 0){
+            velocity.x = 0;
+        }
+        if(pos.y > 540 && velocity.y > 0){
+            velocity.y = 0;
+        }
+        if(pos.x < 0 && velocity.x < 0){
+            velocity.x = 0;
+        }
+        if(pos.y < 0 && velocity.y <0){
+            velocity.y = 0;
+        }
         velocity.add(dirVector);
         velocity.multiply(1 - FRICTION);
         if(velocity.isZero()){
