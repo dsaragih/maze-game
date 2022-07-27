@@ -134,7 +134,7 @@ public class Level implements IRoomContainer {
      * @return a random point on screen
      */
     private Point getRandomPointOnScreen(){
-        return new Point(rnd.nextInt(0, screenWidth), rnd.nextInt(0, screenHeight));
+        return new Point(rnd.nextInt(screenWidth), rnd.nextInt(screenHeight));
     }
 
     /**
