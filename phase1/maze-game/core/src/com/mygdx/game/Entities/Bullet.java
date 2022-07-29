@@ -7,7 +7,7 @@ import com.mygdx.game.graphics.bullet.IBulletDrawer;
  * @author Daniel Saragih
  * @author Ian Curtis Ewing
  */
-public class Bullet extends CollidableEntity {
+public class Bullet extends CollidableEntity{
 
     private int BULLET_DAMAGE = 15;
     private final Point velocity;

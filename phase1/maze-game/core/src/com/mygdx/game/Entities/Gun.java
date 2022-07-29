@@ -1,11 +1,12 @@
 package com.mygdx.game.Entities;
 
+import com.mygdx.game.Entities.Item.Weapon;
 import com.mygdx.game.IEntityManager;
 import com.mygdx.game.geometry.Point;
 import com.mygdx.game.graphics.bullet.IBulletDrawer;
 import com.mygdx.game.graphics.gun.IGunDrawer;
 
-public class Gun extends Entity {
+public class Gun extends Weapon {
 
     private final IGunDrawer gunDrawer;
     private final IBulletDrawer bulletDrawer;
@@ -13,10 +14,13 @@ public class Gun extends Entity {
     private final long cooldown = 200;
     private long lastAttack = 0;
 
+    private int damage = 15;
+
     public Gun(Point pos, IGunDrawer gunDrawer, IBulletDrawer bulletDrawer){
         super(pos);
         this.gunDrawer = gunDrawer;
         this.bulletDrawer = bulletDrawer;
+        damage = 15;
     }
 
     public void setEntityManager(IEntityManager entityManager){

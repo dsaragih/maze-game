@@ -2,6 +2,8 @@ package com.mygdx.game.Entities.Item;
 
 import com.mygdx.game.Entities.*;
 import com.mygdx.game.geometry.Circle;
+import com.mygdx.game.geometry.Point;
+
 
 public class Weapon extends Item implements ICollidable {
     private int damage;
@@ -9,7 +11,9 @@ public class Weapon extends Item implements ICollidable {
         super(x, y, onGround, value);
         this.damage = damage;
     }
-
+    public Weapon(Point pos){
+        super(pos);
+    }
     @Override
     public void draw() {
 

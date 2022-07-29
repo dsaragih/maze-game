@@ -10,7 +10,7 @@ import com.mygdx.game.graphics.IDrawble;
  * @author Daniel
  */
 public abstract class Entity implements IDrawble {
-    Point pos;
+    public Point pos;
 
     /**
      * Create an entity

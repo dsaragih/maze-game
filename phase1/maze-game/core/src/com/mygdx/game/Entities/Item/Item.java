@@ -3,6 +3,7 @@ package com.mygdx.game.Entities.Item;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.mygdx.game.Entities.Entity;
+import com.mygdx.game.geometry.Point;
 import com.mygdx.game.graphics.IDrawble;
 
 public  abstract class Item extends Entity implements IDrawble {
@@ -13,6 +14,9 @@ public  abstract class Item extends Entity implements IDrawble {
         super(x, y);
         this.onGround = onGround;
         this.value = value;
+    }
+    public Item(Point pos){
+        super(pos);
     }
     public abstract void draw();
 
