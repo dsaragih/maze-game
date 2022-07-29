@@ -22,6 +22,7 @@ public class Player extends CollidableEntity {
     private final Collection<IPlayerObserver> observers = new ArrayList<>();
     private Point gunDirection = new Point(0,0);
     public Gun gun;
+    private float moneyOwned = 0;
 
     /**
      * Create a player

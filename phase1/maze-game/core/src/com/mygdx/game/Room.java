@@ -17,7 +17,7 @@ public class Room implements IDrawble {
         this.presenter = presenter;
         entityManager.addCollidableEntity(player);
 
-        int numEnemies = MathUtils.random(1, 2);
+        int numEnemies = MathUtils.random(1, 3);
         for(int i = 0; i < numEnemies; ++i){
             Point enemy_pos = new Point(MathUtils.random(0, screenWidth), MathUtils.random(0, screenHeight));
             Enemy enemy = new Enemy(enemy_pos, presenter.getEnemyDrawer());

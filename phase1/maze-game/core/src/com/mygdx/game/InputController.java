@@ -33,9 +33,15 @@ public class InputController {
      */
     public void checkForInput(){
         Point dir = new Point(0,0);
+        if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.D)
+        || Gdx.input.isKeyPressed(Input.Keys.S) ||  Gdx.input.isKeyPressed(Input.Keys.W)){
         dir.x = dirCalc(Gdx.input.isKeyPressed(Input.Keys.A), Gdx.input.isKeyPressed(Input.Keys.D));
-        dir.y = dirCalc(Gdx.input.isKeyPressed(Input.Keys.S), Gdx.input.isKeyPressed(Input.Keys.W));
-
+        dir.y = dirCalc(Gdx.input.isKeyPressed(Input.Keys.S), Gdx.input.isKeyPressed(Input.Keys.W));}
+        //An alternative set of inputs
+        else{
+            dir.x = dirCalc(Gdx.input.isKeyPressed(Input.Keys.LEFT), Gdx.input.isKeyPressed(Input.Keys.RIGHT));
+            dir.y = dirCalc(Gdx.input.isKeyPressed(Input.Keys.DOWN), Gdx.input.isKeyPressed(Input.Keys.UP));
+        }
         level.movePlayer(dir);
 
         Point mousePos = new Point(Gdx.input.getX(), Gdx.input.getY());
