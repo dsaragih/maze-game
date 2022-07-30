@@ -48,4 +48,7 @@ public class Weapon extends Item implements ICollidable {
     public void informCollision(ICollidable other) {
 
     }
+    public int getDamage(){
+        return damage;
+    }
 }
