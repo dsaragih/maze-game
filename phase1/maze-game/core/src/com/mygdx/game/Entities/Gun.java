@@ -23,7 +23,6 @@ public class Gun extends Weapon {
         damage = 15;
     }
 
-
     public void setEntityManager(IEntityManager entityManager){
         this.entityManager = entityManager;
     }

@@ -1,5 +1,7 @@
 package com.mygdx.game.Entities.Item;
 
+import com.mygdx.game.Entities.*;
+import com.mygdx.game.geometry.Circle;
 import com.mygdx.game.geometry.Point;
 
 public class Armour extends Item{
@@ -24,4 +26,33 @@ public class Armour extends Item{
 
     }
 
+    @Override
+    public Circle getCollisionBox() {
+        return null;
+    }
+
+    @Override
+    public void collideWith(Player player) {
+
+    }
+
+    @Override
+    public void collideWith(Enemy enemy) {
+
+    }
+
+    @Override
+    public void collideWith(Door door) {
+
+    }
+
+    @Override
+    public void collideWith(Bullet bullet) {
+
+    }
+
+    @Override
+    public void informCollision(ICollidable other) {
+
+    }
 }
