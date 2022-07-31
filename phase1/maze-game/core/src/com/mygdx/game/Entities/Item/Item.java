@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.mygdx.game.Entities.CollidableEntity;
 import com.mygdx.game.Entities.Entity;
+import com.mygdx.game.Entities.ICollidable;
 import com.mygdx.game.Entities.Player;
 import com.mygdx.game.geometry.Point;
 import com.mygdx.game.graphics.IDrawble;
@@ -41,5 +42,10 @@ public  abstract class Item extends CollidableEntity implements IDrawble {
 
     @Override
     public void collideWith(Player player){onGround = false;}
+
+    @Override
+    public void informCollision(ICollidable other) {
+        other.collideWith(this);
+    }
 
 }
