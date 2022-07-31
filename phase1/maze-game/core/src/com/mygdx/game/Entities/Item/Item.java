@@ -13,15 +13,15 @@ public  abstract class Item extends CollidableEntity implements IDrawble {
     //Item is an object that can be pick up by the player, and has a value. This is not a class we write in phase 1
     //An item has a value, a name, and can be picked up or dropped.
     private boolean onGround;
-    private float value;
+    private int value;
     private String name;
-    public Item(float x, float y, boolean onGround, float value, String name) {
+    public Item(float x, float y, boolean onGround, int value, String name) {
         super(x, y);
         this.onGround = onGround;
         this.value = value;
         this.name = name;
     }
-    public Item(Point pos, boolean onGround, float value){
+    public Item(Point pos, boolean onGround, int value){
         super(pos);
         this.onGround = onGround;
         this.value = value;
@@ -31,7 +31,7 @@ public  abstract class Item extends CollidableEntity implements IDrawble {
     }
     public abstract void draw();
 
-    public float checkValue(){
+    public int checkValue(){
         return value;
     }
 

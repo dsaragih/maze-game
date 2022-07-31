@@ -7,7 +7,7 @@ import com.mygdx.game.geometry.Point;
 
 public class Weapon extends Item implements ICollidable {
     private int damage;
-    public Weapon(float x, float y, boolean onGround, float value, String name, int damage) {
+    public Weapon(float x, float y, boolean onGround, int value, String name, int damage) {
         super(x, y, onGround, value, name);
         this.damage = damage;
     }

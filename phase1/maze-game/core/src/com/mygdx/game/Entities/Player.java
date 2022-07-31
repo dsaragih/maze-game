@@ -27,7 +27,7 @@ public class Player extends CollidableEntity {
     private Point gunDirection = new Point(0,0);
     public Gun gun;
 
-    private float moneyOwned = 0;
+    private int goldOwned = 0;
     private ArrayList<Item> itemOwned = new ArrayList<Item>(Collections.singletonList(gun));
 
     public boolean needToBeKilled = false;
@@ -195,4 +195,5 @@ public class Player extends CollidableEntity {
     public int getHealth(){
         return health;
     }
+    public int getGold(){return goldOwned;}
 }
