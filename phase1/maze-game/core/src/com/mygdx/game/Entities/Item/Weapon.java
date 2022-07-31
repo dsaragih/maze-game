@@ -45,6 +45,11 @@ public class Weapon extends Item implements ICollidable {
     }
 
     @Override
+    public void collideWith(Item item) {
+
+    }
+
+    @Override
     public void informCollision(ICollidable other) {
 
     }
