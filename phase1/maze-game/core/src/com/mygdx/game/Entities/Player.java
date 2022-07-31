@@ -157,6 +157,10 @@ public class Player extends CollidableEntity {
     public void collideWith(Door door) {
 
     }
+    @Override
+    public void collideWith(Item item){
+        itemOwned.add(item);
+    }
 
     /**
      * Collide with another bullet.

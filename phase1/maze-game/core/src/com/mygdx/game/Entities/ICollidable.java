@@ -1,5 +1,6 @@
 package com.mygdx.game.Entities;
 
+import com.mygdx.game.Entities.Item.Item;
 import com.mygdx.game.geometry.Circle;
 
 /**
@@ -38,6 +39,8 @@ public interface ICollidable {
      * @param bullet the bullet being collided.
      */
     public void collideWith(Bullet bullet);
+
+    public void collideWith(Item item);
 
     /**
      * Inform the ICollidable objects being collided

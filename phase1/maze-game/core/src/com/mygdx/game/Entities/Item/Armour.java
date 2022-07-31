@@ -59,6 +59,11 @@ public class Armour extends Item{
     }
 
     @Override
+    public void collideWith(Item item) {
+
+    }
+
+    @Override
     public void informCollision(ICollidable other) {
 
     }
