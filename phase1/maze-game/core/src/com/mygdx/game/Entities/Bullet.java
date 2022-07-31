@@ -15,6 +15,8 @@ public class Bullet extends Weapon{
     private final float speed = 30;
     private boolean isHit = false;
 
+    private final int value = 1;
+
     private final IBulletDrawer bulletDrawer;
 
     /** Creates a bullet with the specified name.

@@ -16,6 +16,8 @@ public class Gun extends Weapon {
 
     private int damage = 15;
 
+    private final int value = 30;
+
     public Gun(Point pos, IGunDrawer gunDrawer, IBulletDrawer bulletDrawer){
         super(pos);
         this.gunDrawer = gunDrawer;
