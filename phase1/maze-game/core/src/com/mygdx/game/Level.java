@@ -90,8 +90,10 @@ public class Level implements IRoomContainer {
     public void setNewRoom(Room room){
 
         // For some reason this is being called more than once if the Player walks through a door.
+        IEntityManager entityManager = currentRoom.getEntityManager();
+        if (entityManager.isFinished()){
         currentRoom = room;
-        player.setGunEntityManager(currentRoom.getEntityManager());
+        player.setGunEntityManager(currentRoom.getEntityManager());}
     }
 
     /**

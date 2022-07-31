@@ -77,8 +77,7 @@ public class Door extends CollidableEntity {
      * @param player the player being collided
      */
     public void collideWith(Player player){
-        if(isFinished)
-        {roomContainer.setNewRoom(door.room);}
+        roomContainer.setNewRoom(door.room);
     }
 
     /**
@@ -106,10 +105,6 @@ public class Door extends CollidableEntity {
     @Override
     public void collideWith(Bullet bullet) {
 
-    }
-    public void update(){
-        IEntityManager entityManager = room.getEntityManager();
-        isFinished = entityManager.isFinished();
     }
 }
 
