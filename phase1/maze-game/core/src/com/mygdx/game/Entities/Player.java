@@ -1,13 +1,17 @@
 package com.mygdx.game.Entities;
 
 import com.badlogic.gdx.Gdx;
+import com.mygdx.game.Entities.Item.Item;
+import com.mygdx.game.Entities.Item.Weapon;
 import com.mygdx.game.IEntityManager;
 import com.mygdx.game.geometry.Circle;
 import com.mygdx.game.geometry.Point;
 import com.mygdx.game.graphics.entities.player.IPlayerDrawer;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 
 /**
  * Represents the player
@@ -22,7 +26,9 @@ public class Player extends CollidableEntity {
     private final Collection<IPlayerObserver> observers = new ArrayList<>();
     private Point gunDirection = new Point(0,0);
     public Gun gun;
+
     private float moneyOwned = 0;
+    private ArrayList<Item> itemOwned = new ArrayList<Item>(Collections.singletonList(gun));
 
     /**
      * Create a player
@@ -94,6 +100,8 @@ public class Player extends CollidableEntity {
      * @param gun the gun hold by player
      */
     public void setGun(Gun gun){
+        if(!itemOwned.contains(gun))
+        {itemOwned.add(gun);}
         this.gun = gun;
     }
 
