@@ -1,5 +1,6 @@
 package com.mygdx.game.Entities;
 
+import com.mygdx.game.Entities.Item.Item;
 import com.mygdx.game.Entities.Item.Weapon;
 import com.mygdx.game.IEntityManager;
 import com.mygdx.game.geometry.Point;
@@ -17,6 +18,8 @@ public class Gun extends Weapon {
     private int damage = 15;
 
     private final int value = 30;
+
+    private String name = "Default Gun";
 
     public Gun(Point pos, IGunDrawer gunDrawer, IBulletDrawer bulletDrawer){
         super(pos);
@@ -46,5 +49,10 @@ public class Gun extends Weapon {
     @Override
     public void draw() {
         gunDrawer.drawGun(pos);
+    }
+
+    @Override
+    public String toString(){
+        return name;
     }
 }

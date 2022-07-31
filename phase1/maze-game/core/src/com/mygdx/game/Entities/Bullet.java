@@ -1,5 +1,6 @@
 package com.mygdx.game.Entities;
 
+import com.mygdx.game.Entities.Item.Item;
 import com.mygdx.game.Entities.Item.Weapon;
 import com.mygdx.game.geometry.Circle;
 import com.mygdx.game.geometry.Point;
@@ -8,7 +9,7 @@ import com.mygdx.game.graphics.bullet.IBulletDrawer;
  * @author Daniel Saragih
  * @author Ian Curtis Ewing
  */
-public class Bullet extends Weapon{
+public class Bullet extends Weapon {
 
     private int BULLET_DAMAGE = 15;
     private final Point velocity;
