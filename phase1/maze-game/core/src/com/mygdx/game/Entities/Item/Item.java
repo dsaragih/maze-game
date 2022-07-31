@@ -34,13 +34,6 @@ public  abstract class Item extends CollidableEntity implements IDrawble {
         return value;
     }
 
-    public void pickUp(){
-        onGround = false;
-    }
-    public  void drop(){
-        onGround = true;
-    }
-
     @Override
     public String toString(){
         return name;
