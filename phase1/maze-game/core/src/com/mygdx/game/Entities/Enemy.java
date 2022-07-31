@@ -1,5 +1,6 @@
 package com.mygdx.game.Entities;
 import com.badlogic.gdx.Gdx;
+import com.mygdx.game.Entities.Item.Item;
 import com.mygdx.game.IEntityManager;
 import com.mygdx.game.geometry.Circle;
 import com.mygdx.game.geometry.Point;
@@ -95,6 +96,11 @@ public class Enemy extends CollidableEntity implements IPlayerObserver {
     @Override
     public void collideWith(Bullet bullet) {
         this.health -= bullet.getDamage();
+    }
+
+    @Override
+    public void collideWith(Item item) {
+
     }
 
     /**

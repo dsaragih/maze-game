@@ -1,5 +1,6 @@
 package com.mygdx.game.Entities;
 
+import com.mygdx.game.Entities.Item.Item;
 import com.mygdx.game.IEntityManager;
 import com.mygdx.game.IRoomContainer;
 import com.mygdx.game.Room;
@@ -104,6 +105,11 @@ public class Door extends CollidableEntity {
      */
     @Override
     public void collideWith(Bullet bullet) {
+
+    }
+
+    @Override
+    public void collideWith(Item item) {
 
     }
 }
