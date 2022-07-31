@@ -33,9 +33,11 @@ public abstract class Entity implements IDrawble {
     }
     public Entity(Point pos, boolean needToBeKilled){
         this.pos = pos;
+        this.needToBeKilled = needToBeKilled;
     }
     public Entity(float x, float y, boolean needToBeKilled){
         pos = new Point(x,y);
+        this.needToBeKilled = needToBeKilled;
     }
 
     /**

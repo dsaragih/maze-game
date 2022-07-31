@@ -1,5 +1,6 @@
 package com.mygdx.game.Entities;
 
+import com.mygdx.game.IEntityManager;
 import com.mygdx.game.IRoomContainer;
 import com.mygdx.game.Room;
 import com.mygdx.game.geometry.Circle;
@@ -14,6 +15,8 @@ public class Door extends CollidableEntity {
 
     public Room room;
     public Door door;
+
+    private boolean isFinished = false;
     private final IDoorDrawer doorDrawer;
     private final IRoomContainer roomContainer;
 
@@ -74,7 +77,8 @@ public class Door extends CollidableEntity {
      * @param player the player being collided
      */
     public void collideWith(Player player){
-        roomContainer.setNewRoom(door.room);
+        if(isFinished)
+        {roomContainer.setNewRoom(door.room);}
     }
 
     /**
@@ -102,6 +106,10 @@ public class Door extends CollidableEntity {
     @Override
     public void collideWith(Bullet bullet) {
 
+    }
+    public void update(){
+        IEntityManager entityManager = room.getEntityManager();
+        isFinished = entityManager.isFinished();
     }
 }
 

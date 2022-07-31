@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.mygdx.game.Entities.CollidableEntity;
+import com.mygdx.game.Entities.Door;
 import com.mygdx.game.Entities.Entity;
 import com.mygdx.game.Entities.ICollidable;
 
@@ -107,8 +108,7 @@ public class EntityManager implements IEntityManager{
                     continue;
                 }
                 if(e1.getCollisionBox().intersects(e2.getCollisionBox())){
-                    e1.informCollision(e2);
-                }
+                    e1.informCollision(e2);}
             }
         }
     }

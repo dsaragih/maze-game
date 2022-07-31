@@ -34,4 +34,5 @@ public interface IEntityManager {
     void update();
 
     void draw();
+    boolean isFinished();
 }

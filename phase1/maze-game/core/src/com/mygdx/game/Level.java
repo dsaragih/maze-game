@@ -69,9 +69,9 @@ public class Level implements IRoomContainer {
 
                     door1.setCorrespondingDoor(door2);
                     door2.setCorrespondingDoor(door1);
-
                     r1.addDoor(door1);
                     r2.addDoor(door2);
+
 
                     edges.put(pair, true);
                 }
