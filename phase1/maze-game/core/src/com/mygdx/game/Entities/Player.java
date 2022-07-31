@@ -30,6 +30,8 @@ public class Player extends CollidableEntity {
     private float moneyOwned = 0;
     private ArrayList<Item> itemOwned = new ArrayList<Item>(Collections.singletonList(gun));
 
+    public boolean needToBeKilled = false;
+
     /**
      * Create a player
      * @param pos The position of player

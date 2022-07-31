@@ -29,7 +29,7 @@ public class Enemy extends CollidableEntity implements IPlayerObserver {
      * @param enemyDrawer the drawer of enemy
      */
     public Enemy(int x, int y, IEnemyDrawer enemyDrawer) {
-        super(x, y);
+        super(x, y, true);
         this.enemyDrawer = enemyDrawer;
     }
 
@@ -39,7 +39,7 @@ public class Enemy extends CollidableEntity implements IPlayerObserver {
      * @param enemyDrawer the drawer of enemy
      */
     public Enemy(Point pos, IEnemyDrawer enemyDrawer) {
-        super(pos);
+        super(pos,true);
         this.enemyDrawer = enemyDrawer;
     }
 

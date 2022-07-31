@@ -5,6 +5,7 @@ import com.mygdx.game.Entities.Entity;
 import com.mygdx.game.Entities.ICollidable;
 
 import java.util.ArrayList;
+import java.lang.*;
 
 /**
  * Represents an entity manager.
@@ -20,6 +21,7 @@ public class EntityManager implements IEntityManager{
     private final ArrayList<Entity> toBeRemovedEntities;
     private final ArrayList<CollidableEntity> toBeAddedCollidable;
     private final ArrayList<CollidableEntity> toBeRemovedCollidable;
+
 
 
     /**
@@ -63,6 +65,15 @@ public class EntityManager implements IEntityManager{
      */
     public void removeEntity (Entity ent) {
         toBeRemovedEntities.add(ent);
+    }
+
+    public boolean isFinished(){
+        for (Entity entity: Entities){
+            if (entity.needToBeKilled){
+                return false;
+            }
+        }
+        return true;
     }
 
     /**

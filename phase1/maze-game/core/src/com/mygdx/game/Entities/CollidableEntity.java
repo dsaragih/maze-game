@@ -21,6 +21,8 @@ public abstract class CollidableEntity extends Entity implements ICollidable{
     public CollidableEntity(float x, float y) {
         super(x, y);
     }
+    public CollidableEntity(Point pos, boolean needToBeKilled){super(pos, needToBeKilled);}
+    public CollidableEntity(float x, float y, boolean needToBeKilled){super(x,y,needToBeKilled);}
 
     @Override
     public void removeSelf(IEntityManager entityManager){

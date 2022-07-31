@@ -11,6 +11,7 @@ import com.mygdx.game.graphics.IDrawble;
  */
 public abstract class Entity implements IDrawble {
     public Point pos;
+    public boolean needToBeKilled;
 
     /**
      * Create an entity
@@ -19,6 +20,7 @@ public abstract class Entity implements IDrawble {
      */
     public Entity(float x, float y) {
         pos = new Point(x,y);
+        this.needToBeKilled = false;
     }
 
     /**
@@ -27,6 +29,13 @@ public abstract class Entity implements IDrawble {
      */
     public Entity(Point pos) {
         this.pos = pos;
+        this.needToBeKilled = false;
+    }
+    public Entity(Point pos, boolean needToBeKilled){
+        this.pos = pos;
+    }
+    public Entity(float x, float y, boolean needToBeKilled){
+        pos = new Point(x,y);
     }
 
     /**
