@@ -17,6 +17,11 @@ public  abstract class Item extends CollidableEntity implements IDrawble {
         this.onGround = onGround;
         this.value = value;
     }
+    public Item(Point pos, boolean onGround, float value){
+        super(pos);
+        this.onGround = onGround;
+        this.value = value;
+    }
     public Item(Point pos){
         super(pos);
     }

@@ -17,6 +17,13 @@ public class Armour extends Item{
     public Armour(Point pos){
         super(pos);
     }
+    public Armour(Point pos, boolean onGround, float value, float armourPoint, int shield) {
+        super(pos, onGround, value);
+        //armour point reduce the damage taken by a percentage
+        this.armourPoint = Math.min(99, armourPoint);
+        //shield take certain amount of damage
+        this.shield = shield;
+    }
 
 
 
