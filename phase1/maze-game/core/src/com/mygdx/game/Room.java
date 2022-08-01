@@ -29,6 +29,18 @@ public class Room implements IDrawble {
             entityManager.addGold(enemy.getValue());
         }
     }
+    public Room(IPresenter presenter, Player player, int screenWidth, int screenHeight, int numEnemies){
+        this.presenter = presenter;
+        entityManager.addCollidableEntity(player);
+
+        for(int i = 0; i < numEnemies; ++i){
+            Point enemy_pos = new Point(MathUtils.random(0, screenWidth), MathUtils.random(0, screenHeight));
+            Enemy enemy = new Enemy(enemy_pos, presenter.getEnemyDrawer());
+            player.addObserver(enemy);
+            entityManager.addCollidableEntity(enemy);
+            entityManager.addGold(enemy.getValue());
+        }
+    }
 
     /**
      * Update the entity manager
