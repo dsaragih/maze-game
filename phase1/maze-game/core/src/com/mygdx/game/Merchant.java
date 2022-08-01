@@ -4,24 +4,28 @@ import com.mygdx.game.Entities.*;
 import com.mygdx.game.Entities.Item.Item;
 import com.mygdx.game.geometry.Circle;
 import com.mygdx.game.graphics.IDrawble;
+import com.mygdx.game.graphics.Merchant.CircleMerchantDrawer;
 
 import java.util.ArrayList;
 
 public class Merchant extends CollidableEntity implements IDrawble {
     //A merchant will sell stuff to the player
-    private ArrayList<Item> itemOwned;
-    public Merchant(float x, float y, ArrayList itemOwned) {
+    private ArrayList itemOwned;
+    private CircleMerchantDrawer drawer;
+    public Merchant(float x, float y, ArrayList itemOwned, CircleMerchantDrawer drawer) {
         super(x, y);
         this.itemOwned =itemOwned;
+        this.drawer = drawer;
     }
-    public Merchant(float x, float y){
+    public Merchant(float x, float y, CircleMerchantDrawer drawer){
         super(x,y);
         itemOwned = new ArrayList<>();
+        this.drawer =drawer;
     }
 
     @Override
     public void draw() {
-
+        drawer.drawMerchant(pos);
     }
 
     @Override
