@@ -1,9 +1,9 @@
 package com.mygdx.game;
 
 import com.mygdx.game.Entities.CollidableEntity;
-import com.mygdx.game.Entities.Door;
 import com.mygdx.game.Entities.Entity;
 import com.mygdx.game.Entities.ICollidable;
+
 
 import java.util.ArrayList;
 import java.lang.*;
@@ -22,6 +22,8 @@ public class EntityManager implements IEntityManager{
     private final ArrayList<Entity> toBeRemovedEntities;
     private final ArrayList<CollidableEntity> toBeAddedCollidable;
     private final ArrayList<CollidableEntity> toBeRemovedCollidable;
+
+    private int gold = 0;
 
 
 
@@ -77,6 +79,13 @@ public class EntityManager implements IEntityManager{
         return true;
     }
 
+    public void addGold(int gold){
+        this.gold += gold;
+    }
+    public int getGold(){int value =gold;
+        gold = 0;
+        return value;}
+
     /**
      * Update the manager
      */
@@ -111,6 +120,7 @@ public class EntityManager implements IEntityManager{
                     e1.informCollision(e2);}
             }
         }
+
     }
 
     /**

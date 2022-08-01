@@ -2,6 +2,8 @@ package com.mygdx.game;
 
 import com.mygdx.game.Entities.Door;
 import com.mygdx.game.Entities.Gun;
+import com.mygdx.game.Entities.Item.Armour;
+import com.mygdx.game.Entities.Item.ExampleArmour;
 import com.mygdx.game.Entities.Player;
 import com.mygdx.game.geometry.Point;
 import com.mygdx.game.graph.PlanarGraph;
@@ -40,6 +42,9 @@ public class Level implements IRoomContainer {
 
         Gun gun = new Gun(new Point(screenWidth / 2f, screenHeight / 2f), presenter.getGunDrawer(), presenter.getBulletDrawer());
         player.setGun(gun);
+        //Just here to test if my class work or not
+        Armour armour = new ExampleArmour(screenWidth / 2f, screenHeight / 2f);
+        player.setArmour(armour);
 
         levelDrawer = presenter.getLevelDrawer();
 
@@ -100,7 +105,9 @@ public class Level implements IRoomContainer {
      * Update the current room
      */
     public void update(){
+        EntityManager entityManager = (EntityManager) currentRoom.getEntityManager();
         currentRoom.update();
+        if (entityManager.isFinished()){player.changeGold(entityManager.getGold());}
     }
 
     /**

@@ -1,6 +1,7 @@
 package com.mygdx.game.Entities;
 
 import com.badlogic.gdx.Gdx;
+import com.mygdx.game.Entities.Item.Armour;
 import com.mygdx.game.Entities.Item.Item;
 import com.mygdx.game.Entities.Item.Weapon;
 import com.mygdx.game.IEntityManager;
@@ -27,10 +28,14 @@ public class Player extends CollidableEntity {
     private Point gunDirection = new Point(0,0);
     public Gun gun;
 
+    private Armour armour;
+    private float armourPoint = 0.0F;
+    private int shield = 0;
+
     private int goldOwned = 0;
     private ArrayList<Item> itemOwned = new ArrayList<Item>(Collections.singletonList(gun));
 
-    public boolean needToBeKilled = false;
+
 
     /**
      * Create a player
@@ -108,6 +113,20 @@ public class Player extends CollidableEntity {
     }
 
     /**
+     * Set the armour that is wear by player
+     * @param armour the armour wear by player
+     */
+    public void setArmour(Armour armour){
+        if(!itemOwned.contains((armour)))
+        {itemOwned.add(armour);}
+        this.armour = armour;
+        this.shield = armour.getShield();
+        this.armourPoint = armour.getArmourPoint();
+        armour.collideWith(this);
+
+    }
+
+    /**
      * Get the gun direction.
      * @return the gun direction
      */
@@ -146,7 +165,13 @@ public class Player extends CollidableEntity {
      * @param enemy the enemy collided with player
      */
     public void collideWith(Enemy enemy) {
-        health -= enemy.getDamage();
+        if(shield > 0){
+            if (shield - enemy.getDamage() < 0)
+            {health += shield - enemy.getDamage();
+            shield = 0;}
+        else
+            {shield -= enemy.getDamage() * (1.0 - armourPoint * 0.01);}}
+        else{health -= enemy.getDamage() *(1.0 - armourPoint * 0.01);}
     }
 
     /**
@@ -196,4 +221,8 @@ public class Player extends CollidableEntity {
         return health;
     }
     public int getGold(){return goldOwned;}
+
+    public int getShield(){return shield;}
+
+    public void changeGold(int amount){this.goldOwned += amount;}
 }

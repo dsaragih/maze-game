@@ -17,14 +17,26 @@ public class Armour extends Item{
     public Armour(Point pos){
         super(pos);
     }
-    public Armour(Point pos, boolean onGround, int value, float armourPoint, int shield) {
-        super(pos, onGround, value);
+    public Armour(Point pos, boolean onGround, int value, float armourPoint, int shield, String name) {
+        super(pos, onGround, value, name);
+        //armour point reduce the damage taken by a percentage
+        this.armourPoint = Math.min(99, armourPoint);
+        //shield take certain amount of damage
+        this.shield = shield;
+        this.name = name;
+    }
+
+    public Armour(float x, float y, boolean onGround, int value, float armourPoint, int shield, String name) {
+        super(x, y, onGround, value, name);
         //armour point reduce the damage taken by a percentage
         this.armourPoint = Math.min(99, armourPoint);
         //shield take certain amount of damage
         this.shield = shield;
     }
 
+    public Armour(float x, float y) {
+        super(x,y);
+    }
 
 
     //An armour has armour point that reduce damage
@@ -67,4 +79,7 @@ public class Armour extends Item{
     public void informCollision(ICollidable other) {
 
     }
+
+    public int getShield(){return shield;}
+    public float getArmourPoint(){return armourPoint;}
 }

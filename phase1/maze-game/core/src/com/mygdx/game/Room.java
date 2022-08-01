@@ -15,7 +15,6 @@ public class Room implements IDrawble {
     private final IPresenter presenter;
     private final IEntityManager entityManager = new EntityManager();
 
-    private ArrayList<Door> tempDoorStorer = new ArrayList<>();
 
     public Room(IPresenter presenter, Player player, int screenWidth, int screenHeight){
         this.presenter = presenter;
@@ -27,6 +26,7 @@ public class Room implements IDrawble {
             Enemy enemy = new Enemy(enemy_pos, presenter.getEnemyDrawer());
             player.addObserver(enemy);
             entityManager.addCollidableEntity(enemy);
+            entityManager.addGold(enemy.getValue());
         }
     }
 
@@ -56,4 +56,5 @@ public class Room implements IDrawble {
     public IEntityManager getEntityManager(){
         return entityManager;
     }
+
 }

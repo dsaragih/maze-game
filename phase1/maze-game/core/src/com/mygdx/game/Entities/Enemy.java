@@ -5,6 +5,7 @@ import com.mygdx.game.IEntityManager;
 import com.mygdx.game.geometry.Circle;
 import com.mygdx.game.geometry.Point;
 import com.mygdx.game.graphics.entities.enemy.IEnemyDrawer;
+import com.badlogic.gdx.math.MathUtils;
 
 /** Represents an enemy
  * @author Ethan
@@ -22,6 +23,8 @@ public class Enemy extends CollidableEntity implements IPlayerObserver {
     private int damage = 1;
 
     private Point target = null;
+
+    private final int value = MathUtils.random(1,3);
 
     /**
      * Create an enemy
@@ -154,6 +157,7 @@ public class Enemy extends CollidableEntity implements IPlayerObserver {
         }
 
         pos.add(velocity);
+
     }
 
     /**
@@ -171,4 +175,6 @@ public class Enemy extends CollidableEntity implements IPlayerObserver {
     public void setTarget(Point newTarget){
         target = newTarget;
     }
+
+    public int getValue(){return value;}
 }

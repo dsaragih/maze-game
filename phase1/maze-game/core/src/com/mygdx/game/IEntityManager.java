@@ -3,8 +3,6 @@ package com.mygdx.game;
 import com.mygdx.game.Entities.CollidableEntity;
 import com.mygdx.game.Entities.Entity;
 
-import java.util.Collection;
-
 // Represents an entity manager interface
 // @author Daniel
 // @author Ethan
@@ -35,4 +33,6 @@ public interface IEntityManager {
 
     void draw();
     boolean isFinished();
+
+    void addGold(int value);
 }
