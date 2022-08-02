@@ -26,7 +26,8 @@ public class Level implements IRoomContainer {
     private final Random rnd = new Random();
     private final int screenWidth;
     private final int screenHeight;
-   private final Player player;
+    private final Player player;
+
 
     /**
      * Create a alevel

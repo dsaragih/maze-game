@@ -2,10 +2,12 @@ package com.mygdx.game.graphics;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.mygdx.game.graphics.entities.Merchant.CircleMerchantDrawer;
 import com.mygdx.game.graphics.bullet.CircleBulletDrawer;
 import com.mygdx.game.graphics.bullet.IBulletDrawer;
 import com.mygdx.game.graphics.door.CircleDoorDrawer;
 import com.mygdx.game.graphics.door.IDoorDrawer;
+import com.mygdx.game.graphics.entities.Merchant.IMerchantDrawer;
 import com.mygdx.game.graphics.entities.enemy.CircleEnemyDrawer;
 import com.mygdx.game.graphics.entities.enemy.IEnemyDrawer;
 import com.mygdx.game.graphics.gun.CircleGunDrawer;
@@ -63,6 +65,8 @@ public class ShapePresenter implements IPresenter {
     public IEnemyDrawer getEnemyDrawer() {
         return new CircleEnemyDrawer(shapeRenderer);
     }
+
+    public IMerchantDrawer getMerchantDrawer(){return new CircleMerchantDrawer(shapeRenderer);}
 
     @Override
     public IGunDrawer getGunDrawer() {

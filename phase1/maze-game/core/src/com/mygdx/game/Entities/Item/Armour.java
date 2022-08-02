@@ -1,6 +1,7 @@
 package com.mygdx.game.Entities.Item;
 
 import com.mygdx.game.Entities.*;
+import com.mygdx.game.Merchant;
 import com.mygdx.game.geometry.Circle;
 import com.mygdx.game.geometry.Point;
 
@@ -77,6 +78,11 @@ public class Armour extends Item{
 
     @Override
     public void informCollision(ICollidable other) {
+
+    }
+
+    @Override
+    public void collideWith(Merchant merchant) {
 
     }
 

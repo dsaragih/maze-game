@@ -2,6 +2,7 @@ package com.mygdx.game.Entities;
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.Entities.Item.Item;
 import com.mygdx.game.IEntityManager;
+import com.mygdx.game.Merchant;
 import com.mygdx.game.geometry.Circle;
 import com.mygdx.game.geometry.Point;
 import com.mygdx.game.graphics.entities.enemy.IEnemyDrawer;
@@ -61,6 +62,11 @@ public class Enemy extends CollidableEntity implements IPlayerObserver {
     @Override
     public void informCollision(ICollidable other) {
         other.collideWith(this);
+    }
+
+    @Override
+    public void collideWith(Merchant merchant) {
+
     }
 
     /**

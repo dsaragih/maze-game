@@ -5,6 +5,7 @@ import com.mygdx.game.Entities.Item.Armour;
 import com.mygdx.game.Entities.Item.Item;
 import com.mygdx.game.Entities.Item.Weapon;
 import com.mygdx.game.IEntityManager;
+import com.mygdx.game.Merchant;
 import com.mygdx.game.geometry.Circle;
 import com.mygdx.game.geometry.Point;
 import com.mygdx.game.graphics.entities.player.IPlayerDrawer;
@@ -203,6 +204,11 @@ public class Player extends CollidableEntity {
     @Override
     public void informCollision(ICollidable other) {
         other.collideWith(this);
+    }
+
+    @Override
+    public void collideWith(Merchant merchant) {
+
     }
 
     /**

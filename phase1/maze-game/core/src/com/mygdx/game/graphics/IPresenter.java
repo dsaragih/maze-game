@@ -1,8 +1,10 @@
 package com.mygdx.game.graphics;
 
 import com.badlogic.gdx.graphics.Camera;
+import com.mygdx.game.graphics.entities.Merchant.CircleMerchantDrawer;
 import com.mygdx.game.graphics.bullet.IBulletDrawer;
 import com.mygdx.game.graphics.door.IDoorDrawer;
+import com.mygdx.game.graphics.entities.Merchant.IMerchantDrawer;
 import com.mygdx.game.graphics.entities.enemy.IEnemyDrawer;
 import com.mygdx.game.graphics.gun.IGunDrawer;
 import com.mygdx.game.graphics.level.ILevelDrawer;
@@ -22,6 +24,8 @@ public interface IPresenter {
 
     public IEnemyDrawer getEnemyDrawer();
     public IGunDrawer getGunDrawer();
+
+    public IMerchantDrawer getMerchantDrawer();
 
     public IBulletDrawer getBulletDrawer();
 }
