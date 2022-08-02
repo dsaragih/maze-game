@@ -2,6 +2,7 @@ package com.mygdx.game.graphics.Merchant;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.Entities.Item.Item;
 import com.mygdx.game.geometry.Point;
@@ -23,7 +24,11 @@ public class CircleMerchantDrawer implements IMerchantDrawer{
     }
     public void drawItemList(Point pos, ArrayList<Item> itemList)
     {
+        SpriteBatch batch = new SpriteBatch();
+        float i = 0.0f;
         BitmapFont font = new BitmapFont();
         for (Item item: itemList){
+            font.draw(batch, item.toString(), pos.x, pos.y-i);
+            i += 30;
     }}
 }
