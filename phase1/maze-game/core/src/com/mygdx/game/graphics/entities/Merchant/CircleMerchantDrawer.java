@@ -12,6 +12,9 @@ import java.util.ArrayList;
 public class CircleMerchantDrawer implements IMerchantDrawer{
     private final int radius = 15;
     private final ShapeRenderer shapeRenderer;
+
+    private SpriteBatch batch = new SpriteBatch();
+    private BitmapFont font = new BitmapFont();
     public CircleMerchantDrawer(ShapeRenderer shapeRenderer){
         this.shapeRenderer = shapeRenderer;
     }
@@ -20,15 +23,18 @@ public class CircleMerchantDrawer implements IMerchantDrawer{
     public void drawMerchant(Point pos) {
         shapeRenderer.setColor(Color.BROWN);
         shapeRenderer.circle(pos.x,pos.y, radius);
+        batch.begin();
+        font.draw(batch, "Merchant", pos.x, pos.y);
+        batch.end();
     }
     @Override
     public void drawItemList(Point pos, ArrayList<Item> itemList)
     {
-        SpriteBatch batch = new SpriteBatch();
+        batch.begin();
         float i = 0.0f;
-        BitmapFont font = new BitmapFont();
         for (Item item: itemList){
             font.draw(batch, item.toString() + " price: " + item.checkValue() + " input: " + itemList.indexOf(item), pos.x, pos.y-i);
             i += 30;
-    }}
+    }
+    batch.end();}
 }
