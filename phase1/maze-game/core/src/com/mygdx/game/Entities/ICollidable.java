@@ -1,7 +1,6 @@
 package com.mygdx.game.Entities;
 
 import com.mygdx.game.Entities.Item.Item;
-import com.mygdx.game.Merchant;
 import com.mygdx.game.geometry.Circle;
 
 /**

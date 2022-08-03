@@ -47,9 +47,6 @@ public class Level implements IRoomContainer {
 
         Gun gun = new Gun(new Point(screenWidth / 2f, screenHeight / 2f), presenter.getGunDrawer(), presenter.getBulletDrawer());
         player.setGun(gun);
-        //Just here to test if my class work or not
-        Armour armour = new ExampleArmour(screenWidth / 2f, screenHeight / 2f);
-        player.setArmour(armour);
 
         levelDrawer = presenter.getLevelDrawer();
 

@@ -1,9 +1,7 @@
 package com.mygdx.game.Entities;
 
 import com.mygdx.game.Entities.Item.Item;
-import com.mygdx.game.IEntityManager;
 import com.mygdx.game.IRoomContainer;
-import com.mygdx.game.Merchant;
 import com.mygdx.game.Room;
 import com.mygdx.game.geometry.Circle;
 import com.mygdx.game.geometry.Point;
