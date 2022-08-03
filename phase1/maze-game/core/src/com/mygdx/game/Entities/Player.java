@@ -256,7 +256,7 @@ public class Player extends CollidableEntity {
 
     public void useArmour(){
         if (inventory.hasArmour()){
-        inventory.use(armour);}
-        inventory.removeItem(armour);
+            inventory.use((Armour) inventory.getArmour());
+            inventory.removeItem(inventory.getArmour());}
     }
 }
