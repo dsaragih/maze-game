@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
 import com.mygdx.game.Entities.Door;
 import com.mygdx.game.Entities.Gun;
 import com.mygdx.game.Entities.Item.Armour;
@@ -29,9 +30,9 @@ public class Level implements IRoomContainer {
     private final int screenWidth;
     private final int screenHeight;
     private final Player player;
-
-
-
+    private boolean hasMerchantBeenGenerated = false;
+    private float levelSize;
+    private float merchantProb;
 
     /**
      * Create a alevel
@@ -87,6 +88,9 @@ public class Level implements IRoomContainer {
 
         Collection<Room> rooms = nodeToRoom.values();
         currentRoom = rooms.iterator().next();
+
+        addMerchantToRooms(new ArrayList<>(rooms));
+
         gun.setEntityManager(currentRoom.getEntityManager());
     }
 
@@ -96,14 +100,21 @@ public class Level implements IRoomContainer {
      */
     public void setNewRoom(Room room){
 
-        // For some reason this is being called more than once if the Player walks through a door.
         IEntityManager entityManager = currentRoom.getEntityManager();
         if (entityManager.isFinished()){
         currentRoom = room;
         player.setGunEntityManager(currentRoom.getEntityManager());
-        player.setCollideWithMerchant();}
+        player.setCollideWithMerchant();
+        }
     }
+    private void addMerchantToRooms(List<Room> rooms) {
+        int merchant1Index = MathUtils.random(0, rooms.size() - 1);
+        int merchant2Index = MathUtils.random(0, rooms.size() - 1);
+        while (merchant2Index == merchant1Index) merchant2Index = MathUtils.random(0, rooms.size() - 1);
 
+        rooms.get(merchant1Index).addMerchant();
+        rooms.get(merchant2Index).addMerchant();
+    }
     /**
      * Update the current room
      */
