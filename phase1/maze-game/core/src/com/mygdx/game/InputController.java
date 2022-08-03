@@ -53,6 +53,13 @@ public class InputController {
          if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
             level.mouseClick(mousePos);
          }
+         Player player = level.getPlayer();
+         if (player.hasCollidewithMerchant()){
+             Merchant merchant = player.getCurrMerchant();
+             if (Gdx.input.isKeyPressed(Input.Keys.NUM_1)){
+                 player.buy(merchant.getItemOwned().get(0));
+             }
+         }
 
     }
 

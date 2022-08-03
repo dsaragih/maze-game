@@ -36,6 +36,10 @@ public class Player extends CollidableEntity {
     private int goldOwned = 0;
     private ArrayList<Item> itemOwned = new ArrayList<Item>(Collections.singletonList(gun));
 
+    public boolean collideWithMerchant = false;
+
+    private Merchant currMerchant;
+
 
 
     /**
@@ -208,7 +212,16 @@ public class Player extends CollidableEntity {
 
     @Override
     public void collideWith(Merchant merchant) {
+        collideWithMerchant = true;
+        currMerchant = merchant;
+    }
 
+    public void buy(Item item){
+        if (!(currMerchant == null)){
+            if (currMerchant.getItemOwned().contains(item) && goldOwned >= item.checkValue())
+            {addItem(item);
+            goldOwned -= item.checkValue();}
+        }
     }
 
     /**
@@ -231,4 +244,12 @@ public class Player extends CollidableEntity {
     public int getShield(){return shield;}
 
     public void changeGold(int amount){this.goldOwned += amount;}
+
+    public boolean hasCollidewithMerchant(){return collideWithMerchant;}
+
+    public void setCollideWithMerchant(){collideWithMerchant = false;}
+
+    public void addItem(Item item){itemOwned.add(item);}
+
+    public Merchant getCurrMerchant(){return currMerchant;}
 }

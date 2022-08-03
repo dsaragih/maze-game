@@ -1,9 +1,11 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.Entities.Door;
 import com.mygdx.game.Entities.Gun;
 import com.mygdx.game.Entities.Item.Armour;
 import com.mygdx.game.Entities.Item.ExampleArmour;
+import com.mygdx.game.Entities.Item.Item;
 import com.mygdx.game.Entities.Player;
 import com.mygdx.game.geometry.Point;
 import com.mygdx.game.graph.PlanarGraph;
@@ -27,6 +29,8 @@ public class Level implements IRoomContainer {
     private final int screenWidth;
     private final int screenHeight;
     private final Player player;
+
+
 
 
     /**
@@ -99,7 +103,8 @@ public class Level implements IRoomContainer {
         IEntityManager entityManager = currentRoom.getEntityManager();
         if (entityManager.isFinished()){
         currentRoom = room;
-        player.setGunEntityManager(currentRoom.getEntityManager());}
+        player.setGunEntityManager(currentRoom.getEntityManager());
+        player.setCollideWithMerchant();}
     }
 
     /**
@@ -177,4 +182,8 @@ public class Level implements IRoomContainer {
     public boolean isOver(){
         return player.getHealth() <= 0;
     }
+
+
+    public Player getPlayer(){return player;}
+
 }

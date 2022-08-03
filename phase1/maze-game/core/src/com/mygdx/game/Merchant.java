@@ -31,7 +31,7 @@ public class Merchant extends CollidableEntity implements IDrawble {
 
     @Override
     public Circle getCollisionBox() {
-        return new Circle(pos, 12);
+        return new Circle(pos, 15);
     }
 
 
@@ -69,4 +69,5 @@ public class Merchant extends CollidableEntity implements IDrawble {
     public void collideWith(Merchant merchant) {
 
     }
+    public ArrayList<Item> getItemOwned(){return itemOwned;}
 }
