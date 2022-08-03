@@ -1,20 +1,17 @@
 package com.mygdx.game.Entities.Item;
 
-import com.mygdx.game.Entities.*;
+import com.mygdx.game.Entities.Bullet;
+import com.mygdx.game.Entities.Door;
+import com.mygdx.game.Entities.Enemy;
 import com.mygdx.game.Entities.Merchant;
 import com.mygdx.game.geometry.Circle;
-import com.mygdx.game.geometry.Point;
 
+public class HealthFlask extends Item{
+    public int healthRestored = 30;
+    public HealthFlask(float x, float y){
+        super(x,y,8, "Health Flask");
+    }
 
-public class Weapon extends Item implements ICollidable {
-    private int damage;
-    public Weapon(float x, float y, int value, String name, int damage) {
-        super(x, y, value, name);
-        this.damage = damage;
-    }
-    public Weapon(Point pos){
-        super(pos);
-    }
     @Override
     public void draw() {
 
@@ -23,11 +20,6 @@ public class Weapon extends Item implements ICollidable {
     @Override
     public Circle getCollisionBox() {
         return null;
-    }
-
-    @Override
-    public void collideWith(Player player) {
-
     }
 
     @Override
@@ -51,16 +43,7 @@ public class Weapon extends Item implements ICollidable {
     }
 
     @Override
-    public void informCollision(ICollidable other) {
-
-    }
-
-    @Override
     public void collideWith(Merchant merchant) {
 
-    }
-
-    public int getDamage(){
-        return damage;
     }
 }

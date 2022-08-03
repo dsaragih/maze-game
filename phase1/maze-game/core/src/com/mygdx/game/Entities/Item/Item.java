@@ -12,18 +12,16 @@ import com.mygdx.game.graphics.IDrawble;
 public  abstract class Item extends CollidableEntity implements IDrawble {
     //Item is an object that can be pick up by the player, and has a value. This is not a class we write in phase 1
     //An item has a value, a name, and can be picked up or dropped.
-    private boolean onGround;
+
     private int value;
     String name;
-    public Item(float x, float y, boolean onGround, int value, String name) {
+    public Item(float x, float y, int value, String name) {
         super(x, y);
-        this.onGround = onGround;
         this.value = value;
         this.name = name;
     }
-    public Item(Point pos, boolean onGround, int value, String name){
+    public Item(Point pos, int value, String name){
         super(pos);
-        this.onGround = onGround;
         this.value = value;
         this.name = name;
     }
@@ -48,7 +46,7 @@ public  abstract class Item extends CollidableEntity implements IDrawble {
     }
 
     @Override
-    public void collideWith(Player player){onGround = false;}
+    public void collideWith(Player player){}
 
     @Override
     public void informCollision(ICollidable other) {
