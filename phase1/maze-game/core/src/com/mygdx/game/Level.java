@@ -5,6 +5,7 @@ import com.mygdx.game.Entities.Door;
 import com.mygdx.game.Entities.Gun;
 import com.mygdx.game.Entities.Item.Armour;
 import com.mygdx.game.Entities.Item.ExampleArmour;
+import com.mygdx.game.Entities.Item.Item;
 import com.mygdx.game.Entities.Player;
 import com.mygdx.game.geometry.Point;
 import com.mygdx.game.graph.PlanarGraph;
@@ -182,5 +183,7 @@ public class Level implements IRoomContainer {
         return player.getHealth() <= 0;
     }
 
-    public Room getCurrentRoom(){return currentRoom;}
+
+    public Player getPlayer(){return player;}
+
 }
