@@ -2,6 +2,7 @@ package com.mygdx.game.graphics;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.mygdx.game.graphics.entities.Merchant.CircleMerchantDrawer;
 import com.mygdx.game.graphics.bullet.CircleBulletDrawer;
 import com.mygdx.game.graphics.bullet.IBulletDrawer;
@@ -21,10 +22,12 @@ import com.mygdx.game.graphics.room.SimpleShapeRoomDrawer;
 
 public class ShapePresenter implements IPresenter {
     private final ShapeRenderer shapeRenderer;
+    private Stage stage;
     private int screenWidth;
     private int screenHeight;
 
-    public ShapePresenter(ShapeRenderer shapeRenderer, int screenWidth, int screenHeight){
+    public ShapePresenter(ShapeRenderer shapeRenderer, Stage stage, int screenWidth, int screenHeight){
+        this.stage = stage;
         this.shapeRenderer = shapeRenderer;
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
@@ -66,7 +69,7 @@ public class ShapePresenter implements IPresenter {
         return new CircleEnemyDrawer(shapeRenderer);
     }
 
-    public IMerchantDrawer getMerchantDrawer(){return new CircleMerchantDrawer(shapeRenderer);}
+    public IMerchantDrawer getMerchantDrawer(){return new CircleMerchantDrawer(shapeRenderer, stage);}
 
     @Override
     public IGunDrawer getGunDrawer() {
