@@ -51,7 +51,7 @@ public class ShapePresenter implements IPresenter {
 
     @Override
     public IRoomDrawer getRoomDrawer() {
-        return new SimpleShapeRoomDrawer(shapeRenderer, screenWidth, screenHeight);
+        return new SimpleShapeRoomDrawer(shapeRenderer, stage, screenWidth, screenHeight);
     }
 
     @Override

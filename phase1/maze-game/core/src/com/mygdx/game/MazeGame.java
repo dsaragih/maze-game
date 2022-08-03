@@ -4,11 +4,14 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -67,9 +70,9 @@ public class MazeGame extends ApplicationAdapter {
 	@Override
 	public void render () {
 		update();
-		draw();
-
 		stage.act();
+
+		draw();
 		stage.draw();
 		stage.clear();
 	}
@@ -103,9 +106,11 @@ public class MazeGame extends ApplicationAdapter {
 		ScreenUtils.clear(0, 0, 0, 1);
 		camera.update();
 		presenter.start(camera);
-		player.draw();
+
 		level.draw();
+		player.draw();
 		presenter.end();
+
 		batch.begin();
 		Label.LabelStyle label1Style = new Label.LabelStyle();
 		label1Style.font = font;
@@ -119,21 +124,15 @@ public class MazeGame extends ApplicationAdapter {
 			stage.addActor(label1);
 		}else{
 			Label label2 = new Label("Health: " + player.getHealth(), label1Style);
-			label2.setSize(Gdx.graphics.getWidth(), 20);
 			label2.setPosition(10, 20);
-			//label2.setAlignment(Align.center);
 			stage.addActor(label2);
 
 			Label label3 = new Label("Shield: " + player.getShield(), label1Style);
-			label3.setSize(Gdx.graphics.getWidth(), 20);
 			label3.setPosition(10, 50);
-			//label3.setAlignment(Align.center);
 			stage.addActor(label3);
 
 			Label label4 = new Label("Gold: " + player.getGold(), label1Style);
-			label4.setSize(Gdx.graphics.getWidth(), 20);
 			label4.setPosition(900, 20);
-			//label4.setAlignment(Align.center);
 			stage.addActor(label4);
 		}
 		batch.end();
