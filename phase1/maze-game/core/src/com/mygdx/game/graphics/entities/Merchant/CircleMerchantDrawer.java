@@ -2,10 +2,12 @@ package com.mygdx.game.graphics.entities.Merchant;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import com.mygdx.game.Entities.Item.Item;
@@ -30,6 +32,7 @@ public class CircleMerchantDrawer implements IMerchantDrawer{
     public void drawMerchant(Point pos) {
         shapeRenderer.setColor(Color.BROWN);
         shapeRenderer.circle(pos.x,pos.y, radius);
+
 
         Label merchantLabel = new Label("Merchant", labelStyle);
         merchantLabel.setPosition(pos.x - merchantLabel.getPrefWidth() / 2f, pos.y + 20);
