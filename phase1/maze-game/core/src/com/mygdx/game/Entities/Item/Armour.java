@@ -8,8 +8,8 @@ import com.mygdx.game.geometry.Point;
 public class Armour extends Item{
     private float armourPoint;
     private int shield;
-    public Armour(float x, float y, boolean onGround, int value, float armourPoint, String name, int shield) {
-        super(x, y, onGround, value, name);
+    public Armour(float x, float y, int value, float armourPoint, String name, int shield) {
+        super(x, y, value, name);
         //armour point reduce the damage taken by a percentage
         this.armourPoint = Math.min(99, armourPoint);
         //shield take certain amount of damage
@@ -18,8 +18,8 @@ public class Armour extends Item{
     public Armour(Point pos){
         super(pos);
     }
-    public Armour(Point pos, boolean onGround, int value, float armourPoint, int shield, String name) {
-        super(pos, onGround, value, name);
+    public Armour(Point pos, int value, float armourPoint, int shield, String name) {
+        super(pos, value, name);
         //armour point reduce the damage taken by a percentage
         this.armourPoint = Math.min(99, armourPoint);
         //shield take certain amount of damage
@@ -27,8 +27,8 @@ public class Armour extends Item{
         this.name = name;
     }
 
-    public Armour(float x, float y, boolean onGround, int value, float armourPoint, int shield, String name) {
-        super(x, y, onGround, value, name);
+    public Armour(float x, float y, int value, float armourPoint, int shield, String name) {
+        super(x, y, value, name);
         //armour point reduce the damage taken by a percentage
         this.armourPoint = Math.min(99, armourPoint);
         //shield take certain amount of damage

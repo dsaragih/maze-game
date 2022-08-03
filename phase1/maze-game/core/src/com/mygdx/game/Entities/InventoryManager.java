@@ -1,6 +1,7 @@
 package com.mygdx.game.Entities;
 
 import com.mygdx.game.Entities.Item.Armour;
+import com.mygdx.game.Entities.Item.HealthFlask;
 import com.mygdx.game.Entities.Item.Item;
 import com.mygdx.game.IEntityManager;
 
@@ -30,5 +31,16 @@ public class InventoryManager {
         }
         return null;
     }
-
+    public boolean hasHealthFlask(){
+        for (Item item: items){
+            if (item instanceof HealthFlask){return true;}
+        }
+        return false;
+    }
+    public Item getHealthFlask(){
+        for (Item item: items){
+            if (item instanceof HealthFlask){return item;}
+        }
+        return null;
+    }
 }

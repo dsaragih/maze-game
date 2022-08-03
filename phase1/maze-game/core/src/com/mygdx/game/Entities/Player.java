@@ -1,6 +1,7 @@
 package com.mygdx.game.Entities;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.MathUtils;
 import com.mygdx.game.Entities.Item.Armour;
 import com.mygdx.game.Entities.Item.Item;
 import com.mygdx.game.IEntityManager;
@@ -38,6 +39,7 @@ public class Player extends CollidableEntity {
     private Merchant currMerchant;
 
     private InventoryManager inventory;
+
 
 
 
@@ -218,6 +220,7 @@ public class Player extends CollidableEntity {
 
     public void buy(Item item){
         if (!(currMerchant == null)){
+            long time = System.currentTimeMillis();
             if (currMerchant.getItemOwned().contains(item) && goldOwned >= item.checkValue())
             {addItem(item);
             goldOwned -= item.checkValue();
@@ -258,5 +261,12 @@ public class Player extends CollidableEntity {
         if (inventory.hasArmour()){
             inventory.use((Armour) inventory.getArmour());
             inventory.removeItem(inventory.getArmour());}
+    }
+    public void restoreHealth(){
+        if(inventory.hasHealthFlask()){
+            health += 30;
+            health = Math.min(100, health);
+            inventory.removeItem(inventory.getHealthFlask());
+        }
     }
 }

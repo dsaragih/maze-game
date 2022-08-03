@@ -11,7 +11,7 @@ public class ExampleArmour extends Armour{
         super(pos);
     }
     public ExampleArmour(float x, float y) {
-        super(x,y,true,10,10,30,"ExampleArmour");
+        super(x,y,10,10,30,"ExampleArmour");
     }
 
 }

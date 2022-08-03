@@ -56,12 +56,18 @@ public class InputController {
          Player player = level.getPlayer();
          if (player.hasCollidewithMerchant()){
              Merchant merchant = player.getCurrMerchant();
-             if (Gdx.input.isKeyPressed(Input.Keys.NUM_1)){
+             if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)){
                  player.buy(merchant.getItemOwned().get(0));
              }
+             if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_2)){
+                 player.buy(merchant.getItemOwned().get(1));
+             }
          }
-         if (Gdx.input.isKeyPressed(Input.Keys.J)){
+         if (Gdx.input.isKeyJustPressed(Input.Keys.J)){
              player.useArmour();
+         }
+         if (Gdx.input.isButtonJustPressed(Input.Buttons.RIGHT)){
+             player.restoreHealth();
          }
 
     }

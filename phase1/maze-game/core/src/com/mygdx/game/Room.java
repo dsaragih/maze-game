@@ -3,6 +3,7 @@ import com.badlogic.gdx.math.MathUtils;
 
 import com.mygdx.game.Entities.*;
 import com.mygdx.game.Entities.Item.ExampleArmour;
+import com.mygdx.game.Entities.Item.HealthFlask;
 import com.mygdx.game.Entities.Item.Item;
 import com.mygdx.game.geometry.Point;
 import com.mygdx.game.graphics.IDrawble;
@@ -35,7 +36,9 @@ public class Room implements IDrawble {
         if (numMerchant == 1) {
             ArrayList<Item> itemOwned = new ArrayList<>();
             ExampleArmour weakArmour = new ExampleArmour(0, 0);
+            HealthFlask health = new HealthFlask(0, 0);
             itemOwned.add(weakArmour);
+            itemOwned.add(health);
             Merchant merchant = new Merchant(100, 100, itemOwned, presenter.getMerchantDrawer());
             entityManager.addCollidableEntity(merchant);
         }
@@ -56,6 +59,8 @@ public class Room implements IDrawble {
         if (numMerchant == 1) {
             ArrayList<Item> itemOwned = new ArrayList<>();
             ExampleArmour weakArmour = new ExampleArmour(0, 0);
+            HealthFlask health = new HealthFlask(0, 0);
+            itemOwned.add(health);
             itemOwned.add(weakArmour);
             Merchant merchant = new Merchant(100, 100, itemOwned, presenter.getMerchantDrawer());
             entityManager.addCollidableEntity(merchant);
