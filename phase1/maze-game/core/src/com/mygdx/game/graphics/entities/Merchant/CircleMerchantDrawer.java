@@ -32,9 +32,9 @@ public class CircleMerchantDrawer implements IMerchantDrawer{
     {
         batch.begin();
         float i = 0.0f;
-        for (Item item: itemList){
-            font.draw(batch, item.toString() + " price: " + item.checkValue() + " input: " + itemList.indexOf(item), pos.x, pos.y-i);
+        for (Item item: itemList) {
+            font.draw(batch, item.toString() + " price: " + item.checkValue() + " input: " + itemList.indexOf(item), pos.x, pos.y - i);
             i += 30;
-    }
-    batch.end();}
+        }
+        batch.end();}
 }

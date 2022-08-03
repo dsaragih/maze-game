@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.Entities.Door;
 import com.mygdx.game.Entities.Gun;
 import com.mygdx.game.Entities.Item.Armour;
@@ -27,6 +28,8 @@ public class Level implements IRoomContainer {
     private final int screenWidth;
     private final int screenHeight;
     private final Player player;
+
+
 
 
     /**
@@ -99,7 +102,8 @@ public class Level implements IRoomContainer {
         IEntityManager entityManager = currentRoom.getEntityManager();
         if (entityManager.isFinished()){
         currentRoom = room;
-        player.setGunEntityManager(currentRoom.getEntityManager());}
+        player.setGunEntityManager(currentRoom.getEntityManager());
+        player.setCollideWithMerchant();}
     }
 
     /**
@@ -177,4 +181,6 @@ public class Level implements IRoomContainer {
     public boolean isOver(){
         return player.getHealth() <= 0;
     }
+
+    public Room getCurrentRoom(){return currentRoom;}
 }
