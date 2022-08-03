@@ -26,17 +26,14 @@ public class SimpleShapeRoomDrawer implements IRoomDrawer{
     }
     @Override
     public void drawRoom() {
-//        shapeRenderer.setColor(Color.GRAY);
-//        shapeRenderer.rect(0, 0, screenWidth, screenHeight);
-        Texture texture = new Texture(Gdx.files.internal("chiseled_nether_bricks.png"));
+        stage.getBatch().begin();
+        Texture texture = new Texture(Gdx.files.internal("chiseled_sandstone.png"));
         texture.setWrap(Texture.TextureWrap.MirroredRepeat, Texture.TextureWrap.MirroredRepeat);
         TextureRegion textureRegion = new TextureRegion(texture);
-        textureRegion.setRegion(0,0,screenWidth,screenHeight);
+        textureRegion.setRegion(0, 0, screenWidth, screenHeight);
 
-        Image image = new Image(textureRegion);
-        image.setPosition(0, 0);
-        stage.addActor(image);
-
+        stage.getBatch().draw(textureRegion, 0, 0);
+        stage.getBatch().end();
     }
 
 }

@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -69,9 +70,9 @@ public class MazeGame extends ApplicationAdapter {
 	@Override
 	public void render () {
 		update();
-		draw();
-
 		stage.act();
+
+		draw();
 		stage.draw();
 		stage.clear();
 	}
@@ -105,8 +106,9 @@ public class MazeGame extends ApplicationAdapter {
 		ScreenUtils.clear(0, 0, 0, 1);
 		camera.update();
 		presenter.start(camera);
-		player.draw();
+
 		level.draw();
+		player.draw();
 		presenter.end();
 
 		batch.begin();
