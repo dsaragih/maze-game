@@ -1,10 +1,8 @@
-package com.mygdx.game;
+package com.mygdx.game.Entities;
 
-import com.mygdx.game.Entities.*;
 import com.mygdx.game.Entities.Item.Item;
 import com.mygdx.game.geometry.Circle;
 import com.mygdx.game.graphics.IDrawble;
-import com.mygdx.game.graphics.entities.Merchant.CircleMerchantDrawer;
 import com.mygdx.game.graphics.entities.Merchant.IMerchantDrawer;
 
 import java.util.ArrayList;

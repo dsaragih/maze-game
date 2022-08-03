@@ -3,15 +3,12 @@ package com.mygdx.game.Entities;
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.Entities.Item.Armour;
 import com.mygdx.game.Entities.Item.Item;
-import com.mygdx.game.Entities.Item.Weapon;
 import com.mygdx.game.IEntityManager;
-import com.mygdx.game.Merchant;
 import com.mygdx.game.geometry.Circle;
 import com.mygdx.game.geometry.Point;
 import com.mygdx.game.graphics.entities.player.IPlayerDrawer;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -40,6 +37,8 @@ public class Player extends CollidableEntity {
 
     private Merchant currMerchant;
 
+    private InventoryManager inventory;
+
 
 
     /**
@@ -50,6 +49,7 @@ public class Player extends CollidableEntity {
     public Player(Point pos, IPlayerDrawer playerDrawer){
         super(pos);
         this.playerDrawer = playerDrawer;
+        inventory = new InventoryManager(this, itemOwned);
     }
 
     /**
@@ -220,7 +220,8 @@ public class Player extends CollidableEntity {
         if (!(currMerchant == null)){
             if (currMerchant.getItemOwned().contains(item) && goldOwned >= item.checkValue())
             {addItem(item);
-            goldOwned -= item.checkValue();}
+            goldOwned -= item.checkValue();
+            inventory.addItem(item);}
         }
     }
 
@@ -252,4 +253,10 @@ public class Player extends CollidableEntity {
     public void addItem(Item item){itemOwned.add(item);}
 
     public Merchant getCurrMerchant(){return currMerchant;}
+
+    public void useArmour(){
+        if (inventory.hasArmour()){
+        inventory.use(armour);}
+        inventory.removeItem(armour);
+    }
 }

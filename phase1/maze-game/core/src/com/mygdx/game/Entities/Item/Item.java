@@ -37,6 +37,7 @@ public  abstract class Item extends CollidableEntity implements IDrawble {
 
     public abstract void draw();
 
+
     public int checkValue(){
         return value;
     }

@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Vector3;
-import com.mygdx.game.Entities.Gun;
+import com.mygdx.game.Entities.Merchant;
 import com.mygdx.game.Entities.Player;
 import com.mygdx.game.geometry.Point;
 
@@ -59,6 +59,9 @@ public class InputController {
              if (Gdx.input.isKeyPressed(Input.Keys.NUM_1)){
                  player.buy(merchant.getItemOwned().get(0));
              }
+         }
+         if (Gdx.input.isKeyPressed(Input.Keys.J)){
+             player.useArmour();
          }
 
     }
