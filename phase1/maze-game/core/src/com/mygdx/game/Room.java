@@ -32,15 +32,6 @@ public class Room implements IDrawble {
             entityManager.addCollidableEntity(enemy);
             entityManager.addGold(enemy.getValue());
         }
-        int numMerchant = MathUtils.random(0,1);
-        if (numMerchant == 1) {
-            ArrayList<Item> itemOwned = new ArrayList<>();
-            ExampleArmour weakArmour = new ExampleArmour(0, 0);
-            itemOwned.add(weakArmour);
-            Merchant merchant = new Merchant(100, 100, itemOwned, presenter.getMerchantDrawer());
-            entityManager.addCollidableEntity(merchant);
-        }
-
     }
     public Room(IPresenter presenter, Player player, int screenWidth, int screenHeight, int numEnemies){
         this.presenter = presenter;
@@ -52,14 +43,6 @@ public class Room implements IDrawble {
             player.addObserver(enemy);
             entityManager.addCollidableEntity(enemy);
             entityManager.addGold(enemy.getValue());
-        }
-        int numMerchant = MathUtils.random(0,1);
-        if (numMerchant == 1) {
-            ArrayList<Item> itemOwned = new ArrayList<>();
-            ExampleArmour weakArmour = new ExampleArmour(0, 0);
-            itemOwned.add(weakArmour);
-            Merchant merchant = new Merchant(100, 100, itemOwned, presenter.getMerchantDrawer());
-            entityManager.addCollidableEntity(merchant);
         }
     }
 
@@ -81,6 +64,8 @@ public class Room implements IDrawble {
     public void addMerchant() {
         ArrayList<Item> itemOwned = new ArrayList<>();
         ExampleArmour weakArmour = new ExampleArmour(0, 0);
+        HealthFlask health = new HealthFlask(0, 0);
+        itemOwned.add(health);
         itemOwned.add(weakArmour);
         Merchant merchant = new Merchant(100, 100, itemOwned, presenter.getMerchantDrawer());
         entityManager.addCollidableEntity(merchant);
