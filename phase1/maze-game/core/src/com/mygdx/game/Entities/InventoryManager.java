@@ -24,5 +24,11 @@ public class InventoryManager {
         }
         return false;
     }
+    public Item getArmour(){
+        for (Item item: items){
+            if (item instanceof Armour){return item;}
+        }
+        return null;
+    }
 
 }
