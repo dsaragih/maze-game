@@ -8,8 +8,12 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.Entities.Gun;
 import com.mygdx.game.Entities.Player;
 import com.mygdx.game.geometry.Point;
@@ -22,6 +26,7 @@ import com.mygdx.game.graphics.ShapePresenter;
  * @author Daniel
  */
 public class MazeGame extends ApplicationAdapter {
+	private Stage stage;
 	ShapeRenderer shapeRenderer;
 	private OrthographicCamera camera;
 	private final int SCREEN_WIDTH = 960;
@@ -40,14 +45,15 @@ public class MazeGame extends ApplicationAdapter {
 	 */
 	@Override
 	public void create () {
+		stage = new Stage(new ScreenViewport());
 		batch = new SpriteBatch();
 		font = new BitmapFont();
-		font.setColor(Color.RED);
+
 
 		shapeRenderer = new ShapeRenderer();
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, SCREEN_WIDTH, SCREEN_HEIGHT);
-		presenter = new ShapePresenter(shapeRenderer, SCREEN_WIDTH, SCREEN_HEIGHT);
+		presenter = new ShapePresenter(shapeRenderer, stage, SCREEN_WIDTH, SCREEN_HEIGHT);
 
 		player = new Player(new Point(SCREEN_WIDTH/2f, SCREEN_HEIGHT/2f), presenter.getPlayerDrawer());
 		level = new Level(presenter, player, SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -62,6 +68,10 @@ public class MazeGame extends ApplicationAdapter {
 	public void render () {
 		update();
 		draw();
+
+		stage.act();
+		stage.draw();
+		stage.clear();
 	}
 
 	/**
@@ -72,6 +82,7 @@ public class MazeGame extends ApplicationAdapter {
 		shapeRenderer.dispose();
 		batch.dispose();
 		font.dispose();
+		stage.dispose();
 	}
 
 	/**
@@ -92,16 +103,38 @@ public class MazeGame extends ApplicationAdapter {
 		ScreenUtils.clear(0, 0, 0, 1);
 		camera.update();
 		presenter.start(camera);
-		level.draw();
 		player.draw();
+		level.draw();
 		presenter.end();
 		batch.begin();
+		Label.LabelStyle label1Style = new Label.LabelStyle();
+		label1Style.font = font;
+		label1Style.fontColor = Color.RED;
+
 		if(level.isOver()){
-			font.draw(batch, "YOU DIED", SCREEN_WIDTH/2f, SCREEN_HEIGHT/2f);
+			Label label1 = new Label("YOU DIED", label1Style);
+			label1.setSize(Gdx.graphics.getWidth(), 20);
+			label1.setPosition(0, SCREEN_HEIGHT / 2f);
+			label1.setAlignment(Align.center);
+			stage.addActor(label1);
 		}else{
-			font.draw(batch, "Health: " + player.getHealth(), 10, 20);
-			font.draw(batch, "Shield: " + player.getShield(), 10, 50);
-			font.draw(batch, "Gold: " + player.getGold(), 900, 20);
+			Label label2 = new Label("Health: " + player.getHealth(), label1Style);
+			label2.setSize(Gdx.graphics.getWidth(), 20);
+			label2.setPosition(10, 20);
+			//label2.setAlignment(Align.center);
+			stage.addActor(label2);
+
+			Label label3 = new Label("Shield: " + player.getShield(), label1Style);
+			label3.setSize(Gdx.graphics.getWidth(), 20);
+			label3.setPosition(10, 50);
+			//label3.setAlignment(Align.center);
+			stage.addActor(label3);
+
+			Label label4 = new Label("Gold: " + player.getGold(), label1Style);
+			label4.setSize(Gdx.graphics.getWidth(), 20);
+			label4.setPosition(900, 20);
+			//label4.setAlignment(Align.center);
+			stage.addActor(label4);
 		}
 		batch.end();
 

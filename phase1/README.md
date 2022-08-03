@@ -15,7 +15,7 @@ Alternatively, you may explore the login system.
 
 ## Login System (Phase0)
 
-Instead of running the game, enter 2 followed by the return key in the console to sign up. Your username cannot be the same as someone else's.
+Instead of running  the game, enter 2 followed by the return key in the console to sign up. Your username cannot be the same as someone else's.
 
 To log in, enter 1 followed by your username and password.
 

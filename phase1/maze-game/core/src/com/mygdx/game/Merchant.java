@@ -11,11 +11,11 @@ import java.util.ArrayList;
 
 public class Merchant extends CollidableEntity implements IDrawble {
     //A merchant will sell stuff to the player
-    private ArrayList itemOwned;
+    private ArrayList<Item> itemOwned;
     private IMerchantDrawer drawer;
-    public Merchant(float x, float y, ArrayList itemOwned, IMerchantDrawer drawer) {
+    public Merchant(float x, float y, ArrayList<Item> itemOwned, IMerchantDrawer drawer) {
         super(x, y);
-        this.itemOwned =itemOwned;
+        this.itemOwned = itemOwned;
         this.drawer = drawer;
     }
     public Merchant(float x, float y, IMerchantDrawer drawer){
@@ -37,10 +37,7 @@ public class Merchant extends CollidableEntity implements IDrawble {
 
     @Override
     public void collideWith(Player player) {
-//        int screenWidth = 960;
-//        int screenHeight = 540;
-//        com.mygdx.game.geometry.Point pos = new com.mygdx.game.geometry.Point(960, 540);
-//        drawer.drawItemList(pos, itemOwned);
+        drawer.drawItemList(pos, itemOwned);
     }
 
     @Override
