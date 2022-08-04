@@ -81,10 +81,13 @@ public class Level implements IRoomContainer {
                     edges.put(pair, true);
                 }
             }
+
         }
 
         Collection<Room> rooms = nodeToRoom.values();
         currentRoom = rooms.iterator().next();
+        //this line of code is for convenience of testing
+//        currentRoom = new BossRoom(presenter, player, screenWidth, screenHeight);
 
         addMerchantToRooms(new ArrayList<>(rooms));
 
