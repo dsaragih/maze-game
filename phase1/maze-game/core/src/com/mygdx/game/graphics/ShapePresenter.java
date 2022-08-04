@@ -20,6 +20,7 @@ import com.mygdx.game.graphics.level.LevelDrawer;
 import com.mygdx.game.graphics.entities.player.CirclePlayerDrawer;
 import com.mygdx.game.graphics.entities.player.IPlayerDrawer;
 import com.mygdx.game.graphics.room.IRoomDrawer;
+import com.mygdx.game.graphics.room.SandRoomDrawer;
 import com.mygdx.game.graphics.room.SimpleShapeRoomDrawer;
 
 public class ShapePresenter implements IPresenter {
@@ -53,7 +54,7 @@ public class ShapePresenter implements IPresenter {
 
     @Override
     public IRoomDrawer getRoomDrawer() {
-        return new SimpleShapeRoomDrawer(shapeRenderer, stage, screenWidth, screenHeight);
+        return new SandRoomDrawer(stage, screenWidth, screenHeight);
     }
 
     @Override
