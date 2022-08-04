@@ -6,7 +6,7 @@ import com.mygdx.game.geometry.Point;
 
 public class CircleBossDrawer implements IBossDrawer{
     ShapeRenderer renderer;
-    private int radius = 10;
+    private int radius = 20;
     public CircleBossDrawer(ShapeRenderer renderer){this.renderer = renderer;}
     @Override
     public void drawBoss(Point pos) {

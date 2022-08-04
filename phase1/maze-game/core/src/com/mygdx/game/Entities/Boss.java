@@ -11,11 +11,16 @@ public class Boss extends CollidableEntity implements IPlayerObserver{
 
     private int health = 1500;
     public Gun gun;
+    private Point target = null;
 
     private final IBossDrawer bossDrawer;
     private int radius = 10;
     public Boss(int x, int y, IBossDrawer drawer){
         super(x, y, true);
+        bossDrawer = drawer;
+    }
+    public Boss(Point pos, IBossDrawer drawer){
+        super(pos, true);
         bossDrawer = drawer;
     }
     @Override
@@ -24,7 +29,13 @@ public class Boss extends CollidableEntity implements IPlayerObserver{
     }
     @Override
     public void update(){
-        radius += 1;}
+        radius += 1;
+//        fire(target);
+
+}
+    public void fire(Point direction){
+        gun.fire(direction);
+    }
 
     @Override
     public Circle getCollisionBox() {
@@ -57,7 +68,7 @@ public class Boss extends CollidableEntity implements IPlayerObserver{
     }
 
     @Override
-    public void informCollision(ICollidable other) {
+    public void informCollision(ICollidable other) {other.informCollision(this);
     }
 
     @Override
@@ -66,8 +77,8 @@ public class Boss extends CollidableEntity implements IPlayerObserver{
     }
 
     @Override
-    public void setTarget(Point target) {
-
+    public void setTarget(Point newTarget) {
+           target = newTarget;
     }
-    public void setGUn(Gun gun){this.gun = gun;}
+    public void setGun(Gun gun){this.gun = gun;}
 }
