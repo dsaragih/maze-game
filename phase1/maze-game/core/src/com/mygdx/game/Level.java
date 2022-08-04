@@ -30,9 +30,6 @@ public class Level implements IRoomContainer {
     private final int screenWidth;
     private final int screenHeight;
     private final Player player;
-    private boolean hasMerchantBeenGenerated = false;
-    private float levelSize;
-    private float merchantProb;
 
     /**
      * Create a alevel

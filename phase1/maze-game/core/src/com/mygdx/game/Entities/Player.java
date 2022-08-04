@@ -40,9 +40,6 @@ public class Player extends CollidableEntity {
 
     private InventoryManager inventory;
 
-
-
-
     /**
      * Create a player
      * @param pos The position of player
@@ -220,7 +217,6 @@ public class Player extends CollidableEntity {
 
     public void buy(Item item){
         if (!(currMerchant == null)){
-            long time = System.currentTimeMillis();
             if (currMerchant.getItemOwned().contains(item) && goldOwned >= item.checkValue())
             {addItem(item);
             goldOwned -= item.checkValue();
