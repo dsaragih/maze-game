@@ -3,6 +3,8 @@ package com.mygdx.game.graphics;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.mygdx.game.graphics.entities.Boss.CircleBossDrawer;
+import com.mygdx.game.graphics.entities.Boss.IBossDrawer;
 import com.mygdx.game.graphics.entities.Merchant.CircleMerchantDrawer;
 import com.mygdx.game.graphics.bullet.CircleBulletDrawer;
 import com.mygdx.game.graphics.bullet.IBulletDrawer;
@@ -80,4 +82,8 @@ public class ShapePresenter implements IPresenter {
     public IBulletDrawer getBulletDrawer() {
         return new CircleBulletDrawer(shapeRenderer);
     }
-}
+
+    @Override
+    public IBossDrawer getBossDrawer(){return new CircleBossDrawer(shapeRenderer);}
+    }
+
