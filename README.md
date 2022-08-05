@@ -5,7 +5,7 @@ You need JDK 17 to run this program, because libraries used in this project are 
 
 This project is built using gradle and the GDX game library.
 ## Game Instructions (Phase1)
-To execute this program, you have to run the Main class (Have the console open as large as you can to not miss any text).
+To execute this program, you have to run the console.Main class (Have the console open as large as you can to not miss any text).
 
 Then, enter 3 to run a demo of the game.
 
