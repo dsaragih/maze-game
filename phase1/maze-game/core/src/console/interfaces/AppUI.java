@@ -1,14 +1,13 @@
 package console.interfaces;
 
 import config.ErrorCodes;
-import console.DesktopLauncher;
+import console.launcher.DesktopLauncher;
 import console.entities.User;
 import console.usecases.UserController;
 
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Scanner;
-import java.util.function.Predicate;
 
 public class AppUI {
     private static int MIN = 1;//smallest acceptable username/password

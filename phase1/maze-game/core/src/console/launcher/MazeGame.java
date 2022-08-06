@@ -1,4 +1,4 @@
-package console;
+package console.launcher;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;

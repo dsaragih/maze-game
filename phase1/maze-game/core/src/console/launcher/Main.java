@@ -1,4 +1,4 @@
-package console;
+package console.launcher;
 
 import console.interfaces.AppUI;
 
