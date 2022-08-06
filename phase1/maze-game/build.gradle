@@ -39,16 +39,6 @@ allprojects {
     }
 }
 
-project(":desktop") {
-    apply plugin: "java-library"
-
-
-    dependencies {
-        implementation project(":core")
-
-    }
-}
-
 project(":core") {
     apply plugin: "java-library"
 
