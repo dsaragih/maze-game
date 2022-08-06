@@ -98,14 +98,29 @@ public class AppUI {
             int input = getNumUpTo(user.isAdmin() ? 7 : 3);
 
             switch (input) {
-                case 0: return;
-                case 1: userController.logLaunch(user.getUserid()); DesktopLauncher.main(new String[]{}); break;
-                case 2: log(); break;
-                case 3: addUser(false); break;
-                case 4: addUser(true); break;
-                case 5: deleteUser(); break;
-                case 6: banUser(); break;
-                case 7: unbanUser();
+                case 0:
+                    return;
+                case 1:
+                    userController.logLaunch(user.getUserid());
+                    DesktopLauncher.main(new String[]{});
+                    break;
+                case 2:
+                    log();
+                    break;
+                case 3:
+                    addUser(false);
+                    break;
+                case 4:
+                    addUser(true);
+                    break;
+                case 5:
+                    deleteUser();
+                    break;
+                case 6:
+                    banUser();
+                    break;
+                case 7:
+                    unbanUser();
             }
         }
     }
@@ -127,9 +142,15 @@ public class AppUI {
         displayTitle("Permanently delete user");
         int outcome = userController.deleteUser(enter("username"));
         switch (outcome) {
-            case ErrorCodes.SUCCESS: writeln("Successfully deleted user."); break;
-            case ErrorCodes.USER_IS_ADMIN: writeln("Deletion aborted: Admins cannot be deleted."); break;
-            case ErrorCodes.USER_NOT_FOUND: writeln("Deletion aborted: No user with this name was found."); break;
+            case ErrorCodes.SUCCESS:
+                writeln("Successfully deleted user.");
+                break;
+            case ErrorCodes.USER_IS_ADMIN:
+                writeln("Deletion aborted: Admins cannot be deleted.");
+                break;
+            case ErrorCodes.USER_NOT_FOUND:
+                writeln("Deletion aborted: No user with this name was found.");
+                break;
         }
     }
 
@@ -162,26 +183,27 @@ public class AppUI {
     }
 
     private int getNumUpTo(int max) {
-        while(true) {
+        int num;
+
+        while (true) {
             writeln("Please enter a number between 0 and " + max + ": ");
             String input = in.nextLine();
 
             try {
-                int num = Integer.parseInt(input);
+                num = Integer.parseInt(input);
                 if (num > max) {
                     writeln("Invalid input -- number too large.");
+                } else if (num < 0) {
+                    writeln("Invalid input -- number can't be negative.");
+                } else {
                     break;
                 }
             } catch (NumberFormatException e) {
                 writeln("Invalid input -- not a number.");
-                break;
             }
-            //return num;
-            return Integer.parseInt(input);
         }
-        return max;
+        return num;
     }
-
 
 
     private void writeln(Object obj) {
