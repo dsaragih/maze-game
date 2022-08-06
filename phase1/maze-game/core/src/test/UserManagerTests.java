@@ -1,4 +1,4 @@
-/*
+import console.usecases.UserController;
 import org.junit.*;
 
 import static org.junit.Assert.*;
@@ -26,7 +26,7 @@ public class UserManagerTests {
     @Test(timeout = 50)
     public void testDeleteUser(){
         userController.addUser("Bob the Vanquished", "BobPass", false);
-        String response = userController.deleteUser("Bob the Vanquished");
+        String response = String.valueOf(userController.deleteUser("Bob the Vanquished"));
         assertEquals("Successfully deleted Bob the Vanquished!", response);
     }
 
@@ -38,4 +38,3 @@ public class UserManagerTests {
         assertEquals("Successfully banned Bob the Banned!", response);
     }
 }
-*/

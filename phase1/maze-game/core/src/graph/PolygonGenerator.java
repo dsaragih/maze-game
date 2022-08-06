@@ -10,8 +10,8 @@ import java.util.ArrayList;
 public class PolygonGenerator implements IGraphGenerator{
     private Point center;
     private int n;
-    private float radius;
-    private float angle;
+    private double radius;
+    private double angle;
 
     /**
      * Create a polygon generator.
@@ -20,7 +20,7 @@ public class PolygonGenerator implements IGraphGenerator{
      * @param radius the radius from center to vertex
      * @param angle the angle of counterclockwise rotation
      */
-    public PolygonGenerator(Point center, int n, float radius, float angle){
+    public PolygonGenerator(Point center, int n, double radius, double angle){
         this.center = center;
         this.n = n;
         this.radius = radius;
@@ -36,13 +36,13 @@ public class PolygonGenerator implements IGraphGenerator{
         // generate cycle
         PlanarGraph graph = new PlanarGraph();
         //Convert to radian
-        float initialRadian = (float)Math.toRadians(angle);
-        float radianIncrement = (float) Math.toRadians(360.0/n);
+        double initialRadian = (double)Math.toRadians(angle);
+        double radianIncrement = (double) Math.toRadians(360.0/n);
         ArrayList<PlanarNode> lst = new ArrayList<>();
         //Create the vertices
         for (int i=0; i<n; i++){
-            PlanarNode n1 = new PlanarNode(center.x+radius*(float)Math.cos(initialRadian+radianIncrement),
-                    center.y+radius*(float)Math.sin(angle));
+            PlanarNode n1 = new PlanarNode(center.x+radius*(double)Math.cos(initialRadian+radianIncrement),
+                    center.y+radius*(double)Math.sin(angle));
             lst.add(n1);
         }
         //Join undirected edges
