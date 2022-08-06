@@ -10,14 +10,12 @@ public class User implements Serializable {
     private boolean admin;
     private boolean banned;
 
-    private Date signUpDate; //saved but never accessed.
     public User(String userName, String password, boolean admin, int userid){
         this.userName = userName;
         this.password = password;
         this.admin = admin;
         this.userid = userid;
         this.banned = false;
-        signUpDate = new Date();
     }
 
     //getters and setters

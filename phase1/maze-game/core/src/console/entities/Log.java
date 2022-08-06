@@ -4,9 +4,11 @@ import java.util.Date;
 public class Log {
     private int userid;
     private Date loginDate;
-    public Log (int userid, Date loginDate){
+    private boolean launch;
+    public Log (int userid, Date loginDate, boolean launch){
         this.userid = userid;
         this.loginDate = loginDate;
+        this.launch = launch;
     }
 
     public int getUserid() {
@@ -16,4 +18,7 @@ public class Log {
     public Date getLoginDate() {
         return loginDate;
     }
+
+    public boolean isLaunch() { return launch; }
+
 }

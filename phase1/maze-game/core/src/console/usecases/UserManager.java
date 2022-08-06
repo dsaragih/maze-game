@@ -30,8 +30,8 @@ public class UserManager implements Serializable {
         users.remove(userName);
     }
 
-    public void recordLoginDate(int userid){
-        Log log = new Log(userid, new Date());
+    public void recordLog(int userid, boolean launch){
+        Log log = new Log(userid, new Date(), launch);
         logHistory.add(log);
     }
 

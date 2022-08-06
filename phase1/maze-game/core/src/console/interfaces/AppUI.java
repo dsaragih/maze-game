@@ -1,5 +1,6 @@
 package console.interfaces;
 
+import config.ErrorCodes;
 import console.DesktopLauncher;
 import console.entities.User;
 import console.usecases.UserController;
@@ -45,7 +46,9 @@ public class AppUI {
             switch (state) {
                 case -1: {
                     displayTitle("Welcome");
-                    state = getNumInRange("Exit (0) or Login (1) or Signup (2) or Play Demo (3)", 3);
+                    writeln("Choose from the following commands:");
+                    writeln("Exit (0) or Login (1) or Signup (2) or Play Demo (3)");
+                    state = getNumUpTo(3);
                     break;
                 }
                 case 0: {
@@ -83,30 +86,32 @@ public class AppUI {
             displayTitle("Menu");
             writeln("Choose from the following commands:");
             writeln("0) Log Out");
-            writeln("1) Log");
-            writeln("2) AddUser");
+            writeln("1) Play Game");
+            writeln("2) View Activity");
+            writeln("3) AddUser");
             if (user.isAdmin()) {
-                writeln("3) AddAdminUser (Admin only)");
-                writeln("4) DeleteUser (Admin only)");
-                writeln("5) BanUser (Admin only)");
-                writeln("6) UnbanUser (Admin only)");
+                writeln("4) AddAdminUser (Admin only)");
+                writeln("5) DeleteUser (Admin only)");
+                writeln("6) BanUser (Admin only)");
+                writeln("7) UnbanUser (Admin only)");
             }
-            int input = getNumInRange("Please enter a number between ", user.isAdmin() ? 6 : 2);
+            int input = getNumUpTo(user.isAdmin() ? 7 : 3);
 
             switch (input) {
                 case 0: return;
-                case 1: log(); break;
-                case 2: addUser(false); break;
-                case 3: addUser(true); break;
-                case 4: deleteUser(); break;
-                case 5: banUser(); break;
-                case 6: unbanUser();
+                case 1: userController.logLaunch(user.getUserid()); DesktopLauncher.main(new String[]{}); break;
+                case 2: log(); break;
+                case 3: addUser(false); break;
+                case 4: addUser(true); break;
+                case 5: deleteUser(); break;
+                case 6: banUser(); break;
+                case 7: unbanUser();
             }
         }
     }
 
     private void log() {
-        displayTitle("Log");
+        displayTitle("Activity Log");
         String outcome = userController.getLogsOf(user.getUserid());
         writeln(outcome);
     }
@@ -120,8 +125,12 @@ public class AppUI {
 
     private void deleteUser() {
         displayTitle("Permanently delete user");
-        String outcome = userController.deleteUser(enter("username"));
-        writeln(outcome);
+        int outcome = userController.deleteUser(enter("username"));
+        switch (outcome) {
+            case ErrorCodes.SUCCESS: writeln("Successfully deleted user."); break;
+            case ErrorCodes.USER_IS_ADMIN: writeln("Deletion aborted: Admins cannot be deleted."); break;
+            case ErrorCodes.USER_NOT_FOUND: writeln("Deletion aborted: No user with this name was found."); break;
+        }
     }
 
     private void banUser() {
@@ -152,39 +161,27 @@ public class AppUI {
         return true;
     }
 
-
-    private int getNumInRange(String prompt, int max) {
-        String input = getInputFromUser(prompt, s -> isStringANumberInRange(s, 0, max));
-
-        return Integer.parseInt(input);
-    }
-
-    private boolean isStringANumberInRange(String text, int min, int max) {
-        try {
-            int num = Integer.parseInt(text);
-            return min <= num && num <= max;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
-    private String getInputFromUser(String prompt, Predicate<String> predicate, String errorMessage) {
-        while (true) {
-            writeln(prompt);
-            writeln("Input: ");
+    private int getNumUpTo(int max) {
+        while(true) {
+            writeln("Please enter a number between 0 and " + max + ": ");
             String input = in.nextLine();
 
-            if (predicate.test(input)) {
-                return input;
+            try {
+                int num = Integer.parseInt(input);
+                if (num > max) {
+                    writeln("Invalid input -- number too large.");
+                    break;
+                }
+            } catch (NumberFormatException e) {
+                writeln("Invalid input -- not a number.");
+                break;
             }
-
-            writeln(errorMessage + "\n");
+            //return num;
+            return Integer.parseInt(input);
         }
+        return max;
     }
 
-    private String getInputFromUser(String prompt, Predicate<String> predicate) {
-        return getInputFromUser(prompt, predicate, "Invalid input.");
-    }
 
 
     private void writeln(Object obj) {

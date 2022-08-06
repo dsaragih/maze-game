@@ -1,4 +1,5 @@
 package console.usecases;
+import config.ErrorCodes;
 import console.entities.Log;
 import console.entities.User;
 
@@ -26,16 +27,16 @@ public class UserController {
         return "User added!";
     }
 
-    public String deleteUser(String username) {
+    public int deleteUser(String username) {
         User user = manager.getUser(username);
         if (user == null){
-            return "User " + username + " does not exist!";
+            return ErrorCodes.USER_NOT_FOUND;
         }
         if (user.isAdmin()) {
-            return "Admins like " + username + " can't be deleted!";
+            return ErrorCodes.USER_IS_ADMIN;
         }
         manager.delete(username);
-        return "Successfully deleted " + username + "!";
+        return ErrorCodes.SUCCESS;
     }
 
     public String banUser(String username) {
@@ -69,15 +70,22 @@ public class UserController {
             return null;
         }
 
-        manager.recordLoginDate(user.getUserid());
+        manager.recordLog(user.getUserid(), false);
 
         return user;
     }
+    public void logLaunch(int userid){
+        manager.recordLog(userid, true);
+    }
     public String getLogsOf(int userid){
         ArrayList<Log> logs = manager.getLogs();
-        StringBuilder logOutput = new StringBuilder("Your logins in chronological order:");
+        StringBuilder logOutput = new StringBuilder("Your activity in chronological order:");
         for (Log log : logs) {
-            if(log.getUserid() == userid) logOutput.append("\n").append(log.getLoginDate());
+            if(log.getUserid() == userid) {
+                logOutput.append("\n").append(log.getLoginDate());
+                if(log.isLaunch()) logOutput.append(" - Launched Game.");
+                else logOutput.append(" - Logged In.");
+            }
         }
         return logOutput.toString();
     }
