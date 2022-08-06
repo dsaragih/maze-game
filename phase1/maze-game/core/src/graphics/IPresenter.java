@@ -13,21 +13,21 @@ import graphics.room.IRoomDrawer;
 
 public interface IPresenter {
 
-    public void start(Camera camera);
-    public void end();
-    public IDoorDrawer getDoorDrawer();
-    public IRoomDrawer getRoomDrawer();
+    void start(Camera camera);
+    void end();
+    IDoorDrawer getDoorDrawer();
+    IRoomDrawer getRoomDrawer();
 
-    public ILevelDrawer getLevelDrawer();
+    ILevelDrawer getLevelDrawer();
 
-    public IPlayerDrawer getPlayerDrawer();
+    IPlayerDrawer getPlayerDrawer();
 
-    public IEnemyDrawer getEnemyDrawer();
-    public IGunDrawer getGunDrawer();
+    IEnemyDrawer getEnemyDrawer();
+    IGunDrawer getGunDrawer();
 
-    public IMerchantDrawer getMerchantDrawer();
+    IMerchantDrawer getMerchantDrawer();
 
-    public IBulletDrawer getBulletDrawer();
+    IBulletDrawer getBulletDrawer();
 
-    public IBossDrawer getBossDrawer();
+    IBossDrawer getBossDrawer();
 }

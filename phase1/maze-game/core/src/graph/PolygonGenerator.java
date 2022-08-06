@@ -8,10 +8,10 @@ import java.util.ArrayList;
  * @author Jack
  */
 public class PolygonGenerator implements IGraphGenerator{
-    Point center;
-    int n;
-    float radius;
-    float angle;
+    private Point center;
+    private int n;
+    private float radius;
+    private float angle;
 
     /**
      * Create a polygon generator.

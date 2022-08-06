@@ -11,7 +11,7 @@ public  abstract class Item extends CollidableEntity implements IDrawble {
     //An item has a value, a name, and can be picked up or dropped.
 
     private int value;
-    String name;
+    private String name;
     public Item(float x, float y, int value, String name) {
         super(x, y);
         this.value = value;

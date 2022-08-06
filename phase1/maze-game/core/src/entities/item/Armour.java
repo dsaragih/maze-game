@@ -24,7 +24,6 @@ public class Armour extends Item{
         this.armourPoint = Math.min(99, armourPoint);
         //shield take certain amount of damage
         this.shield = shield;
-        this.name = name;
     }
 
     public Armour(float x, float y, int value, float armourPoint, int shield, String name) {

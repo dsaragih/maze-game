@@ -27,7 +27,7 @@ import manager.InputController;
  */
 public class MazeGame extends ApplicationAdapter {
 	private Stage stage;
-	ShapeRenderer shapeRenderer;
+	private ShapeRenderer shapeRenderer;
 	private OrthographicCamera camera;
 
 	private Player player;

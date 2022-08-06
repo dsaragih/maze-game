@@ -4,5 +4,5 @@ import geometry.Point;
 
 public interface IBulletDrawer {
 
-    public void drawBullet(Point pos);
+    void drawBullet(Point pos);
 }
