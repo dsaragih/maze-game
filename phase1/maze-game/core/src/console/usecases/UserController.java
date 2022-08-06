@@ -3,6 +3,7 @@ import config.ErrorCodes;
 import console.entities.Log;
 import console.entities.User;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class UserController {
@@ -89,7 +90,7 @@ public class UserController {
         }
         return logOutput.toString();
     }
-    public boolean saveUserManager() {
-        return logger.logToFile(manager);
+    public void saveUserManager() throws IOException {
+        logger.logToFile(manager);
     }
 }

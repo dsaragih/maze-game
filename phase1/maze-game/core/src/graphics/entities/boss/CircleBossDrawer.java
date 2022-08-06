@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import geometry.Point;
 
 public class CircleBossDrawer implements IBossDrawer{
-    ShapeRenderer renderer;
+    private ShapeRenderer renderer;
     private int radius = 20;
     public CircleBossDrawer(ShapeRenderer renderer){this.renderer = renderer;}
     @Override

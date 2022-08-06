@@ -10,5 +10,5 @@ public interface IGraphGenerator {
      * Generate a planar graph
      * @return planar graph
      */
-    public PlanarGraph generate();
+    PlanarGraph generate();
 }

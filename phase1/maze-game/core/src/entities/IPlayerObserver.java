@@ -12,6 +12,6 @@ public interface IPlayerObserver {
      * Set the target
      * @param target the target of observer.
      */
-    public void setTarget(Point target);
+    void setTarget(Point target);
 
 }

@@ -12,5 +12,5 @@ public interface IRoomContainer {
      * Set a new room
      * @param room a room that will be in container.
      */
-    public void setNewRoom(Room room);
+    void setNewRoom(Room room);
 }
