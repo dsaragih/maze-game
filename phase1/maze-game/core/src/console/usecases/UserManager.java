@@ -15,10 +15,9 @@ public class UserManager implements Serializable {
 
     public UserManager(){
         if(users.isEmpty())
-            addUser("admin", "123", true); //was "TestAdmin" before made "admin"
+            addUser("admin", "123", true); //was "TestAdmin", now "admin"
     }
     public void addUser(String userName, String password, boolean isAdmin) {
-        //int lastId = users.values().stream().mapToInt(User::getUserid).max().orElse(0);
         User newUser = new User(userName, password, isAdmin, lastId);
         users.put(userName, newUser);
         ++lastId;

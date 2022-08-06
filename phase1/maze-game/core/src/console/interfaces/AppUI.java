@@ -1,12 +1,11 @@
 package console.interfaces;
 
-import config.ErrorCodes;
+import config.Msg;
 import console.launcher.DesktopLauncher;
 import console.entities.User;
 import console.usecases.UserController;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.Scanner;
 
 public class AppUI {
@@ -19,9 +18,7 @@ public class AppUI {
         while (true) {
             mainMenu();
             if (user == null) {
-                //Exits to main.
-                //Move the if statement, which serializes the users, to main?
-                //but userController is here and not in main. Does main need to know about it?
+                //Saves UserManager.ser and exits to main, where the program terminates.
                 try {
                     userController.saveUserManager();
                 } catch (IOException e) {
@@ -48,7 +45,7 @@ public class AppUI {
                 case -1: {
                     displayTitle("Welcome");
                     writeln("Choose from the following commands:");
-                    writeln("Exit (0) or Login (1) or Signup (2) or Play Demo (3)");
+                    writeln("Exit (0) or Play Demo (1) or Login (2) or Signup (3)");
                     state = getNumUpTo(3);
                     break;
                 }
@@ -56,26 +53,26 @@ public class AppUI {
                     return;
                 }
                 case 1: {
-                    displayTitle("Login");
-                    user = userController.login(enter("username"), enter("password"));
-                    if (user == null) {
-                        writeln("Username or password incorrect (or you're just banned).");
-                    }
+                    DesktopLauncher.main(new String[]{});
                     state = -1;
                     break;
                 }
                 case 2: {
-                    displayTitle("Signup");
-                    String username = enter("username");
-                    String password = enter("password");
-                    String outcome = userController.addUser(username, password, false);
-                    writeln(outcome);
-                    user = userController.login(username, password);
+                    displayTitle("Login");
+                    user = userController.login(enter("username"), enter("password"));
+                    if (user == null) {
+                        writeln(Msg.FAILURE_CANNOT_LOG_IN.out());
+                    }
                     state = -1;
                     break;
                 }
                 case 3: {
-                    DesktopLauncher.main(new String[]{});
+                    displayTitle("Signup");
+                    String username = enter("username");
+                    String password = enter("password");
+                    Msg outcome = userController.addUser(username, password, false);
+                    writeln(outcome.out());
+                    user = userController.login(username, password);
                     state = -1;
                 }
             }
@@ -139,36 +136,26 @@ public class AppUI {
     private void addUser(boolean admin) {
         if (admin) displayTitle("Add admin user");
         else displayTitle("Add user");
-        String outcome = userController.addUser(enter("username"), enter("password"), admin);
-        writeln(outcome);
+        Msg outcome = userController.addUser(enter("username"), enter("password"), admin);
+        writeln(outcome.out());
     }
 
     private void deleteUser() {
         displayTitle("Permanently delete user");
-        int outcome = userController.deleteUser(enter("username"));
-        switch (outcome) {
-            case ErrorCodes.SUCCESS:
-                writeln("Successfully deleted user.");
-                break;
-            case ErrorCodes.USER_IS_ADMIN:
-                writeln("Deletion aborted: Admins cannot be deleted.");
-                break;
-            case ErrorCodes.USER_NOT_FOUND:
-                writeln("Deletion aborted: No user with this name was found.");
-                break;
-        }
+        Msg outcome = userController.deleteUser(enter("username"));
+        writeln(outcome.out());
     }
 
     private void banUser() {
         displayTitle("Ban user");
-        String outcome = userController.banUser(enter("username"));
-        writeln(outcome);
+        Msg outcome = userController.banUser(enter("username"));
+        writeln(outcome.out());
     }
 
     private void unbanUser() {
         displayTitle("Unban user");
-        String outcome = userController.unbanUser(enter("username"));
-        writeln(outcome);
+        Msg outcome = userController.unbanUser(enter("username"));
+        writeln(outcome.out());
 
     }
 

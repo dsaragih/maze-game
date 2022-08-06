@@ -1,5 +1,6 @@
 package console.usecases;
-import config.ErrorCodes;
+
+import config.Msg;
 import console.entities.Log;
 import console.entities.User;
 
@@ -15,53 +16,55 @@ public class UserController {
         this.manager = storedManager == null ? new UserManager() : storedManager;
     }
 
-    public String addUser(String username, String password, boolean admin) {
-        //if (username.equalsIgnoreCase("cancel")) { return "Cancelling!"; }
+    public Msg addUser(String username, String password, boolean admin) {
         if (username.equalsIgnoreCase(password)) {
-            return "Need better password, not same as username!";
+            return Msg.FAILURE_WEAK_PASSWORD;
         }
         if (manager.getUser(username) != null){
-            return "User already exists with that name!";
+            return Msg.FAILURE_USERNAME_TAKEN;
         }
         User user = new User(username, password, false, 9000);
         manager.addUser(username, password, admin);
-        return "User added!";
+        return Msg.SUCCESS;
     }
 
-    public int deleteUser(String username) {
+    public Msg deleteUser(String username) {
         User user = manager.getUser(username);
         if (user == null){
-            return ErrorCodes.USER_NOT_FOUND;
+            return Msg.FAILURE_USER_NOT_FOUND;
         }
         if (user.isAdmin()) {
-            return ErrorCodes.USER_IS_ADMIN;
+            return Msg.FAILURE_USER_IS_ADMIN;
         }
         manager.delete(username);
-        return ErrorCodes.SUCCESS;
+        return Msg.SUCCESS;
     }
 
-    public String banUser(String username) {
+    public Msg banUser(String username) {
         User user = manager.getUser(username);
         if (user == null){
-            return "User " + username + " does not exist!";
+            return Msg.FAILURE_USER_NOT_FOUND;
+        }
+        if (user.isAdmin()) {
+            return Msg.FAILURE_USER_IS_ADMIN;
         }
         if(user.isBanned()){
-            return "User " + username + " is already banned!";
+            return Msg.NO_CHANGE;
         }
         user.setBanned(true);
-        return "Successfully banned " + username + "!";
+        return Msg.SUCCESS;
     }
 
-    public String unbanUser(String username) {
+    public Msg unbanUser(String username) {
         User user = manager.getUser(username);
         if (user == null){
-            return "User " + username + " does not exist!";
+            return Msg.FAILURE_USER_NOT_FOUND;
         }
         if(!user.isBanned()){
-            return "User " + username + " is unbanned anyway!";
+            return Msg.NO_CHANGE;
         }
         user.setBanned(false);
-        return "Successfully unbanned " + username + "!";
+        return Msg.SUCCESS;
     }
 
 
