@@ -1,5 +1,6 @@
 package entities;
 
+import config.GameConstants;
 import entities.item.Weapon;
 import manager.IEntityManager;
 import geometry.Point;
@@ -8,15 +9,10 @@ import graphics.gun.IGunDrawer;
 
 public class Gun extends Weapon {
 
-    private final IGunDrawer gunDrawer;
-    private final IBulletDrawer bulletDrawer;
+    private IGunDrawer gunDrawer;
+    private IBulletDrawer bulletDrawer;
     private IEntityManager entityManager;
-    private final long cooldown = 200;
     private long lastAttack = 0;
-
-    private int damage = 15;
-
-    private final int value = 30;
 
     private String name = "Default Gun";
 
@@ -24,7 +20,6 @@ public class Gun extends Weapon {
         super(pos);
         this.gunDrawer = gunDrawer;
         this.bulletDrawer = bulletDrawer;
-        damage = 15;
     }
 
     public void setEntityManager(IEntityManager entityManager){
@@ -33,7 +28,7 @@ public class Gun extends Weapon {
 
     public void fire(Point direction){
         long time = System.currentTimeMillis();
-        if (time >= lastAttack + cooldown) {
+        if (time >= lastAttack + GameConstants.GUN_COOLDOWN) {
             Bullet bullet = new Bullet(pos, direction.distanceVector(pos).normalized(), bulletDrawer);
             entityManager.addCollidableEntity(bullet);
             lastAttack = time;

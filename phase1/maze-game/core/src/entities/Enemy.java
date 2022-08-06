@@ -1,5 +1,6 @@
 package entities;
 import com.badlogic.gdx.Gdx;
+import config.GameConstants;
 import entities.item.Item;
 import geometry.Circle;
 import geometry.Point;
@@ -14,16 +15,11 @@ import com.badlogic.gdx.math.MathUtils;
 public class Enemy extends CollidableEntity implements IPlayerObserver {
 
     private Point velocity = new Point(0,0);
-    private final float ACCELERATION = 10;
-    private final float FRICTION = 0.02f;
-    private final float MAX_SPEED = 20;
     private IEnemyDrawer enemyDrawer;
     private int health = 100;
-    private int damage = 1;
-
     private Point target = null;
 
-    private final int value = MathUtils.random(1,3);
+    private int value = MathUtils.random(1,3);
 
     /**
      * Create an enemy
@@ -51,7 +47,7 @@ public class Enemy extends CollidableEntity implements IPlayerObserver {
      * @return the circle representation of the collision box.
      */
     public Circle getCollisionBox(){
-        return new Circle(pos, 15);
+        return new Circle(pos, GameConstants.ENEMY_RADIUS);
     }
 
     /**
@@ -136,11 +132,11 @@ public class Enemy extends CollidableEntity implements IPlayerObserver {
         }
 
         Point dirVector = target.distanceVector(pos).normalized();
-        dirVector.multiply(ACCELERATION * Gdx.graphics.getDeltaTime());
-        if(pos.x > 960 && velocity.x > 0){
+        dirVector.multiply(GameConstants.ENEMY_ACCELERATION * Gdx.graphics.getDeltaTime());
+        if(pos.x > GameConstants.SCREEN_WIDTH && velocity.x > 0){
             velocity.x = 0;
         }
-        if(pos.y > 540 && velocity.y > 0){
+        if(pos.y > GameConstants.SCREEN_HEIGHT && velocity.y > 0){
             velocity.y = 0;
         }
         if(pos.x < 0 && velocity.x < 0){
@@ -150,13 +146,13 @@ public class Enemy extends CollidableEntity implements IPlayerObserver {
             velocity.y = 0;
         }
         velocity.add(dirVector);
-        velocity.multiply(1 - FRICTION);
+        velocity.multiply(1 - GameConstants.ENEMY_FRICTION);
         if(velocity.isZero()){
             return;
         }
         Point newDir = velocity.normalized();
-        if(newDir.length() > MAX_SPEED){
-            newDir.multiply(MAX_SPEED);
+        if(newDir.length() > GameConstants.ENEMY_MAX_SPEED){
+            newDir.multiply(GameConstants.ENEMY_MAX_SPEED);
             velocity = newDir;
         }
 
@@ -169,7 +165,7 @@ public class Enemy extends CollidableEntity implements IPlayerObserver {
      * @return the damage
      */
     public int getDamage(){
-        return damage;
+        return GameConstants.ENEMY_DAMAGE;
     }
 
     /**

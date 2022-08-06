@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class TextFileLogger {
-    private final String filePath;
+    private String filePath;
     public TextFileLogger(String filePath){
         this.filePath = filePath;
     }

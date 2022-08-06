@@ -1,5 +1,6 @@
 package entities;
 
+import config.GameConstants;
 import entities.item.Item;
 import geometry.Circle;
 import geometry.Point;
@@ -13,10 +14,8 @@ public class Door extends CollidableEntity {
 
     public Room room;
     public Door door;
-
-    private boolean isFinished = false;
-    private final IDoorDrawer doorDrawer;
-    private final IRoomContainer roomContainer;
+    private IDoorDrawer doorDrawer;
+    private IRoomContainer roomContainer;
 
     /**
      * Create a door
@@ -58,7 +57,7 @@ public class Door extends CollidableEntity {
      * @return Circle the circle representation of the collision box.
      */
     public Circle getCollisionBox(){
-        return new Circle(pos, 10);
+        return new Circle(pos, GameConstants.DOOR_RADIUS);
     }
 
     /**

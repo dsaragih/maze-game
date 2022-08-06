@@ -1,5 +1,6 @@
 package entities;
 
+import config.GameConstants;
 import entities.item.Weapon;
 import geometry.Circle;
 import geometry.Point;
@@ -10,14 +11,10 @@ import graphics.bullet.IBulletDrawer;
  */
 public class Bullet extends Weapon {
 
-    private int BULLET_DAMAGE = 15;
-    private final Point velocity;
-    private final float speed = 30;
+    private Point velocity;
     private boolean isHit = false;
 
-    private final int value = 1;
-
-    private final IBulletDrawer bulletDrawer;
+    private IBulletDrawer bulletDrawer;
 
     /** Creates a bullet with the specified name.
      * @param pos Position of the bullet.
@@ -26,7 +23,7 @@ public class Bullet extends Weapon {
      */
     public Bullet(Point pos, Point direction, IBulletDrawer bulletDrawer) {
         super(pos);
-        direction.multiply(speed);
+        direction.multiply(GameConstants.BULLET_SPEED);
         this.velocity = direction;
         this.bulletDrawer = bulletDrawer;
     }
@@ -43,7 +40,7 @@ public class Bullet extends Weapon {
      */
     @Override
     public Circle getCollisionBox() {
-        return new Circle(this.pos, 4);
+        return new Circle(this.pos, GameConstants.BULLET_RADIUS);
     }
 
     /** Collide with the player
@@ -94,7 +91,7 @@ public class Bullet extends Weapon {
      * @return The damage of the bullet
      */
     public int getDamage() {
-        return BULLET_DAMAGE;
+        return GameConstants.BULLET_DAMAGE;
     }
 
     /**

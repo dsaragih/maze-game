@@ -23,11 +23,11 @@ import java.util.*;
  */
 public class Level implements IRoomContainer {
     private Room currentRoom;
-    private final ILevelDrawer levelDrawer;
-    private final Random rnd = new Random();
-    private final int screenWidth;
-    private final int screenHeight;
-    private final Player player;
+    private ILevelDrawer levelDrawer;
+    private Random rnd = new Random();
+    private int screenWidth;
+    private int screenHeight;
+    private Player player;
 
     /**
      * Create a alevel

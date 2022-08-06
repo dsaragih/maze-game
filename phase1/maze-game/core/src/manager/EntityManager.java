@@ -16,12 +16,12 @@ import java.lang.*;
  * @author Ethan
  */
 public class EntityManager implements IEntityManager{
-    private final ArrayList<Entity> Entities;
-    private final ArrayList<CollidableEntity> collidableEntities;
-    private final ArrayList<Entity> toBeAddedEntities;
-    private final ArrayList<Entity> toBeRemovedEntities;
-    private final ArrayList<CollidableEntity> toBeAddedCollidable;
-    private final ArrayList<CollidableEntity> toBeRemovedCollidable;
+    private ArrayList<Entity> Entities;
+    private ArrayList<CollidableEntity> collidableEntities;
+    private ArrayList<Entity> toBeAddedEntities;
+    private ArrayList<Entity> toBeRemovedEntities;
+    private ArrayList<CollidableEntity> toBeAddedCollidable;
+    private ArrayList<CollidableEntity> toBeRemovedCollidable;
 
     private int gold = 0;
 

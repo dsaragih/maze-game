@@ -23,7 +23,7 @@ import graphics.room.IRoomDrawer;
 import graphics.room.SandRoomDrawer;
 
 public class ShapePresenter implements IPresenter {
-    private final ShapeRenderer shapeRenderer;
+    private ShapeRenderer shapeRenderer;
     private Stage stage;
     private int screenWidth;
     private int screenHeight;

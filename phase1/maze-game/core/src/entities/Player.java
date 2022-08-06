@@ -1,6 +1,7 @@
 package entities;
 
 import com.badlogic.gdx.Gdx;
+import config.GameConstants;
 import entities.item.Armour;
 import entities.item.Item;
 import manager.IEntityManager;
@@ -20,10 +21,9 @@ import java.util.Collections;
  * @author Daniel.
  */
 public class Player extends CollidableEntity {
-    private final float speed = 200;
     private int health = 100;
-    private final IPlayerDrawer playerDrawer;
-    private final Collection<IPlayerObserver> observers = new ArrayList<>();
+    private IPlayerDrawer playerDrawer;
+    private Collection<IPlayerObserver> observers = new ArrayList<>();
     private Point gunDirection = new Point(0,0);
     public Gun gun;
 
@@ -73,12 +73,12 @@ public class Player extends CollidableEntity {
      */
     public void move(Point direction){
 
-        direction.multiply(speed * Gdx.graphics.getDeltaTime());
+        direction.multiply(GameConstants.PLAYER_SPEED * Gdx.graphics.getDeltaTime());
         //Don't allow the player to get out of the screen
-        if(pos.x > 960 && direction.x > 0){
+        if(pos.x > GameConstants.SCREEN_WIDTH && direction.x > 0){
             direction.x = 0;
         }
-        if(pos.y > 540 && direction.y > 0){
+        if(pos.y > GameConstants.SCREEN_HEIGHT && direction.y > 0){
             direction.y = 0;
         }
         if(pos.x < 0 && direction.x < 0){
@@ -152,7 +152,7 @@ public class Player extends CollidableEntity {
      * @return the circle representation of the collision box.
      */
     public Circle getCollisionBox(){
-        return new Circle(pos, 10);
+        return new Circle(pos, GameConstants.PLAYER_RADIUS);
     }
 
     /**

@@ -7,8 +7,8 @@ import java.util.Map;
 import java.util.HashMap;
 public class UserManager implements Serializable {
     private int lastId = 0;
-    private final Map<String, User> users = new HashMap<>();
-    private final ArrayList<Log> logHistory = new ArrayList<>();
+    private Map<String, User> users = new HashMap<>();
+    private ArrayList<Log> logHistory = new ArrayList<>();
 
     public UserManager(){
         if(users.isEmpty())

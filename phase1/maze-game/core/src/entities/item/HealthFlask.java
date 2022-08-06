@@ -7,7 +7,6 @@ import entities.Merchant;
 import geometry.Circle;
 
 public class HealthFlask extends Item{
-    public int healthRestored = 30;
     public HealthFlask(float x, float y){
         super(x,y,8, "Health Flask");
     }

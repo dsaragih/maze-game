@@ -2,11 +2,11 @@ package graphics.gun;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import config.GameConstants;
 import geometry.Point;
 
 public class CircleGunDrawer implements IGunDrawer{
 
-    private int radius = 2;
     private ShapeRenderer shapeRenderer;
     public CircleGunDrawer(ShapeRenderer shapeRenderer){
         this.shapeRenderer = shapeRenderer;
@@ -14,6 +14,6 @@ public class CircleGunDrawer implements IGunDrawer{
     @Override
     public void drawGun(Point pos) {
         shapeRenderer.setColor(Color.BLACK);
-        shapeRenderer.circle(pos.x, pos.y, radius);
+        shapeRenderer.circle(pos.x, pos.y, GameConstants.GUN_RADIUS);
     }
 }

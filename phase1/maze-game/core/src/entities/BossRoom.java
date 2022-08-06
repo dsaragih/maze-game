@@ -16,7 +16,7 @@ public class BossRoom extends Room {
     private int screenWidth;
     private int screenHeight;
 
-    private final IEntityManager entityManager = new EntityManager();
+    private IEntityManager entityManager = new EntityManager();
 
     public BossRoom(IPresenter presenter, Player player, int screenWidth, int screenHeight) {
         super(presenter, player, screenWidth, screenHeight, 0);

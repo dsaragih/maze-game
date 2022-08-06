@@ -16,8 +16,8 @@ import geometry.Point;
  * @author Daniel
  */
 public class InputController {
-    private final Level level;
-    private final Camera camera;
+    private Level level;
+    private Camera camera;
 
     /**
      * Create an input controller

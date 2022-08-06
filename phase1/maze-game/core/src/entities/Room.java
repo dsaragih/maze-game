@@ -18,8 +18,8 @@ import java.util.ArrayList;
  * Represents a room
  */
 public class Room implements IDrawble {
-    private final IPresenter presenter;
-    private final IEntityManager entityManager = new EntityManager();
+    private IPresenter presenter;
+    private IEntityManager entityManager = new EntityManager();
 
 
 

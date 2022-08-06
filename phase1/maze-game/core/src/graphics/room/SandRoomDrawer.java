@@ -6,8 +6,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public class SandRoomDrawer implements IRoomDrawer {
-    private final int screenWidth;
-    private final int screenHeight;
+    private int screenWidth;
+    private int screenHeight;
     private Stage stage;
     public SandRoomDrawer(Stage stage, int screenWidth, int screenHeight){
         this.stage = stage;

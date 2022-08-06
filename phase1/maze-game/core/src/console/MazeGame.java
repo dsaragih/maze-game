@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import config.GameConstants;
 import entities.Level;
 import entities.Player;
 import geometry.Point;
@@ -28,8 +29,6 @@ public class MazeGame extends ApplicationAdapter {
 	private Stage stage;
 	ShapeRenderer shapeRenderer;
 	private OrthographicCamera camera;
-	private final int SCREEN_WIDTH = 960;
-	private final int SCREEN_HEIGHT = 540;
 
 	private Player player;
 	private Level level;
@@ -51,11 +50,11 @@ public class MazeGame extends ApplicationAdapter {
 
 		shapeRenderer = new ShapeRenderer();
 		camera = new OrthographicCamera();
-		camera.setToOrtho(false, SCREEN_WIDTH, SCREEN_HEIGHT);
-		presenter = new ShapePresenter(shapeRenderer, stage, SCREEN_WIDTH, SCREEN_HEIGHT);
+		camera.setToOrtho(false, GameConstants.SCREEN_WIDTH, GameConstants.SCREEN_HEIGHT);
+		presenter = new ShapePresenter(shapeRenderer, stage, GameConstants.SCREEN_WIDTH, GameConstants.SCREEN_HEIGHT);
 
-		player = new Player(new Point(SCREEN_WIDTH/2f, SCREEN_HEIGHT/2f), presenter.getPlayerDrawer());
-		level = new Level(presenter, player, SCREEN_WIDTH, SCREEN_HEIGHT);
+		player = new Player(new Point(GameConstants.SCREEN_WIDTH/2f, GameConstants.SCREEN_HEIGHT/2f), presenter.getPlayerDrawer());
+		level = new Level(presenter, player, GameConstants.SCREEN_WIDTH, GameConstants.SCREEN_HEIGHT);
 
 		controller = new InputController(camera, level);
 	}
@@ -115,7 +114,7 @@ public class MazeGame extends ApplicationAdapter {
 		if(level.isOver()){
 			Label label1 = new Label("YOU DIED", label1Style);
 			label1.setSize(Gdx.graphics.getWidth(), 20);
-			label1.setPosition(0, SCREEN_HEIGHT / 2f);
+			label1.setPosition(0, GameConstants.SCREEN_HEIGHT / 2f);
 			label1.setAlignment(Align.center);
 			stage.addActor(label1);
 		}else{

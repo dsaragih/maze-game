@@ -2,7 +2,7 @@ package console;
 import java.util.ArrayList;
 
 public class UserController {
-    private final TextFileLogger logger = new TextFileLogger("userManager.ser");
+    private TextFileLogger logger = new TextFileLogger("userManager.ser");
     public UserManager manager;
 
     public UserController() {

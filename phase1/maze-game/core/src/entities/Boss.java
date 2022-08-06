@@ -11,7 +11,7 @@ public class Boss extends CollidableEntity implements IPlayerObserver{
     public Gun gun;
     private Point target = null;
 
-    private final IBossDrawer bossDrawer;
+    private IBossDrawer bossDrawer;
     private int radius = 10;
     public Boss(int x, int y, IBossDrawer drawer){
         super(x, y, true);

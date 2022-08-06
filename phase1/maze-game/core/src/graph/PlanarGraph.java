@@ -11,7 +11,7 @@ import java.util.Set;
  */
 public class PlanarGraph implements Iterable<PlanarNode>{
 
-    private final Set<PlanarNode> nodes = new HashSet<>();
+    private Set<PlanarNode> nodes = new HashSet<>();
 
     /**
      * Get the set of nodes

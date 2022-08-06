@@ -7,15 +7,15 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
+import config.GameConstants;
 import entities.item.Item;
 import geometry.Point;
 
 import java.util.ArrayList;
 
 public class CircleMerchantDrawer implements IMerchantDrawer{
-    private final int radius = 15;
-    private final ShapeRenderer shapeRenderer;
-    private final Stage stage;
+    private ShapeRenderer shapeRenderer;
+    private Stage stage;
     private Label.LabelStyle labelStyle;
     public CircleMerchantDrawer(ShapeRenderer shapeRenderer, Stage stage){
         this.stage = stage;
@@ -28,7 +28,7 @@ public class CircleMerchantDrawer implements IMerchantDrawer{
     @Override
     public void drawMerchant(Point pos) {
         shapeRenderer.setColor(Color.BROWN);
-        shapeRenderer.circle(pos.x,pos.y, radius);
+        shapeRenderer.circle(pos.x,pos.y, GameConstants.MERCHANT_RADIUS);
 
 
         Label merchantLabel = new Label("Merchant", labelStyle);
