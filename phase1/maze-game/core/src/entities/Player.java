@@ -22,6 +22,9 @@ import java.util.Collections;
  */
 public class Player extends CollidableEntity {
     private int health = 100;
+    private float speed = 200;
+    private float stamina = 100;
+    private int sprintDelay = 10;
     private IPlayerDrawer playerDrawer;
     private Collection<IPlayerObserver> observers = new ArrayList<>();
     private Point gunDirection = new Point(0,0);
@@ -73,7 +76,7 @@ public class Player extends CollidableEntity {
      */
     public void move(Point direction){
 
-        direction.multiply(GameConstants.PLAYER_SPEED * Gdx.graphics.getDeltaTime());
+        direction.multiply(speed * Gdx.graphics.getDeltaTime());
         //Don't allow the player to get out of the screen
         if(pos.x > GameConstants.SCREEN_WIDTH && direction.x > 0){
             direction.x = 0;
@@ -263,6 +266,30 @@ public class Player extends CollidableEntity {
             health += 30;
             health = Math.min(100, health);
             inventory.removeItem(inventory.getHealthFlask());
+        }
+    }
+
+    public void regenStamina(){
+        stamina += 10;
+        if (sprintDelay >= 5){
+            sprintDelay -= 5;
+        }
+    }
+
+    public void sprint(){
+
+        if (sprintDelay == 0) {
+            if (speed == 200) {
+                speed += 50;
+                stamina -= 5;
+            }
+            if (speed == 250 && stamina > 0){
+                stamina -= 5;
+            }
+            if (stamina == 0) {
+                speed -= 50;
+                sprintDelay += 10;
+            }
         }
     }
 }
