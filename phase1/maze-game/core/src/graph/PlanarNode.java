@@ -19,7 +19,7 @@ public class PlanarNode extends Point {
      * @param x x-coordinate of node
      * @param y y-coordinate of node
      */
-    public PlanarNode(double x, double y){
+    public PlanarNode(float x, float y){
         super(x,y);
         neighbors = new HashSet<PlanarNode>();
     }

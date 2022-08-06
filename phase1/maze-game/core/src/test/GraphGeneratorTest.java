@@ -1,4 +1,3 @@
-import junit.*;
 import graph.PlanarGraph;
 import graph.PlanarNode;
 import geometry.Point;
@@ -6,7 +5,7 @@ import graph.PolygonGenerator;
 import org.junit.*;
 
 import static org.junit.Assert.*;
-
+import org.junit.Test;
 public class GraphGeneratorTest {
 
     @Test(timeout = 50)
@@ -36,14 +35,14 @@ public class GraphGeneratorTest {
         assert n1.getNeighboors().contains(n2);
         assert n2.getNeighboors().contains(n1);
     }
-    public void polygonGraphGeneratorTest(){
-        PolygonGenerator p = new PolygonGenerator(new Point(0,0), 4,1.0, 1.0);
-        PlanarGraph g = p.generate();
-        Boolean expected = true;
-        Boolean actual;
-        for (PlanarNode i: g.getNodes()) {
-
-        }
-    }
+//    public void polygonGraphGeneratorTest(){
+//        PolygonGenerator p = new PolygonGenerator(new Point(0,0), 4,1.0, 1.0);
+//        PlanarGraph g = p.generate();
+//        Boolean expected = true;
+//        Boolean actual;
+//        for (PlanarNode i: g.getNodes()) {
+//
+//        }
+//    }
 
 }

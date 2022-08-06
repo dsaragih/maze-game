@@ -1,5 +1,5 @@
 import console.usecases.UserController;
-import org.junit.*;
+import org.junit.Test;
 
 import static org.junit.Assert.*;
 
@@ -34,7 +34,7 @@ public class UserManagerTests {
     public void testSuspendUser(){
         // For some reason this test takes longer than 50ms
         userController.addUser("Bob the Banned", "BobPass", false);
-        String response = userController.banUser("Bob the Banned");
+        String response = String.valueOf(userController.banUser("Bob the Banned"));
         assertEquals("Successfully banned Bob the Banned!", response);
     }
 }

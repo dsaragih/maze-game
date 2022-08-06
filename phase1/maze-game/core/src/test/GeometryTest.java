@@ -1,4 +1,4 @@
-import junit.*;
+
 import geometry.*;
 import org.junit.*;
 
