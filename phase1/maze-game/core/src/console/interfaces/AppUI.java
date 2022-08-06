@@ -1,7 +1,8 @@
-package console;
+package console.interfaces;
 
-import console.User;
-import console.UserController;
+import console.DesktopLauncher;
+import console.entities.User;
+import console.usecases.UserController;
 
 import java.io.IOException;
 import java.text.ParseException;

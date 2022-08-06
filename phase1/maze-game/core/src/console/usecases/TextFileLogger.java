@@ -1,4 +1,4 @@
-package console;
+package console.usecases;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;

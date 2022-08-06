@@ -2,6 +2,7 @@ package console;
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
+import config.GameConstants;
 
 // Please note that on macOS your application needs to be started with the -XstartOnFirstThread JVM argument
 
@@ -13,9 +14,9 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setTitle("maze-game");
-		config.setWindowedMode(960, 540);
+		config.setWindowedMode(GameConstants.SCREEN_WIDTH, GameConstants.SCREEN_HEIGHT);
 		config.useVsync(true);
-		config.setForegroundFPS(60);
+		config.setForegroundFPS(GameConstants.FOREGROUND_FPS);
 		new Lwjgl3Application(new MazeGame(), config);
 	}
 }

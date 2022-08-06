@@ -1,6 +1,6 @@
 package console;
 
-import console.AppUI;
+import console.interfaces.AppUI;
 
 import java.io.IOException;
 import java.text.ParseException;

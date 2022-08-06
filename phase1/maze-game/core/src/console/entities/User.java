@@ -1,4 +1,4 @@
-package console;
+package console.entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;

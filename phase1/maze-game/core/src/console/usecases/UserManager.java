@@ -1,4 +1,7 @@
-package console;
+package console.usecases;
+
+import console.entities.Log;
+import console.entities.User;
 
 import java.io.Serializable;
 import java.util.ArrayList;
