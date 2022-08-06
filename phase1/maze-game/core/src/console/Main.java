@@ -8,11 +8,7 @@ import java.text.ParseException;
 public class Main {
     public static void main(String[]args){
         AppUI appUI = new AppUI();
-        try {
-            appUI.run();
-        } catch (ParseException | IOException e) {
-            System.out.println("Exception caught:, " + e.getMessage());
-        }
+        appUI.run();
     }
 }
 

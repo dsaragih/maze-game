@@ -10,18 +10,12 @@ public class TextFileLogger {
         this.filePath = filePath;
     }
 
-    public boolean logToFile(Serializable obj) {
-        try{
+    public void logToFile(Serializable obj) throws IOException {
             FileOutputStream fileOut  = new FileOutputStream(filePath);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(obj);
             out.close();
             fileOut.close();
-            return true;
-        } catch (IOException e) {
-            return false;
-        }
-
     }
 
     public Object readFromFile() {

@@ -16,15 +16,17 @@ public class AppUI {
     private UserController userController = new UserController();
     private Scanner in = new Scanner(System.in);
 
-    public void run() throws ParseException, IOException {
+    public void run() {
         while (true) {
             mainMenu();
             if (user == null) {
                 //Exits to main.
                 //Move the if statement, which serializes the users, to main?
                 //but userController is here and not in main. Does main need to know about it?
-                if (!userController.saveUserManager()) {
-                    System.out.println("Error saving");//writeln
+                try {
+                    userController.saveUserManager();
+                } catch (IOException e) {
+                    writeln("Error saving: " + e.getMessage());
                 }
                 return;
             }
@@ -101,8 +103,7 @@ public class AppUI {
                 case 0:
                     return;
                 case 1:
-                    userController.logLaunch(user.getUserid());
-                    DesktopLauncher.main(new String[]{});
+                    playGame();
                     break;
                 case 2:
                     log();
@@ -123,6 +124,11 @@ public class AppUI {
                     unbanUser();
             }
         }
+    }
+
+    private void playGame() {
+        userController.logLaunch(user.getUserid());
+        DesktopLauncher.main(new String[]{});
     }
 
     private void log() {
