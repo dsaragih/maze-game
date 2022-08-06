@@ -6,14 +6,14 @@ package geometry;
  * @author Daniel
  */
 public class Point {
-    public float x,y;
+    public double x,y;
 
     /**
      * Create a point
      * @param x the x-coordinate of point
      * @param y the y-coordinate of point
      */
-    public Point(float x, float y) {
+    public Point(double x, double y) {
         this.x = x;
         this.y = y;
     }
@@ -31,7 +31,7 @@ public class Point {
      * Stretch/Compress the point
      * @param scalar the factor of stretch/compression
      */
-    public void multiply(float scalar){
+    public void multiply(double scalar){
         x *= scalar;
         y *= scalar;
     }
@@ -40,7 +40,7 @@ public class Point {
      * Get the square of magnitude
      * @return the square of magnitude
      */
-    public float lengthSquared() {
+    public double lengthSquared() {
         return x * x + y * y;
     }
 
@@ -48,8 +48,8 @@ public class Point {
      * Get the magnitude
      * @return the magnitude.
      */
-    public float length(){
-        return (float) Math.sqrt(lengthSquared());
+    public double length(){
+        return (double) Math.sqrt(lengthSquared());
     }
 
     /**
@@ -66,7 +66,7 @@ public class Point {
      * @return the normalized point
      */
     public Point normalized(){
-        float length = length();
+        double length = length();
         if(length == 0){
             throw new IllegalArgumentException("Cannot normalize the 0 vector");
         }
