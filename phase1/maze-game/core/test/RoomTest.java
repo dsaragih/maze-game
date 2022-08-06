@@ -6,7 +6,7 @@ import graphics.entities.player.IPlayerDrawer;
 
 //import junit.*;
 //public class RoomTest {
-//    public static void console.Main(){
+//    public static void console.launcher.Main(){
 //        ExampleArmour object = new ExampleArmour(1,1);
 //        Point pos = new Point(1,1);
 //        CirclePlayerDrawer draw = new CirclePlayerDrawer();
