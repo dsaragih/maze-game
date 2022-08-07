@@ -2,6 +2,7 @@ import entities.characters.Player;
 import entities.item.ExampleArmour;
 import geometry.Point;
 import graphics.entities.player.CirclePlayerDrawer;
+import graphics.healthbar.HealthBarDrawer;
 import manager.EntityManager;
 import manager.InventoryManager;
 import org.junit.Test;
@@ -14,8 +15,10 @@ public class GraphicTest {
     public void EntityManagerAddEntityTest(){
         ExampleArmour armour = new ExampleArmour(1,1);
         Point pos = new Point(1,1);
-        CirclePlayerDrawer draw = new CirclePlayerDrawer(new ShapeRenderer());
-        Player player = new Player(pos, draw);
+        ShapeRenderer renderer = new ShapeRenderer();
+        CirclePlayerDrawer draw = new CirclePlayerDrawer(renderer);
+        HealthBarDrawer draw2 = new HealthBarDrawer(renderer);
+        Player player = new Player(pos, draw, draw2);
         EntityManager entityManager = new EntityManager();
         entityManager.addCollidableEntity(armour);
         entityManager.addCollidableEntity(player);

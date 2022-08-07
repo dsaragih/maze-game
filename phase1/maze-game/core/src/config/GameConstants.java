@@ -9,6 +9,7 @@ public class GameConstants {
     public static int SCREEN_HEIGHT = 540;
     public static int FOREGROUND_FPS = 60;
     public static int PLAYER_RADIUS = 10;
+    public static int PLAYER_SPEED = 200;
     public static int DOOR_RADIUS = 10;
     public static int ENEMY_RADIUS = 15;
     public static float ENEMY_ACCELERATION = 10;

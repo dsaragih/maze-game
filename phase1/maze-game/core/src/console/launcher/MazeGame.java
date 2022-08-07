@@ -52,7 +52,7 @@ public class MazeGame extends ApplicationAdapter {
 		camera.setToOrtho(false, GameConstants.SCREEN_WIDTH, GameConstants.SCREEN_HEIGHT);
 		presenter = new ShapePresenter(shapeRenderer, stage, GameConstants.SCREEN_WIDTH, GameConstants.SCREEN_HEIGHT);
 
-		player = new Player(new Point(GameConstants.SCREEN_WIDTH/2f, GameConstants.SCREEN_HEIGHT/2f), presenter.getPlayerDrawer());
+		player = new Player(new Point(GameConstants.SCREEN_WIDTH/2f, GameConstants.SCREEN_HEIGHT/2f), presenter.getPlayerDrawer(), presenter.getHealthBarDrawer());
 		level = new Level(presenter, player, GameConstants.SCREEN_WIDTH, GameConstants.SCREEN_HEIGHT);
 
 		controller = new InputController(camera, level);
@@ -116,7 +116,7 @@ public class MazeGame extends ApplicationAdapter {
 			label1.setAlignment(Align.center);
 			stage.addActor(label1);
 		}else{
-			Label label2 = new Label("Health: " + player.getHealth(), label1Style);
+			Label label2 = new Label("Health: ", label1Style);
 			label2.setPosition(10, 20);
 			stage.addActor(label2);
 

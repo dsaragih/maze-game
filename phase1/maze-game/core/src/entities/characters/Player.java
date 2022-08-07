@@ -6,6 +6,8 @@ import entities.abstractions.CollidableEntity;
 import entities.abstractions.ICollidable;
 import entities.abstractions.IPlayerObserver;
 import entities.item.*;
+import graphics.healthbar.HealthBarDrawer;
+import graphics.healthbar.IHealthBarDrawer;
 import manager.IEntityManager;
 import geometry.Circle;
 import geometry.Point;
@@ -24,13 +26,11 @@ import java.util.Collections;
  */
 public class Player extends CollidableEntity {
     private int health = 100;
-    private float speed = 200;
-    private float stamina = 100;
-    private int sprintDelay = 10;
     private IPlayerDrawer playerDrawer;
     private Collection<IPlayerObserver> observers = new ArrayList<>();
     private Point gunDirection = new Point(0,0);
     public Gun gun;
+    private IHealthBarDrawer healthBarDrawer;
 
     private Armour armour;
     private float armourPoint = 0.0F;
@@ -49,9 +49,10 @@ public class Player extends CollidableEntity {
      * @param pos The position of player
      * @param playerDrawer The drawer of player
      */
-    public Player(Point pos, IPlayerDrawer playerDrawer){
+    public Player(Point pos, IPlayerDrawer playerDrawer, IHealthBarDrawer healthBarDrawer){
         super(pos);
         this.playerDrawer = playerDrawer;
+        this.healthBarDrawer = healthBarDrawer;
         inventory = new InventoryManager(this, itemOwned);
     }
 
@@ -77,7 +78,7 @@ public class Player extends CollidableEntity {
      */
     public void move(Point direction){
         //move in the given direction
-        direction.multiply(speed * Gdx.graphics.getDeltaTime());
+        direction.multiply(GameConstants.PLAYER_SPEED * Gdx.graphics.getDeltaTime());
         pos.add(direction);
 
         //keep player on the screen
@@ -139,6 +140,7 @@ public class Player extends CollidableEntity {
      */
     public void draw(){
         playerDrawer.drawPlayer(pos, gunDirection);
+        healthBarDrawer.drawHealthBar(this);
         gun.draw();
     }
 
@@ -271,26 +273,4 @@ public class Player extends CollidableEntity {
         }
     }
 
-    public void regenStamina(){
-        stamina += 10;
-        if (sprintDelay >= 5){
-            sprintDelay -= 5;
-        }
-    }
-
-    public void sprint(){
-        if (sprintDelay == 0) {
-            if (speed == 200) {
-                speed += 50;
-                stamina -= 5;
-            }
-            if (speed == 250 && stamina > 0){
-                stamina -= 5;
-            }
-            if (stamina == 0) {
-                speed -= 50;
-                sprintDelay += 10;
-            }
-        }
-    }
 }

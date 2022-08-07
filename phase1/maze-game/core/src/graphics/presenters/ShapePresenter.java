@@ -15,6 +15,8 @@ import graphics.entities.enemy.CircleEnemyDrawer;
 import graphics.entities.enemy.IEnemyDrawer;
 import graphics.gun.CircleGunDrawer;
 import graphics.gun.IGunDrawer;
+import graphics.healthbar.HealthBarDrawer;
+import graphics.healthbar.IHealthBarDrawer;
 import graphics.level.ILevelDrawer;
 import graphics.level.LevelDrawer;
 import graphics.entities.player.CirclePlayerDrawer;
@@ -86,5 +88,10 @@ public class ShapePresenter implements IPresenter {
 
     @Override
     public IBossDrawer getBossDrawer(){return new CircleBossDrawer(shapeRenderer);}
+
+    @Override
+    public IHealthBarDrawer getHealthBarDrawer() {
+        return new HealthBarDrawer(shapeRenderer);
     }
+}
 
