@@ -14,6 +14,15 @@ public class InventoryManager {
     public InventoryManager(Player player, ArrayList<Item> items)
     {this.player = player;
     this.items = items;}
+
+    public Player getPlayer(){
+        return this.player;
+    }
+
+    public ArrayList<Item> getItems(){
+        return this.items;
+    }
+
     public void addItem(Item item){items.add(item);}
 
     public void removeItem(Item item){items.remove(item);}

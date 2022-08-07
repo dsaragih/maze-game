@@ -40,6 +40,22 @@ public class EntityManager implements IEntityManager{
     }
 
     /**
+     * Get all entities
+     * @return list of entities
+     */
+    public ArrayList<Entity> getEntities(){
+        return this.Entities;
+    }
+
+    /**
+     * Get all entities
+     * @return list of collidable entities
+     */
+    public ArrayList<CollidableEntity> getCollidableEntities(){
+        return this.collidableEntities;
+    }
+
+    /**
      * Add a non-collidable entity to manager
      * @param ent an entity
      */
