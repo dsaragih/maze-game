@@ -61,6 +61,9 @@ public abstract class Entity implements IDrawble {
         return false;
     }
 
+    /**
+     * This method exists to take advantage of overloading with the type of entity.
+     */
     public void removeSelf(IEntityManager entityManager){
         entityManager.removeEntity(this);
     }

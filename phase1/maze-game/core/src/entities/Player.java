@@ -215,10 +215,10 @@ public class Player extends CollidableEntity {
 
     public void buy(Item item){
         if (!(currMerchant == null)){
-            if (currMerchant.getItemOwned().contains(item) && goldOwned >= item.checkValue())
+            if (currMerchant.getItemOwned().contains(item) && goldOwned >= item.getValue())
             {
                 addItem(item);
-                goldOwned -= item.checkValue();
+                goldOwned -= item.getValue();
                 inventory.addItem(item);
             }
         }
