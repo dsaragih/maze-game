@@ -6,8 +6,7 @@ import graphics.entities.player.IPlayerDrawer;
 import console.launcher.Main;
 import org.junit.*;
 
-public class EntitiesTest {
-
+public class GraphicTest {
 //    @Test(timeout=50)
 //    public void ArmourTest(){
 //        ExampleArmour object = new ExampleArmour(1,1);
@@ -15,7 +14,5 @@ public class EntitiesTest {
 //        CirclePlayerDrawer draw = new CirclePlayerDrawer();
 //        Player player = new Player(pos,);
 //    }
-
-
 
 }
