@@ -15,6 +15,7 @@ import java.util.*;
 
 /**
  * Represents a level
+ *
  * @author Daniel
  * @author Ethan
  */
@@ -28,12 +29,13 @@ public class Level implements IRoomContainer {
 
     /**
      * Create a level
-     * @param presenter the presenter in Clean architecture
-     * @param player a player instance
-     * @param screenWidth the width of screen
+     *
+     * @param presenter    the presenter in Clean architecture
+     * @param player       a player instance
+     * @param screenWidth  the width of screen
      * @param screenHeight the height of screen
      */
-    public Level(IPresenter presenter, Player player, int screenWidth, int screenHeight){
+    public Level(IPresenter presenter, Player player, int screenWidth, int screenHeight) {
         this.player = player;
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
@@ -54,19 +56,19 @@ public class Level implements IRoomContainer {
         gun.setEntityManager(currentRoom.getEntityManager());
     }
 
-    public Collection<Room> getRoomsFromGraph(PlanarGraph levelLayout, IPresenter presenter){
+    public Collection<Room> getRoomsFromGraph(PlanarGraph levelLayout, IPresenter presenter) {
         Map<Set<PlanarNode>, Boolean> edges = getEdgeMap(levelLayout);
         Map<PlanarNode, Room> nodeToRoom = new HashMap<>();
-        for(PlanarNode node: levelLayout){
+        for (PlanarNode node : levelLayout) {
             nodeToRoom.put(node, new Room(presenter, player, screenWidth, screenHeight));
         }
 
-        for (PlanarNode node: levelLayout) {
-            for (PlanarNode neighbour: node.getNeighboors()){
+        for (PlanarNode node : levelLayout) {
+            for (PlanarNode neighbour : node.getNeighboors()) {
                 Set<PlanarNode> pair = new HashSet<>();
                 pair.add(node);
                 pair.add(neighbour);
-                if(!edges.get(pair)){
+                if (!edges.get(pair)) {
                     Room r1 = nodeToRoom.get(node);
                     Room r2 = nodeToRoom.get(neighbour);
 
@@ -95,17 +97,19 @@ public class Level implements IRoomContainer {
 
     /**
      * Set a new room
+     *
      * @param room a room that will be in container.
      */
-    public void setNewRoom(Room room){
+    public void setNewRoom(Room room) {
 
         IEntityManager entityManager = currentRoom.getEntityManager();
-        if (entityManager.isFinished()){
-        currentRoom = room;
-        player.setGunEntityManager(currentRoom.getEntityManager());
-        player.setCollideWithMerchant();
+        if (entityManager.isFinished()) {
+            currentRoom = room;
+            player.setGunEntityManager(currentRoom.getEntityManager());
+            player.setCollideWithMerchant();
         }
     }
+
     private void addMerchantToRooms(List<Room> rooms) {
         int merchant1Index = MathUtils.random(0, rooms.size() - 1);
         int merchant2Index = MathUtils.random(0, rooms.size() - 1);
@@ -116,13 +120,14 @@ public class Level implements IRoomContainer {
         rooms.get(merchant1Index).addMerchant();
         rooms.get(merchant2Index).addMerchant();
     }
+
     /**
      * Update the current room
      */
-    public void update(){
+    public void update() {
         IEntityManager entityManager = currentRoom.getEntityManager();
         currentRoom.update();
-        if (entityManager.isFinished()){
+        if (entityManager.isFinished()) {
             player.changeGold(entityManager.getGold());
         }
 
@@ -132,23 +137,24 @@ public class Level implements IRoomContainer {
     /**
      * Draw the level
      */
-    public void draw(){
+    public void draw() {
         levelDrawer.drawLevel(currentRoom);
     }
 
     /**
      * Return an edge map
+     *
      * @param levelLayout the layout of level
      * @return a map of edges
      */
-    private Map<Set<PlanarNode>, Boolean> getEdgeMap(PlanarGraph levelLayout){
+    private Map<Set<PlanarNode>, Boolean> getEdgeMap(PlanarGraph levelLayout) {
         Map<Set<PlanarNode>, Boolean> edges = new HashMap<>();
-        for(PlanarNode n1: levelLayout){
-            for(PlanarNode n2: levelLayout){
+        for (PlanarNode n1 : levelLayout) {
+            for (PlanarNode n2 : levelLayout) {
                 Set<PlanarNode> pair = new HashSet<>();
                 pair.add(n1);
                 pair.add(n2);
-                if(n1 != n2 && !edges.containsKey(pair) && n1.getNeighboors().contains(n2)){
+                if (n1 != n2 && !edges.containsKey(pair) && n1.getNeighboors().contains(n2)) {
                     edges.put(pair, false);
                 }
             }
@@ -159,42 +165,49 @@ public class Level implements IRoomContainer {
 
     /**
      * Generate a random point
+     *
      * @return a random point on screen
      */
-    private Point getRandomPointOnScreen(){
+    private Point getRandomPointOnScreen() {
         return new Point(rnd.nextInt(screenWidth), rnd.nextInt(screenHeight));
     }
 
     /**
      * Move player in a given direction
+     *
      * @param dir direction
      */
-    public void movePlayer(Point dir){
+    public void movePlayer(Point dir) {
         player.move(dir);
     }
 
     /**
      * Update the position of mouse
+     *
      * @param mousePos position of mouse
      */
-    public void setMousePos(Point mousePos){
+    public void setMousePos(Point mousePos) {
         player.setMousePos(mousePos);
     }
 
     /**
      * Click mouse to fire
+     *
      * @param mouseDir direction of fire
      */
-    public void mouseClick(Point mouseDir){
+    public void mouseClick(Point mouseDir) {
         player.fire(mouseDir);
     }
 
     /*
-    * Returns tru if player is dead, false otherwise
-    * */
-    public boolean isOver(){
+     * Returns tru if player is dead, false otherwise
+     * */
+    public boolean isOver() {
         return player.getHealth() <= 0;
     }
-    public Player getPlayer(){return player;}
+
+    public Player getPlayer() {
+        return player;
+    }
 
 }

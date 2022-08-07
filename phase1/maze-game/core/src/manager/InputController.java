@@ -2,16 +2,14 @@ package manager;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 import config.GameConstants;
+import config.KeyBindings;
 import entities.Level;
 import entities.Merchant;
 import entities.Player;
 import geometry.Point;
-
-import java.util.Arrays;
 
 /**
  * Represents an input controller
@@ -37,15 +35,10 @@ public class InputController {
      * Check for input
      */
     public void checkForInput(){
-        int[] leftKeys = {Input.Keys.A, Input.Keys.LEFT};
-        int[] rightKeys = {Input.Keys.D, Input.Keys.RIGHT};
-        int[] upKeys = {Input.Keys.W, Input.Keys.UP};
-        int[] downKeys = {Input.Keys.S, Input.Keys.DOWN};
-
-        boolean left = areAnyKeysInListPressed(leftKeys);
-        boolean right = areAnyKeysInListPressed(rightKeys);
-        boolean up = areAnyKeysInListPressed(upKeys);
-        boolean down = areAnyKeysInListPressed(downKeys);
+        boolean left = areAnyKeysInListPressed(KeyBindings.MOVE_LEFT_KEYS);
+        boolean right = areAnyKeysInListPressed(KeyBindings.MOVE_RIGHT_KEYS);
+        boolean up = areAnyKeysInListPressed(KeyBindings.MOVE_UP_KEYS);
+        boolean down = areAnyKeysInListPressed(KeyBindings.MOVE_DOWN_KEYS);
 
         Point dir = new Point(dirCalc(left, right),dirCalc(down, up));
         level.movePlayer(dir);
@@ -55,7 +48,7 @@ public class InputController {
         mousePos = new Point(unprotectedMousePos.x, unprotectedMousePos.y);
         level.setMousePos(mousePos);
 
-         if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
+         if(Gdx.input.isButtonPressed(KeyBindings.USE_CURRENT_ITEM)){
             level.mouseClick(mousePos);
          }
 
