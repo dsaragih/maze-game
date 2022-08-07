@@ -1,6 +1,5 @@
 package graphics.presenters;
 
-import com.badlogic.gdx.graphics.Camera;
 import graphics.entities.boss.IBossDrawer;
 import graphics.bullet.IBulletDrawer;
 import graphics.door.IDoorDrawer;
@@ -11,10 +10,11 @@ import graphics.level.ILevelDrawer;
 import graphics.entities.player.IPlayerDrawer;
 import graphics.room.IRoomDrawer;
 
-public interface IPresenter {
+public interface IPresenter{
 
-    void start(Camera camera);
-    void end();
+    void onStartRender();
+    void onEndRender();
+    void dispose();
     IDoorDrawer getDoorDrawer();
     IRoomDrawer getRoomDrawer();
 

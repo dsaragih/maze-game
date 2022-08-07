@@ -3,7 +3,9 @@ package manager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
+import config.GameConstants;
 import entities.Level;
 import entities.Merchant;
 import entities.Player;
@@ -19,16 +21,16 @@ import java.util.Arrays;
  */
 public class InputController {
     private Level level;
-    private Camera camera;
+    private OrthographicCamera camera;
 
     /**
      * Create an input controller
-     * @param camera the camera
      * @param level the level
      */
-    public InputController(Camera camera, Level level){
+    public InputController(Level level){
         this.level = level;
-        this.camera = camera;
+        camera = new OrthographicCamera();
+        camera.setToOrtho(false, GameConstants.SCREEN_WIDTH, GameConstants.SCREEN_HEIGHT);
     }
 
     /**

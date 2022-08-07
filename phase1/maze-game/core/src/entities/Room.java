@@ -20,8 +20,6 @@ public class Room implements IDrawble {
     private IPresenter presenter;
     private IEntityManager entityManager = new EntityManager();
 
-
-
     public Room(IPresenter presenter, Player player, int screenWidth, int screenHeight) {
         this.presenter = presenter;
         entityManager.addCollidableEntity(player);

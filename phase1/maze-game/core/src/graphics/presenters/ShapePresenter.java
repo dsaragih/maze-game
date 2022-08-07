@@ -1,8 +1,11 @@
 package graphics.presenters;
 
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import config.GameConstants;
 import graphics.entities.boss.CircleBossDrawer;
 import graphics.entities.boss.IBossDrawer;
 import graphics.entities.merchant.CircleMerchantDrawer;
@@ -22,29 +25,45 @@ import graphics.entities.player.IPlayerDrawer;
 import graphics.presenters.IPresenter;
 import graphics.room.IRoomDrawer;
 import graphics.room.SandRoomDrawer;
+import graphics.room.SimpleShapeRoomDrawer;
 
 public class ShapePresenter implements IPresenter {
     private ShapeRenderer shapeRenderer;
-    private Stage stage;
+    private SpriteBatch spriteBatch;
+    private OrthographicCamera camera;
+
     private int screenWidth;
     private int screenHeight;
 
-    public ShapePresenter(ShapeRenderer shapeRenderer, Stage stage, int screenWidth, int screenHeight){
-        this.stage = stage;
-        this.shapeRenderer = shapeRenderer;
+    public ShapePresenter(int screenWidth, int screenHeight){
+        spriteBatch =  new SpriteBatch();
+        shapeRenderer = new ShapeRenderer();
+        camera = new OrthographicCamera();
+        camera.setToOrtho(false, screenWidth, screenHeight);
+
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
     }
 
     @Override
-    public void start(Camera camera) {
+    public void onStartRender() {
+        camera.update();
         shapeRenderer.setProjectionMatrix(camera.combined);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+
+        spriteBatch.setProjectionMatrix(camera.combined);
+        spriteBatch.begin();
     }
 
     @Override
-    public void end() {
+    public void onEndRender() {
         shapeRenderer.end();
+        spriteBatch.end();
+    }
+
+    public void dispose(){
+        shapeRenderer.dispose();
+        spriteBatch.dispose();
     }
 
     @Override
@@ -54,7 +73,7 @@ public class ShapePresenter implements IPresenter {
 
     @Override
     public IRoomDrawer getRoomDrawer() {
-        return new SandRoomDrawer(stage, screenWidth, screenHeight);
+        return new SimpleShapeRoomDrawer(shapeRenderer, screenWidth, screenHeight);
     }
 
     @Override
@@ -72,7 +91,7 @@ public class ShapePresenter implements IPresenter {
         return new CircleEnemyDrawer(shapeRenderer);
     }
 
-    public IMerchantDrawer getMerchantDrawer(){return new CircleMerchantDrawer(shapeRenderer, stage);}
+    public IMerchantDrawer getMerchantDrawer(){return new CircleMerchantDrawer(shapeRenderer);}
 
     @Override
     public IGunDrawer getGunDrawer() {

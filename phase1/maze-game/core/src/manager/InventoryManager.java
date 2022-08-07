@@ -11,35 +11,55 @@ public class InventoryManager {
     private Player player;
     private ArrayList<Item> items;
 
-    public InventoryManager(Player player, ArrayList<Item> items)
-    {this.player = player;
-    this.items = items;}
-    public void addItem(Item item){items.add(item);}
+    public InventoryManager(Player player, ArrayList<Item> items) {
+        this.player = player;
+        this.items = items;
+    }
 
-    public void removeItem(Item item){items.remove(item);}
-    public void use(Armour armour){player.setArmour(armour);}
+    public void addItem(Item item) {
+        items.add(item);
+    }
 
-    public boolean hasArmour(){
-        for (Item item: items){
-            if (item instanceof Armour){return true;}
+    public void removeItem(Item item) {
+        items.remove(item);
+    }
+
+    public void use(Armour armour) {
+        player.setArmour(armour);
+    }
+
+    public boolean hasArmour() {
+        for (Item item : items) {
+            if (item instanceof Armour) {
+                return true;
+            }
         }
         return false;
     }
-    public Item getArmour(){
-        for (Item item: items){
-            if (item instanceof Armour){return item;}
+
+    public Item getArmour() {
+        for (Item item : items) {
+            if (item instanceof Armour) {
+                return item;
+            }
         }
         return null;
     }
-    public boolean hasHealthFlask(){
-        for (Item item: items){
-            if (item instanceof HealthFlask){return true;}
+
+    public boolean hasHealthFlask() {
+        for (Item item : items) {
+            if (item instanceof HealthFlask) {
+                return true;
+            }
         }
         return false;
     }
-    public Item getHealthFlask(){
-        for (Item item: items){
-            if (item instanceof HealthFlask){return item;}
+
+    public Item getHealthFlask() {
+        for (Item item : items) {
+            if (item instanceof HealthFlask) {
+                return item;
+            }
         }
         return null;
     }

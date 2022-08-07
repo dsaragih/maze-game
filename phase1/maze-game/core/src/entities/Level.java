@@ -27,7 +27,7 @@ public class Level implements IRoomContainer {
     private Player player;
 
     /**
-     * Create a alevel
+     * Create a level
      * @param presenter the presenter in Clean architecture
      * @param player a player instance
      * @param screenWidth the width of screen
@@ -43,6 +43,18 @@ public class Level implements IRoomContainer {
         player.setGun(gun);
 
         PlanarGraph levelLayout = new TestGraphGenerator().generate();
+        Collection<Room> rooms = getRoomsFromGraph(levelLayout, presenter);
+        currentRoom = rooms.iterator().next();
+
+        //this line of code is for convenience of testing
+//        currentRoom = new entities.BossRoom(presenter, player, screenWidth, screenHeight);
+
+        addMerchantToRooms(new ArrayList<>(rooms));
+
+        gun.setEntityManager(currentRoom.getEntityManager());
+    }
+
+    public Collection<Room> getRoomsFromGraph(PlanarGraph levelLayout, IPresenter presenter){
         Map<Set<PlanarNode>, Boolean> edges = getEdgeMap(levelLayout);
         Map<PlanarNode, Room> nodeToRoom = new HashMap<>();
         for(PlanarNode node: levelLayout){
@@ -77,14 +89,8 @@ public class Level implements IRoomContainer {
 
         }
 
-        Collection<Room> rooms = nodeToRoom.values();
-        currentRoom = rooms.iterator().next();
-        //this line of code is for convenience of testing
-//        currentRoom = new entities.BossRoom(presenter, player, screenWidth, screenHeight);
+        return nodeToRoom.values();
 
-        addMerchantToRooms(new ArrayList<>(rooms));
-
-        gun.setEntityManager(currentRoom.getEntityManager());
     }
 
     /**
@@ -103,7 +109,9 @@ public class Level implements IRoomContainer {
     private void addMerchantToRooms(List<Room> rooms) {
         int merchant1Index = MathUtils.random(0, rooms.size() - 1);
         int merchant2Index = MathUtils.random(0, rooms.size() - 1);
-        while (merchant2Index == merchant1Index) merchant2Index = MathUtils.random(0, rooms.size() - 1);
+        while (merchant2Index == merchant1Index) {
+            merchant2Index = MathUtils.random(0, rooms.size() - 1);
+        }
 
         rooms.get(merchant1Index).addMerchant();
         rooms.get(merchant2Index).addMerchant();
@@ -112,11 +120,13 @@ public class Level implements IRoomContainer {
      * Update the current room
      */
     public void update(){
-        EntityManager entityManager = (EntityManager) currentRoom.getEntityManager();
+        IEntityManager entityManager = currentRoom.getEntityManager();
         currentRoom.update();
         if (entityManager.isFinished()){
             player.changeGold(entityManager.getGold());
         }
+
+        //presenter.draw("pass in all the data that has any effect on the visuals on the screen");
     }
 
     /**
