@@ -25,6 +25,10 @@ public class Gun extends Weapon {
         this.entityManager = entityManager;
     }
 
+    public void rename(String name){
+        this.name = name;
+    }
+
     public void fire(Point direction){
         long time = System.currentTimeMillis();
         if (time >= lastAttack + GameConstants.GUN_COOLDOWN) {

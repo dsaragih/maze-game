@@ -253,7 +253,10 @@ public class Player extends CollidableEntity {
 
     public void setCollideWithMerchant(){collideWithMerchant = false;}
 
-    public void addItem(Item item){itemOwned.add(item);}
+    public ArrayList<Item> getItem(){
+        return inventory.getItems();
+    }
+    public void addItem(Item item){inventory.addItem(item);}
 
     public Merchant getCurrMerchant(){return currMerchant;}
 

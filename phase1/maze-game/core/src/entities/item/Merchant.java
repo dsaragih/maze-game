@@ -29,6 +29,10 @@ public class Merchant extends CollidableEntity {
         drawer.drawMerchant(pos);
     }
 
+    public void addItem(Item item){
+        itemOwned.add(item);
+    }
+
     @Override
     public Circle getCollisionBox() {
         return new Circle(pos, 15);
