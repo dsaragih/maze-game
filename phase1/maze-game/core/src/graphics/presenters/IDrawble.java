@@ -1,4 +1,4 @@
-package graphics;
+package graphics.presenters;
 
 public interface IDrawble {
     void draw();

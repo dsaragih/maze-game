@@ -2,7 +2,7 @@ package entities;
 
 import entities.item.Item;
 import geometry.Circle;
-import graphics.IDrawble;
+import graphics.presenters.IDrawble;
 import graphics.entities.merchant.IMerchantDrawer;
 
 import java.util.ArrayList;

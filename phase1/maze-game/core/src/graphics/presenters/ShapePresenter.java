@@ -1,4 +1,4 @@
-package graphics;
+package graphics.presenters;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -19,6 +19,7 @@ import graphics.level.ILevelDrawer;
 import graphics.level.LevelDrawer;
 import graphics.entities.player.CirclePlayerDrawer;
 import graphics.entities.player.IPlayerDrawer;
+import graphics.presenters.IPresenter;
 import graphics.room.IRoomDrawer;
 import graphics.room.SandRoomDrawer;
 

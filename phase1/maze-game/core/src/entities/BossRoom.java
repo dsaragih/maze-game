@@ -1,12 +1,8 @@
 package entities;
 
 import com.badlogic.gdx.math.MathUtils;
-import entities.Boss;
-import entities.Enemy;
-import entities.Player;
-import entities.Room;
 import geometry.Point;
-import graphics.IPresenter;
+import graphics.presenters.IPresenter;
 import manager.EntityManager;
 import manager.IEntityManager;
 

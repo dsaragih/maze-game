@@ -2,7 +2,7 @@ package entities;
 
 import manager.IEntityManager;
 import geometry.Point;
-import graphics.IDrawble;
+import graphics.presenters.IDrawble;
 
 /** Represents an entity
  * @author Ethan

@@ -1,14 +1,11 @@
 package entities;
 
 import com.badlogic.gdx.math.MathUtils;
-import entities.Door;
-import entities.Gun;
-import entities.Player;
 import geometry.Point;
 import graph.PlanarGraph;
 import graph.PlanarNode;
 import graph.TestGraphGenerator;
-import graphics.IPresenter;
+import graphics.presenters.IPresenter;
 import graphics.door.IDoorDrawer;
 import graphics.level.ILevelDrawer;
 import manager.EntityManager;

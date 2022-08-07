@@ -16,8 +16,8 @@ import config.GameConstants;
 import entities.Level;
 import entities.Player;
 import geometry.Point;
-import graphics.IPresenter;
-import graphics.ShapePresenter;
+import graphics.presenters.IPresenter;
+import graphics.presenters.ShapePresenter;
 import manager.InputController;
 
 /**

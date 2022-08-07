@@ -4,7 +4,7 @@ import entities.CollidableEntity;
 import entities.ICollidable;
 import entities.Player;
 import geometry.Point;
-import graphics.IDrawble;
+import graphics.presenters.IDrawble;
 
 public  abstract class Item extends CollidableEntity implements IDrawble {
     //Item is an object that can be pick up by the player, and has a value. This is not a class we write in phase 1

@@ -2,13 +2,12 @@ package entities;
 
 import com.badlogic.gdx.math.MathUtils;
 
-import entities.*;
 import entities.item.ExampleArmour;
 import entities.item.HealthFlask;
 import entities.item.Item;
 import geometry.Point;
-import graphics.IDrawble;
-import graphics.IPresenter;
+import graphics.presenters.IDrawble;
+import graphics.presenters.IPresenter;
 import manager.EntityManager;
 import manager.IEntityManager;
 

@@ -1,4 +1,4 @@
-package graphics;
+package graphics.presenters;
 
 import com.badlogic.gdx.graphics.Camera;
 import graphics.entities.boss.IBossDrawer;
