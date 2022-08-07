@@ -1,4 +1,3 @@
-
 import geometry.*;
 import org.junit.*;
 

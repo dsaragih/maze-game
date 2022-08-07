@@ -20,6 +20,7 @@ public class GameConstants {
     public static float BULLET_SPEED = 30;
     public static int GUN_RADIUS = 2;
     public static long GUN_COOLDOWN = 200;
+
     public static int HEALTH_FLASK_HP = 30;
     // shop prices:
     public static int PRICE_GUN = 30;

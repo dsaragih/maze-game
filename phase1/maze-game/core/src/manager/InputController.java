@@ -9,6 +9,8 @@ import entities.Merchant;
 import entities.Player;
 import geometry.Point;
 
+import java.util.Arrays;
+
 /**
  * Represents an input controller
  * @author Ethan
@@ -33,22 +35,22 @@ public class InputController {
      * Check for input
      */
     public void checkForInput(){
-        Point dir = new Point(0,0);
-        if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.D)
-        || Gdx.input.isKeyPressed(Input.Keys.S) ||  Gdx.input.isKeyPressed(Input.Keys.W)){
-        dir.x = dirCalc(Gdx.input.isKeyPressed(Input.Keys.A), Gdx.input.isKeyPressed(Input.Keys.D));
-        dir.y = dirCalc(Gdx.input.isKeyPressed(Input.Keys.S), Gdx.input.isKeyPressed(Input.Keys.W));}
-        //An alternative set of inputs
-        else{
-            dir.x = dirCalc(Gdx.input.isKeyPressed(Input.Keys.LEFT), Gdx.input.isKeyPressed(Input.Keys.RIGHT));
-            dir.y = dirCalc(Gdx.input.isKeyPressed(Input.Keys.DOWN), Gdx.input.isKeyPressed(Input.Keys.UP));
-        }
+        int[] leftKeys = {Input.Keys.A, Input.Keys.LEFT};
+        int[] rightKeys = {Input.Keys.D, Input.Keys.RIGHT};
+        int[] upKeys = {Input.Keys.W, Input.Keys.UP};
+        int[] downKeys = {Input.Keys.S, Input.Keys.DOWN};
+
+        boolean left = areAnyKeysInListPressed(leftKeys);
+        boolean right = areAnyKeysInListPressed(rightKeys);
+        boolean up = areAnyKeysInListPressed(upKeys);
+        boolean down = areAnyKeysInListPressed(downKeys);
+
+        Point dir = new Point(dirCalc(left, right),dirCalc(down, up));
         level.movePlayer(dir);
 
         Point mousePos = new Point(Gdx.input.getX(), Gdx.input.getY());
         Vector3 unprotectedMousePos = camera.unproject(new Vector3(mousePos.x, mousePos.y, 0));
         mousePos = new Point(unprotectedMousePos.x, unprotectedMousePos.y);
-
         level.setMousePos(mousePos);
 
          if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
@@ -76,6 +78,16 @@ public class InputController {
              player.restoreHealth();
          }
 
+    }
+
+    private boolean areAnyKeysInListPressed(int[] keys){
+        for(int key : keys){
+            if(Gdx.input.isKeyPressed(key)){
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**

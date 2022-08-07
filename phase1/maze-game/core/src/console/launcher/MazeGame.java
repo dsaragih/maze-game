@@ -47,7 +47,6 @@ public class MazeGame extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		font = new BitmapFont();
 
-
 		shapeRenderer = new ShapeRenderer();
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, GameConstants.SCREEN_WIDTH, GameConstants.SCREEN_HEIGHT);
@@ -101,7 +100,6 @@ public class MazeGame extends ApplicationAdapter {
 		ScreenUtils.clear(0, 0, 0, 1);
 		camera.update();
 		presenter.start(camera);
-
 		level.draw();
 		player.draw();
 		presenter.end();

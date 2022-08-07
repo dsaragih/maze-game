@@ -7,7 +7,7 @@ import graphics.entities.merchant.IMerchantDrawer;
 
 import java.util.ArrayList;
 
-public class Merchant extends CollidableEntity implements IDrawble {
+public class Merchant extends CollidableEntity {
     //A merchant will sell stuff to the player
     private ArrayList<Item> itemOwned;
     private IMerchantDrawer drawer;
@@ -19,7 +19,7 @@ public class Merchant extends CollidableEntity implements IDrawble {
     public Merchant(float x, float y, IMerchantDrawer drawer){
         super(x,y);
         itemOwned = new ArrayList<>();
-        this.drawer =drawer;
+        this.drawer= drawer;
     }
 
     @Override
@@ -57,12 +57,10 @@ public class Merchant extends CollidableEntity implements IDrawble {
     public void collideWith(Item item) {
 
     }
-
     @Override
     public void informCollision(ICollidable other) {
     other.collideWith(this);
     }
-
     @Override
     public void collideWith(Merchant merchant) {
 

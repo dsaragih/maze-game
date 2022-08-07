@@ -35,8 +35,7 @@ public class Player extends CollidableEntity {
     private int shield = 0;
 
     private int goldOwned = 100;
-    private ArrayList<Item> itemOwned = new ArrayList<Item>(Collections.singletonList(gun));
-
+    private ArrayList<Item> itemOwned = new ArrayList<>(Collections.singletonList(gun));
     public boolean collideWithMerchant = false;
 
     private Merchant currMerchant;
@@ -75,22 +74,13 @@ public class Player extends CollidableEntity {
      * @param direction The direction of player
      */
     public void move(Point direction){
-
+        //move in the given direction
         direction.multiply(speed * Gdx.graphics.getDeltaTime());
-        //Don't allow the player to get out of the screen
-        if(pos.x > GameConstants.SCREEN_WIDTH && direction.x > 0){
-            direction.x = 0;
-        }
-        if(pos.y > GameConstants.SCREEN_HEIGHT && direction.y > 0){
-            direction.y = 0;
-        }
-        if(pos.x < 0 && direction.x < 0){
-            direction.x = 0;
-        }
-        if(pos.y < 0 && direction.y <0){
-            direction.y = 0;
-        }
         pos.add(direction);
+
+        //keep player on the screen
+        pos.x = Math.max(Math.min(pos.x, GameConstants.SCREEN_WIDTH), 0);
+        pos.y = Math.max(Math.min(pos.y, GameConstants.SCREEN_HEIGHT), 0);
 
         for(IPlayerObserver observer: observers){
             observer.setTarget(pos);
@@ -173,12 +163,17 @@ public class Player extends CollidableEntity {
      */
     public void collideWith(Enemy enemy) {
         if(shield > 0){
-            if (shield - enemy.getDamage() < 0)
-            {health += shield - enemy.getDamage();
-            shield = 0;}
-        else
-            {shield -= enemy.getDamage() * (1.0 - armourPoint * 0.01);}}
-        else{health -= enemy.getDamage() *(1.0 - armourPoint * 0.01);}
+            if (shield - enemy.getDamage() < 0) {
+                health += shield - enemy.getDamage();
+                shield = 0;
+            }
+            else {
+                shield -= enemy.getDamage() * (1.0 - armourPoint * 0.01);
+            }
+        }
+        else{
+            health -= enemy.getDamage() *(1.0 - armourPoint * 0.01);
+        }
     }
 
     /**
@@ -221,9 +216,11 @@ public class Player extends CollidableEntity {
     public void buy(Item item){
         if (!(currMerchant == null)){
             if (currMerchant.getItemOwned().contains(item) && goldOwned >= item.checkValue())
-            {addItem(item);
-            goldOwned -= item.checkValue();
-            inventory.addItem(item);}
+            {
+                addItem(item);
+                goldOwned -= item.checkValue();
+                inventory.addItem(item);
+            }
         }
     }
 
@@ -257,11 +254,14 @@ public class Player extends CollidableEntity {
     public Merchant getCurrMerchant(){return currMerchant;}
 
     public void useArmour(){
-        if (inventory.hasArmour()){
+        if (inventory.hasArmour())
+        {
             inventory.use((Armour) inventory.getArmour());
-            inventory.removeItem(inventory.getArmour());}
+            inventory.removeItem(inventory.getArmour());
+        }
     }
-    public void restoreHealth(){
+    public void restoreHealth()
+    {
         if(inventory.hasHealthFlask()){
             health += 30;
             health = Math.min(100, health);
@@ -277,7 +277,6 @@ public class Player extends CollidableEntity {
     }
 
     public void sprint(){
-
         if (sprintDelay == 0) {
             if (speed == 200) {
                 speed += 50;
