@@ -1,7 +1,6 @@
-package entities;
+package entities.item;
 
 import config.GameConstants;
-import entities.item.Weapon;
 import manager.IEntityManager;
 import geometry.Point;
 import graphics.bullet.IBulletDrawer;
@@ -24,6 +23,10 @@ public class Gun extends Weapon {
 
     public void setEntityManager(IEntityManager entityManager){
         this.entityManager = entityManager;
+    }
+
+    public void rename(String name){
+        this.name = name;
     }
 
     public void fire(Point direction){

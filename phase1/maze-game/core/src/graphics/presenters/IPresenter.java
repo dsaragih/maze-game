@@ -6,6 +6,7 @@ import graphics.door.IDoorDrawer;
 import graphics.entities.merchant.IMerchantDrawer;
 import graphics.entities.enemy.IEnemyDrawer;
 import graphics.gun.IGunDrawer;
+import graphics.healthbar.IHealthBarDrawer;
 import graphics.level.ILevelDrawer;
 import graphics.entities.player.IPlayerDrawer;
 import graphics.room.IRoomDrawer;
@@ -30,4 +31,6 @@ public interface IPresenter{
     IBulletDrawer getBulletDrawer();
 
     IBossDrawer getBossDrawer();
+
+    IHealthBarDrawer getHealthBarDrawer();
 }

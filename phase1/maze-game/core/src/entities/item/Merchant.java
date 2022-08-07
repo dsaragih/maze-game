@@ -1,8 +1,10 @@
-package entities;
+package entities.item;
 
-import entities.item.Item;
+import entities.abstractions.CollidableEntity;
+import entities.abstractions.ICollidable;
+import entities.characters.Enemy;
+import entities.characters.Player;
 import geometry.Circle;
-import graphics.presenters.IDrawble;
 import graphics.entities.merchant.IMerchantDrawer;
 
 import java.util.ArrayList;
@@ -25,6 +27,10 @@ public class Merchant extends CollidableEntity {
     @Override
     public void draw() {
         drawer.drawMerchant(pos);
+    }
+
+    public void addItem(Item item){
+        itemOwned.add(item);
     }
 
     @Override

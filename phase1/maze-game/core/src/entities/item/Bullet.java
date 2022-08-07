@@ -1,7 +1,9 @@
-package entities;
+package entities.item;
 
 import config.GameConstants;
-import entities.item.Weapon;
+import entities.abstractions.ICollidable;
+import entities.characters.Enemy;
+import entities.characters.Player;
 import geometry.Circle;
 import geometry.Point;
 import graphics.bullet.IBulletDrawer;
@@ -13,6 +15,7 @@ public class Bullet extends Weapon {
 
     private Point velocity;
     private boolean isHit = false;
+    private int damage;
 
     private IBulletDrawer bulletDrawer;
 
@@ -26,6 +29,7 @@ public class Bullet extends Weapon {
         direction.multiply(GameConstants.BULLET_SPEED);
         this.velocity = direction;
         this.bulletDrawer = bulletDrawer;
+        this.damage = GameConstants.BULLET_DAMAGE;
     }
 
     /** Draw the bullet
@@ -90,6 +94,11 @@ public class Bullet extends Weapon {
     /** Get the bullet damage
      * @return The damage of the bullet
      */
+
+    public void setDamage(int damage){
+        this.damage = damage;
+    }
+
     public int getDamage() {
         return GameConstants.BULLET_DAMAGE;
     }

@@ -1,7 +1,7 @@
 package manager;
 
-import entities.CollidableEntity;
-import entities.Entity;
+import entities.abstractions.CollidableEntity;
+import entities.abstractions.Entity;
 
 // Represents an entity manager interface
 // @author Daniel

@@ -1,9 +1,13 @@
 package entities.item;
 
-import entities.*;
-import entities.Merchant;
+import entities.abstractions.ICollidable;
+import entities.characters.Enemy;
+import entities.characters.Player;
 import geometry.Circle;
 import geometry.Point;
+import config.GameConstants;
+
+import static config.GameConstants.ARMOUR_RADIUS;
 
 public class Armour extends Item{
     private float armourPoint;
@@ -47,12 +51,11 @@ public class Armour extends Item{
 
     @Override
     public Circle getCollisionBox() {
-        return null;
+        return new Circle(pos, ARMOUR_RADIUS);
     }
 
     @Override
     public void collideWith(Player player) {
-
     }
 
     @Override

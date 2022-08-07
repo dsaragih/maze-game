@@ -6,9 +6,9 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 import config.GameConstants;
 import config.KeyBindings;
-import entities.Level;
-import entities.Merchant;
-import entities.Player;
+import entities.characters.Player;
+import entities.item.Merchant;
+import entities.rooms.Level;
 import geometry.Point;
 
 /**
@@ -54,9 +54,6 @@ public class InputController {
 
          Player player = level.getPlayer();
 
-         if(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)){
-            player.sprint();
-        }
          if (player.hasCollidewithMerchant()){
              Merchant merchant = player.getCurrMerchant();
              if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)){

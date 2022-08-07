@@ -1,8 +1,8 @@
 package manager;
 
-import entities.CollidableEntity;
-import entities.Entity;
-import entities.ICollidable;
+import entities.abstractions.CollidableEntity;
+import entities.abstractions.Entity;
+import entities.abstractions.ICollidable;
 
 
 import java.util.ArrayList;
@@ -37,6 +37,22 @@ public class EntityManager implements IEntityManager{
         toBeRemovedEntities = new ArrayList<>();
         toBeAddedCollidable = new ArrayList<>();
         toBeRemovedCollidable = new ArrayList<>();
+    }
+
+    /**
+     * Get all entities
+     * @return list of entities
+     */
+    public ArrayList<Entity> getEntities(){
+        return this.Entities;
+    }
+
+    /**
+     * Get all entities
+     * @return list of collidable entities
+     */
+    public ArrayList<CollidableEntity> getCollidableEntities(){
+        return this.collidableEntities;
     }
 
     /**
@@ -111,8 +127,8 @@ public class EntityManager implements IEntityManager{
             entity.update();
         }
 
-        for(ICollidable e1: collidableEntities){
-            for(ICollidable e2: collidableEntities){
+        for(CollidableEntity e1: collidableEntities){
+            for(CollidableEntity e2: collidableEntities){
                 if(e1 == e2){
                     continue;
                 }

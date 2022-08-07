@@ -8,8 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
 import config.GameConstants;
-import entities.Level;
-import entities.Player;
+import entities.rooms.Level;
+import entities.characters.Player;
 import geometry.Point;
 import graphics.presenters.IPresenter;
 import graphics.presenters.ShapePresenter;
@@ -34,7 +34,7 @@ public class MazeGame extends ApplicationAdapter {
 	public void create () {
 		font = new BitmapFont();
 		presenter = new ShapePresenter(GameConstants.SCREEN_WIDTH, GameConstants.SCREEN_HEIGHT);
-		player = new Player(new Point(GameConstants.SCREEN_WIDTH/2f, GameConstants.SCREEN_HEIGHT/2f), presenter.getPlayerDrawer());
+		player = new Player(new Point(GameConstants.SCREEN_WIDTH/2f, GameConstants.SCREEN_HEIGHT/2f), presenter.getPlayerDrawer(), presenter.getHealthBarDrawer());
 		level = new Level(presenter, player, GameConstants.SCREEN_WIDTH, GameConstants.SCREEN_HEIGHT);
 
 		controller = new InputController(level);
@@ -79,6 +79,7 @@ public class MazeGame extends ApplicationAdapter {
 		player.draw();
 		presenter.onEndRender();
 
+
 //		batch.begin();
 //		Label.LabelStyle label1Style = new Label.LabelStyle();
 //		label1Style.font = font;
@@ -91,7 +92,7 @@ public class MazeGame extends ApplicationAdapter {
 //			label1.setAlignment(Align.center);
 //			stage.addActor(label1);
 //		}else{
-//			Label label2 = new Label("Health: " + player.getHealth(), label1Style);
+//			Label label2 = new Label("Health: ", label1Style);
 //			label2.setPosition(10, 20);
 //			stage.addActor(label2);
 //

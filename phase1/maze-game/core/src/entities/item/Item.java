@@ -1,8 +1,8 @@
 package entities.item;
 
-import entities.CollidableEntity;
-import entities.ICollidable;
-import entities.Player;
+import entities.abstractions.CollidableEntity;
+import entities.abstractions.ICollidable;
+import entities.characters.Player;
 import geometry.Point;
 
 public abstract class Item extends CollidableEntity {

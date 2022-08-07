@@ -1,6 +1,10 @@
-package entities;
+package entities.rooms;
 
 import com.badlogic.gdx.math.MathUtils;
+import entities.item.Door;
+import entities.item.Gun;
+import entities.abstractions.IRoomContainer;
+import entities.characters.Player;
 import geometry.Point;
 import graph.PlanarGraph;
 import graph.PlanarNode;
@@ -92,7 +96,8 @@ public class Level implements IRoomContainer {
         }
 
         return nodeToRoom.values();
-
+        //this line of code is for convenience of testing
+//        currentRoom = new entities.rooms.BossRoom(presenter, player, screenWidth, screenHeight);
     }
 
     /**

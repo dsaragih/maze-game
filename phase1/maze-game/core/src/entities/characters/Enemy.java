@@ -1,11 +1,19 @@
-package entities;
+package entities.characters;
 import com.badlogic.gdx.Gdx;
 import config.GameConstants;
+import entities.item.Bullet;
+import entities.abstractions.CollidableEntity;
+import entities.abstractions.ICollidable;
+import entities.abstractions.IPlayerObserver;
+import entities.item.Door;
 import entities.item.Item;
+import entities.item.Merchant;
 import geometry.Circle;
 import geometry.Point;
 import graphics.entities.enemy.IEnemyDrawer;
 import com.badlogic.gdx.math.MathUtils;
+
+import static config.GameConstants.ENEMY_DAMAGE;
 
 /** Represents an enemy
  * @author Ethan
@@ -18,6 +26,7 @@ public class Enemy extends CollidableEntity implements IPlayerObserver {
     private IEnemyDrawer enemyDrawer;
     private int health = 100;
     private Point target = null;
+    private int damage;
 
     private int value = MathUtils.random(1,3);
 
@@ -30,6 +39,7 @@ public class Enemy extends CollidableEntity implements IPlayerObserver {
     public Enemy(int x, int y, IEnemyDrawer enemyDrawer) {
         super(x, y, true);
         this.enemyDrawer = enemyDrawer;
+        damage = ENEMY_DAMAGE;
     }
 
     /**
@@ -42,6 +52,9 @@ public class Enemy extends CollidableEntity implements IPlayerObserver {
         this.enemyDrawer = enemyDrawer;
     }
 
+    public int getHealth(){
+        return health;
+    }
     /**
      * Return the collision box of the enemy
      * @return the circle representation of the collision box.
@@ -62,7 +75,6 @@ public class Enemy extends CollidableEntity implements IPlayerObserver {
     public void collideWith(Merchant merchant) {
 
     }
-
     /**
      * Collide with the player.
      * @param player
@@ -159,13 +171,16 @@ public class Enemy extends CollidableEntity implements IPlayerObserver {
         pos.add(velocity);
 
     }
+    public void setDamage(int damage){
+        this.damage = damage;
+    }
 
     /**
      * Get the damage that the enemy can deal
      * @return the damage
      */
     public int getDamage(){
-        return GameConstants.ENEMY_DAMAGE;
+        return damage;
     }
 
     /**

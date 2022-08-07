@@ -1,6 +1,6 @@
 package manager;
 
-import entities.Player;
+import entities.characters.Player;
 import entities.item.Armour;
 import entities.item.HealthFlask;
 import entities.item.Item;
@@ -10,10 +10,16 @@ import java.util.ArrayList;
 public class InventoryManager {
     private Player player;
     private ArrayList<Item> items;
+    public InventoryManager(Player player, ArrayList<Item> items)
+    {this.player = player;
+    this.items = items;}
 
-    public InventoryManager(Player player, ArrayList<Item> items) {
-        this.player = player;
-        this.items = items;
+    public Player getPlayer(){
+        return this.player;
+    }
+
+    public ArrayList<Item> getItems(){
+        return this.items;
     }
 
     public void addItem(Item item) {

@@ -1,7 +1,12 @@
-package entities;
+package entities.item;
 
 import config.GameConstants;
-import entities.item.Item;
+import entities.abstractions.CollidableEntity;
+import entities.abstractions.ICollidable;
+import entities.abstractions.IRoomContainer;
+import entities.characters.Enemy;
+import entities.characters.Player;
+import entities.rooms.Room;
 import geometry.Circle;
 import geometry.Point;
 import graphics.door.IDoorDrawer;

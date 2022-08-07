@@ -1,6 +1,11 @@
-package entities;
+package entities.abstractions;
 
+import entities.characters.Enemy;
+import entities.characters.Player;
+import entities.item.Bullet;
+import entities.item.Door;
 import entities.item.Item;
+import entities.item.Merchant;
 import geometry.Circle;
 
 /**

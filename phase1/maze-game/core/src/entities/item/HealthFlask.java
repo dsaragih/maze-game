@@ -1,9 +1,6 @@
 package entities.item;
 
-import entities.Bullet;
-import entities.Door;
-import entities.Enemy;
-import entities.Merchant;
+import entities.characters.Enemy;
 import geometry.Circle;
 
 public class HealthFlask extends Item{
