@@ -8,5 +8,5 @@ public class KeyBindings {
     public static int[] MOVE_UP_KEYS = {Input.Keys.W, Input.Keys.UP};
     public static int[] MOVE_DOWN_KEYS = {Input.Keys.S, Input.Keys.DOWN};
     
-    public static int USE_CURRENT_ITEM = Input.Keys.LEFT;
+    public static int USE_CURRENT_ITEM = Input.Buttons.LEFT;
 }

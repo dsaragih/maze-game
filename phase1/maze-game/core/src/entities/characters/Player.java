@@ -14,6 +14,7 @@ import geometry.Point;
 import graphics.entities.player.IPlayerDrawer;
 import manager.InventoryManager;
 
+import javax.imageio.ImageTranscoder;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -25,7 +26,9 @@ import java.util.Collections;
  * @author Daniel.
  */
 public class Player extends CollidableEntity {
-    private int health = 100;
+
+    private final int MAX_HEALTH = 100;
+    private int health = MAX_HEALTH;
     private IPlayerDrawer playerDrawer;
     private Collection<IPlayerObserver> observers = new ArrayList<>();
     private Point gunDirection = new Point(0,0);
@@ -166,18 +169,11 @@ public class Player extends CollidableEntity {
      * @param enemy the enemy collided with player
      */
     public void collideWith(Enemy enemy) {
-        if(shield > 0){
-            if (shield - enemy.getDamage() < 0) {
-                health += shield - enemy.getDamage();
-                shield = 0;
-            }
-            else {
-                shield -= enemy.getDamage() * (1.0 - armourPoint * 0.01);
-            }
-        }
-        else{
-            health -= enemy.getDamage() *(1.0 - armourPoint * 0.01);
-        }
+        int totalHealth = health + shield;
+        totalHealth -= enemy.getDamage() *(1.0 - armourPoint * 0.01);
+        health = Math.min(totalHealth, MAX_HEALTH);
+        shield = Math.max(totalHealth - health, 0);
+
     }
 
     /**

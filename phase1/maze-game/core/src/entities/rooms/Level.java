@@ -88,7 +88,6 @@ public class Level implements IRoomContainer {
                     r1.addDoor(door1);
                     r2.addDoor(door2);
 
-
                     edges.put(pair, true);
                 }
             }
@@ -106,7 +105,6 @@ public class Level implements IRoomContainer {
      * @param room a room that will be in container.
      */
     public void setNewRoom(Room room) {
-
         IEntityManager entityManager = currentRoom.getEntityManager();
         if (entityManager.isFinished()) {
             currentRoom = room;
@@ -135,8 +133,6 @@ public class Level implements IRoomContainer {
         if (entityManager.isFinished()) {
             player.changeGold(entityManager.getGold());
         }
-
-        //presenter.draw("pass in all the data that has any effect on the visuals on the screen");
     }
 
     /**

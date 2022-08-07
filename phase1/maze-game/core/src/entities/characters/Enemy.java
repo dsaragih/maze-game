@@ -26,7 +26,7 @@ public class Enemy extends CollidableEntity implements IPlayerObserver {
     private IEnemyDrawer enemyDrawer;
     private int health = 100;
     private Point target = null;
-    private int damage;
+    private int damage = ENEMY_DAMAGE;
 
     private int value = MathUtils.random(1,3);
 
@@ -39,7 +39,6 @@ public class Enemy extends CollidableEntity implements IPlayerObserver {
     public Enemy(int x, int y, IEnemyDrawer enemyDrawer) {
         super(x, y, true);
         this.enemyDrawer = enemyDrawer;
-        damage = ENEMY_DAMAGE;
     }
 
     /**

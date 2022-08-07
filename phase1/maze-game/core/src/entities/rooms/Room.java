@@ -15,6 +15,7 @@ import graphics.presenters.IPresenter;
 import manager.EntityManager;
 import manager.IEntityManager;
 
+import javax.print.attribute.standard.PresentationDirection;
 import java.util.ArrayList;
 
 /**
@@ -30,12 +31,17 @@ public class Room implements IDrawble {
 
         int numEnemies = MathUtils.random(1, 3);
         for (int i = 0; i < numEnemies; ++i) {
-            Point enemy_pos = new Point(MathUtils.random(0, screenWidth), MathUtils.random(0, screenHeight));
-            Enemy enemy = new Enemy(enemy_pos, presenter.getEnemyDrawer());
+            Point enemyPos = new Point(MathUtils.random(0, screenWidth), MathUtils.random(0, screenHeight));
+            Enemy enemy = new Enemy(enemyPos, presenter.getEnemyDrawer());
             player.addObserver(enemy);
             entityManager.addCollidableEntity(enemy);
             entityManager.addGold(enemy.getValue());
         }
+
+        Point merchantPos = new Point(MathUtils.random(0, screenWidth), MathUtils.random(0, screenHeight));
+        entityManager.addCollidableEntity(new Merchant(merchantPos.x,merchantPos.y, new ArrayList<Item>(), presenter.getMerchantDrawer()));
+
+
 
     }
     public Room(IPresenter presenter, Player player, int screenWidth, int screenHeight, int numEnemies){
