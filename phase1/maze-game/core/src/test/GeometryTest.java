@@ -39,7 +39,7 @@ public class GeometryTest {
     public void circleIntersectionTest2(){
         Circle c1 = new Circle(new Point(1,2), 2);
         Circle c2 = new Circle(new Point(1,10), 3);
-        Boolean expected = true;
+        Boolean expected = false;
         Boolean actual = c1.intersects(c2);
         assertEquals(expected, actual);
     }

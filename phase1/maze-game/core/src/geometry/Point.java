@@ -81,4 +81,8 @@ public class Point {
         return x ==0 && y ==0;
     }
 
+    public boolean equals(Point p){
+        return this.x == p.x && this.y == p.y;
+    }
+
 }

@@ -27,7 +27,7 @@ public class UserManagerTests {
     public void testDeleteUser(){
         userController.addUser("Bob the Vanquished", "BobPass", false);
         String response = String.valueOf(userController.deleteUser("Bob the Vanquished"));
-        assertEquals("Successfully deleted Bob the Vanquished!", response);
+        assertEquals("SUCCESS", response);
     }
 
     @Test(timeout = 200)
@@ -35,6 +35,6 @@ public class UserManagerTests {
         // For some reason this test takes longer than 50ms
         userController.addUser("Bob the Banned", "BobPass", false);
         String response = String.valueOf(userController.banUser("Bob the Banned"));
-        assertEquals("Successfully banned Bob the Banned!", response);
+        assertEquals("SUCCESS", response);
     }
 }

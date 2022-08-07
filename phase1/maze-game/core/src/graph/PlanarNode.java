@@ -53,26 +53,17 @@ public class PlanarNode extends Point {
 
     /**
      * Determine whether the point equals the object
-     * @param ob the object being compared
-     * @return
+     * @param p the node being compared
+     * @return whether they are equal
      */
-    @Override
-    public boolean equals(Object ob)
+
+    public boolean equals(PlanarNode p)
     {
-        if (ob == this) {
-            return true;
-        }
-
-        if (ob == null || ob.getClass() != getClass()) {
-            return false;
-        }
-
-        PlanarNode n = (PlanarNode) ob;
-        return x == n.x && y == n.y;
+        return super.equals((Point) p);
     }
 
     /**
-     * Retrun integer hash code of the coordinate of the node
+     * Return integer hash code of the coordinate of the node
      * @return hash code of the coordinate of the node
      */
     @Override

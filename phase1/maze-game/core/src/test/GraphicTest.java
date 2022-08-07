@@ -5,8 +5,8 @@
 //import graphics.entities.player.IPlayerDrawer;
 //import console.launcher.Main;
 //import junit.*;
-import org.junit.Test;
-public class RoomTest {
+
+public class GraphicTest {
 //    public static void Main(){
 //        ExampleArmour object = new ExampleArmour(1,1);
 //        Point pos = new Point(1,1);

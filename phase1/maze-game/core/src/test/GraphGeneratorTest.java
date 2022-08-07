@@ -6,6 +6,10 @@ import org.junit.*;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
+
+import java.util.Collections;
+import java.util.Iterator;
+
 public class GraphGeneratorTest {
 
     @Test(timeout = 50)
@@ -21,11 +25,11 @@ public class GraphGeneratorTest {
         p1.addNode(n1);
         p1.addNode(n2);
         p1.addNode(n3);
-        p2.addNode(n1);
-        p2.addNode(n2);
-        p2.addNode(n3);
+        p2.addNode(n4);
+        p2.addNode(n5);
+        p2.addNode(n6);
         p1.mergeGraph(p2);
-        assert p1.getNodes().contains(n4);
+        assertTrue(p1.getNodes().contains(n4));
     }
     @Test(timeout = 50)
     public void joinUndirectedNodesTest(){
@@ -35,14 +39,26 @@ public class GraphGeneratorTest {
         assert n1.getNeighboors().contains(n2);
         assert n2.getNeighboors().contains(n1);
     }
-//    public void polygonGraphGeneratorTest(){
-//        PolygonGenerator p = new PolygonGenerator(new Point(0,0), 4,1.0, 1.0);
-//        PlanarGraph g = p.generate();
-//        Boolean expected = true;
-//        Boolean actual;
-//        for (PlanarNode i: g.getNodes()) {
-//
-//        }
-//    }
+    @Test(timeout = 50)
+    public void polygonGraphGeneratorTest(){
+        PolygonGenerator p = new PolygonGenerator(new Point(0,0), 2,1, 0);
+        PlanarGraph g = p.generate();
+        boolean containsLeftPoint = false;
+        boolean containsRightPoint = false;
+        for (PlanarNode planarNode : g.getNodes()) {
+            if (Math.abs(planarNode.x - 1) < 0.01 && Math.abs(planarNode.y - 0) < 0.01) {
+                containsLeftPoint = true;
+                break;
+            }
+        }
+        for (PlanarNode planarNode : g.getNodes()) {
+            if (Math.abs(planarNode.x + 1) < 0.01 && Math.abs(planarNode.y - 0) < 0.01) {
+                containsRightPoint = true;
+                break;
+            }
+        }
+        assertTrue(containsLeftPoint);
+        assertTrue(containsRightPoint);
+    }
 
 }
