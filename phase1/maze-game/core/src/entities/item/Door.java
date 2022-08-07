@@ -74,49 +74,12 @@ public class Door extends CollidableEntity {
         other.collideWith(this);
     }
 
-    @Override
-    public void collideWith(Merchant merchant) {
-
-    }
-
     /**
      * Collide with the other player
      * @param player the player being collided
      */
     public void collideWith(Player player){
         roomContainer.setNewRoom(door.room);
-    }
-
-    /**
-     * Collide with the other enemy
-     * @param enemy the enemy being collided
-     */
-    @Override
-    public void collideWith(Enemy enemy) {
-
-    }
-
-    /**
-     * Collide with the other door
-     * @param door the door being collided
-     */
-    @Override
-    public void collideWith(Door door) {
-
-    }
-
-    /**
-     * Collide with the bullet
-     * @param bullet the bullet being collided
-     */
-    @Override
-    public void collideWith(Bullet bullet) {
-
-    }
-
-    @Override
-    public void collideWith(Item item) {
-
     }
 }
 

@@ -6,7 +6,6 @@ import entities.abstractions.CollidableEntity;
 import entities.abstractions.ICollidable;
 import entities.abstractions.IPlayerObserver;
 import entities.item.*;
-import graphics.healthbar.HealthBarDrawer;
 import graphics.healthbar.IHealthBarDrawer;
 import manager.IEntityManager;
 import geometry.Circle;
@@ -14,7 +13,6 @@ import geometry.Point;
 import graphics.entities.player.IPlayerDrawer;
 import manager.InventoryManager;
 
-import javax.imageio.ImageTranscoder;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -130,15 +128,6 @@ public class Player extends CollidableEntity {
     }
 
     /**
-     * Get the gun direction.
-     * @return the gun direction
-     */
-    public Point getGunDirection() {
-        System.out.println(gunDirection.x + " " + gunDirection.y);
-        return gunDirection;
-    }
-
-    /**
      * Draw the player.
      */
     public void draw(){
@@ -156,15 +145,6 @@ public class Player extends CollidableEntity {
     }
 
     /**
-     * Collide with another player.
-     * @param player the player collided with the player
-     */
-    @Override
-    public void collideWith(Player player) {
-
-    }
-
-    /**
      * Collide with another enemy.
      * @param enemy the enemy collided with player
      */
@@ -176,26 +156,9 @@ public class Player extends CollidableEntity {
 
     }
 
-    /**
-     * Collide with another door.
-     * @param door the door collided with player
-     */
-    @Override
-    public void collideWith(Door door) {
-
-    }
     @Override
     public void collideWith(Item item){
         itemOwned.add(item);
-    }
-
-    /**
-     * Collide with another bullet.
-     * @param bullet the bullet collided with player
-     */
-    @Override
-    public void collideWith(Bullet bullet) {
-
     }
 
     /**
@@ -239,13 +202,10 @@ public class Player extends CollidableEntity {
     public int getHealth(){
         return health;
     }
-    public int getGold(){return goldOwned;}
-
-    public int getShield(){return shield;}
 
     public void changeGold(int amount){this.goldOwned += amount;}
 
-    public boolean hasCollidewithMerchant(){return collideWithMerchant;}
+    public boolean hasCollideWithMerchant(){return collideWithMerchant;}
 
     public void setCollideWithMerchant(){collideWithMerchant = false;}
 

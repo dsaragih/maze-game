@@ -32,8 +32,7 @@ public class Boss extends CollidableEntity implements IPlayerObserver {
     public void update(){
         radius += 1;
 //        fire(target);
-
-}
+    }
     public void fire(Point direction){
         gun.fire(direction);
     }
@@ -44,37 +43,12 @@ public class Boss extends CollidableEntity implements IPlayerObserver {
     }
 
     @Override
-    public void collideWith(Player player) {
-
-    }
-
-    @Override
-    public void collideWith(Enemy enemy) {
-
-    }
-
-    @Override
-    public void collideWith(Door door) {
-
-    }
-
-    @Override
     public void collideWith(Bullet bullet) {
         this.health -= bullet.getDamage();
     }
 
     @Override
-    public void collideWith(Item item) {
-
-    }
-
-    @Override
     public void informCollision(ICollidable other) {other.informCollision(this);
-    }
-
-    @Override
-    public void collideWith(Merchant merchant) {
-
     }
 
     @Override

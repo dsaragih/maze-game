@@ -27,38 +27,8 @@ public class Weapon extends Item implements ICollidable {
     }
 
     @Override
-    public void collideWith(Player player) {
-
-    }
-
-    @Override
-    public void collideWith(Enemy enemy) {
-
-    }
-
-    @Override
-    public void collideWith(Door door) {
-
-    }
-
-    @Override
-    public void collideWith(Bullet bullet) {
-
-    }
-
-    @Override
-    public void collideWith(Item item) {
-
-    }
-
-    @Override
     public void informCollision(ICollidable other) {
-
-    }
-
-    @Override
-    public void collideWith(Merchant merchant) {
-
+        other.informCollision(this);
     }
 
     public int getDamage(){

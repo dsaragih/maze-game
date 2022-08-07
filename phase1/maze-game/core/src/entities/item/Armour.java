@@ -5,7 +5,6 @@ import entities.characters.Enemy;
 import entities.characters.Player;
 import geometry.Circle;
 import geometry.Point;
-import config.GameConstants;
 
 import static config.GameConstants.ARMOUR_RADIUS;
 
@@ -22,6 +21,12 @@ public class Armour extends Item{
     public Armour(Point pos){
         super(pos);
     }
+
+    @Override
+    public void draw() {
+
+    }
+
     public Armour(Point pos, int value, float armourPoint, int shield, String name) {
         super(pos, value, name);
         //armour point reduce the damage taken by a percentage
@@ -38,56 +43,10 @@ public class Armour extends Item{
         this.shield = shield;
     }
 
-    public Armour(float x, float y) {
-        super(x,y);
-    }
-
-
-    //An armour has armour point that reduce damage
-    @Override
-    public void draw() {
-
-    }
-
     @Override
     public Circle getCollisionBox() {
         return new Circle(pos, ARMOUR_RADIUS);
     }
-
-    @Override
-    public void collideWith(Player player) {
-    }
-
-    @Override
-    public void collideWith(Enemy enemy) {
-
-    }
-
-    @Override
-    public void collideWith(Door door) {
-
-    }
-
-    @Override
-    public void collideWith(Bullet bullet) {
-
-    }
-
-    @Override
-    public void collideWith(Item item) {
-
-    }
-
-    @Override
-    public void informCollision(ICollidable other) {
-
-    }
-
-    @Override
-    public void collideWith(Merchant merchant) {
-
-    }
-
     public int getShield(){return shield;}
     public float getArmourPoint(){return armourPoint;}
 }

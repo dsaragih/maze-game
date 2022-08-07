@@ -13,6 +13,7 @@ public class Merchant extends CollidableEntity {
     //A merchant will sell stuff to the player
     private ArrayList<Item> itemOwned;
     private IMerchantDrawer drawer;
+    private boolean showMenu = false;
     public Merchant(float x, float y, ArrayList<Item> itemOwned, IMerchantDrawer drawer) {
         super(x, y);
         this.itemOwned = itemOwned;
@@ -27,49 +28,26 @@ public class Merchant extends CollidableEntity {
     @Override
     public void draw() {
         drawer.drawMerchant(pos);
+        if(showMenu){
+            drawer.drawItemList(pos, itemOwned);
+        }
     }
 
-    public void addItem(Item item){
-        itemOwned.add(item);
+    @Override
+    public void update(){
+        showMenu = false;
     }
-
     @Override
     public Circle getCollisionBox() {
         return new Circle(pos, 15);
     }
-
-
     @Override
     public void collideWith(Player player) {
-        drawer.drawItemList(pos, itemOwned);
-    }
-
-    @Override
-    public void collideWith(Enemy enemy) {
-
-    }
-
-    @Override
-    public void collideWith(Door door) {
-
-    }
-
-    @Override
-    public void collideWith(Bullet bullet) {
-
-    }
-
-    @Override
-    public void collideWith(Item item) {
-
+        showMenu = true;
     }
     @Override
     public void informCollision(ICollidable other) {
     other.collideWith(this);
-    }
-    @Override
-    public void collideWith(Merchant merchant) {
-
     }
     public ArrayList<Item> getItemOwned(){return itemOwned;}
 }

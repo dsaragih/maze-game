@@ -17,29 +17,4 @@ public class HealthFlask extends Item{
     public Circle getCollisionBox() {
         return null;
     }
-
-    @Override
-    public void collideWith(Enemy enemy) {
-
-    }
-
-    @Override
-    public void collideWith(Door door) {
-
-    }
-
-    @Override
-    public void collideWith(Bullet bullet) {
-
-    }
-
-    @Override
-    public void collideWith(Item item) {
-
-    }
-
-    @Override
-    public void collideWith(Merchant merchant) {
-
-    }
 }

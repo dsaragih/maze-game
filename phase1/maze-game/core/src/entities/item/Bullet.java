@@ -47,34 +47,11 @@ public class Bullet extends Weapon {
         return new Circle(this.pos, GameConstants.BULLET_RADIUS);
     }
 
-    /** Collide with the player
-     * @param player The player being hit by the bullet.
-     */
-    public void collideWith(Player player) {
-
-    }
-
     /** Collide with enemy player
      * @param enemy The enemy being hit by the bullet.
      */
     public void collideWith(Enemy enemy) {
         isHit = true;
-    }
-
-    /** Collide with enemy player
-     * @param door The door being hit by the bullet.
-     */
-    @Override
-    public void collideWith(Door door) {
-
-    }
-
-    /** Collide with another bullet
-     * @param bullet Another bullet being hit by this bullet
-     */
-    @Override
-    public void collideWith(Bullet bullet) {
-
     }
 
     /** Inform the object that it's hit by the bullet

@@ -96,25 +96,12 @@ public class Enemy extends CollidableEntity implements IPlayerObserver {
     }
 
     /**
-     * Collide with the door
-     * @param door the door being collided with the door
-     */
-    public void collideWith(Door door) {
-
-    }
-
-    /**
      * Collide with the bullet
      * @param bullet the bullet being collided with the door
      */
     @Override
     public void collideWith(Bullet bullet) {
         this.health -= bullet.getDamage();
-    }
-
-    @Override
-    public void collideWith(Item item) {
-
     }
 
     /**

@@ -29,9 +29,6 @@ public abstract class Item extends CollidableEntity {
         super(x,y);
     }
 
-    public abstract void draw();
-
-
     public int getValue(){
         return value;
     }
@@ -40,10 +37,6 @@ public abstract class Item extends CollidableEntity {
     public String toString(){
         return name;
     }
-
-    @Override
-    public void collideWith(Player player){}
-
     @Override
     public void informCollision(ICollidable other) {
         other.collideWith(this);

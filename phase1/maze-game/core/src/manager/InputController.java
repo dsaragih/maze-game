@@ -54,7 +54,7 @@ public class InputController {
 
          Player player = level.getPlayer();
 
-         if (player.hasCollidewithMerchant()){
+         if (player.hasCollideWithMerchant()){
              Merchant merchant = player.getCurrMerchant();
              if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)){
                  player.buy(merchant.getItemOwned().get(0));

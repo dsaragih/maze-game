@@ -1,5 +1,11 @@
 package entities.abstractions;
 
+import entities.characters.Enemy;
+import entities.characters.Player;
+import entities.item.Bullet;
+import entities.item.Door;
+import entities.item.Item;
+import entities.item.Merchant;
 import geometry.Circle;
 import manager.IEntityManager;
 import geometry.Point;
@@ -25,7 +31,48 @@ public abstract class CollidableEntity extends Entity implements ICollidable{
     public CollidableEntity(Point pos, boolean needToBeKilled){super(pos, needToBeKilled);}
     public CollidableEntity(float x, float y, boolean needToBeKilled){super(x,y,needToBeKilled);}
 
+    @Override
+    public void draw() {
+
+    }
+
     abstract public Circle getCollisionBox();
+
+    @Override
+    public void collideWith(Player player) {
+
+    }
+
+    @Override
+    public void collideWith(Enemy enemy) {
+
+    }
+
+    @Override
+    public void collideWith(Door door) {
+
+    }
+
+    @Override
+    public void collideWith(Bullet bullet) {
+
+    }
+
+    @Override
+    public void collideWith(Item item) {
+
+    }
+
+    @Override
+    public void informCollision(ICollidable other) {
+
+    }
+
+    @Override
+    public void collideWith(Merchant merchant) {
+
+    }
+
     @Override
     public void removeSelf(IEntityManager entityManager){
         entityManager.removeEntity(this);
