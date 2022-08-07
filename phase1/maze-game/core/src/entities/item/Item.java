@@ -1,10 +1,9 @@
 package entities.item;
 
-import entities.CollidableEntity;
-import entities.ICollidable;
-import entities.Player;
+import entities.abstractions.CollidableEntity;
+import entities.abstractions.ICollidable;
+import entities.characters.Player;
 import geometry.Point;
-import graphics.presenters.IDrawble;
 
 public abstract class Item extends CollidableEntity {
     //Item is an object that can be picked up by the player, and has a value. This is not a class we wrote in phase 1

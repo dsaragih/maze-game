@@ -1,4 +1,4 @@
-package entities;
+package entities.abstractions;
 
 import manager.IEntityManager;
 import geometry.Point;

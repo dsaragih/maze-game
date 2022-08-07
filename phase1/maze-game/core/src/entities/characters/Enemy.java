@@ -1,7 +1,13 @@
-package entities;
+package entities.characters;
 import com.badlogic.gdx.Gdx;
 import config.GameConstants;
+import entities.item.Bullet;
+import entities.abstractions.CollidableEntity;
+import entities.abstractions.ICollidable;
+import entities.abstractions.IPlayerObserver;
+import entities.item.Door;
 import entities.item.Item;
+import entities.item.Merchant;
 import geometry.Circle;
 import geometry.Point;
 import graphics.entities.enemy.IEnemyDrawer;

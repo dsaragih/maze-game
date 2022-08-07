@@ -1,7 +1,11 @@
-package entities;
+package entities.rooms;
 
 import com.badlogic.gdx.math.MathUtils;
 
+import entities.item.Door;
+import entities.characters.Enemy;
+import entities.item.Merchant;
+import entities.characters.Player;
 import entities.item.ExampleArmour;
 import entities.item.HealthFlask;
 import entities.item.Item;

@@ -1,6 +1,6 @@
 package graphics.level;
 
-import entities.Room;
+import entities.rooms.Room;
 
 public class LevelDrawer implements ILevelDrawer{
     @Override

@@ -1,6 +1,6 @@
-package entities;
+package entities.abstractions;
 
-import entities.Room;
+import entities.rooms.Room;
 
 /**
  * Represents a room container interface

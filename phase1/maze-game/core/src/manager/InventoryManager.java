@@ -1,6 +1,6 @@
 package manager;
 
-import entities.Player;
+import entities.characters.Player;
 import entities.item.Armour;
 import entities.item.HealthFlask;
 import entities.item.Item;

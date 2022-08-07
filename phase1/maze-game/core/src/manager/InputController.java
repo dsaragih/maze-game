@@ -4,12 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Vector3;
-import entities.Level;
-import entities.Merchant;
-import entities.Player;
+import entities.rooms.Level;
+import entities.item.Merchant;
+import entities.characters.Player;
 import geometry.Point;
-
-import java.util.Arrays;
 
 /**
  * Represents an input controller

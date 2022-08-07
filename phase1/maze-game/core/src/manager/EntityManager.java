@@ -1,8 +1,8 @@
 package manager;
 
-import entities.CollidableEntity;
-import entities.Entity;
-import entities.ICollidable;
+import entities.abstractions.CollidableEntity;
+import entities.abstractions.Entity;
+import entities.abstractions.ICollidable;
 
 
 import java.util.ArrayList;

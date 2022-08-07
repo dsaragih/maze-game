@@ -1,7 +1,9 @@
-package entities;
+package entities.item;
 
 import config.GameConstants;
-import entities.item.Weapon;
+import entities.abstractions.ICollidable;
+import entities.characters.Enemy;
+import entities.characters.Player;
 import geometry.Circle;
 import geometry.Point;
 import graphics.bullet.IBulletDrawer;

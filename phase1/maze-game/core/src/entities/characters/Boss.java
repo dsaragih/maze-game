@@ -1,11 +1,14 @@
-package entities;
+package entities.characters;
 
-import entities.item.Item;
+import entities.abstractions.CollidableEntity;
+import entities.abstractions.ICollidable;
+import entities.abstractions.IPlayerObserver;
+import entities.item.*;
 import geometry.Circle;
 import geometry.Point;
 import graphics.entities.boss.IBossDrawer;
 
-public class Boss extends CollidableEntity implements IPlayerObserver{
+public class Boss extends CollidableEntity implements IPlayerObserver {
 
     private int health = 1500;
     public Gun gun;

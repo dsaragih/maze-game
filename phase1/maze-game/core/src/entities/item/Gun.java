@@ -1,7 +1,6 @@
-package entities;
+package entities.item;
 
 import config.GameConstants;
-import entities.item.Weapon;
 import manager.IEntityManager;
 import geometry.Point;
 import graphics.bullet.IBulletDrawer;

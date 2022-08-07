@@ -1,9 +1,11 @@
-package entities;
+package entities.characters;
 
 import com.badlogic.gdx.Gdx;
 import config.GameConstants;
-import entities.item.Armour;
-import entities.item.Item;
+import entities.abstractions.CollidableEntity;
+import entities.abstractions.ICollidable;
+import entities.abstractions.IPlayerObserver;
+import entities.item.*;
 import manager.IEntityManager;
 import geometry.Circle;
 import geometry.Point;
