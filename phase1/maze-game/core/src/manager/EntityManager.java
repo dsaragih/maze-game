@@ -127,8 +127,8 @@ public class EntityManager implements IEntityManager{
             entity.update();
         }
 
-        for(ICollidable e1: collidableEntities){
-            for(ICollidable e2: collidableEntities){
+        for(CollidableEntity e1: collidableEntities){
+            for(CollidableEntity e2: collidableEntities){
                 if(e1 == e2){
                     continue;
                 }
