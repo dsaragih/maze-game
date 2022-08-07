@@ -21,7 +21,7 @@ import java.util.*;
 public class Level implements IRoomContainer {
     private Room currentRoom;
     private ILevelDrawer levelDrawer;
-    private Random rnd = new Random();
+    private final Random rnd = new Random();
     private int screenWidth;
     private int screenHeight;
     private Player player;
@@ -37,12 +37,10 @@ public class Level implements IRoomContainer {
         this.player = player;
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
+        levelDrawer = presenter.getLevelDrawer();
 
         Gun gun = new Gun(new Point(screenWidth / 2f, screenHeight / 2f), presenter.getGunDrawer(), presenter.getBulletDrawer());
         player.setGun(gun);
-
-        levelDrawer = presenter.getLevelDrawer();
-
 
         PlanarGraph levelLayout = new TestGraphGenerator().generate();
         Map<Set<PlanarNode>, Boolean> edges = getEdgeMap(levelLayout);
@@ -116,7 +114,9 @@ public class Level implements IRoomContainer {
     public void update(){
         EntityManager entityManager = (EntityManager) currentRoom.getEntityManager();
         currentRoom.update();
-        if (entityManager.isFinished()){player.changeGold(entityManager.getGold());}
+        if (entityManager.isFinished()){
+            player.changeGold(entityManager.getGold());
+        }
     }
 
     /**
@@ -185,8 +185,6 @@ public class Level implements IRoomContainer {
     public boolean isOver(){
         return player.getHealth() <= 0;
     }
-
-
     public Player getPlayer(){return player;}
 
 }
