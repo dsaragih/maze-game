@@ -5,8 +5,8 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import config.GameConstants;
 import game.entities.rooms.Level;
 import game.entities.characters.Player;
-import graphics.presenters.IUIPresenter;
-import graphics.presenters.UIPresenter;
+import graphics.presenters.IPresenter;
+import graphics.presenters.Presenter;
 import graphics.presenters.IDrawerFactory;
 import graphics.presenters.ShapeDrawerFactory;
 import manager.InputController;
@@ -20,7 +20,7 @@ public class MazeGame extends ApplicationAdapter {
 	private Player player;
 	private Level level;
 	private IDrawerFactory drawerFactory;
-	private IUIPresenter UIPresenter;
+	private IPresenter Presenter;
 	private InputController controller;
 
 	/**
@@ -28,10 +28,10 @@ public class MazeGame extends ApplicationAdapter {
 	 */
 	@Override
 	public void create () {
-		UIPresenter = new UIPresenter();
+		Presenter = new Presenter();
 		drawerFactory = new ShapeDrawerFactory(GameConstants.SCREEN_WIDTH, GameConstants.SCREEN_HEIGHT);
 
-		level = new Level(drawerFactory, UIPresenter, GameConstants.SCREEN_WIDTH, GameConstants.SCREEN_HEIGHT);
+		level = new Level(drawerFactory, Presenter, GameConstants.SCREEN_WIDTH, GameConstants.SCREEN_HEIGHT);
 		controller = new InputController(level);
 	}
 
@@ -50,7 +50,7 @@ public class MazeGame extends ApplicationAdapter {
 	@Override
 	public void dispose () {
 		drawerFactory.dispose();
-		UIPresenter.dispose();
+		Presenter.dispose();
 	}
 
 	/**
@@ -69,8 +69,6 @@ public class MazeGame extends ApplicationAdapter {
 	 */
 	private void draw() {
 		ScreenUtils.clear(0, 0, 0, 1);
-
-		level.draw();
-		UIPresenter.draw();
+		Presenter.draw();
 	}
 }

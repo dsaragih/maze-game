@@ -9,11 +9,11 @@ import geometry.Point;
 import graph.PlanarGraph;
 import graph.PlanarNode;
 import graph.TestGraphGenerator;
-import graphics.presenters.IUIPresenter;
+import graphics.presenters.IDrawble;
+import graphics.presenters.IPresenter;
 import graphics.presenters.IDrawerFactory;
 import graphics.game.entities.drawers.door.IDoorDrawer;
 import graphics.level.ILevelDrawer;
-import manager.IEntityManager;
 
 import java.util.*;
 
@@ -23,12 +23,13 @@ import java.util.*;
  * @author Daniel
  * @author Ethan
  */
-public class Level implements IRoomContainer {
+public class Level implements IRoomContainer, IDrawble{
 
     private IDrawerFactory drawerFactory;
     private Room currentRoom;
+    private Collection<Room> rooms;
     private final ILevelDrawer levelDrawer;
-    private final IUIPresenter UIPresenter;
+    private final IPresenter Presenter;
     private final Random rnd = new Random();
     private final int screenWidth;
     private final int screenHeight;
@@ -36,15 +37,14 @@ public class Level implements IRoomContainer {
 
     /**
      * Create a level
-     *
      * @param drawerFactory    the drawerFactory in Clean architecture
      * @param screenWidth  the width of screen
      * @param screenHeight the height of screen
      */
-    public Level(IDrawerFactory drawerFactory, IUIPresenter UIPresenter, int screenWidth, int screenHeight) {
+    public Level(IDrawerFactory drawerFactory, IPresenter Presenter, int screenWidth, int screenHeight) {
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
-        this.UIPresenter = UIPresenter;
+        this.Presenter = Presenter;
         this.drawerFactory = drawerFactory;
         levelDrawer = drawerFactory.getLevelDrawer();
 
@@ -53,10 +53,14 @@ public class Level implements IRoomContainer {
         player.setGun(gun);
 
         PlanarGraph levelLayout = new TestGraphGenerator().generate();
-        Collection<Room> rooms = getRoomsFromGraph(levelLayout, drawerFactory);
+        rooms = getRoomsFromGraph(levelLayout, drawerFactory);
         currentRoom = rooms.iterator().next();
 
         gun.setEntityManager(currentRoom.getEntityManager());
+
+        Collection<IDrawble> drawbles = new ArrayList<>();
+        drawbles.add(this);
+        Presenter.setDrawbles(drawbles);
     }
 
     private Collection<Room> getRoomsFromGraph(PlanarGraph levelLayout, IDrawerFactory presenter) {
@@ -94,8 +98,6 @@ public class Level implements IRoomContainer {
         }
 
         return nodeToRoom.values();
-        //this line of code is for convenience of testing
-//        currentRoom = new entities.rooms.BossRoom(presenter, player, screenWidth, screenHeight);
     }
 
     /**
@@ -104,8 +106,7 @@ public class Level implements IRoomContainer {
      * @param room a room that will be in container.
      */
     public void setNewRoom(Room room) {
-        IEntityManager entityManager = currentRoom.getEntityManager();
-        if (entityManager.isFinished()) {
+        if (currentRoom.allEnemiesKilled()) {
             currentRoom = room;
             player.setGunEntityManager(currentRoom.getEntityManager());
         }
@@ -120,9 +121,20 @@ public class Level implements IRoomContainer {
     public void update() {
         currentRoom.update();
 
-        UIPresenter.updatePlayerShield(player.getHealth());
-        UIPresenter.updateIsPlayerDead(player.getHealth() <= 0);
-        UIPresenter.updatePlayerHealth(player.getHealth());
+        boolean playerWins = true;
+        for(Room room : rooms){
+            if(!room.allEnemiesKilled()){
+                playerWins = false;
+            }
+        }
+        if(playerWins){
+            Presenter.playerWins();
+        }
+
+        Presenter.updatePlayerShield(player.getHealth());
+        Presenter.updateIsPlayerDead(player.getHealth() <= 0);
+        Presenter.updatePlayerHealth(player.getHealth());
+
     }
 
     /**
