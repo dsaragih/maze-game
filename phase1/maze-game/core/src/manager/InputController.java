@@ -52,23 +52,23 @@ public class InputController {
             level.mouseClick(mousePos);
          }
 
-         Player player = level.getPlayer();
-
-         if (player.hasCollideWithMerchant()){
-             Merchant merchant = player.getCurrMerchant();
-             if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)){
-                 player.buy(merchant.getItemOwned().get(0));
-             }
-             if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_2)){
-                 player.buy(merchant.getItemOwned().get(1));
-             }
-         }
-         if (Gdx.input.isKeyJustPressed(Input.Keys.J)){
-             player.useArmour();
-         }
-         if (Gdx.input.isButtonJustPressed(Input.Buttons.RIGHT)){
-             player.restoreHealth();
-         }
+//         Player player = level.getPlayer();
+//
+//         if (player.hasCollideWithMerchant()){
+//             Merchant merchant = player.getCurrMerchant();
+//             if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)){
+//                 player.buy(merchant.getItemOwned().get(0));
+//             }
+//             if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_2)){
+//                 player.buy(merchant.getItemOwned().get(1));
+//             }
+//         }
+//         if (Gdx.input.isKeyJustPressed(Input.Keys.J)){
+//             player.useArmour();
+//         }
+//         if (Gdx.input.isButtonJustPressed(Input.Buttons.RIGHT)){
+//             player.restoreHealth();
+//         }
 
     }
 

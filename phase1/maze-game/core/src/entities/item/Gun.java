@@ -25,10 +25,6 @@ public class Gun extends Weapon {
         this.entityManager = entityManager;
     }
 
-    public void rename(String name){
-        this.name = name;
-    }
-
     public void fire(Point direction){
         long time = System.currentTimeMillis();
         if (time >= lastAttack + GameConstants.GUN_COOLDOWN) {
@@ -37,19 +33,13 @@ public class Gun extends Weapon {
             lastAttack = time;
         }
     }
-//    public void setEntityManager(manager.IEntityManager entityManager) {this.entityManager = entityManager;}
 
-    public void setPosition(Point pos){
-        this.pos = pos;
+    public void setPlayerPosition(Point playerPos){
+        pos = playerPos;
     }
 
     @Override
     public void draw() {
         gunDrawer.drawGun(pos);
-    }
-
-    @Override
-    public String toString(){
-        return name;
     }
 }

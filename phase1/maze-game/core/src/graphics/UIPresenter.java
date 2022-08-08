@@ -8,7 +8,7 @@ import config.GameConstants;
 public class UIPresenter implements IUIPresenter {
 
 	//Game state which effects the UI
-    private boolean isLevelOver = false;
+    private boolean isPlayerDead = false;
 	private int playerShield;
 	private int playerGold;
 
@@ -34,7 +34,7 @@ public class UIPresenter implements IUIPresenter {
     }
 
 	private void drawNoOverhead(){
-		if(isLevelOver){
+		if(isPlayerDead){
 			font.setColor(1, 0, 0, 1);
 			font.draw(spriteBatch, "YOU DIED", GameConstants.SCREEN_WIDTH / 2f, GameConstants.SCREEN_HEIGHT / 2f);
 			return;
@@ -51,8 +51,8 @@ public class UIPresenter implements IUIPresenter {
 	}
 
 	@Override
-	public void updateIsGameOver(boolean isLevelOver) {
-		this.isLevelOver = isLevelOver;
+	public void updateIsPlayerDead(boolean isPlayerDead) {
+		this.isPlayerDead = isPlayerDead;
 	}
 
 	@Override

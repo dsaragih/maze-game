@@ -21,8 +21,8 @@ import java.util.ArrayList;
  * Represents a room
  */
 public class Room implements IDrawble {
-    private IDrawerFactory presenter;
-    private IEntityManager entityManager = new EntityManager();
+    private final IDrawerFactory presenter;
+    private final IEntityManager entityManager = new EntityManager();
 
     public Room(IDrawerFactory presenter, Player player, int screenWidth, int screenHeight) {
         this.presenter = presenter;
@@ -34,25 +34,6 @@ public class Room implements IDrawble {
             Enemy enemy = new Enemy(enemyPos, presenter.getEnemyDrawer());
             player.addObserver(enemy);
             entityManager.addCollidableEntity(enemy);
-            entityManager.addGold(enemy.getValue());
-        }
-
-        Point merchantPos = new Point(MathUtils.random(0, screenWidth), MathUtils.random(0, screenHeight));
-        entityManager.addCollidableEntity(new Merchant(merchantPos.x,merchantPos.y, new ArrayList<Item>(), presenter.getMerchantDrawer()));
-
-
-
-    }
-    public Room(IDrawerFactory presenter, Player player, int screenWidth, int screenHeight, int numEnemies){
-        this.presenter = presenter;
-        entityManager.addCollidableEntity(player);
-
-        for(int i = 0; i < numEnemies; ++i){
-            Point enemy_pos = new Point(MathUtils.random(0, screenWidth), MathUtils.random(0, screenHeight));
-            Enemy enemy = new Enemy(enemy_pos, presenter.getEnemyDrawer());
-            player.addObserver(enemy);
-            entityManager.addCollidableEntity(enemy);
-            entityManager.addGold(enemy.getValue());
         }
     }
 

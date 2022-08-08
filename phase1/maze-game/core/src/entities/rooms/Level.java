@@ -1,6 +1,6 @@
 package entities.rooms;
 
-import com.badlogic.gdx.math.MathUtils;
+import config.GameConstants;
 import entities.item.Door;
 import entities.item.Gun;
 import entities.abstractions.IRoomContainer;
@@ -24,29 +24,31 @@ import java.util.*;
  * @author Ethan
  */
 public class Level implements IRoomContainer {
+
+    private IDrawerFactory drawerFactory;
     private Room currentRoom;
-    private ILevelDrawer levelDrawer;
-    private IUIPresenter UIPresenter;
+    private final ILevelDrawer levelDrawer;
+    private final IUIPresenter UIPresenter;
     private final Random rnd = new Random();
-    private int screenWidth;
-    private int screenHeight;
-    private Player player;
+    private final int screenWidth;
+    private final int screenHeight;
+    private final Player player;
 
     /**
      * Create a level
      *
      * @param drawerFactory    the drawerFactory in Clean architecture
-     * @param player       a player instance
      * @param screenWidth  the width of screen
      * @param screenHeight the height of screen
      */
-    public Level(IDrawerFactory drawerFactory, IUIPresenter UIPresenter, Player player, int screenWidth, int screenHeight) {
-        this.player = player;
+    public Level(IDrawerFactory drawerFactory, IUIPresenter UIPresenter, int screenWidth, int screenHeight) {
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
-        levelDrawer = drawerFactory.getLevelDrawer();
         this.UIPresenter = UIPresenter;
+        this.drawerFactory = drawerFactory;
+        levelDrawer = drawerFactory.getLevelDrawer();
 
+        player = new Player(new Point(GameConstants.SCREEN_WIDTH/2f, GameConstants.SCREEN_HEIGHT/2f), drawerFactory.getPlayerDrawer());
         Gun gun = new Gun(new Point(screenWidth / 2f, screenHeight / 2f), drawerFactory.getGunDrawer(), drawerFactory.getBulletDrawer());
         player.setGun(gun);
 
@@ -57,7 +59,7 @@ public class Level implements IRoomContainer {
         gun.setEntityManager(currentRoom.getEntityManager());
     }
 
-    public Collection<Room> getRoomsFromGraph(PlanarGraph levelLayout, IDrawerFactory presenter) {
+    private Collection<Room> getRoomsFromGraph(PlanarGraph levelLayout, IDrawerFactory presenter) {
         Map<Set<PlanarNode>, Boolean> edges = getEdgeMap(levelLayout);
         Map<PlanarNode, Room> nodeToRoom = new HashMap<>();
         for (PlanarNode node : levelLayout) {
@@ -106,7 +108,6 @@ public class Level implements IRoomContainer {
         if (entityManager.isFinished()) {
             currentRoom = room;
             player.setGunEntityManager(currentRoom.getEntityManager());
-            player.setCollideWithMerchant();
         }
     }
 
@@ -125,21 +126,20 @@ public class Level implements IRoomContainer {
      * Update the current room
      */
     public void update() {
-        IEntityManager entityManager = currentRoom.getEntityManager();
         currentRoom.update();
-        if (entityManager.isFinished()) {
-            player.changeGold(entityManager.getGold());
-        }
 
         UIPresenter.updatePlayerShield(player.getHealth());
-        UIPresenter.updateIsGameOver(entityManager.isFinished());
+        UIPresenter.updateIsPlayerDead(player.getHealth() <= 0);
     }
 
     /**
      * Draw the level
      */
     public void draw() {
+        drawerFactory.onStartRender();
         levelDrawer.drawLevel(currentRoom);
+        player.draw();
+        drawerFactory.onEndRender();
     }
 
     /**
@@ -205,10 +205,6 @@ public class Level implements IRoomContainer {
      * */
     public boolean isOver() {
         return player.getHealth() <= 0;
-    }
-
-    public Player getPlayer() {
-        return player;
     }
 
 }

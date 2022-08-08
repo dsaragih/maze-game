@@ -35,6 +35,4 @@ public interface IEntityManager {
     boolean isFinished();
 
     void addGold(int value);
-
-    int getGold();
 }

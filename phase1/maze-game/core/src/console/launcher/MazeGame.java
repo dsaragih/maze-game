@@ -31,9 +31,8 @@ public class MazeGame extends ApplicationAdapter {
 	public void create () {
 		UIPresenter = new UIPresenter();
 		drawerFactory = new ShapeDrawerFactory(GameConstants.SCREEN_WIDTH, GameConstants.SCREEN_HEIGHT);
-		player = new Player(new Point(GameConstants.SCREEN_WIDTH/2f, GameConstants.SCREEN_HEIGHT/2f), drawerFactory.getPlayerDrawer(), drawerFactory.getHealthBarDrawer());
-		level = new Level(drawerFactory, UIPresenter, player, GameConstants.SCREEN_WIDTH, GameConstants.SCREEN_HEIGHT);
 
+		level = new Level(drawerFactory, UIPresenter, GameConstants.SCREEN_WIDTH, GameConstants.SCREEN_HEIGHT);
 		controller = new InputController(level);
 	}
 
@@ -71,11 +70,8 @@ public class MazeGame extends ApplicationAdapter {
 	 */
 	private void draw() {
 		ScreenUtils.clear(0, 0, 0, 1);
-		drawerFactory.onStartRender();
-		level.draw();
-		player.draw();
-		drawerFactory.onEndRender();
 
+		level.draw();
 		UIPresenter.draw();
 	}
 }
