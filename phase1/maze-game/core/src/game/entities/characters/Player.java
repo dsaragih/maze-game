@@ -199,9 +199,9 @@ public class Player extends CollidableEntity {
 
 
 
-//    public void addObserver(IPlayerObserver observer){
-//        observers.add(observer);
-//    }
+    public void addObserver(IPlayerObserver observer){
+        observers.add(observer);
+    }
 
 
     public int getHealth(){

@@ -19,11 +19,6 @@ public class Merchant extends CollidableEntity {
         this.itemOwned = itemOwned;
         this.drawer = drawer;
     }
-    public Merchant(float x, float y, IMerchantDrawer drawer){
-        super(x,y);
-        itemOwned = new ArrayList<>();
-        this.drawer= drawer;
-    }
 
     @Override
     public void draw() {

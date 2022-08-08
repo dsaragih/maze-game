@@ -16,6 +16,7 @@ import manager.EntityManager;
 import manager.IEntityManager;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a room
@@ -35,6 +36,8 @@ public class Room implements IDrawble {
             player.addObserver(enemy);
             entityManager.addCollidableEntity(enemy);
         }
+        Point merchantPos = new Point(MathUtils.random(0, screenWidth), MathUtils.random(0, screenHeight));
+        entityManager.addCollidableEntity(new Merchant(merchantPos.x, merchantPos.y, new ArrayList<>(), presenter.getMerchantDrawer()));
     }
 
     /**
