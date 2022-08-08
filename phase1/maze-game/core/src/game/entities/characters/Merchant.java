@@ -47,12 +47,13 @@ public class Merchant extends CollidableEntity {
     other.collideWith(this);
     }
     public ArrayList<Item> getItemOwned(){return itemOwned;}
-    public void removeItem(Item item) {
+    public Item sellItem(Item item, int gold) {
         for (Item i : this.itemOwned) {
-            if (i.equals(item)) {
+            if (i.equals(item)&&gold>i.getValue()) {
                 itemOwned.remove(i);
-                break;
+                return i;
             }
         }
+        return null;
     }
 }

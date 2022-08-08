@@ -111,6 +111,9 @@ public class Level implements IRoomContainer {
         }
     }
 
+    public Player getPlayer(){
+        return player;
+    }
     /**
      * Update the current room
      */

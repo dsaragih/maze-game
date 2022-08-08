@@ -188,35 +188,25 @@ public class Player extends CollidableEntity {
         }
     }
 
-    public void buy(ArrayList<Item> items){
-        for (Item i: items){
-            if(currMerchant.getItemOwned().contains(i) && goldOwned >= i.getValue()){
-                this.addItem(i);
-                goldOwned -= i.getValue();
-                currMerchant.removeItem(i);
-            }
+    public void buy(Item item){
+        Item wantToBuy = currMerchant.sellItem(item, goldOwned);
+        if (wantToBuy!=null){
+            itemOwned.add(wantToBuy);
+            goldOwned -= item.getValue();
         }
     }
 
 
-    /**
-     * Add an observer
-     * @param observer the observer added
-     */
-    public void addObserver(IPlayerObserver observer){
-        observers.add(observer);
-    }
 
-    /**
-     * Get the health of player
-     * @return the health value of player.
-     */
-    public int getHealth(){
-        return health;
-    }
 
-//    public void changeGold(int amount){this.goldOwned += amount;}
-//
+//    public void addObserver(IPlayerObserver observer){
+//        observers.add(observer);
+//    }
+
+
+//    public int getHealth(){
+//        return health;
+//    }
     public boolean hasCollideWithMerchant(){return !(currMerchant==null);}
 //
 //    public void setCollideWithMerchant(){collideWithMerchant = false;}
@@ -226,7 +216,9 @@ public class Player extends CollidableEntity {
 //    }
     public void addItem(Item item){itemOwned.add(item);}
 //
-    public Merchant getCurrMerchant(){return currMerchant;}
+    public Merchant getCurrMerchant(){
+        return currMerchant;
+    }
 
 //    public void useArmour(){
 //        if (inventory.hasArmour())
