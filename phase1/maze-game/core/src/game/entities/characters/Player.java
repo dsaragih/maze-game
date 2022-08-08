@@ -90,7 +90,7 @@ public class Player extends CollidableEntity {
     }
 
     private Point calcGunPos(){
-        return new Point(pos.x + gunDirection.x * BULLET_SPEED, pos.y + gunDirection.y * BULLET_SPEED);
+        return new Point(pos.x + gunDirection.x * GameConstants.PLAYER_RADIUS, pos.y + gunDirection.y * GameConstants.PLAYER_RADIUS);
     }
 
 
