@@ -207,6 +207,7 @@ public class Player extends CollidableEntity {
     public int getHealth(){
         return health;
     }
+    public int getShield() { return shield; }
     public boolean hasCollideWithMerchant(){return !(currMerchant==null);}
 //
 //    public void setCollideWithMerchant(){collideWithMerchant = false;}

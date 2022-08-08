@@ -120,7 +120,7 @@ public class Level implements IRoomContainer {
     public void update() {
         currentRoom.update();
 
-        UIPresenter.updatePlayerShield(player.getHealth());
+        UIPresenter.updatePlayerShield(player.getShield());
         UIPresenter.updateIsPlayerDead(player.getHealth() <= 0);
         UIPresenter.updatePlayerHealth(player.getHealth());
     }
