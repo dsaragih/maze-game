@@ -6,6 +6,7 @@ import game.entities.abstractions.CollidableEntity;
 import game.entities.abstractions.ICollidable;
 import game.entities.abstractions.IPlayerObserver;
 import game.entities.item.Gun;
+import game.entities.item.Item;
 import manager.IEntityManager;
 import geometry.Circle;
 import geometry.Point;
@@ -13,6 +14,7 @@ import graphics.game.entities.drawers.player.IPlayerDrawer;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 
 /**
  * Represents the player
@@ -33,11 +35,11 @@ public class Player extends CollidableEntity {
 //    private float armourPoint = 0.0F;
 //    private int shield = 0;
 //
-//    private int goldOwned = 100;
-//    private ArrayList<Item> itemOwned = new ArrayList<>(Collections.singletonList(gun));
+    private int goldOwned = 100;
+    private ArrayList<Item> itemOwned = new ArrayList<>(Collections.singletonList(gun));
 //    public boolean collideWithMerchant = false;
 //
-//    private Merchant currMerchant;
+    private Merchant currMerchant;
 //
 //    private InventoryManager inventory;
 
@@ -65,6 +67,7 @@ public class Player extends CollidableEntity {
      * @param direction The direction of player
      */
     public void fire(Point direction){
+        currMerchant = null;
         gun.fire(direction);
     }
 
@@ -73,6 +76,7 @@ public class Player extends CollidableEntity {
      * @param direction The direction of player
      */
     public void move(Point direction){
+        currMerchant = null;
         //move in the given direction
         direction.multiply(GameConstants.PLAYER_SPEED * Gdx.graphics.getDeltaTime());
         pos.add(direction);
@@ -109,6 +113,7 @@ public class Player extends CollidableEntity {
      * @param gun the gun hold by player
      */
     public void setGun(Gun gun){
+        currMerchant = null;
         this.gun = gun;
     }
 
@@ -169,22 +174,30 @@ public class Player extends CollidableEntity {
         other.collideWith(this);
     }
 
-//    @Override
-//    public void collideWith(Merchant merchant) {
-//        collideWithMerchant = true;
-//        currMerchant = merchant;
-//    }
+    @Override
+    public void collideWith(Merchant merchant) {
+        currMerchant = merchant;
+    }
 
-//    public void buy(Item item){
-//        if (!(currMerchant == null)){
-//            if (currMerchant.getItemOwned().contains(item) && goldOwned >= item.getValue())
-//            {
-//                addItem(item);
-//                goldOwned -= item.getValue();
-//                inventory.addItem(item);
-//            }
-//        }
-//    }
+    public ArrayList<Item> showMerchantItems(){
+        if(!(currMerchant==null)){
+            return currMerchant.getItemOwned();
+        }
+        else{
+            return new ArrayList<>();
+        }
+    }
+
+    public void buy(ArrayList<Item> items){
+        for (Item i: items){
+            if(currMerchant.getItemOwned().contains(i) && goldOwned >= i.getValue()){
+                this.addItem(i);
+                goldOwned -= i.getValue();
+                currMerchant.removeItem(i);
+            }
+        }
+    }
+
 
     /**
      * Add an observer
@@ -204,16 +217,16 @@ public class Player extends CollidableEntity {
 
 //    public void changeGold(int amount){this.goldOwned += amount;}
 //
-//    public boolean hasCollideWithMerchant(){return collideWithMerchant;}
+    public boolean hasCollideWithMerchant(){return !(currMerchant==null);}
 //
 //    public void setCollideWithMerchant(){collideWithMerchant = false;}
 //
 //    public ArrayList<Item> getItem(){
 //        return inventory.getItems();
 //    }
-//    public void addItem(Item item){inventory.addItem(item);}
+    public void addItem(Item item){itemOwned.add(item);}
 //
-//    public Merchant getCurrMerchant(){return currMerchant;}
+    public Merchant getCurrMerchant(){return currMerchant;}
 
 //    public void useArmour(){
 //        if (inventory.hasArmour())
