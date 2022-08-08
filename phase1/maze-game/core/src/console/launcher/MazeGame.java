@@ -1,7 +1,13 @@
 package console.launcher;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.sun.org.apache.xpath.internal.operations.Or;
 import config.GameConstants;
 import game.entities.rooms.Level;
 import game.entities.characters.Player;
@@ -28,8 +34,9 @@ public class MazeGame extends ApplicationAdapter {
 	 */
 	@Override
 	public void create () {
-		UIPresenter = new UIPresenter();
-		drawerFactory = new ShapeDrawerFactory(GameConstants.SCREEN_WIDTH, GameConstants.SCREEN_HEIGHT);
+		Stage stage = new Stage(new ScreenViewport());
+		UIPresenter = new UIPresenter(stage);
+		drawerFactory = new ShapeDrawerFactory(stage, GameConstants.SCREEN_WIDTH, GameConstants.SCREEN_HEIGHT);
 
 		level = new Level(drawerFactory, UIPresenter, GameConstants.SCREEN_WIDTH, GameConstants.SCREEN_HEIGHT);
 		controller = new InputController(level);

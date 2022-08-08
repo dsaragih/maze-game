@@ -10,21 +10,23 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 public class SandRoomDrawer implements IRoomDrawer {
     private int screenWidth;
     private int screenHeight;
-    private SpriteBatch spriteBatch;
-    Texture texture;
+    Stage stage;
+    SpriteBatch spriteBatch;
     TextureRegion textureRegion;
-    public SandRoomDrawer(SpriteBatch spriteBatch, int screenWidth, int screenHeight){
-        this.spriteBatch = spriteBatch;
+    public SandRoomDrawer(Stage stage, int screenWidth, int screenHeight){
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
+        this.stage = stage;
 
-        texture = new Texture(Gdx.files.internal("chiseled_sandstone.png"));
+        Texture texture = new Texture(Gdx.files.internal("chiseled_sandstone.png"));
         texture.setWrap(Texture.TextureWrap.MirroredRepeat, Texture.TextureWrap.MirroredRepeat);
         textureRegion = new TextureRegion(texture);
         textureRegion.setRegion(0, 0, screenWidth, screenHeight);
     }
     @Override
     public void drawRoom() {
-        spriteBatch.draw(textureRegion, 0, 0);
+        stage.getBatch().begin();
+        stage.getBatch().draw(textureRegion, 0, 0);
+        stage.getBatch().end();
     }
 }

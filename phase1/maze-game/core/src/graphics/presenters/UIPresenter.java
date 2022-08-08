@@ -1,5 +1,6 @@
 package graphics.presenters;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -30,9 +31,9 @@ public class UIPresenter implements IUIPresenter {
 	private final OrthographicCamera camera;
 
 	private final IHealthBarDrawer healthBarDrawer;
-    public UIPresenter(){
+    public UIPresenter(Stage stage){
         spriteBatch = new SpriteBatch();
-		stage = new Stage(new ScreenViewport());
+		this.stage = stage;
 		font = new BitmapFont();
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, GameConstants.SCREEN_WIDTH, GameConstants.SCREEN_HEIGHT	);
@@ -44,6 +45,7 @@ public class UIPresenter implements IUIPresenter {
 
     @Override
     public void draw() {
+
 		spriteBatch.setProjectionMatrix(camera.combined);
 		shapeRenderer.setProjectionMatrix(camera.combined);
 
@@ -67,12 +69,13 @@ public class UIPresenter implements IUIPresenter {
 		if(isPlayerDead){
 			Label label1 = new Label("YOU DIED", style);
 			label1.setPosition(0, GameConstants.SCREEN_HEIGHT / 2f);
+			label1.setSize(Gdx.graphics.getWidth(), 20);
 			label1.setAlignment(Align.center);
 			stage.addActor(label1);
 			return;
 		}
 		Label shieldLabel = new Label("Shield: " + playerShield, style);
-		shieldLabel.setPosition(10, 50);
+		shieldLabel.setPosition(30, 50);
 		stage.addActor(shieldLabel);
 
 		Label goldLabel = new Label("Gold: " + playerGold, style);

@@ -1,9 +1,13 @@
 package graphics.presenters;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import graphics.game.entities.drawers.merchant.CircleMerchantDrawer;
 import graphics.game.entities.drawers.bullet.CircleBulletDrawer;
 import graphics.game.entities.drawers.bullet.IBulletDrawer;
@@ -21,18 +25,20 @@ import graphics.level.LevelDrawer;
 import graphics.game.entities.drawers.player.CirclePlayerDrawer;
 import graphics.game.entities.drawers.player.IPlayerDrawer;
 import graphics.room.IRoomDrawer;
-import graphics.room.SimpleShapeRoomDrawer;
+import graphics.room.SandRoomDrawer;
 
 public class ShapeDrawerFactory implements IDrawerFactory {
     private ShapeRenderer shapeRenderer;
+    private Stage stage;
     private SpriteBatch spriteBatch;
     private OrthographicCamera camera;
 
     private int screenWidth;
     private int screenHeight;
 
-    public ShapeDrawerFactory(int screenWidth, int screenHeight){
-        spriteBatch =  new SpriteBatch();
+    public ShapeDrawerFactory(Stage stage, int screenWidth, int screenHeight){
+        spriteBatch = new SpriteBatch();
+        this.stage = stage;
         shapeRenderer = new ShapeRenderer();
         camera = new OrthographicCamera();
         camera.setToOrtho(false, screenWidth, screenHeight);
@@ -45,9 +51,8 @@ public class ShapeDrawerFactory implements IDrawerFactory {
     public void onStartRender() {
         camera.update();
         shapeRenderer.setProjectionMatrix(camera.combined);
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-
         spriteBatch.setProjectionMatrix(camera.combined);
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         spriteBatch.begin();
     }
 
@@ -60,6 +65,7 @@ public class ShapeDrawerFactory implements IDrawerFactory {
     public void dispose(){
         shapeRenderer.dispose();
         spriteBatch.dispose();
+        stage.dispose();
     }
 
     @Override
@@ -69,7 +75,7 @@ public class ShapeDrawerFactory implements IDrawerFactory {
 
     @Override
     public IRoomDrawer getRoomDrawer() {
-        return new SimpleShapeRoomDrawer(shapeRenderer, screenWidth, screenHeight);
+        return new SandRoomDrawer(stage, screenWidth, screenHeight);
     }
 
     @Override
@@ -87,7 +93,7 @@ public class ShapeDrawerFactory implements IDrawerFactory {
         return new CircleEnemyDrawer(shapeRenderer);
     }
 
-    public IMerchantDrawer getMerchantDrawer(){return new CircleMerchantDrawer(shapeRenderer, new BitmapFont());}
+    public IMerchantDrawer getMerchantDrawer(){return new CircleMerchantDrawer(shapeRenderer, stage);}
 
     @Override
     public IGunDrawer getGunDrawer() {
