@@ -11,7 +11,6 @@ public class SandRoomDrawer implements IRoomDrawer {
     private int screenWidth;
     private int screenHeight;
     Stage stage;
-    SpriteBatch spriteBatch;
     TextureRegion textureRegion;
     public SandRoomDrawer(Stage stage, int screenWidth, int screenHeight){
         this.screenWidth = screenWidth;
