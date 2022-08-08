@@ -34,8 +34,6 @@ public class Player extends CollidableEntity {
     private Collection<IPlayerObserver> observers = new ArrayList<>();
     private Point gunDirection = new Point(0,0);
     public Gun gun;
-
-    private Armour armour;
     private float armourPoint = 0.0F;
     private int shield = 0;
 
@@ -122,13 +120,11 @@ public class Player extends CollidableEntity {
      * @param armour the armour wear by player
      */
     public void setArmour(Armour armour){
-        if(!itemOwned.contains((armour)))
-        {itemOwned.add(armour);}
-        this.armour = armour;
+        if(!itemOwned.contains((armour))) {
+            itemOwned.add(armour);
+        }
         this.shield = armour.getShield();
         this.armourPoint = armour.getArmourPoint();
-        armour.collideWith(this);
-
     }
 
     /**
@@ -152,12 +148,16 @@ public class Player extends CollidableEntity {
      * @param enemy the enemy collided with player
      */
     public void collideWith(Enemy enemy) {
-//        int totalHealth = health + shield;
-//        totalHealth -= enemy.getDamage() *(1.0 - armourPoint * 0.01);
-//        health = Math.min(totalHealth, MAX_HEALTH);
-//        shield = Math.max(totalHealth - health, 0);
-
-        health = Math.max(health - enemy.getDamage(), 0);
+        if (enemy.getDamage()*armourPoint>=shield){
+            this.health -= enemy.getDamage()-shield;
+            this.shield = 0;
+            this.armourPoint = 0;
+        }
+        else{
+            this.shield -= enemy.getDamage()*armourPoint;
+            this.health -= enemy.getDamage()*(1-armourPoint);
+        }
+        health = Math.max(health, 0);
     }
 
     @Override
@@ -220,13 +220,25 @@ public class Player extends CollidableEntity {
         return currMerchant;
     }
 
-//    public void useArmour(){
-//        if (inventory.hasArmour())
-//        {
-//            inventory.use((Armour) inventory.getArmour());
-//            inventory.removeItem(inventory.getArmour());
-//        }
-//    }
+    public void useArmour(Armour armour){
+        if (itemOwned.contains(armour)){
+            this.armourPoint = armour.getArmourPoint();
+            this.shield = armour.getShield();
+            itemOwned.remove(armour);
+        }
+    }
+    public void useArmour(){
+        Item toBeRemoved = null;
+        for (Item i: itemOwned){
+            if (i instanceof Armour){
+                toBeRemoved = i;
+                Armour armour = (Armour)i;
+                this.armourPoint=armour.getArmourPoint();
+                this.shield = armour.getShield();
+            }
+        }
+        itemOwned.remove(toBeRemoved);
+    }
     public void restoreHealth()
     {
         Item toBeRemoved = null;
