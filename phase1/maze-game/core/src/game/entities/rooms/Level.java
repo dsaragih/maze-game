@@ -127,6 +127,7 @@ public class Level implements IRoomContainer, IDrawble{
                 playerWins = false;
             }
         }
+
         if(playerWins){
             Presenter.playerWins();
         }

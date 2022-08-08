@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import graphics.game.entities.drawers.MineDropperEnemy.IMineDropperDrawer;
+import graphics.game.entities.drawers.MineDropperEnemy.ShapeMineDropperDrawer;
 import graphics.game.entities.drawers.merchant.CircleMerchantDrawer;
 import graphics.game.entities.drawers.bullet.CircleBulletDrawer;
 import graphics.game.entities.drawers.bullet.IBulletDrawer;
@@ -102,6 +104,11 @@ public class ShapeDrawerFactory implements IDrawerFactory {
     @Override
     public IHealthBarDrawer getHealthBarDrawer() {
         return new HealthBarDrawer(shapeRenderer);
+    }
+
+    @Override
+    public IMineDropperDrawer getMineDropperEnemyDrawer() {
+        return new ShapeMineDropperDrawer(shapeRenderer);
     }
 }
 

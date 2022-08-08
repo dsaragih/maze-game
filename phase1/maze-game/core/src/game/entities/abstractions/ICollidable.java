@@ -1,5 +1,6 @@
 package game.entities.abstractions;
 
+import game.entities.Mine;
 import game.entities.characters.Enemy;
 import game.entities.characters.MineDropperEnemy;
 import game.entities.characters.Player;
@@ -57,4 +58,6 @@ public interface ICollidable {
     void collideWith(Merchant merchant);
 
     void collideWith(MineDropperEnemy mineDropperEnemy);
+
+    void collideWith(Mine mine);
 }

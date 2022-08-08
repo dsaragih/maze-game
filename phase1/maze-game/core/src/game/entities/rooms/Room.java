@@ -2,6 +2,7 @@ package game.entities.rooms;
 
 import com.badlogic.gdx.math.MathUtils;
 
+import game.entities.characters.MineDropperEnemy;
 import game.entities.item.Door;
 import game.entities.characters.Enemy;
 import game.entities.characters.Merchant;
@@ -38,6 +39,10 @@ public class Room implements IDrawble {
         }
         Point merchantPos = new Point(MathUtils.random(0, screenWidth), MathUtils.random(0, screenHeight));
         entityManager.addCollidableEntity(new Merchant(merchantPos.x, merchantPos.y, new ArrayList<>(), presenter.getMerchantDrawer()));
+
+        Point mineDropperPos = new Point(MathUtils.random(0, screenWidth), MathUtils.random(0, screenHeight));
+        entityManager.addCollidableEntity(new MineDropperEnemy(mineDropperPos, presenter.getMineDropperEnemyDrawer()));
+
     }
 
     /**
