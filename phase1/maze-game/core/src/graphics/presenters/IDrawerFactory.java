@@ -1,6 +1,5 @@
 package graphics.presenters;
 
-import graphics.game.entities.drawers.boss.IBossDrawer;
 import graphics.game.entities.drawers.bullet.IBulletDrawer;
 import graphics.game.entities.drawers.door.IDoorDrawer;
 import graphics.game.entities.drawers.merchant.IMerchantDrawer;
@@ -29,8 +28,6 @@ public interface IDrawerFactory {
     IMerchantDrawer getMerchantDrawer();
 
     IBulletDrawer getBulletDrawer();
-
-    IBossDrawer getBossDrawer();
 
     IHealthBarDrawer getHealthBarDrawer();
 }
