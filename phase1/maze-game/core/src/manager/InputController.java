@@ -1,14 +1,11 @@
 package manager;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 import config.GameConstants;
 import config.KeyBindings;
-import entities.characters.Player;
-import entities.item.Merchant;
-import entities.rooms.Level;
+import game.entities.rooms.Level;
 import geometry.Point;
 
 /**

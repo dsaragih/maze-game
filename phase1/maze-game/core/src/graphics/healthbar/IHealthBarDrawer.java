@@ -1,7 +1,6 @@
 package graphics.healthbar;
 
-import entities.characters.Enemy;
-import entities.characters.Player;
+import game.entities.characters.Player;
 
 public interface IHealthBarDrawer {
 

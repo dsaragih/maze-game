@@ -1,12 +1,11 @@
 
 import entities.characters.Enemy;
 import entities.characters.Player;
-import entities.item.*;
 import geometry.Point;
-import graphics.bullet.CircleBulletDrawer;
+import graphics.entities.bullet.CircleBulletDrawer;
 import graphics.entities.player.CirclePlayerDrawer;
-import graphics.gun.CircleGunDrawer;
-import graphics.gun.IGunDrawer;
+import graphics.entities.gun.CircleGunDrawer;
+import graphics.entities.gun.IGunDrawer;
 import graphics.healthbar.HealthBarDrawer;
 import manager.EntityManager;
 import static org.junit.Assert.*;
