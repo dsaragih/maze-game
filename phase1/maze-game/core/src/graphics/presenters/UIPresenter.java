@@ -75,8 +75,9 @@ public class UIPresenter implements IUIPresenter {
 		style.fontColor = Color.RED;
 
 		if(playerWins){
-			Label label1 = new Label("YOU Win", style);
+			Label label1 = new Label("YOU WIN", style);
 			label1.setPosition(0, GameConstants.SCREEN_HEIGHT / 2f);
+			label1.setSize(Gdx.graphics.getWidth(), 20);
 			label1.setAlignment(Align.center);
 			stage.addActor(label1);
 			return;

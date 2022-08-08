@@ -36,8 +36,8 @@ public class Room implements IDrawble {
             player.addObserver(enemy);
             entityManager.addCollidableEntity(enemy);
         }
-        Point merchantPos = new Point(MathUtils.random(0, screenWidth), MathUtils.random(0, screenHeight));
-        entityManager.addCollidableEntity(new Merchant(merchantPos.x, merchantPos.y, new ArrayList<>(), presenter.getMerchantDrawer()));
+        Point merchantPos = new Point(MathUtils.random(40, screenWidth - 40), MathUtils.random(40, screenHeight - 40));
+        addMerchant(merchantPos);
     }
 
     /**
@@ -55,13 +55,13 @@ public class Room implements IDrawble {
         entityManager.addCollidableEntity(door);
     }
 
-    public void addMerchant() {
+    public void addMerchant(Point merchantPos) {
         ArrayList<Item> itemOwned = new ArrayList<>();
         ExampleArmour weakArmour = new ExampleArmour(0, 0);
         HealthFlask health = new HealthFlask(0, 0);
         itemOwned.add(health);
         itemOwned.add(weakArmour);
-        Merchant merchant = new Merchant(100, 100, itemOwned, presenter.getMerchantDrawer());
+        Merchant merchant = new Merchant(merchantPos.x, merchantPos.y, itemOwned, presenter.getMerchantDrawer());
         entityManager.addCollidableEntity(merchant);
     }
     /**
