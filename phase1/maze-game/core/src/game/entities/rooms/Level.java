@@ -111,17 +111,6 @@ public class Level implements IRoomContainer {
         }
     }
 
-//    private void addMerchantToRooms(List<Room> rooms) {
-//        int merchant1Index = MathUtils.random(0, rooms.size() - 1);
-//        int merchant2Index = MathUtils.random(0, rooms.size() - 1);
-//        while (merchant2Index == merchant1Index) {
-//            merchant2Index = MathUtils.random(0, rooms.size() - 1);
-//        }
-//
-//        rooms.get(merchant1Index).addMerchant();
-//        rooms.get(merchant2Index).addMerchant();
-//    }
-
     /**
      * Update the current room
      */

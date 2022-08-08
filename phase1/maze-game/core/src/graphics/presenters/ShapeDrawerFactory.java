@@ -1,6 +1,7 @@
 package graphics.presenters;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import graphics.game.entities.drawers.boss.CircleBossDrawer;
@@ -88,7 +89,7 @@ public class ShapeDrawerFactory implements IDrawerFactory {
         return new CircleEnemyDrawer(shapeRenderer);
     }
 
-    public IMerchantDrawer getMerchantDrawer(){return new CircleMerchantDrawer(shapeRenderer);}
+    public IMerchantDrawer getMerchantDrawer(){return new CircleMerchantDrawer(shapeRenderer, new BitmapFont());}
 
     @Override
     public IGunDrawer getGunDrawer() {

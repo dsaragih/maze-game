@@ -1,8 +1,9 @@
-package game.entities.item;
+package game.entities.characters;
 
 import game.entities.abstractions.CollidableEntity;
 import game.entities.abstractions.ICollidable;
 import game.entities.characters.Player;
+import game.entities.item.Item;
 import geometry.Circle;
 import graphics.game.entities.drawers.merchant.IMerchantDrawer;
 
@@ -26,10 +27,7 @@ public class Merchant extends CollidableEntity {
 
     @Override
     public void draw() {
-        drawer.drawMerchant(pos);
-        if(showMenu){
-            drawer.drawItemList(pos, itemOwned);
-        }
+        drawer.drawMerchant(pos, showMenu, new Item[0]);
     }
 
     @Override

@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.MathUtils;
 
 import game.entities.item.Door;
 import game.entities.characters.Enemy;
-import game.entities.item.Merchant;
+import game.entities.characters.Merchant;
 import game.entities.characters.Player;
 import game.entities.item.ExampleArmour;
 import game.entities.item.HealthFlask;
