@@ -10,7 +10,7 @@ import graph.PlanarGraph;
 import graph.PlanarNode;
 import graph.TestGraphGenerator;
 import graphics.presenters.IDrawble;
-import graphics.presenters.IPresenter;
+import graphics.presenters.IUIPresenter;
 import graphics.presenters.IDrawerFactory;
 import graphics.game.entities.drawers.door.IDoorDrawer;
 import graphics.level.ILevelDrawer;
@@ -29,7 +29,7 @@ public class Level implements IRoomContainer, IDrawble{
     private Room currentRoom;
     private Collection<Room> rooms;
     private final ILevelDrawer levelDrawer;
-    private final IPresenter Presenter;
+    private final IUIPresenter Presenter;
     private final Random rnd = new Random();
     private final int screenWidth;
     private final int screenHeight;
@@ -41,7 +41,7 @@ public class Level implements IRoomContainer, IDrawble{
      * @param screenWidth  the width of screen
      * @param screenHeight the height of screen
      */
-    public Level(IDrawerFactory drawerFactory, IPresenter Presenter, int screenWidth, int screenHeight) {
+    public Level(IDrawerFactory drawerFactory, IUIPresenter Presenter, int screenWidth, int screenHeight) {
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
         this.Presenter = Presenter;

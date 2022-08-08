@@ -10,14 +10,14 @@ import graphics.healthbar.IHealthBarDrawer;
 
 import java.util.Collection;
 
-public class Presenter implements IPresenter {
+public class UIPresenter implements IUIPresenter {
 
     //Game state which effects the UI
     private boolean isPlayerDead = false;
     private int playerShield;
     private int playerHealth;
     private int playerGold;
-
+    private boolean playerWins = false;
     private Collection<IDrawble> drawbles;
 
 
@@ -26,11 +26,10 @@ public class Presenter implements IPresenter {
     private ShapeRenderer shapeRenderer;
     private final BitmapFont font;
     private final OrthographicCamera camera;
-    private boolean playerWins = false;
 
     private final IHealthBarDrawer healthBarDrawer;
 
-    public Presenter() {
+    public UIPresenter() {
         spriteBatch = new SpriteBatch();
         font = new BitmapFont();
         camera = new OrthographicCamera();

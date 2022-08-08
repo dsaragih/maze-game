@@ -2,7 +2,7 @@ package graphics.presenters;
 
 import java.util.Collection;
 
-public interface IPresenter extends IDrawble {
+public interface IUIPresenter extends IDrawble {
     public void draw();
 
     public void updatePlayerShield(int playerShield);
