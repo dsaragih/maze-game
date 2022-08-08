@@ -6,17 +6,15 @@ import game.entities.characters.Player;
 
 public class HealthBarDrawer implements IHealthBarDrawer{
 
-    private ShapeRenderer shapeRenderer;
+    private final ShapeRenderer shapeRenderer;
 
     public HealthBarDrawer(ShapeRenderer shapeRenderer){
         this.shapeRenderer = shapeRenderer;
     }
 
     @Override
-    public void drawHealthBar(Player player) {
+    public void drawHealthBar(int playerHealth) {
         shapeRenderer.setColor(Color.RED);
-        shapeRenderer.rect(65, 23, player.getHealth(), 10);
+        shapeRenderer.rect(30, 15, playerHealth, 10);
     }
-
-
 }
