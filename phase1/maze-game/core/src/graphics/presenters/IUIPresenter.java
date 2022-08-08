@@ -1,6 +1,6 @@
 package graphics.presenters;
 
-import graphics.presenters.IDrawble;
+import java.util.Collection;
 
 public interface IUIPresenter extends IDrawble {
     public void draw();
@@ -9,5 +9,9 @@ public interface IUIPresenter extends IDrawble {
     public void updateIsPlayerDead(boolean isPlayerDead);
     public void updatePlayerGold(int playerGold);
     public void updatePlayerHealth(int playerHealth);
+
+    public void playerWins();
+
+    public void setDrawbles(Collection<IDrawble> drawbles);
     public void dispose();
 }

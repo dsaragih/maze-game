@@ -76,4 +76,8 @@ public class Room implements IDrawble {
         return entityManager;
     }
 
+    public boolean allEnemiesKilled(){
+        return entityManager.isFinished();
+    }
+
 }

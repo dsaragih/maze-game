@@ -1,13 +1,10 @@
 package console.launcher;
 
 import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.sun.org.apache.xpath.internal.operations.Or;
 import config.GameConstants;
 import game.entities.rooms.Level;
 import game.entities.characters.Player;
@@ -26,7 +23,7 @@ public class MazeGame extends ApplicationAdapter {
 	private Player player;
 	private Level level;
 	private IDrawerFactory drawerFactory;
-	private IUIPresenter UIPresenter;
+	private IUIPresenter Presenter;
 	private InputController controller;
 
 	/**
@@ -35,10 +32,10 @@ public class MazeGame extends ApplicationAdapter {
 	@Override
 	public void create () {
 		Stage stage = new Stage(new ScreenViewport());
-		UIPresenter = new UIPresenter(stage);
+		Presenter = new UIPresenter(stage);
 		drawerFactory = new ShapeDrawerFactory(stage, GameConstants.SCREEN_WIDTH, GameConstants.SCREEN_HEIGHT);
 
-		level = new Level(drawerFactory, UIPresenter, GameConstants.SCREEN_WIDTH, GameConstants.SCREEN_HEIGHT);
+		level = new Level(drawerFactory, Presenter, GameConstants.SCREEN_WIDTH, GameConstants.SCREEN_HEIGHT);
 		controller = new InputController(level);
 	}
 
@@ -57,7 +54,7 @@ public class MazeGame extends ApplicationAdapter {
 	@Override
 	public void dispose () {
 		drawerFactory.dispose();
-		UIPresenter.dispose();
+		Presenter.dispose();
 	}
 
 	/**
@@ -76,8 +73,6 @@ public class MazeGame extends ApplicationAdapter {
 	 */
 	private void draw() {
 		ScreenUtils.clear(0, 0, 0, 1);
-
-		level.draw();
-		UIPresenter.draw();
+		Presenter.draw();
 	}
 }
