@@ -11,7 +11,7 @@ public class Armour extends Item{
     public Armour(float x, float y, int value, float armourPoint, String name, int shield) {
         super(x, y, value, name);
         //armour point reduce the damage taken by a percentage
-        this.armourPoint = Math.min(99, armourPoint);
+        this.armourPoint = Math.min(100, armourPoint);
         //shield take certain amount of damage
         this.shield = shield;
     }
@@ -24,10 +24,10 @@ public class Armour extends Item{
 
     }
 
-    public Armour(Point pos, int value, float armourPoint, int shield, String name) {
+    public Armour(Point pos, int value, float armourPoint, String name, int shield) {
         super(pos, value, name);
         //armour point reduce the damage taken by a percentage
-        this.armourPoint = Math.min(99, armourPoint);
+        this.armourPoint = Math.min(100, armourPoint);
         //shield take certain amount of damage
         this.shield = shield;
     }

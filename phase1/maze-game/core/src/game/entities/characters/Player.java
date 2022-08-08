@@ -5,7 +5,9 @@ import config.GameConstants;
 import game.entities.abstractions.CollidableEntity;
 import game.entities.abstractions.ICollidable;
 import game.entities.abstractions.IPlayerObserver;
+import game.entities.item.Armour;
 import game.entities.item.Gun;
+import game.entities.item.HealthFlask;
 import game.entities.item.Item;
 import manager.IEntityManager;
 import geometry.Circle;
@@ -15,6 +17,8 @@ import graphics.game.entities.drawers.player.IPlayerDrawer;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+
+import static config.GameConstants.BULLET_SPEED;
 
 /**
  * Represents the player
@@ -31,17 +35,14 @@ public class Player extends CollidableEntity {
     private Point gunDirection = new Point(0,0);
     public Gun gun;
 
-//    private Armour armour;
-//    private float armourPoint = 0.0F;
-//    private int shield = 0;
-//
+    private Armour armour;
+    private float armourPoint = 0.0F;
+    private int shield = 0;
+
     private int goldOwned = 100;
     private ArrayList<Item> itemOwned = new ArrayList<>(Collections.singletonList(gun));
-//    public boolean collideWithMerchant = false;
 //
     private Merchant currMerchant;
-//
-//    private InventoryManager inventory;
 
     /**
      * Create a player
@@ -51,7 +52,6 @@ public class Player extends CollidableEntity {
     public Player(Point pos, IPlayerDrawer playerDrawer){
         super(pos);
         this.playerDrawer = playerDrawer;
-//        inventory = new InventoryManager(this, itemOwned);
     }
 
     /**
@@ -92,7 +92,7 @@ public class Player extends CollidableEntity {
     }
 
     private Point calcGunPos(){
-        return new Point(pos.x + gunDirection.x * 10, pos.y + gunDirection.y * 10);
+        return new Point(pos.x + gunDirection.x * BULLET_SPEED, pos.y + gunDirection.y * BULLET_SPEED);
     }
 
 
@@ -117,19 +117,19 @@ public class Player extends CollidableEntity {
         this.gun = gun;
     }
 
-//    /**
-//     * Set the armour that is wear by player
-//     * @param armour the armour wear by player
-//     */
-//    public void setArmour(Armour armour){
-//        if(!itemOwned.contains((armour)))
-//        {itemOwned.add(armour);}
-//        this.armour = armour;
-//        this.shield = armour.getShield();
-//        this.armourPoint = armour.getArmourPoint();
-//        armour.collideWith(this);
-//
-//    }
+    /**
+     * Set the armour that is wear by player
+     * @param armour the armour wear by player
+     */
+    public void setArmour(Armour armour){
+        if(!itemOwned.contains((armour)))
+        {itemOwned.add(armour);}
+        this.armour = armour;
+        this.shield = armour.getShield();
+        this.armourPoint = armour.getArmourPoint();
+        armour.collideWith(this);
+
+    }
 
     /**
      * Draw the player.
@@ -160,10 +160,10 @@ public class Player extends CollidableEntity {
         health = Math.max(health - enemy.getDamage(), 0);
     }
 
-//    @Override
-//    public void collideWith(Item item){
-//        itemOwned.add(item);
-//    }
+    @Override
+    public void collideWith(Item item){
+        itemOwned.add(item);
+    }
 
     /**
      * Inform others being collided by player.
@@ -204,9 +204,9 @@ public class Player extends CollidableEntity {
 //    }
 
 
-//    public int getHealth(){
-//        return health;
-//    }
+    public int getHealth(){
+        return health;
+    }
     public boolean hasCollideWithMerchant(){return !(currMerchant==null);}
 //
 //    public void setCollideWithMerchant(){collideWithMerchant = false;}
@@ -227,13 +227,19 @@ public class Player extends CollidableEntity {
 //            inventory.removeItem(inventory.getArmour());
 //        }
 //    }
-//    public void restoreHealth()
-//    {
-//        if(inventory.hasHealthFlask()){
-//            health += 30;
-//            health = Math.min(100, health);
-//            inventory.removeItem(inventory.getHealthFlask());
-//        }
-//    }
+    public void restoreHealth()
+    {
+        Item toBeRemoved = null;
+        for (Item i: itemOwned){
+            if(i instanceof HealthFlask){
+                health += 30;
+                health = Math.min(100, health);
+                toBeRemoved = i;
+                break;
+            }
+        }
+        itemOwned.remove(toBeRemoved);
+
+    }
 
 }
