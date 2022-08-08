@@ -5,7 +5,6 @@ import config.GameConstants;
 import game.entities.abstractions.CollidableEntity;
 import game.entities.abstractions.ICollidable;
 import game.entities.abstractions.IPlayerObserver;
-import entities.item.*;
 import game.entities.item.Gun;
 import manager.IEntityManager;
 import geometry.Circle;

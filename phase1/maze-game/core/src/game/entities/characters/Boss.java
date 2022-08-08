@@ -3,7 +3,6 @@ package game.entities.characters;
 import game.entities.abstractions.CollidableEntity;
 import game.entities.abstractions.ICollidable;
 import game.entities.abstractions.IPlayerObserver;
-import entities.item.*;
 import game.entities.item.Bullet;
 import game.entities.item.Gun;
 import geometry.Circle;

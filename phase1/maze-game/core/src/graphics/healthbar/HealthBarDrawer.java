@@ -18,11 +18,5 @@ public class HealthBarDrawer implements IHealthBarDrawer{
         shapeRenderer.rect(65, 23, player.getHealth(), 10);
     }
 
-    //@Override
-    //public void drawHealthBar(Enemy enemy) {
-    //    shapeRenderer.setColor(Color.RED);
-    //    shapeRenderer.rect(enemy.)
-    //}
-
 
 }
