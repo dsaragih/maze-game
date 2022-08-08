@@ -14,33 +14,26 @@ import java.util.ArrayList;
 
 public class CircleMerchantDrawer implements IMerchantDrawer{
     private ShapeRenderer shapeRenderer;
-    private Label.LabelStyle labelStyle;
-    public CircleMerchantDrawer(ShapeRenderer shapeRenderer){
+    private BitmapFont font;
+    public CircleMerchantDrawer(ShapeRenderer shapeRenderer, BitmapFont font){
         this.shapeRenderer = shapeRenderer;
-        labelStyle = new Label.LabelStyle();
-        labelStyle.font = new BitmapFont();
-        labelStyle.fontColor = Color.NAVY;
+        this.font = font;
     }
 
     @Override
-    public void drawMerchant(Point pos) {
+    public void drawMerchant(Point pos, boolean showMenu, Item[] items) {
         shapeRenderer.setColor(Color.BROWN);
         shapeRenderer.circle(pos.x,pos.y, GameConstants.MERCHANT_RADIUS);
 
-        Label merchantLabel = new Label("Merchant", labelStyle);
-        merchantLabel.setPosition(pos.x - merchantLabel.getPrefWidth() / 2f, pos.y + 20);
-    }
-    @Override
-    public void drawItemList(Point pos, ArrayList<Item> itemList)
-    {
-        float i = 0.0f;
-        for (Item item: itemList){
-            Label itemLabel = new Label(item.toString() + " price: " + item.getValue() +
-                    " input: " + (itemList.indexOf(item)+1), labelStyle);
-            itemLabel.setSize(Gdx.graphics.getWidth(), 20);
-            itemLabel.setPosition(0 , pos.y - i);
-            itemLabel.setAlignment(Align.center);
-            i += 30;
-        }
+//        font.draw(, "Merchant", pos.x, pos.y + 20);
+//        float i = 0.0f;
+//        for (Item item: items){
+//            Label itemLabel = new Label(item.toString() + " price: " + item.getValue() +
+//                    " input: " + (items.indexOf(item)+1), labelStyle);
+//            itemLabel.setSize(Gdx.graphics.getWidth(), 20);
+//            itemLabel.setPosition(0 , pos.y - i);
+//            itemLabel.setAlignment(Align.center);
+//            i += 30;
+//        }
     }
 }

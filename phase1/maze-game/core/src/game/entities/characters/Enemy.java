@@ -5,7 +5,6 @@ import game.entities.item.Bullet;
 import game.entities.abstractions.CollidableEntity;
 import game.entities.abstractions.ICollidable;
 import game.entities.abstractions.IPlayerObserver;
-import game.entities.item.Merchant;
 import geometry.Circle;
 import geometry.Point;
 import graphics.game.entities.drawers.enemy.IEnemyDrawer;

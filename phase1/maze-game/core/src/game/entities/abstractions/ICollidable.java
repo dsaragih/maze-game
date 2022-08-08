@@ -5,7 +5,7 @@ import game.entities.characters.Player;
 import game.entities.item.Bullet;
 import game.entities.item.Door;
 import game.entities.item.Item;
-import game.entities.item.Merchant;
+import game.entities.characters.Merchant;
 import geometry.Circle;
 
 /**
