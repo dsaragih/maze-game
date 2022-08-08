@@ -1,6 +1,7 @@
 package game.entities.abstractions;
 
 import game.entities.characters.Enemy;
+import game.entities.characters.MineDropperEnemy;
 import game.entities.characters.Player;
 import game.entities.item.Bullet;
 import game.entities.item.Door;
@@ -70,6 +71,11 @@ public abstract class CollidableEntity extends Entity implements ICollidable{
 
     @Override
     public void collideWith(Merchant merchant) {
+
+    }
+
+    @Override
+    public void collideWith(MineDropperEnemy mineDropperEnemy){
 
     }
 
