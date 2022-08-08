@@ -4,8 +4,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import graphics.game.entities.drawers.boss.CircleBossDrawer;
-import graphics.game.entities.drawers.boss.IBossDrawer;
 import graphics.game.entities.drawers.merchant.CircleMerchantDrawer;
 import graphics.game.entities.drawers.bullet.CircleBulletDrawer;
 import graphics.game.entities.drawers.bullet.IBulletDrawer;
@@ -100,9 +98,6 @@ public class ShapeDrawerFactory implements IDrawerFactory {
     public IBulletDrawer getBulletDrawer() {
         return new CircleBulletDrawer(shapeRenderer);
     }
-
-    @Override
-    public IBossDrawer getBossDrawer(){return new CircleBossDrawer(shapeRenderer);}
 
     @Override
     public IHealthBarDrawer getHealthBarDrawer() {
