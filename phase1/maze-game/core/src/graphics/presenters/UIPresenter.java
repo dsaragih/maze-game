@@ -64,9 +64,21 @@ public class UIPresenter implements IUIPresenter {
     }
 
 	private void drawNoOverhead(){
+        for(IDrawble drawble: drawbles){
+            drawble.draw();
+        }
+
 		Label.LabelStyle style = new Label.LabelStyle();
 		style.font = font;
 		style.fontColor = Color.RED;
+
+		if(playerWins){
+			Label label1 = new Label("YOU Win", style);
+			label1.setPosition(0, GameConstants.SCREEN_HEIGHT / 2f);
+			label1.setAlignment(Align.center);
+			stage.addActor(label1);
+			return;
+		}
 
 		if(isPlayerDead){
 			Label label1 = new Label("YOU DIED", style);
@@ -105,7 +117,17 @@ public class UIPresenter implements IUIPresenter {
 		this.playerHealth = playerHealth;
 	}
 
-	public void dispose(){
+    @Override
+    public void playerWins() {
+        playerWins = true;
+    }
+
+    @Override
+    public void setDrawbles(Collection<IDrawble> drawbles) {
+        this.drawbles = drawbles;
+    }
+
+    public void dispose(){
 		font.dispose();
 		spriteBatch.dispose();
 		stage.dispose();
