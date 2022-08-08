@@ -11,21 +11,20 @@ import entities.item.HealthFlask;
 import entities.item.Item;
 import geometry.Point;
 import graphics.presenters.IDrawble;
-import graphics.presenters.IPresenter;
+import graphics.presenters.IDrawerFactory;
 import manager.EntityManager;
 import manager.IEntityManager;
 
-import javax.print.attribute.standard.PresentationDirection;
 import java.util.ArrayList;
 
 /**
  * Represents a room
  */
 public class Room implements IDrawble {
-    private IPresenter presenter;
+    private IDrawerFactory presenter;
     private IEntityManager entityManager = new EntityManager();
 
-    public Room(IPresenter presenter, Player player, int screenWidth, int screenHeight) {
+    public Room(IDrawerFactory presenter, Player player, int screenWidth, int screenHeight) {
         this.presenter = presenter;
         entityManager.addCollidableEntity(player);
 
@@ -44,7 +43,7 @@ public class Room implements IDrawble {
 
 
     }
-    public Room(IPresenter presenter, Player player, int screenWidth, int screenHeight, int numEnemies){
+    public Room(IDrawerFactory presenter, Player player, int screenWidth, int screenHeight, int numEnemies){
         this.presenter = presenter;
         entityManager.addCollidableEntity(player);
 

@@ -9,10 +9,10 @@ import geometry.Point;
 import graph.PlanarGraph;
 import graph.PlanarNode;
 import graph.TestGraphGenerator;
-import graphics.presenters.IPresenter;
+import graphics.IUIPresenter;
+import graphics.presenters.IDrawerFactory;
 import graphics.door.IDoorDrawer;
 import graphics.level.ILevelDrawer;
-import manager.EntityManager;
 import manager.IEntityManager;
 
 import java.util.*;
@@ -26,6 +26,7 @@ import java.util.*;
 public class Level implements IRoomContainer {
     private Room currentRoom;
     private ILevelDrawer levelDrawer;
+    private IUIPresenter UIPresenter;
     private final Random rnd = new Random();
     private int screenWidth;
     private int screenHeight;
@@ -34,33 +35,29 @@ public class Level implements IRoomContainer {
     /**
      * Create a level
      *
-     * @param presenter    the presenter in Clean architecture
+     * @param drawerFactory    the drawerFactory in Clean architecture
      * @param player       a player instance
      * @param screenWidth  the width of screen
      * @param screenHeight the height of screen
      */
-    public Level(IPresenter presenter, Player player, int screenWidth, int screenHeight) {
+    public Level(IDrawerFactory drawerFactory, IUIPresenter UIPresenter, Player player, int screenWidth, int screenHeight) {
         this.player = player;
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
-        levelDrawer = presenter.getLevelDrawer();
+        levelDrawer = drawerFactory.getLevelDrawer();
+        this.UIPresenter = UIPresenter;
 
-        Gun gun = new Gun(new Point(screenWidth / 2f, screenHeight / 2f), presenter.getGunDrawer(), presenter.getBulletDrawer());
+        Gun gun = new Gun(new Point(screenWidth / 2f, screenHeight / 2f), drawerFactory.getGunDrawer(), drawerFactory.getBulletDrawer());
         player.setGun(gun);
 
         PlanarGraph levelLayout = new TestGraphGenerator().generate();
-        Collection<Room> rooms = getRoomsFromGraph(levelLayout, presenter);
+        Collection<Room> rooms = getRoomsFromGraph(levelLayout, drawerFactory);
         currentRoom = rooms.iterator().next();
-
-        //this line of code is for convenience of testing
-//        currentRoom = new entities.BossRoom(presenter, player, screenWidth, screenHeight);
-
-        addMerchantToRooms(new ArrayList<>(rooms));
 
         gun.setEntityManager(currentRoom.getEntityManager());
     }
 
-    public Collection<Room> getRoomsFromGraph(PlanarGraph levelLayout, IPresenter presenter) {
+    public Collection<Room> getRoomsFromGraph(PlanarGraph levelLayout, IDrawerFactory presenter) {
         Map<Set<PlanarNode>, Boolean> edges = getEdgeMap(levelLayout);
         Map<PlanarNode, Room> nodeToRoom = new HashMap<>();
         for (PlanarNode node : levelLayout) {
@@ -113,16 +110,16 @@ public class Level implements IRoomContainer {
         }
     }
 
-    private void addMerchantToRooms(List<Room> rooms) {
-        int merchant1Index = MathUtils.random(0, rooms.size() - 1);
-        int merchant2Index = MathUtils.random(0, rooms.size() - 1);
-        while (merchant2Index == merchant1Index) {
-            merchant2Index = MathUtils.random(0, rooms.size() - 1);
-        }
-
-        rooms.get(merchant1Index).addMerchant();
-        rooms.get(merchant2Index).addMerchant();
-    }
+//    private void addMerchantToRooms(List<Room> rooms) {
+//        int merchant1Index = MathUtils.random(0, rooms.size() - 1);
+//        int merchant2Index = MathUtils.random(0, rooms.size() - 1);
+//        while (merchant2Index == merchant1Index) {
+//            merchant2Index = MathUtils.random(0, rooms.size() - 1);
+//        }
+//
+//        rooms.get(merchant1Index).addMerchant();
+//        rooms.get(merchant2Index).addMerchant();
+//    }
 
     /**
      * Update the current room
@@ -133,6 +130,9 @@ public class Level implements IRoomContainer {
         if (entityManager.isFinished()) {
             player.changeGold(entityManager.getGold());
         }
+
+        UIPresenter.updatePlayerShield(player.getHealth());
+        UIPresenter.updateIsGameOver(entityManager.isFinished());
     }
 
     /**

@@ -5,19 +5,19 @@ import entities.characters.Enemy;
 import entities.characters.Player;
 import entities.characters.Boss;
 import geometry.Point;
-import graphics.presenters.IPresenter;
+import graphics.presenters.IDrawerFactory;
 import manager.EntityManager;
 import manager.IEntityManager;
 
 public class BossRoom extends Room {
-    private IPresenter presenter;
+    private IDrawerFactory presenter;
     private Player player;
     private int screenWidth;
     private int screenHeight;
 
     private IEntityManager entityManager = new EntityManager();
 
-    public BossRoom(IPresenter presenter, Player player, int screenWidth, int screenHeight) {
+    public BossRoom(IDrawerFactory presenter, Player player, int screenWidth, int screenHeight) {
         super(presenter, player, screenWidth, screenHeight, 0);
         Point bossPos = new Point((float) screenWidth/2,(float) screenHeight/2);
         Boss boss = new Boss(bossPos, presenter.getBossDrawer());

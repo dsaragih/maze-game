@@ -11,7 +11,7 @@ import graphics.level.ILevelDrawer;
 import graphics.entities.player.IPlayerDrawer;
 import graphics.room.IRoomDrawer;
 
-public interface IPresenter{
+public interface IDrawerFactory {
 
     void onStartRender();
     void onEndRender();

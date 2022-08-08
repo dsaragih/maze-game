@@ -1,11 +1,8 @@
 package graphics.presenters;
 
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import config.GameConstants;
 import graphics.entities.boss.CircleBossDrawer;
 import graphics.entities.boss.IBossDrawer;
 import graphics.entities.merchant.CircleMerchantDrawer;
@@ -24,12 +21,10 @@ import graphics.level.ILevelDrawer;
 import graphics.level.LevelDrawer;
 import graphics.entities.player.CirclePlayerDrawer;
 import graphics.entities.player.IPlayerDrawer;
-import graphics.presenters.IPresenter;
 import graphics.room.IRoomDrawer;
-import graphics.room.SandRoomDrawer;
 import graphics.room.SimpleShapeRoomDrawer;
 
-public class ShapePresenter implements IPresenter {
+public class ShapeDrawerFactory implements IDrawerFactory {
     private ShapeRenderer shapeRenderer;
     private SpriteBatch spriteBatch;
     private OrthographicCamera camera;
@@ -37,7 +32,7 @@ public class ShapePresenter implements IPresenter {
     private int screenWidth;
     private int screenHeight;
 
-    public ShapePresenter(int screenWidth, int screenHeight){
+    public ShapeDrawerFactory(int screenWidth, int screenHeight){
         spriteBatch =  new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
         camera = new OrthographicCamera();
