@@ -13,6 +13,6 @@ public class CircleEnemyDrawer implements IEnemyDrawer{
     @Override
     public void drawEnemy(Point pos) {
         shapeRenderer.setColor(Color.NAVY);
-        shapeRenderer.circle(pos.x, pos.y, GameConstants.ENEMY_RADIUS);
+        shapeRenderer.circle(pos.getX(), pos.getY(), GameConstants.ENEMY_RADIUS);
     }
 }

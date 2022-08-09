@@ -41,8 +41,8 @@ public class PolygonGenerator implements IGraphGenerator{
         ArrayList<PlanarNode> lst = new ArrayList<>();
         //Create the vertices
         for (int i=0; i<n; i++){
-            PlanarNode n1 = new PlanarNode(center.x+radius*(float)Math.cos(initialRadian+i*radianIncrement),
-                    center.y+radius*(float)Math.sin(initialRadian+i*radianIncrement));
+            PlanarNode n1 = new PlanarNode(center.getX()+radius*(float)Math.cos(initialRadian+i*radianIncrement),
+                    center.getY()+radius*(float)Math.sin(initialRadian+i*radianIncrement));
             lst.add(n1);
         }
         //Join undirected edges

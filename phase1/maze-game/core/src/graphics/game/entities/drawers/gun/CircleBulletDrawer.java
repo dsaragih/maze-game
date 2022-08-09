@@ -13,6 +13,6 @@ public class CircleBulletDrawer implements IBulletDrawer{
     @Override
     public void drawBullet(Point pos) {
         shapeRenderer.setColor(Color.RED);
-        shapeRenderer.circle(pos.x, pos.y, GameConstants.BULLET_RADIUS);
+        shapeRenderer.circle(pos.getX(), pos.getY(), GameConstants.BULLET_RADIUS);
     }
 }

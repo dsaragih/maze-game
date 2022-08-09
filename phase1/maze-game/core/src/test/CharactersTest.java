@@ -31,16 +31,17 @@ public class CharactersTest {
     @Test(timeout=50)
     public void EnemyTest(){
         Enemy e = new Enemy(0,0,null);
-        e.collideWith
+        e.setDamage(10);
+        assertEquals(10, e.getDamage());
+        Player p = new Player(new Point(0,0), null);
+        p.collideWith(e);
+        assertEquals(90, p.getHealth());
         Bullet bullet = new Bullet(new Point(0,0), new Point(1,0), null);
         bullet.setDamage(100);
         e.collideWith(bullet);
         assertTrue(e.shouldBeRemoved());
     }
 
-    @Test(timeout=50)
-    public void MineDropperEnemyTest(){
-    }
 
     @Test(timeout=50)
     public void PlayerTest(){

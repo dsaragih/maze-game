@@ -24,14 +24,14 @@ public class CircleMerchantDrawer implements IMerchantDrawer{
     @Override
     public void drawMerchant(Point pos, boolean showMenu, ArrayList<Item> items) {
         shapeRenderer.setColor(Color.BROWN);
-        shapeRenderer.circle(pos.x,pos.y, GameConstants.MERCHANT_RADIUS);
+        shapeRenderer.circle(pos.getX(),pos.getY(), GameConstants.MERCHANT_RADIUS);
 
         Label.LabelStyle style = new Label.LabelStyle();
         style.font = new BitmapFont();
         style.fontColor = Color.NAVY;
 
         Label merchantLabel = new Label("Merchant", style);
-        merchantLabel.setPosition(pos.x - merchantLabel.getPrefWidth() / 2, pos.y + 20);
+        merchantLabel.setPosition(pos.getX() - merchantLabel.getPrefWidth() / 2, pos.getY() + 20);
         stage.addActor(merchantLabel);
 
         if (showMenu) {
@@ -40,7 +40,7 @@ public class CircleMerchantDrawer implements IMerchantDrawer{
                 Label itemLabel = new Label(item.toString() + " price: " + item.getValue() +
                         " input: " + (items.indexOf(item) + 1), style);
                 itemLabel.setSize(Gdx.graphics.getWidth(), 20);
-                itemLabel.setPosition(0, pos.y - i);
+                itemLabel.setPosition(0, pos.getY() - i);
                 itemLabel.setAlignment(Align.center);
                 stage.addActor(itemLabel);
                 i += 30;
