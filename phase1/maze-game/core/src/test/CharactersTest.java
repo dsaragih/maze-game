@@ -15,7 +15,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 public class CharactersTest {
     @Test(timeout=50)
-    public void MerchantTest(){
+    public void MerchantTransactionTest(){
         ExampleArmour armour = new ExampleArmour(0,0);
         ArrayList<Item> items = new ArrayList<>();
         items.add(armour);
@@ -29,7 +29,7 @@ public class CharactersTest {
 
     @Test(timeout=50)
     public void EnemyTest(){
-
+        //My computer cannot run gdx. Can anyone else do enemy collision/update test?
     }
 
     @Test(timeout=50)
@@ -39,7 +39,7 @@ public class CharactersTest {
 
     @Test(timeout=50)
     public void PlayerTest(){
-
+        //also fire test.
     }
 
 }
