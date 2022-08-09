@@ -19,9 +19,9 @@ import java.util.ArrayList;
 public class RoomTest {
     @Test
     public void RoomTest1(){
-
+//        IDrawerFactory factory = new ShapeDrawerFactory(null, 1000, 1000);
         Player p = new Player(new Point(0,0), null);
-        Room room = new Room(factory, p, 1000, 1000);
+        Room room = new Room(null, p, 1000, 1000);
 
     }
 
