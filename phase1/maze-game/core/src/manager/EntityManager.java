@@ -91,6 +91,19 @@ public class EntityManager implements IEntityManager{
                 return false;
             }
         }
+
+        for (Entity entity: toBeAddedEntities){
+            if (entity.needToBeKilled){
+                return false;
+            }
+        }
+
+        for (Entity entity: toBeAddedCollidable){
+            if (entity.needToBeKilled){
+                return false;
+            }
+        }
+
         return true;
     }
 

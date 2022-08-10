@@ -1,5 +1,6 @@
 package game.entities.abstractions;
 
+import game.entities.Mine;
 import game.entities.characters.Enemy;
 import game.entities.characters.MineDropperEnemy;
 import game.entities.characters.Player;
@@ -82,5 +83,10 @@ public abstract class CollidableEntity extends Entity implements ICollidable{
     @Override
     public void removeSelf(IEntityManager entityManager){
         entityManager.removeEntity(this);
+    }
+
+    @Override
+    public void collideWith(Mine mine){
+
     }
 }
