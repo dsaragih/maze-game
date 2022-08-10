@@ -21,6 +21,6 @@ public class CircleDoorDrawer implements IDoorDrawer {
     @Override
     public void drawDoor(Point pos) {
         shapeRenderer.setColor(color);
-        shapeRenderer.circle(pos.x, pos.y, GameConstants.DOOR_RADIUS);
+        shapeRenderer.circle(pos.getX(), pos.getY(), GameConstants.DOOR_RADIUS);
     }
 }

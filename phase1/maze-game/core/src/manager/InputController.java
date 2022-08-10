@@ -44,7 +44,7 @@ public class InputController {
         level.movePlayer(dir);
 
         Point mousePos = new Point(Gdx.input.getX(), Gdx.input.getY());
-        Vector3 unprotectedMousePos = camera.unproject(new Vector3(mousePos.x, mousePos.y, 0));
+        Vector3 unprotectedMousePos = camera.unproject(new Vector3(mousePos.getX(), mousePos.getY(), 0));
         mousePos = new Point(unprotectedMousePos.x, unprotectedMousePos.y);
         level.setMousePos(mousePos);
 

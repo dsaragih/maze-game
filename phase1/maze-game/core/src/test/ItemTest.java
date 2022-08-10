@@ -28,32 +28,36 @@ public class ItemTest {
         Point q1 = new Point(0,0);
         Point q2 = new Point(1,0);
         Enemy e1 = new Enemy(q1, null);
-        e1.setDamage(35);
+        e1.setDamage(100);
         Player p2 = new Player(q2, null);
-        //p2.setArmour(armour);
-        //assertEquals(p2.getShield(), 30);
+        p2.setArmour(armour);
+        assertEquals(100, p2.getHealth());
+        assertEquals(30, p2.getShield());
+        assertEquals(10, (int)armour.getArmourPoint());
         p2.collideWith(e1);
-        assertEquals(p2.getHealth(), 65);
-        //assertEquals(p2.getShield(), 0);
+        assertEquals(10, p2.getHealth());
+        assertEquals(20,p2.getShield());
     }
 
     @Test(timeout=50)
     public void BulletTest() {
         Bullet bullet = new Bullet(new Point(0, 0), new Point(1, 0), null);
         bullet.update();
-        assertEquals(30.0, bullet.getCollisionBox().center.x, 0.01);
-        assertEquals(0.0, bullet.getCollisionBox().center.y, 0.01);
+        assertEquals(30.0, bullet.getCollisionBox().getCenter().getX(), 0.01);
+        assertEquals(0.0, bullet.getCollisionBox().getCenter().getY(), 0.01);
         Point q1 = new Point(0,0);
         Enemy e1 = new Enemy(q1, null);
         bullet.collideWith(e1);
         e1.collideWith(bullet);
         assertTrue(bullet.shouldBeRemoved());
-        assertEquals(e1.getHealth(), 85);
+        assertEquals(85, e1.getHealth());
     }
 
     @Test(timeout=50)
     public void DoorTest(){
-
+        Door door = new Door(new Point(0,0), null, null);
+        assertEquals(0, (int)door.getCollisionBox().getCenter().getX());
+        assertEquals(0, (int)door.getCollisionBox().getCenter().getY());
     }
     @Test
     public void GunTest(){
@@ -66,8 +70,8 @@ public class ItemTest {
         m.update();
         assertFalse(m.getEntities().isEmpty());
         gun.setPlayerPosition(new Point(5,5));
-        assertEquals((int)gun.getCollisionBox().center.x,5);
-        assertEquals((int)gun.getCollisionBox().center.y,5);
+        assertEquals((int)gun.getCollisionBox().getCenter().getX(),5);
+        assertEquals((int)gun.getCollisionBox().getCenter().getY(),5);
 
 
     }
@@ -93,7 +97,7 @@ public class ItemTest {
         Weapon weapon = new Weapon(1,1,10,"weapon", 10);
         assertEquals(10, weapon.getValue());
         assertEquals(10, weapon.getDamage());
-        assertEquals(1, (int)weapon.getCollisionBox().center.x);
+        assertEquals(1, (int)weapon.getCollisionBox().getCenter().getX());
     }
 
 }

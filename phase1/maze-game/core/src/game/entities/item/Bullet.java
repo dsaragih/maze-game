@@ -76,7 +76,7 @@ public class Bullet extends Weapon {
     }
 
     public int getDamage() {
-        return GameConstants.BULLET_DAMAGE;
+        return damage;
     }
 
     /**
