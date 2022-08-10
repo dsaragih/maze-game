@@ -68,6 +68,6 @@ public class PlanarNode extends Point {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(x, y);
+        return Objects.hash(this.getX(), this.getY());
     }
 }

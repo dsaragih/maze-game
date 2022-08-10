@@ -20,8 +20,8 @@ public class GeometryTest {
         Point distanceVector = p1.distanceVector(p2);
         double expected_x = -3.0;
         double expected_y = -3.0;
-        double actual_x = distanceVector.x;
-        double actual_y = distanceVector.y;
+        double actual_x = distanceVector.getX();
+        double actual_y = distanceVector.getY();
         assertEquals(expected_x,actual_x, 0.01);
         assertEquals(expected_y,actual_y, 0.01);
     }

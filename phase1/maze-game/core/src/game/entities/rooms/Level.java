@@ -132,7 +132,7 @@ public class Level implements IRoomContainer, IDrawble{
             Presenter.playerWins();
         }
 
-        Presenter.updatePlayerShield(player.getHealth());
+        Presenter.updatePlayerShield(player.getShield());
         Presenter.updateIsPlayerDead(player.getHealth() <= 0);
         Presenter.updatePlayerHealth(player.getHealth());
 

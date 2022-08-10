@@ -33,7 +33,7 @@ public class Player extends CollidableEntity {
     private IPlayerDrawer playerDrawer;
     private Collection<IPlayerObserver> observers = new ArrayList<>();
     private Point gunDirection = new Point(0,0);
-    public Gun gun;
+    private Gun gun;
     private float armourPoint = 0.0F;
     private int shield = 0;
 
@@ -80,8 +80,8 @@ public class Player extends CollidableEntity {
         pos.add(direction);
 
         //keep player on the screen
-        pos.x = Math.max(Math.min(pos.x, GameConstants.SCREEN_WIDTH), 0);
-        pos.y = Math.max(Math.min(pos.y, GameConstants.SCREEN_HEIGHT), 0);
+        pos.setX(Math.max(Math.min(pos.getX(), GameConstants.SCREEN_WIDTH), 0));
+        pos.setY(Math.max(Math.min(pos.getY(), GameConstants.SCREEN_HEIGHT), 0));
 
         for(IPlayerObserver observer: observers){
             observer.setTarget(pos);
@@ -90,7 +90,7 @@ public class Player extends CollidableEntity {
     }
 
     private Point calcGunPos(){
-        return new Point(pos.x + gunDirection.x * BULLET_SPEED, pos.y + gunDirection.y * BULLET_SPEED);
+        return new Point(pos.getX() + gunDirection.getX() * GameConstants.PLAYER_RADIUS, pos.getY() + gunDirection.getY() * GameConstants.PLAYER_RADIUS);
     }
 
 
@@ -148,14 +148,14 @@ public class Player extends CollidableEntity {
      * @param enemy the enemy collided with player
      */
     public void collideWith(Enemy enemy) {
-        if (enemy.getDamage()*armourPoint>=shield){
+        if (enemy.getDamage()*armourPoint*0.01>=shield){
             this.health -= enemy.getDamage()-shield;
             this.shield = 0;
             this.armourPoint = 0;
         }
         else{
-            this.shield -= enemy.getDamage()*armourPoint;
-            this.health -= enemy.getDamage()*(1-armourPoint);
+            this.shield = (int) Math.max(this.shield-(int)enemy.getDamage()*armourPoint*0.01, 0.0);
+            this.health -= (int)enemy.getDamage()*(100-armourPoint)*0.01;
         }
         health = Math.max(health, 0);
     }

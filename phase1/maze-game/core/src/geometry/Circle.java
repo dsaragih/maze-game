@@ -5,8 +5,8 @@ package geometry;
  * @author Ethan
  */
 public class Circle {
-    public Point center;
-    public float radius;
+    private Point center;
+    private float radius;
 
     /**
      * Create a circle
@@ -26,5 +26,11 @@ public class Circle {
     public boolean intersects(Circle other){
         Point dist = center.distanceVector(other.center);
         return dist.length() <= radius + other.radius;
+    }
+    public Point getCenter(){
+        return center;
+    }
+    public float getRadius(){
+        return radius;
     }
 }

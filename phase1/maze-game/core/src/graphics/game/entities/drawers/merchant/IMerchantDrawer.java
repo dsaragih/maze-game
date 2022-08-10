@@ -7,5 +7,5 @@ import java.util.ArrayList;
 
 public interface IMerchantDrawer {
 
-    void drawMerchant(Point pos, boolean showMenu, Item[] items);
+    void drawMerchant(Point pos, boolean showMenu, ArrayList<Item> items);
 }

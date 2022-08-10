@@ -46,13 +46,13 @@ public class GraphGeneratorTest {
         boolean containsLeftPoint = false;
         boolean containsRightPoint = false;
         for (PlanarNode planarNode : g.getNodes()) {
-            if (Math.abs(planarNode.x - 1) < 0.01 && Math.abs(planarNode.y - 0) < 0.01) {
+            if (Math.abs(planarNode.getX() - 1) < 0.01 && Math.abs(planarNode.getY() - 0) < 0.01) {
                 containsLeftPoint = true;
                 break;
             }
         }
         for (PlanarNode planarNode : g.getNodes()) {
-            if (Math.abs(planarNode.x + 1) < 0.01 && Math.abs(planarNode.y - 0) < 0.01) {
+            if (Math.abs(planarNode.getX() + 1) < 0.01 && Math.abs(planarNode.getY() - 0) < 0.01) {
                 containsRightPoint = true;
                 break;
             }

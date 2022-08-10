@@ -60,13 +60,13 @@ public class Room implements IDrawble {
         entityManager.addCollidableEntity(door);
     }
 
-    public void addMerchant() {
+    public void addMerchant(Point merchantPos) {
         ArrayList<Item> itemOwned = new ArrayList<>();
         ExampleArmour weakArmour = new ExampleArmour(0, 0);
         HealthFlask health = new HealthFlask(0, 0);
         itemOwned.add(health);
         itemOwned.add(weakArmour);
-        Merchant merchant = new Merchant(100, 100, itemOwned, presenter.getMerchantDrawer());
+        Merchant merchant = new Merchant(merchantPos.getX(), merchantPos.getY(), itemOwned, presenter.getMerchantDrawer());
         entityManager.addCollidableEntity(merchant);
     }
     /**

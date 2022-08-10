@@ -22,7 +22,7 @@ public class Merchant extends CollidableEntity {
 
     @Override
     public void draw() {
-        drawer.drawMerchant(pos, showMenu, new Item[0]);
+        drawer.drawMerchant(pos, showMenu, itemOwned);
     }
 
     @Override

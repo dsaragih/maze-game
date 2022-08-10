@@ -14,6 +14,6 @@ public class SquareEnemyDrawer implements IEnemyDrawer{
     @Override
     public void drawEnemy(Point pos) {
         shapeRenderer.setColor(Color.NAVY);
-        shapeRenderer.rect(pos.x, pos.y, sideLength, sideLength);
+        shapeRenderer.rect(pos.getX(), pos.getY(), sideLength, sideLength);
     }
 }

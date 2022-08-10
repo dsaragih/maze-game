@@ -94,7 +94,7 @@ public class Enemy extends CollidableEntity implements IPlayerObserver {
 
     /**
      * Collide with the bullet
-     * @param bullet the bullet being collided with the door
+     * @param bullet the bullet being collided with the enemy
      */
     @Override
     public void collideWith(Bullet bullet) {
@@ -128,17 +128,17 @@ public class Enemy extends CollidableEntity implements IPlayerObserver {
 
         Point dirVector = target.distanceVector(pos).normalized();
         dirVector.multiply(GameConstants.ENEMY_ACCELERATION * Gdx.graphics.getDeltaTime());
-        if(pos.x > GameConstants.SCREEN_WIDTH && velocity.x > 0){
-            velocity.x = 0;
+        if(pos.getX()> GameConstants.SCREEN_WIDTH && velocity.getX() > 0){
+            velocity.setX(0);
         }
-        if(pos.y > GameConstants.SCREEN_HEIGHT && velocity.y > 0){
-            velocity.y = 0;
+        if(pos.getY() > GameConstants.SCREEN_HEIGHT && velocity.getY() > 0){
+            velocity.setY(0);
         }
-        if(pos.x < 0 && velocity.x < 0){
-            velocity.x = 0;
+        if(pos.getX() < 0 && velocity.getX() < 0){
+            velocity.setX(0);
         }
-        if(pos.y < 0 && velocity.y <0){
-            velocity.y = 0;
+        if(pos.getY() < 0 && velocity.getY() <0){
+            velocity.setY(0);
         }
         velocity.add(dirVector);
         velocity.multiply(1 - GameConstants.ENEMY_FRICTION);
