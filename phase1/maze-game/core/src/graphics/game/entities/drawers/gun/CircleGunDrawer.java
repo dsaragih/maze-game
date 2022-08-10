@@ -14,6 +14,6 @@ public class CircleGunDrawer implements IGunDrawer{
     @Override
     public void drawGun(Point pos) {
         shapeRenderer.setColor(Color.BLACK);
-        shapeRenderer.circle(pos.x, pos.y, GameConstants.GUN_RADIUS);
+        shapeRenderer.circle(pos.getX(), pos.getY(), GameConstants.GUN_RADIUS);
     }
 }

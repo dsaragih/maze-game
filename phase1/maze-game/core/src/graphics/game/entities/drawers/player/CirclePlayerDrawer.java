@@ -14,7 +14,7 @@ public class CirclePlayerDrawer implements IPlayerDrawer{
     @Override
     public void drawPlayer(Point pos, Point gunDirection) {
         shapeRenderer.setColor(Color.GOLD);
-        shapeRenderer.circle(pos.x, pos.y, GameConstants.PLAYER_RADIUS);
+        shapeRenderer.circle(pos.getX(), pos.getY(), GameConstants.PLAYER_RADIUS);
     }
 
 }

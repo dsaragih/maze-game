@@ -19,8 +19,8 @@ public class MousePlayerDrawer implements IPlayerDrawer{
     }
     @Override
     public void drawPlayer(Point pos, Point gunDirection) {
-        spriteBatch.draw(mouseTexture, pos.x, pos.y);
+        spriteBatch.draw(mouseTexture, pos.getX(), pos.getY());
         shapeRenderer.setColor(Color.BLACK);
-        shapeRenderer.circle(pos.x + gunDirection.x * 10, pos.y + gunDirection.y * 10, 3);
+        shapeRenderer.circle(pos.getX() + gunDirection.getX() * 10, pos.getY() + gunDirection.getY() * 10, 3);
     }
 }

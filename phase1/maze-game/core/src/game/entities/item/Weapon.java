@@ -1,8 +1,10 @@
 package game.entities.item;
 
+import config.GameConstants;
 import game.entities.abstractions.ICollidable;
 import geometry.Circle;
 import geometry.Point;
+import config.GameConstants.*;
 
 
 public class Weapon extends Item implements ICollidable {
@@ -21,7 +23,7 @@ public class Weapon extends Item implements ICollidable {
 
     @Override
     public Circle getCollisionBox() {
-        return null;
+        return new Circle(pos, GameConstants.GUN_RADIUS);
     }
 
     @Override

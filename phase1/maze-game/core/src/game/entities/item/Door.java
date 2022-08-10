@@ -68,10 +68,12 @@ public class Door extends CollidableEntity {
      * Inform other object being collided with the door
      * @param other the object being collided.
      */
-    @Override
-    public void informCollision(ICollidable other) {
-        other.collideWith(this);
-    }
+
+    //No other entities implemented collidewith(Door)!
+//    @Override
+//    public void informCollision(ICollidable other) {
+//        other.collideWith(this);
+//    }
 
     /**
      * Collide with the other player
