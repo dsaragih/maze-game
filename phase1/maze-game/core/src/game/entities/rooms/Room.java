@@ -38,8 +38,8 @@ public class Room implements IDrawble {
             entityManager.addCollidableEntity(enemy);
         }
         Point merchantPos = new Point(MathUtils.random(0, screenWidth), MathUtils.random(0, screenHeight));
-        entityManager.addCollidableEntity(new Merchant(merchantPos.getX(), merchantPos.getY(), new ArrayList<>(), presenter.getMerchantDrawer()));
-
+        //entityManager.addCollidableEntity(new Merchant(merchantPos.getX(), merchantPos.getY(), new ArrayList<>(), presenter.getMerchantDrawer()));
+        addMerchant(merchantPos);
         Point mineDropperPos = new Point(MathUtils.random(0, screenWidth), MathUtils.random(0, screenHeight));
         entityManager.addCollidableEntity(new MineDropperEnemy(mineDropperPos, presenter.getMineDropperEnemyDrawer()));
 
