@@ -2,6 +2,7 @@ package game.entities.characters;
 
 import com.badlogic.gdx.Gdx;
 import config.GameConstants;
+import game.entities.item.Mine;
 import game.entities.abstractions.CollidableEntity;
 import game.entities.abstractions.ICollidable;
 import game.entities.abstractions.IPlayerObserver;
@@ -162,6 +163,16 @@ public class Player extends CollidableEntity {
     public void collideWith(Item item){
         itemOwned.add(item);
     }
+    @Override
+    public void collideWith(Merchant merchant) {
+        currMerchant = merchant;
+    }
+
+    @Override
+    public void collideWith(Mine mine){
+        health -= 25;
+        shield = 0;
+    }
 
     /**
      * Inform others being collided by player.
@@ -172,10 +183,6 @@ public class Player extends CollidableEntity {
         other.collideWith(this);
     }
 
-    @Override
-    public void collideWith(Merchant merchant) {
-        currMerchant = merchant;
-    }
 
     public ArrayList<Item> showMerchantItems(){
         if(!(currMerchant==null)){

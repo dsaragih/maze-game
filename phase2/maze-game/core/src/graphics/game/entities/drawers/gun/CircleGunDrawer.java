@@ -7,7 +7,7 @@ import geometry.Point;
 
 public class CircleGunDrawer implements IGunDrawer{
 
-    private ShapeRenderer shapeRenderer;
+    private final ShapeRenderer shapeRenderer;
     public CircleGunDrawer(ShapeRenderer shapeRenderer){
         this.shapeRenderer = shapeRenderer;
     }

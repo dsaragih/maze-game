@@ -3,6 +3,7 @@ package game.entities.item;
 import config.GameConstants;
 import game.entities.abstractions.ICollidable;
 import game.entities.characters.Enemy;
+import game.entities.characters.MineDropperEnemy;
 import geometry.Circle;
 import geometry.Point;
 import graphics.game.entities.drawers.bullet.IBulletDrawer;
@@ -49,7 +50,13 @@ public class Bullet extends Weapon {
     /** Collide with enemy player
      * @param enemy The enemy being hit by the bullet.
      */
+    @Override
     public void collideWith(Enemy enemy) {
+        isHit = true;
+    }
+
+    @Override
+    public void collideWith(MineDropperEnemy mineDropperEnemy){
         isHit = true;
     }
 

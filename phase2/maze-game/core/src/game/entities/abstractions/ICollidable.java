@@ -1,6 +1,6 @@
 package game.entities.abstractions;
 
-import game.entities.Mine;
+import game.entities.item.Mine;
 import game.entities.characters.Enemy;
 import game.entities.characters.MineDropperEnemy;
 import game.entities.characters.Player;

@@ -98,4 +98,7 @@ public class Point {
         return this.x == p.x && this.y == p.y;
     }
 
+    public Point clone(){
+        return new Point(x, y);
+    }
 }
