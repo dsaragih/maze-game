@@ -14,10 +14,10 @@ public class ShapeMineDropperDrawer implements IMineDropperDrawer{
     @Override
     public void drawMineDropper(Point pos) {
         shapeRenderer.setColor(Color.BLACK);
-        shapeRenderer.circle(pos.x, pos.y, 30);
+        shapeRenderer.circle(pos.getX(), pos.getY(), 30);
         shapeRenderer.setColor(Color.RED);
-        shapeRenderer.circle(pos.x, pos.y, 20);
+        shapeRenderer.circle(pos.getX(), pos.getY(), 20);
         shapeRenderer.setColor(Color.WHITE);
-        shapeRenderer.circle(pos.x, pos.y, 10);
+        shapeRenderer.circle(pos.getX(), pos.getY(), 10);
     }
 }
