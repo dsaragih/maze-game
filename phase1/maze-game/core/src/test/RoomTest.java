@@ -11,18 +11,24 @@ import graphics.game.entities.drawers.player.CirclePlayerDrawer;
 import graphics.healthbar.HealthBarDrawer;
 import graphics.presenters.IDrawerFactory;
 import graphics.presenters.ShapeDrawerFactory;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import config.GameConstants;
 import manager.EntityManager;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
 import java.util.ArrayList;
-public class RoomTest {
-    @Test
-    public void RoomTest1(){
-//        IDrawerFactory factory = new ShapeDrawerFactory(null, 1000, 1000);
-        Player p = new Player(new Point(0,0), null);
-        Room room = new Room(null, p, 1000, 1000);
-
+public class RoomTest{
+    @Test(timeout = 50)
+    public void testConstructor1(){
+        Stage stage = new Stage(new ScreenViewport());
+        IDrawerFactory presenter = new ShapeDrawerFactory(stage, GameConstants.SCREEN_WIDTH, GameConstants.SCREEN_HEIGHT);
+        Point pos = new Point(0,0);
+        Player player = new Player(pos,presenter.getPlayerDrawer());
+         Room room = new Room(presenter, player, GameConstants.SCREEN_WIDTH,  GameConstants.SCREEN_HEIGHT);
+         //test that the room automatically generate an entitymanager
+         assertTrue(room.getEntityManager() != null);
+         assertTrue(room.allEnemiesKilled() == false);
     }
-
 }
