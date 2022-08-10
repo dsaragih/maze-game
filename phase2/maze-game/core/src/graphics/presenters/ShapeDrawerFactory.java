@@ -8,6 +8,7 @@ import graphics.game.entities.drawers.Mine.IMineDrawer;
 import graphics.game.entities.drawers.Mine.SimpleShapeMineDrawer;
 import graphics.game.entities.drawers.MineDropperEnemy.IMineDropperDrawer;
 import graphics.game.entities.drawers.MineDropperEnemy.ShapeMineDropperDrawer;
+import graphics.game.entities.drawers.enemy.CatEnemyDrawer;
 import graphics.game.entities.drawers.merchant.CircleMerchantDrawer;
 import graphics.game.entities.drawers.bullet.CircleBulletDrawer;
 import graphics.game.entities.drawers.bullet.IBulletDrawer;
@@ -90,7 +91,7 @@ public class ShapeDrawerFactory implements IDrawerFactory {
 
     @Override
     public IEnemyDrawer getEnemyDrawer() {
-        return new CircleEnemyDrawer(shapeRenderer);
+        return new CatEnemyDrawer(stage);
     }
 
     public IMerchantDrawer getMerchantDrawer(){return new CircleMerchantDrawer(shapeRenderer, stage);}

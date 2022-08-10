@@ -44,18 +44,6 @@ task dist(type: Jar) {
 
 dependencies {
     implementation 'junit:junit:4.13.2'
-    implementation 'com.badlogicgames.gdx:gdx:1.11.0'
-    implementation 'com.badlogicgames.gdx:gdx-lwjgl3-angle:1.11.0'
-    implementation 'com.badlogicgames.gdx:gdx-lwjgl3-glfw-awt-macos:1.11.0'
-    implementation 'com.badlogicgames.gdx:gdx-openal:0.9.9'
-    implementation 'com.badlogicgames.gdx:gdx:1.11.0'
-    implementation 'com.badlogicgames.gdx:gdx-lwjgl3-angle:1.11.0'
-    implementation 'org.lwjgl:lwjgl-opengles:3.3.1'
-
-    implementation 'junit:junit:4.13.2'
-    api "com.badlogicgames.gdx:gdx:$gdxVersion"
-    api "com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdxVersion"
-    api "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
 }
 
 
