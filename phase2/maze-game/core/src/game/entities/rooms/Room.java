@@ -35,6 +35,7 @@ public class Room implements IDrawable {
             Enemy enemy = new Enemy(enemyPos, presenter.getEnemyDrawer());
             player.addObserver(enemy);
             entityManager.addCollidableEntity(enemy);
+            entityManager.addGold(enemy.getValue());
         }
         Point merchantPos = new Point(MathUtils.random(0, screenWidth), MathUtils.random(0, screenHeight));
         //entityManager.addCollidableEntity(new Merchant(merchantPos.getX(), merchantPos.getY(), new ArrayList<>(), presenter.getMerchantDrawer()));
@@ -43,6 +44,7 @@ public class Room implements IDrawable {
         MineDropperEnemy mineDropper = new MineDropperEnemy(mineDropperPos, presenter.getMineDropperEnemyDrawer(), presenter.getMineDrawer());
         mineDropper.setEntityManager(entityManager);
         entityManager.addCollidableEntity(mineDropper);
+        entityManager.addGold(mineDropper.getValue());
 
     }
 

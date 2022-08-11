@@ -257,5 +257,6 @@ public class Player extends CollidableEntity {
         itemOwned.remove(toBeRemoved);
 
     }
+    public void addGold(int gold){this.goldOwned += gold;}
 
 }

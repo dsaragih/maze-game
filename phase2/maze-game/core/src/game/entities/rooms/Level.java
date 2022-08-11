@@ -136,6 +136,8 @@ public class Level implements IRoomContainer, IDrawable {
         Presenter.updateIsPlayerDead(player.getHealth() <= 0);
         Presenter.updatePlayerHealth(player.getHealth());
 
+        if (currentRoom.allEnemiesKilled()){player.addGold(currentRoom.getEntityManager().getGold());}
+
     }
 
     /**
