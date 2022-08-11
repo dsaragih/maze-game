@@ -10,8 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import config.GameConstants;
-import graphics.healthbar.HealthBarDrawer;
-import graphics.healthbar.IHealthBarDrawer;
+import graphics.otherDrawers.healthbar.HealthBarDrawer;
+import graphics.otherDrawers.healthbar.IHealthBarDrawer;
 
 import java.util.Collection;
 
@@ -23,17 +23,17 @@ public class UIPresenter implements IUIPresenter {
     private int playerHealth;
     private int playerGold;
     private boolean playerWins = false;
-    private Collection<IDrawble> drawbles;
+    private Collection<IDrawable> drawables;
 
 
 	//Variables used to draw
-    private final SpriteBatch spriteBatch;
-	private final Stage stage;
+    private SpriteBatch spriteBatch;
+	private Stage stage;
 	private ShapeRenderer shapeRenderer;
-	private final BitmapFont font;
-	private final OrthographicCamera camera;
+	private BitmapFont font;
+	private OrthographicCamera camera;
 
-	private final IHealthBarDrawer healthBarDrawer;
+	private IHealthBarDrawer healthBarDrawer;
     public UIPresenter(Stage stage){
         spriteBatch = new SpriteBatch();
 		this.stage = stage;
@@ -65,8 +65,8 @@ public class UIPresenter implements IUIPresenter {
     }
 
 	private void drawNoOverhead(){
-        for(IDrawble drawble: drawbles){
-            drawble.draw();
+        for(IDrawable drawable: drawables){
+            drawable.draw();
         }
 
 		Label.LabelStyle style = new Label.LabelStyle();
@@ -126,8 +126,8 @@ public class UIPresenter implements IUIPresenter {
     }
 
     @Override
-    public void setDrawbles(Collection<IDrawble> drawbles) {
-        this.drawbles = drawbles;
+    public void setDrawables(Collection<IDrawable> drawables) {
+        this.drawables = drawables;
     }
 
     public void dispose(){

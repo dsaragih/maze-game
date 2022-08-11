@@ -4,7 +4,7 @@ import game.entities.abstractions.CollidableEntity;
 import game.entities.abstractions.ICollidable;
 import game.entities.item.Item;
 import geometry.Circle;
-import graphics.game.entities.drawers.merchant.IMerchantDrawer;
+import graphics.entityDrawers.merchant.IMerchantDrawer;
 
 import java.util.ArrayList;
 

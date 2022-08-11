@@ -9,11 +9,11 @@ import geometry.Point;
 import graph.PlanarGraph;
 import graph.PlanarNode;
 import graph.TestGraphGenerator;
-import graphics.presenters.IDrawble;
+import graphics.presenters.IDrawable;
 import graphics.presenters.IUIPresenter;
 import graphics.presenters.IDrawerFactory;
-import graphics.game.entities.drawers.door.IDoorDrawer;
-import graphics.level.ILevelDrawer;
+import graphics.entityDrawers.door.IDoorDrawer;
+import graphics.otherDrawers.level.ILevelDrawer;
 
 import java.util.*;
 
@@ -23,17 +23,17 @@ import java.util.*;
  * @author Daniel
  * @author Ethan
  */
-public class Level implements IRoomContainer, IDrawble{
+public class Level implements IRoomContainer, IDrawable {
 
     private IDrawerFactory drawerFactory;
     private Room currentRoom;
     private Collection<Room> rooms;
-    private final ILevelDrawer levelDrawer;
-    private final IUIPresenter Presenter;
-    private final Random rnd = new Random();
-    private final int screenWidth;
-    private final int screenHeight;
-    private final Player player;
+    private ILevelDrawer levelDrawer;
+    private IUIPresenter Presenter;
+    private Random rnd = new Random();
+    private int screenWidth;
+    private int screenHeight;
+    private Player player;
 
     /**
      * Create a level
@@ -58,9 +58,9 @@ public class Level implements IRoomContainer, IDrawble{
 
         gun.setEntityManager(currentRoom.getEntityManager());
 
-        Collection<IDrawble> drawbles = new ArrayList<>();
+        Collection<IDrawable> drawbles = new ArrayList<>();
         drawbles.add(this);
-        Presenter.setDrawbles(drawbles);
+        Presenter.setDrawables(drawbles);
     }
 
     private Collection<Room> getRoomsFromGraph(PlanarGraph levelLayout, IDrawerFactory presenter) {
@@ -71,7 +71,7 @@ public class Level implements IRoomContainer, IDrawble{
         }
 
         for (PlanarNode node : levelLayout) {
-            for (PlanarNode neighbour : node.getNeighboors()) {
+            for (PlanarNode neighbour : node.getNeighbors()) {
                 Set<PlanarNode> pair = new HashSet<>();
                 pair.add(node);
                 pair.add(neighbour);
@@ -161,7 +161,7 @@ public class Level implements IRoomContainer, IDrawble{
                 Set<PlanarNode> pair = new HashSet<>();
                 pair.add(n1);
                 pair.add(n2);
-                if (n1 != n2 && !edges.containsKey(pair) && n1.getNeighboors().contains(n2)) {
+                if (n1 != n2 && !edges.containsKey(pair) && n1.getNeighbors().contains(n2)) {
                     edges.put(pair, false);
                 }
             }

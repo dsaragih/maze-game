@@ -82,9 +82,9 @@ public class InputController {
 
     /**
      * Calculate the direction the user wants to move on an axis.
-     * @param left indicates whether the key to go left is pressed.
-     * @param right indicates whether the key to go right is pressed.
-     * @return 1 for right, -1 for left and 0 for no movment wanted.
+     * @param left indicates that the key to go left is pressed.
+     * @param right indicates that the key to go right is pressed.
+     * @return 1 for right, -1 for left and 0 for no movement wanted.
      */
     private int dirCalc(boolean left, boolean right){
         if(left == right){

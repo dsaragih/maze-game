@@ -1,16 +1,16 @@
 package graphics.presenters;
 
-import graphics.game.entities.drawers.Mine.IMineDrawer;
-import graphics.game.entities.drawers.MineDropperEnemy.IMineDropperDrawer;
-import graphics.game.entities.drawers.bullet.IBulletDrawer;
-import graphics.game.entities.drawers.door.IDoorDrawer;
-import graphics.game.entities.drawers.merchant.IMerchantDrawer;
-import graphics.game.entities.drawers.enemy.IEnemyDrawer;
-import graphics.game.entities.drawers.gun.IGunDrawer;
-import graphics.healthbar.IHealthBarDrawer;
-import graphics.level.ILevelDrawer;
-import graphics.game.entities.drawers.player.IPlayerDrawer;
-import graphics.room.IRoomDrawer;
+import graphics.entityDrawers.mine.IMineDrawer;
+import graphics.entityDrawers.mineDropperEnemy.IMineDropperDrawer;
+import graphics.entityDrawers.bullet.IBulletDrawer;
+import graphics.entityDrawers.door.IDoorDrawer;
+import graphics.entityDrawers.merchant.IMerchantDrawer;
+import graphics.entityDrawers.enemy.IEnemyDrawer;
+import graphics.entityDrawers.gun.IGunDrawer;
+import graphics.otherDrawers.healthbar.IHealthBarDrawer;
+import graphics.otherDrawers.level.ILevelDrawer;
+import graphics.entityDrawers.player.IPlayerDrawer;
+import graphics.otherDrawers.room.IRoomDrawer;
 
 public interface IDrawerFactory {
 

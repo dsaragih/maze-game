@@ -3,8 +3,8 @@ package game.entities.item;
 import config.GameConstants;
 import manager.IEntityManager;
 import geometry.Point;
-import graphics.game.entities.drawers.bullet.IBulletDrawer;
-import graphics.game.entities.drawers.gun.IGunDrawer;
+import graphics.entityDrawers.bullet.IBulletDrawer;
+import graphics.entityDrawers.gun.IGunDrawer;
 
 public class Gun extends Weapon {
 
@@ -12,8 +12,6 @@ public class Gun extends Weapon {
     private IBulletDrawer bulletDrawer;
     private IEntityManager entityManager;
     private long lastAttack = 0;
-
-    private String name = "Default Gun";
 
     public Gun(Point pos, IGunDrawer gunDrawer, IBulletDrawer bulletDrawer){
         super(pos);

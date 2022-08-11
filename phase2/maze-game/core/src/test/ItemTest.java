@@ -1,24 +1,10 @@
-
-import com.badlogic.gdx.utils.TimeUtils;
-import game.entities.abstractions.IRoomContainer;
 import game.entities.characters.Enemy;
 import game.entities.characters.Player;
 import game.entities.item.*;
-import game.entities.characters.Merchant;
-import game.entities.rooms.Level;
 import geometry.Point;
-import graphics.game.entities.drawers.player.CirclePlayerDrawer;
-import graphics.healthbar.HealthBarDrawer;
-import graphics.presenters.IDrawerFactory;
-import graphics.presenters.IUIPresenter;
-import graphics.presenters.ShapeDrawerFactory;
-import graphics.presenters.UIPresenter;
 import manager.EntityManager;
 import static org.junit.Assert.*;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 public class ItemTest {
     @Test(timeout=50)

@@ -2,14 +2,14 @@ package game.entities.abstractions;
 
 import manager.IEntityManager;
 import geometry.Point;
-import graphics.presenters.IDrawble;
+import graphics.presenters.IDrawable;
 
 /** Represents an entity
  * @author Ethan
  * @author Ian Curtis Ewing
  * @author Daniel
  */
-public abstract class Entity implements IDrawble {
+public abstract class Entity implements IDrawable {
     public Point pos;
     public boolean needToBeKilled;
 

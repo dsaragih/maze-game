@@ -1,11 +1,12 @@
 package game.entities.item;
 
+import config.GameConstants;
 import game.entities.abstractions.CollidableEntity;
 import game.entities.abstractions.ICollidable;
 import game.entities.characters.Player;
 import geometry.Circle;
 import geometry.Point;
-import graphics.game.entities.drawers.Mine.IMineDrawer;
+import graphics.entityDrawers.mine.IMineDrawer;
 
 public class Mine extends CollidableEntity {
 
@@ -46,4 +47,7 @@ public class Mine extends CollidableEntity {
     public void draw(){
         mineDrawer.drawMine(pos);
     }
+
+    public int getDamage() { return GameConstants.MINE_DAMAGE; }
+
 }

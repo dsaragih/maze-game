@@ -1,10 +1,11 @@
 package console.entities;
 import java.util.Date;
+import java.io.Serializable;
 
-public class Log {
+public class Log implements Serializable {
     private int userid;
     private Date loginDate;
-    private boolean launch;
+    private boolean launch; // false if simply logging in, true if a game is being launched.
     public Log (int userid, Date loginDate, boolean launch){
         this.userid = userid;
         this.loginDate = loginDate;

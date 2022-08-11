@@ -8,8 +8,8 @@ import game.entities.abstractions.ICollidable;
 import game.entities.item.Bullet;
 import geometry.Circle;
 import geometry.Point;
-import graphics.game.entities.drawers.Mine.IMineDrawer;
-import graphics.game.entities.drawers.MineDropperEnemy.IMineDropperDrawer;
+import graphics.entityDrawers.mine.IMineDrawer;
+import graphics.entityDrawers.mineDropperEnemy.IMineDropperDrawer;
 import manager.IEntityManager;
 
 public class MineDropperEnemy extends CollidableEntity {
@@ -17,7 +17,6 @@ public class MineDropperEnemy extends CollidableEntity {
     private IMineDrawer mineDrawer;
     private IEntityManager entityManager;
     private Point targetPoint;
-    private float speed = 2;
     private float health = 500;
 
     public MineDropperEnemy(Point pos, IMineDropperDrawer mineDropperDrawer, IMineDrawer mineDrawer) {
@@ -54,13 +53,13 @@ public class MineDropperEnemy extends CollidableEntity {
     @Override
     public void update(){
         float dist = pos.distanceVector(targetPoint).length();
-        if(dist < speed){
+        if(dist < GameConstants.MINE_DROPPER_SPEED){
             pos = targetPoint;
             entityManager.addCollidableEntity(new Mine(pos.clone(), mineDrawer));
             targetPoint = getNewTargetPoint();
         }else{
             Point dir = pos.distanceVector(targetPoint).normalized();
-            dir.multiply(-speed);
+            dir.multiply(-GameConstants.MINE_DROPPER_SPEED);
             pos.add(dir);
         }
     }

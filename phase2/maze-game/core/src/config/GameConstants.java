@@ -4,6 +4,12 @@ package config;
  * @author Ivan Vorobyov
  */
 public class GameConstants {
+    public static int MINE_DAMAGE = 25;
+    public static float SQUARE_ENEMY_SIZE = 20;
+    public static float MINE_LIGHT_RADIUS = 2;
+    public static float MINE_RADIUS = 10;
+    public static long MINE_FLASHING_PERIOD_MS = 250;
+    public static float MINE_DROPPER_SPEED = 2;
     public static int MERCHANT_RADIUS = 15;
     public static int SCREEN_WIDTH = 960;
     public static int SCREEN_HEIGHT = 540;
@@ -23,8 +29,5 @@ public class GameConstants {
     public static int ARMOUR_RADIUS = 5;
     public static long GUN_COOLDOWN = 200;
 
-    public static int HEALTH_FLASK_HP = 30;
-    // shop prices:
-    public static int PRICE_GUN = 30;
 
 }

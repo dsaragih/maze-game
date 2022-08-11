@@ -13,7 +13,7 @@ import game.entities.item.Item;
 import manager.IEntityManager;
 import geometry.Circle;
 import geometry.Point;
-import graphics.game.entities.drawers.player.IPlayerDrawer;
+import graphics.entityDrawers.player.IPlayerDrawer;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,7 +27,7 @@ import java.util.Collections;
  */
 public class Player extends CollidableEntity {
 
-    private final int MAX_HEALTH = 100;
+    private int MAX_HEALTH = 100;
     private int health = MAX_HEALTH;
     private IPlayerDrawer playerDrawer;
     private Collection<IPlayerObserver> observers = new ArrayList<>();
@@ -147,14 +147,13 @@ public class Player extends CollidableEntity {
      * @param enemy the enemy collided with player
      */
     public void collideWith(Enemy enemy) {
-        if (enemy.getDamage()*armourPoint*0.01>=shield){
-            this.health -= enemy.getDamage()-shield;
+        if (enemy.getDamage() * armourPoint * 0.01 >= shield) {
+            this.health -= enemy.getDamage() - shield;
             this.shield = 0;
             this.armourPoint = 0;
-        }
-        else{
-            this.shield = (int) Math.max(this.shield-(int)enemy.getDamage()*armourPoint*0.01, 0.0);
-            this.health -= (int)enemy.getDamage()*(100-armourPoint)*0.01;
+        } else {
+            this.shield = (int) Math.max(this.shield - enemy.getDamage() * armourPoint * 0.01, 0.0);
+            this.health -= (int) (enemy.getDamage() * (100. - armourPoint) * 0.01);
         }
         health = Math.max(health, 0);
     }
@@ -170,7 +169,7 @@ public class Player extends CollidableEntity {
 
     @Override
     public void collideWith(Mine mine){
-        health -= 25;
+        health -= mine.getDamage();
         shield = 0;
     }
 
@@ -185,10 +184,9 @@ public class Player extends CollidableEntity {
 
 
     public ArrayList<Item> showMerchantItems(){
-        if(!(currMerchant==null)){
+        if (!(currMerchant == null)) {
             return currMerchant.getItemOwned();
-        }
-        else{
+        } else {
             return new ArrayList<>();
         }
     }

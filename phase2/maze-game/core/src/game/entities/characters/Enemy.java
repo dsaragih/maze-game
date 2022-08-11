@@ -7,7 +7,7 @@ import game.entities.abstractions.ICollidable;
 import game.entities.abstractions.IPlayerObserver;
 import geometry.Circle;
 import geometry.Point;
-import graphics.game.entities.drawers.enemy.IEnemyDrawer;
+import graphics.entityDrawers.enemy.IEnemyDrawer;
 import com.badlogic.gdx.math.MathUtils;
 
 import static config.GameConstants.ENEMY_DAMAGE;

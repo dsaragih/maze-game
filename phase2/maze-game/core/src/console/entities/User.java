@@ -1,7 +1,5 @@
 package console.entities;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
 
 public class User implements Serializable {
     private String userName;

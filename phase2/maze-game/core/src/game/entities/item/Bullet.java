@@ -6,7 +6,7 @@ import game.entities.characters.Enemy;
 import game.entities.characters.MineDropperEnemy;
 import geometry.Circle;
 import geometry.Point;
-import graphics.game.entities.drawers.bullet.IBulletDrawer;
+import graphics.entityDrawers.bullet.IBulletDrawer;
 /** Represents a bullet.
  * @author Daniel Saragih
  * @author Ian Curtis Ewing
@@ -75,7 +75,7 @@ public class Bullet extends Weapon {
     }
 
     /** Get the bullet damage
-     * @return The damage of the bullet
+     * @return how much damage the bullet does
      */
 
     public void setDamage(int damage){

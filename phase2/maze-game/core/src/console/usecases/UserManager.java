@@ -14,8 +14,10 @@ public class UserManager implements Serializable {
     private ArrayList<Log> logHistory = new ArrayList<>();
 
     public UserManager(){
-        if(users.isEmpty())
-            addUser("admin", "123", true); //was "TestAdmin", now "admin"
+        // This constructor is only ever called in UserController.java
+        // if there is an error reading UserManager.ser
+        // and a new UserManager is created instead.
+        addUser("admin", "123", true);
     }
     public void addUser(String userName, String password, boolean isAdmin) {
         User newUser = new User(userName, password, isAdmin, lastId);

@@ -7,7 +7,7 @@ import game.entities.characters.Player;
 import game.entities.rooms.Room;
 import geometry.Circle;
 import geometry.Point;
-import graphics.game.entities.drawers.door.IDoorDrawer;
+import graphics.entityDrawers.door.IDoorDrawer;
 /** Represents a door
  * @author Ethan
  * @author Ian Curtis Ewing\

@@ -2,13 +2,8 @@ import graph.PlanarGraph;
 import graph.PlanarNode;
 import geometry.Point;
 import graph.PolygonGenerator;
-import org.junit.*;
-
 import static org.junit.Assert.*;
 import org.junit.Test;
-
-import java.util.Collections;
-import java.util.Iterator;
 
 public class GraphGeneratorTest {
 
@@ -36,8 +31,8 @@ public class GraphGeneratorTest {
         PlanarNode n1 = new PlanarNode(-1,-2);
         PlanarNode n2 = new PlanarNode(2,-2);
         n1.joinUndirected(n2);
-        assert n1.getNeighboors().contains(n2);
-        assert n2.getNeighboors().contains(n1);
+        assert n1.getNeighbors().contains(n2);
+        assert n2.getNeighbors().contains(n1);
     }
     @Test(timeout = 50)
     public void polygonGraphGeneratorTest(){

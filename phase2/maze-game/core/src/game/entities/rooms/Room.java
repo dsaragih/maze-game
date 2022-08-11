@@ -11,7 +11,7 @@ import game.entities.item.ExampleArmour;
 import game.entities.item.HealthFlask;
 import game.entities.item.Item;
 import geometry.Point;
-import graphics.presenters.IDrawble;
+import graphics.presenters.IDrawable;
 import graphics.presenters.IDrawerFactory;
 import manager.EntityManager;
 import manager.IEntityManager;
@@ -21,9 +21,9 @@ import java.util.ArrayList;
 /**
  * Represents a room
  */
-public class Room implements IDrawble {
-    private final IDrawerFactory presenter;
-    private final IEntityManager entityManager = new EntityManager();
+public class Room implements IDrawable {
+    private IDrawerFactory presenter;
+    private IEntityManager entityManager = new EntityManager();
 
     public Room(IDrawerFactory presenter, Player player, int screenWidth, int screenHeight) {
         this.presenter = presenter;

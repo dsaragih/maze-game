@@ -28,7 +28,7 @@ public class PlanarNode extends Point {
      * Get all adjacent nodes
      * @return set of all adjacent nodes.
      */
-    public Set<PlanarNode> getNeighboors(){
+    public Set<PlanarNode> getNeighbors(){
         return neighbors;
     }
 
@@ -59,7 +59,7 @@ public class PlanarNode extends Point {
 
     public boolean equals(PlanarNode p)
     {
-        return super.equals((Point) p);
+        return super.equals(p); //implicitly casts p to point, its parent class.
     }
 
     /**
