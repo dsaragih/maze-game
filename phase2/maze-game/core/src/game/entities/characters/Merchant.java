@@ -41,6 +41,13 @@ public class Merchant extends CollidableEntity {
     other.collideWith(this);
     }
     public ArrayList<Item> getItemOwned(){return itemOwned;}
+
+    /** tell player the item the merchant want to buy and return the item if the player has enough gold
+     *
+     * @param item proposed item
+     * @param gold gold willing to pay
+     * @return item if the player can afford it and the merchant owns this item, null otherwise.
+     */
     public Item sellItem(Item item, int gold) {
         for (Item i : this.itemOwned) {
             if (i.equals(item)&&gold>i.getValue()) {
