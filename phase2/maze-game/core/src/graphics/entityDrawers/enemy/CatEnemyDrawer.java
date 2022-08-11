@@ -15,7 +15,7 @@ public class CatEnemyDrawer implements IEnemyDrawer {
     public void drawEnemy(Point pos) {
         Texture texture = new Texture(Gdx.files.internal("cat.png"));
         Image image = new Image(texture);
-        image.setPosition(pos.getX()-16, pos.getY()-16);
+        image.setPosition(pos.getX() - image.getWidth() / 2, pos.getY() - image.getHeight() / 2);
         stage.addActor(image);
     }
 }
