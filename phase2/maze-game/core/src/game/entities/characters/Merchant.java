@@ -48,13 +48,13 @@ public class Merchant extends CollidableEntity {
      * @param gold gold willing to pay
      * @return item if the player can afford it and the merchant owns this item, null otherwise.
      */
-    public Item sellItem(Item item, int gold) {
-        for (Item i : this.itemOwned) {
-            if (i.equals(item)&&gold>i.getValue()) {
-                itemOwned.remove(i);
-                return i;
-            }
-        }
-        return null;
-    }
+//    public Item sellItem(Item item, int gold) {
+//        for (Item i : this.itemOwned) {
+//            if ((i.equals(item)) && (gold>=i.getValue())) {
+//                itemOwned.remove(i);
+//                return i;
+//            }
+//        }
+//        return null;
+//    }
 }
