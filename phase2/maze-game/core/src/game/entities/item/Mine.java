@@ -2,6 +2,7 @@ package game.entities.item;
 
 import config.GameConstants;
 import game.entities.abstractions.CollidableEntity;
+import game.entities.abstractions.Entity;
 import game.entities.abstractions.ICollidable;
 import game.entities.characters.Player;
 import geometry.Circle;
@@ -12,11 +13,13 @@ public class Mine extends CollidableEntity {
 
     private IMineDrawer mineDrawer;
     private static float mineRadius = 10;
+    private Entity creator;
     private boolean hasDetonated = false;
 
-    public Mine(Point pos, IMineDrawer mineDrawer) {
+    public Mine(Point pos, IMineDrawer mineDrawer, Entity creator) {
         super(pos);
         this.mineDrawer = mineDrawer;
+        this.creator = creator;
     }
 
     @Override
@@ -46,6 +49,13 @@ public class Mine extends CollidableEntity {
     @Override
     public void draw(){
         mineDrawer.drawMine(pos);
+    }
+
+    @Override
+    public void update(){
+        if(creator.shouldBeRemoved()){
+            hasDetonated = true;
+        }
     }
 
     public int getDamage() { return GameConstants.MINE_DAMAGE; }
