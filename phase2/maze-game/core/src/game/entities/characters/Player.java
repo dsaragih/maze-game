@@ -36,7 +36,7 @@ public class Player extends CollidableEntity {
     private float armourPoint = 0.0F;
     private int shield = 0;
 
-    private int goldOwned = 100;
+    private int goldOwned = 0;
     private ArrayList<Item> itemOwned = new ArrayList<>(Collections.singletonList(gun));
 //
     private Merchant currMerchant;
@@ -211,6 +211,7 @@ public class Player extends CollidableEntity {
         return health;
     }
     public int getShield() { return shield; }
+    public int getGoldOwned(){return goldOwned;}
     public boolean hasCollideWithMerchant(){return !(currMerchant==null);}
 //
 //    public void setCollideWithMerchant(){collideWithMerchant = false;}

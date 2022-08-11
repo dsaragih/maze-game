@@ -19,7 +19,7 @@ public class MineDropperEnemy extends CollidableEntity {
     private Point targetPoint;
     private float health = 500;
 
-    private int value = MathUtils.random(3,6);
+    private final int value = MathUtils.random(3,6);
 
     public MineDropperEnemy(Point pos, IMineDropperDrawer mineDropperDrawer, IMineDrawer mineDrawer) {
         super(pos, true);
