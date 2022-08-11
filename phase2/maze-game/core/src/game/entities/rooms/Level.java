@@ -109,6 +109,7 @@ public class Level implements IRoomContainer, IDrawable {
         if (currentRoom.allEnemiesKilled()) {
             currentRoom = room;
             player.setGunEntityManager(currentRoom.getEntityManager());
+            player.resetCollideWithMerchant();
         }
     }
 
