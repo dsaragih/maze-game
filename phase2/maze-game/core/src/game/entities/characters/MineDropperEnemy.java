@@ -20,7 +20,7 @@ public class MineDropperEnemy extends CollidableEntity {
     private float health = 500;
 
     public MineDropperEnemy(Point pos, IMineDropperDrawer mineDropperDrawer, IMineDrawer mineDrawer) {
-        super(pos);
+        super(pos, true);
         targetPoint = getNewTargetPoint();
         this.mineDropperDrawer = mineDropperDrawer;
         this.mineDrawer = mineDrawer;
