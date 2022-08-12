@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import config.GameConstants;
+import game.entities.characters.Player;
 import graphics.otherDrawers.healthbar.HealthBarDrawer;
 import graphics.otherDrawers.healthbar.IHealthBarDrawer;
 
@@ -90,12 +91,13 @@ public class UIPresenter implements IUIPresenter {
 			stage.addActor(label1);
 			return;
 		}
-		Label shieldLabel = new Label("Shield: " + playerShield, style);
+
+		Label shieldLabel = new Label("Shield: " + playerShield + "/" + Player.MAX_SHIELD, style);
 		shieldLabel.setPosition(30, 50);
 		stage.addActor(shieldLabel);
 
 		Label goldLabel = new Label("Gold: " + playerGold, style);
-		goldLabel.setPosition(900, 20);
+		goldLabel.setPosition(875, 20);
 		stage.addActor(goldLabel);
 
 		healthBarDrawer.drawHealthBar(playerHealth);

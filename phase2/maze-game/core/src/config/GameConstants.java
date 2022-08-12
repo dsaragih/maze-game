@@ -29,5 +29,4 @@ public class GameConstants {
     public static int ARMOUR_RADIUS = 5;
     public static long GUN_COOLDOWN = 200;
 
-
 }
