@@ -36,7 +36,7 @@ public class Player extends CollidableEntity {
     private float armourPoint = 0.0F;
     private int shield = 0;
 
-    private int goldOwned = 0;
+    private int goldOwned = 100;
 //    public ArrayList<Item> itemOwned = new ArrayList<>(Collections.singletonList(gun));
     private ArrayList<Item> itemOwned = new ArrayList<>();
 //
