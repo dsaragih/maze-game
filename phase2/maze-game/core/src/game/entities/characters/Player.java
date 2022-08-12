@@ -37,7 +37,8 @@ public class Player extends CollidableEntity {
     private int shield = 0;
 
     private int goldOwned = 0;
-    private ArrayList<Item> itemOwned = new ArrayList<>(Collections.singletonList(gun));
+//    public ArrayList<Item> itemOwned = new ArrayList<>(Collections.singletonList(gun));
+    private ArrayList<Item> itemOwned = new ArrayList<>();
 //
     private Merchant currMerchant;
 
@@ -178,12 +179,14 @@ public class Player extends CollidableEntity {
     public void informCollision(ICollidable other) {
         other.collideWith(this);
     }
-
+    public ArrayList<Item> getItemOwned(){
+        return itemOwned;
+    }
 
     public void buy(Item item){
 
         if ((currMerchant.getItemOwned().contains(item)) && (goldOwned >= item.getValue()))
-        {addItem(item);
+        {itemOwned.add(item);
         goldOwned -= item.getValue();}
 //        Item wantToBuy = currMerchant.sellItem(item, goldOwned);
 //        if (wantToBuy!=null){
