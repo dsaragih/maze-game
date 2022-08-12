@@ -6,10 +6,7 @@ import game.entities.item.Mine;
 import game.entities.abstractions.CollidableEntity;
 import game.entities.abstractions.ICollidable;
 import game.entities.abstractions.IPlayerObserver;
-import game.entities.item.Armour;
 import game.entities.item.Gun;
-import game.entities.item.HealthFlask;
-import game.entities.item.Item;
 import manager.IEntityManager;
 import geometry.Circle;
 import geometry.Point;
@@ -17,7 +14,6 @@ import graphics.entityDrawers.player.IPlayerDrawer;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 
 /**
  * Represents the player

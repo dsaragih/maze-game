@@ -1,6 +1,6 @@
-# List of deisgn patterns which were used
+# List of design patterns which were used
 
-1. Strategy pattern: Used when a IGraphGenerator is passed into level. Also used when IDoorDrawer, IPlayerDrawer, IGunDrawer, etc. are passed into Door, Player, Gun, etc. respectivly.
+1. Strategy pattern: Used when a IGraphGenerator is passed into level. Also used when IDoorDrawer, IPlayerDrawer, IGunDrawer, etc. are passed into Door, Player, Gun, etc. respectively.
 
 2. Abstract Factory pattern: IPresenter acts as a factory for IDoorDrawer, IPlayerDrawer, IGunDrawer, etc.
 

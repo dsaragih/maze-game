@@ -73,7 +73,7 @@ public class Enemy extends CollidableEntity implements IPlayerObserver {
     }
     /**
      * Collide with the player.
-     * @param player
+     * @param player player being collided
      */
     public void collideWith(Player player) {
         Point dir = player.pos.distanceVector(pos).normalized();

@@ -58,9 +58,9 @@ public class Level implements IRoomContainer, IDrawable {
 
         gun.setEntityManager(currentRoom.getEntityManager());
 
-        Collection<IDrawable> drawbles = new ArrayList<>();
-        drawbles.add(this);
-        Presenter.setDrawables(drawbles);
+        Collection<IDrawable> drawables = new ArrayList<>();
+        drawables.add(this);
+        Presenter.setDrawables(drawables);
     }
 
     private Collection<Room> getRoomsFromGraph(PlanarGraph levelLayout, IDrawerFactory presenter) {

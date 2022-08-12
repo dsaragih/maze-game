@@ -21,7 +21,7 @@ public class PlanarNode extends Point {
      */
     public PlanarNode(float x, float y){
         super(x,y);
-        neighbors = new HashSet<PlanarNode>();
+        neighbors = new HashSet<>();
     }
 
     /**
@@ -47,8 +47,6 @@ public class PlanarNode extends Point {
     public void joinUndirected(PlanarNode n2){
         this.addNeighbor(n2);
         n2.addNeighbor(this);
-//        n1.addNeighbor(n2);
-//        n2.addNeighbor(n1);
     }
 
     /**

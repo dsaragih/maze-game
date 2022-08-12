@@ -42,7 +42,7 @@ public class CharactersTest {
         boolean[] lst = new boolean[1];
         lst[0]=true;
         merchant.updateNumberKeysPressed(lst);
-        assertEquals(1.0, (float) player.getArmourDamageFactor(),0.01);
+        assertEquals(1.0, player.getArmourDamageFactor(),0.01);
 
     }
     @Test(timeout=50)

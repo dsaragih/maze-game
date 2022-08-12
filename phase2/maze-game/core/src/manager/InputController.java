@@ -6,8 +6,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 import config.GameConstants;
 import config.KeyBindings;
-import game.entities.characters.Merchant;
-import game.entities.characters.Player;
 import game.entities.rooms.Level;
 import geometry.Point;
 

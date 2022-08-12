@@ -26,7 +26,7 @@ public class Gun extends Entity {
 
     public void fire(Point direction){
         long time = System.currentTimeMillis();
-        if (time >= lastAttack + GameConstants.GUN_COOLDOWN) {
+        if (time >= lastAttack + GameConstants.GUN_COOL_DOWN) {
             Bullet bullet = new Bullet(pos, direction.distanceVector(pos).normalized(), bulletDrawer);
             entityManager.addCollidableEntity(bullet);
             lastAttack = time;

@@ -2,7 +2,6 @@ package graphics.otherDrawers.healthbar;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import config.GameConstants;
 import game.entities.characters.Player;
 
 public class HealthBarDrawer implements IHealthBarDrawer{

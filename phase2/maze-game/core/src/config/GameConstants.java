@@ -26,7 +26,6 @@ public class GameConstants {
     public static int BULLET_DAMAGE = 15;
     public static float BULLET_SPEED = 30;
     public static int GUN_RADIUS = 2;
-    public static int ARMOUR_RADIUS = 5;
-    public static long GUN_COOLDOWN = 200;
+    public static long GUN_COOL_DOWN = 200;
 
 }
