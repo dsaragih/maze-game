@@ -3,11 +3,11 @@ package game.entities.rooms;
 import com.badlogic.gdx.math.MathUtils;
 
 import game.entities.characters.MineDropperEnemy;
+import game.entities.item.Armour;
 import game.entities.item.Door;
 import game.entities.characters.Enemy;
 import game.entities.characters.Merchant;
 import game.entities.characters.Player;
-import game.entities.item.ExampleArmour;
 import game.entities.item.HealthFlask;
 import game.entities.item.Item;
 import geometry.Point;
@@ -24,6 +24,7 @@ import java.util.ArrayList;
 public class Room implements IDrawable {
     private IDrawerFactory presenter;
     private IEntityManager entityManager = new EntityManager();
+    private Merchant merchant;
 
     public Room(IDrawerFactory presenter, Player player, int screenWidth, int screenHeight) {
         this.presenter = presenter;
@@ -64,13 +65,20 @@ public class Room implements IDrawable {
     }
 
     public void addMerchant(Point merchantPos) {
-        ArrayList<Item> itemOwned = new ArrayList<>();
-        ExampleArmour weakArmour = new ExampleArmour(0, 0);
-        HealthFlask health = new HealthFlask(0, 0);
-        itemOwned.add(health);
-        itemOwned.add(weakArmour);
-        Merchant merchant = new Merchant(merchantPos.getX(), merchantPos.getY(), itemOwned, presenter.getMerchantDrawer());
+        ArrayList<Item> itemsOwned = new ArrayList<>();
+        Armour weakArmour = new Armour(0.4f, "Weak armour", 20);
+        Armour strongArmour = new Armour(0.9f, "String armour", 150);
+        HealthFlask health = new HealthFlask();
+        itemsOwned.add(health);
+        itemsOwned.add(weakArmour);
+        itemsOwned.add(strongArmour);
+        Merchant merchant = new Merchant(merchantPos.getX(), merchantPos.getY(), itemsOwned, presenter.getMerchantDrawer());
+        this.merchant = merchant;
         entityManager.addCollidableEntity(merchant);
+    }
+
+    public void updateMerchantNumberKeys(boolean[] keys){
+        merchant.updateNumberKeysPressed(keys);
     }
     /**
      * Draw the room

@@ -33,14 +33,11 @@ public class Player extends CollidableEntity {
     private Collection<IPlayerObserver> observers = new ArrayList<>();
     private Point gunDirection = new Point(0,0);
     private Gun gun;
-    private float armourPoint = 0.0F;
+    private float armourDamageFactor = 0.0f;
     private int shield = 0;
 
     private int goldOwned = 100;
 //    public ArrayList<Item> itemOwned = new ArrayList<>(Collections.singletonList(gun));
-    private ArrayList<Item> itemOwned = new ArrayList<>();
-//
-    private Merchant currMerchant;
 
     /**
      * Create a player
@@ -65,7 +62,6 @@ public class Player extends CollidableEntity {
      * @param direction The direction of player
      */
     public void fire(Point direction){
-        currMerchant = null;
         gun.fire(direction);
     }
 
@@ -74,7 +70,6 @@ public class Player extends CollidableEntity {
      * @param direction The direction of player
      */
     public void move(Point direction){
-        currMerchant = null;
         //move in the given direction
         direction.multiply(GameConstants.PLAYER_SPEED * Gdx.graphics.getDeltaTime());
         pos.add(direction);
@@ -111,17 +106,11 @@ public class Player extends CollidableEntity {
      * @param gun the gun hold by player
      */
     public void setGun(Gun gun){
-        currMerchant = null;
         this.gun = gun;
     }
 
-    /**
-     * Set the armour that is wear by player
-     * @param armour the armour wear by player
-     */
-    public void setArmour(Armour armour){
-        this.shield = armour.getShield();
-        this.armourPoint = armour.getArmourPoint();
+    public void setArmour(float armourDamageFactor){
+        this.armourDamageFactor = armourDamageFactor;
     }
 
     /**
@@ -145,24 +134,9 @@ public class Player extends CollidableEntity {
      * @param enemy the enemy collided with player
      */
     public void collideWith(Enemy enemy) {
-        if (enemy.getDamage() * armourPoint * 0.01 >= shield) {
-            this.health -= enemy.getDamage() - shield;
-            this.shield = 0;
-            this.armourPoint = 0;
-        } else {
-            this.shield = (int) Math.max(this.shield - enemy.getDamage() * armourPoint * 0.01, 0.0);
-            this.health -= (int) (enemy.getDamage() * (100. - armourPoint) * 0.01);
-        }
-        health = Math.max(health, 0);
-    }
-
-    @Override
-    public void collideWith(Item item){
-        itemOwned.add(item);
-    }
-    @Override
-    public void collideWith(Merchant merchant) {
-        currMerchant = merchant;
+        float totalHealth = (health + shield) - enemy.getDamage() * (1- armourDamageFactor);
+        health = (int)Math.min(totalHealth, MAX_HEALTH);
+        shield = (int)totalHealth - health;
     }
 
     @Override
@@ -179,20 +153,14 @@ public class Player extends CollidableEntity {
     public void informCollision(ICollidable other) {
         other.collideWith(this);
     }
-    public ArrayList<Item> getItemOwned(){
-        return itemOwned;
-    }
 
-    public void buy(Item item){
+    public boolean tryToPay(int priceInGold){
+        if(priceInGold > goldOwned){
+            return false;
+        }
 
-        if ((currMerchant.getItemOwned().contains(item)) && (goldOwned >= item.getValue()))
-        {itemOwned.add(item);
-        goldOwned -= item.getValue();}
-//        Item wantToBuy = currMerchant.sellItem(item, goldOwned);
-//        if (wantToBuy!=null){
-//            addItem(wantToBuy);
-//            goldOwned -= item.getValue();
-//        }
+        goldOwned -= priceInGold;
+        return true;
     }
 
     public void addObserver(IPlayerObserver observer){
@@ -205,39 +173,9 @@ public class Player extends CollidableEntity {
     }
     public int getShield() { return shield; }
     public int getGoldOwned(){return goldOwned;}
-    public boolean hasCollideWithMerchant(){return currMerchant!=null;}
 
-    public void resetCollideWithMerchant(){currMerchant = null;}
-
-    public void addItem(Item item){itemOwned.add(item);}
-//
-    public Merchant getCurrMerchant(){
-        return currMerchant;
-    }
-
-    public void useArmour(){
-        Item toBeRemoved = null;
-        for (Item i: itemOwned){
-            if (i instanceof Armour){
-                toBeRemoved = i;
-                Armour armour = (Armour)i;
-                setArmour(armour);
-            }
-        }
-        itemOwned.remove(toBeRemoved);
-    }
-    public void restoreHealth()
-    {
-        Item toBeRemoved = null;
-        for (Item i: itemOwned){
-            if(i instanceof HealthFlask){
-                health = Math.min(100, health+30);
-                toBeRemoved = i;
-                break;
-            }
-        }
-        itemOwned.remove(toBeRemoved);
-
+    public void addHealth(int healthToAdd){
+        health += healthToAdd;
     }
     public void addGold(int gold){this.goldOwned += gold;}
 

@@ -37,7 +37,7 @@ public class CircleMerchantDrawer implements IMerchantDrawer{
         if (showMenu) {
             float i = 0.0f;
             for (Item item : items) {
-                Label itemLabel = new Label(item.toString() + " price: " + item.getValue() +
+                Label itemLabel = new Label(item.toString() + " price: " + item.getPrice() +
                         " input: " + (items.indexOf(item) + 1), style);
                 itemLabel.setSize(Gdx.graphics.getWidth(), 20);
                 itemLabel.setPosition(0, pos.getY() - i);

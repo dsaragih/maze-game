@@ -1,12 +1,13 @@
 package game.entities.item;
 
 import config.GameConstants;
+import game.entities.abstractions.Entity;
 import manager.IEntityManager;
 import geometry.Point;
 import graphics.entityDrawers.bullet.IBulletDrawer;
 import graphics.entityDrawers.gun.IGunDrawer;
 
-public class Gun extends Weapon {
+public class Gun extends Entity {
 
     private IGunDrawer gunDrawer;
     private IBulletDrawer bulletDrawer;

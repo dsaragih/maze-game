@@ -4,30 +4,30 @@ import game.entities.abstractions.CollidableEntity;
 import game.entities.abstractions.ICollidable;
 import game.entities.item.Item;
 import geometry.Circle;
+import geometry.Point;
 import graphics.entityDrawers.merchant.IMerchantDrawer;
 
 import java.util.ArrayList;
 
 public class Merchant extends CollidableEntity {
     //A merchant will sell stuff to the player
-    private ArrayList<Item> itemOwned;
+    private ArrayList<Item> itemsOwned;
     private IMerchantDrawer drawer;
     private boolean showMenu = false;
+    private Player player;
+    private Point playerPosOnCollision;
+
     public Merchant(float x, float y, ArrayList<Item> itemOwned, IMerchantDrawer drawer) {
         super(x, y);
-        this.itemOwned = itemOwned;
+        this.itemsOwned = itemOwned;
         this.drawer = drawer;
     }
 
     @Override
     public void draw() {
-        drawer.drawMerchant(pos, showMenu, itemOwned);
+        drawer.drawMerchant(pos, showMenu, itemsOwned);
     }
 
-    @Override
-    public void update(){
-        showMenu = false;
-    }
     @Override
     public Circle getCollisionBox() {
         return new Circle(pos, 15);
@@ -35,26 +35,45 @@ public class Merchant extends CollidableEntity {
     @Override
     public void collideWith(Player player) {
         showMenu = true;
+        this.player = player;
+        playerPosOnCollision = player.pos.clone();
     }
+
     @Override
     public void informCollision(ICollidable other) {
     other.collideWith(this);
     }
-    public ArrayList<Item> getItemOwned(){return itemOwned;}
+    public ArrayList<Item> getItemsOwned(){return itemsOwned;}
 
-    /** tell player the item the merchant want to buy and return the item if the player has enough gold
-     *
-     * @param item proposed item
-     * @param gold gold willing to pay
-     * @return item if the player can afford it and the merchant owns this item, null otherwise.
-     */
-//    public Item sellItem(Item item, int gold) {
-//        for (Item i : this.itemOwned) {
-//            if ((i.equals(item)) && (gold>=i.getValue())) {
-//                itemOwned.remove(i);
-//                return i;
-//            }
-//        }
-//        return null;
-//    }
+    @Override
+    public void update() {
+        if(player == null){
+            return;
+        }
+        if(player.pos.getX() != playerPosOnCollision.getX() || player.pos.getY() != playerPosOnCollision.getY()){
+            player = null;
+            playerPosOnCollision = null;
+            showMenu = false;
+        }
+    }
+
+    public void updateNumberKeysPressed(boolean[] keys){
+        if(player == null){
+            return;
+        }
+
+        for(int i = keys.length - 1; i >= 0; --i){
+            if(!keys[i]){
+                continue;
+            }
+
+            Item item = itemsOwned.get(i);
+            if(!player.tryToPay(item.getPrice())){
+                continue;
+            }
+
+            item.operateOnPlayer(player);
+            itemsOwned.remove(i);
+        }
+    }
 }

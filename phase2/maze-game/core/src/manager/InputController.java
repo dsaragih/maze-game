@@ -1,6 +1,7 @@
 package manager;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 import config.GameConstants;
@@ -51,23 +52,36 @@ public class InputController {
             level.mouseClick(mousePos);
          }
 
-         Player player = level.getPlayer();
 
-         if (player.hasCollideWithMerchant()){
-             Merchant merchant = player.getCurrMerchant();
-             if (Gdx.input.isKeyJustPressed(KeyBindings.BUY_1)){
-                 player.buy(merchant.getItemOwned().get(0));
+         boolean keyPressed = false;
+         boolean[] numberKeys = new boolean[10];
+         for(int i = 0; i < numberKeys.length; ++i){
+             numberKeys[i] = Gdx.input.isKeyJustPressed(Input.Keys.NUM_1 + i);
+             if(numberKeys[i]){
+                 keyPressed = true;
              }
-             if (Gdx.input.isKeyJustPressed(KeyBindings.BUY_2)){
-                 player.buy(merchant.getItemOwned().get(1));
-             }
          }
-         if (Gdx.input.isKeyJustPressed(KeyBindings.ADD_SHIELD)){
-             player.useArmour();
+
+         if(keyPressed){
+             level.updateMerchantNumberKeys(numberKeys);
          }
-         if (Gdx.input.isButtonJustPressed(KeyBindings.RESTORE_HEALTH)){
-             player.restoreHealth();
-         }
+//         Player player = level.getPlayer();
+//
+//         if (player.hasCollideWithMerchant()){
+//             Merchant merchant = player.getCurrMerchant();
+//             if (Gdx.input.isKeyJustPressed(KeyBindings.BUY_1)){
+//                 player.buy(merchant.getItemOwned().get(0));
+//             }
+//             if (Gdx.input.isKeyJustPressed(KeyBindings.BUY_2)){
+//                 player.buy(merchant.getItemOwned().get(1));
+//             }
+//         }
+//         if (Gdx.input.isKeyJustPressed(KeyBindings.ADD_SHIELD)){
+//             player.useArmour();
+//         }
+//         if (Gdx.input.isButtonJustPressed(KeyBindings.RESTORE_HEALTH)){
+//             player.restoreHealth();
+//         }
 
     }
 

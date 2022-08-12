@@ -1,6 +1,7 @@
 package game.entities.item;
 
 import config.GameConstants;
+import game.entities.abstractions.CollidableEntity;
 import game.entities.abstractions.ICollidable;
 import game.entities.characters.Enemy;
 import game.entities.characters.MineDropperEnemy;
@@ -11,7 +12,7 @@ import graphics.entityDrawers.bullet.IBulletDrawer;
  * @author Daniel Saragih
  * @author Ian Curtis Ewing
  */
-public class Bullet extends Weapon {
+public class Bullet extends CollidableEntity {
 
     private Point velocity;
     private boolean isHit = false;

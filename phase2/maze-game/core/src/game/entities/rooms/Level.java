@@ -109,7 +109,6 @@ public class Level implements IRoomContainer, IDrawable {
         if (currentRoom.allEnemiesKilled()) {
             currentRoom = room;
             player.setGunEntityManager(currentRoom.getEntityManager());
-            player.resetCollideWithMerchant();
         }
     }
 
@@ -208,6 +207,10 @@ public class Level implements IRoomContainer, IDrawable {
      */
     public void mouseClick(Point mouseDir) {
         player.fire(mouseDir);
+    }
+
+    public void updateMerchantNumberKeys(boolean[] keys){
+        currentRoom.updateMerchantNumberKeys(keys);
     }
 
     /*

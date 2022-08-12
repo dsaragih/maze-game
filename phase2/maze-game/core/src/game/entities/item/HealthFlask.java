@@ -1,19 +1,15 @@
 package game.entities.item;
 
+import game.entities.characters.Player;
 import geometry.Circle;
 
 public class HealthFlask extends Item{
-    public HealthFlask(float x, float y){
-        super(x,y,8, "Health Flask");
+    public HealthFlask(){
+        super( "Health Flask", 10);
     }
 
     @Override
-    public void draw() {
-
-    }
-
-    @Override
-    public Circle getCollisionBox() {
-        return null;
+    public void operateOnPlayer(Player player) {
+        player.addHealth(50);
     }
 }
