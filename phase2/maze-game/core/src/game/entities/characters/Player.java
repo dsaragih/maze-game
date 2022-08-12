@@ -175,7 +175,7 @@ public class Player extends CollidableEntity {
     public int getGoldOwned(){return goldOwned;}
 
     public void addHealth(int healthToAdd){
-        health += healthToAdd;
+        health = Math.min(health + healthToAdd, 100);
     }
     public void addGold(int gold){this.goldOwned += gold;}
 
