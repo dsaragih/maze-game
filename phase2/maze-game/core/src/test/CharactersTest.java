@@ -55,6 +55,7 @@ public class CharactersTest {
         assertTrue(e.shouldBeRemoved());
     }
 
+    @Test
     public void PlayerCollisionBoxTest(){
         Player player = new Player(new Point(0,0), null);
         assertEquals(0, (int)player.getCollisionBox().getCenter().getX());
@@ -74,7 +75,7 @@ public class CharactersTest {
     @Test(timeout=50)
     public void PlayerBeingDamagedTest2(){
         Player player = new Player(new Point(0,0), null);
-        Mine m = new Mine(0,0, null, null);
+        Mine m = new Mine(new Point(0,0), null, null);
         player.setArmour((float)1.0);
         player.collideWith(m);
         assertEquals(75, player.getHealth());
@@ -91,7 +92,7 @@ public class CharactersTest {
     @Test(timeout=50)
     public void PlayerBeingHealedTest(){
         Player player = new Player(new Point(0,0), null);
-        Mine m = new Mine(0,0, null, null);
+        Mine m = new Mine(new Point(0,0), null, null);
         player.collideWith(m);
         HealthFlask flask = new HealthFlask();
         flask.operateOnPlayer(player);
