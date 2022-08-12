@@ -36,7 +36,7 @@ public class Merchant extends CollidableEntity {
     public void collideWith(Player player) {
         showMenu = true;
         this.player = player;
-        playerPosOnCollision = player.pos.clone();
+        playerPosOnCollision = player.pos.clonePoint();
     }
 
     @Override

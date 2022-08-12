@@ -30,7 +30,4 @@ public class Circle {
     public Point getCenter(){
         return center;
     }
-    public float getRadius(){
-        return radius;
-    }
 }

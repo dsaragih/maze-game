@@ -57,7 +57,7 @@ public class MineDropperEnemy extends CollidableEntity {
         float dist = pos.distanceVector(targetPoint).length();
         if(dist < GameConstants.MINE_DROPPER_SPEED){
             pos = targetPoint;
-            entityManager.addCollidableEntity(new Mine(pos.clone(), mineDrawer, this));
+            entityManager.addCollidableEntity(new Mine(pos.clonePoint(), mineDrawer, this));
             targetPoint = getNewTargetPoint();
         }else{
             Point dir = pos.distanceVector(targetPoint).normalized();
