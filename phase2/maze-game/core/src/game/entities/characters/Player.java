@@ -185,4 +185,8 @@ public class Player extends CollidableEntity {
     }
     public void addGold(int gold){this.goldOwned += gold;}
 
+    public void addShield(int shieldToAdd){
+        this.shield += shieldToAdd;
+    }
+
 }
