@@ -1,27 +1,31 @@
 
 import game.entities.characters.Enemy;
 import game.entities.characters.Player;
-import game.entities.item.Bullet;
-import game.entities.item.ExampleArmour;
+import game.entities.item.*;
 import game.entities.characters.Merchant;
-import game.entities.item.Item;
 import geometry.Point;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
 import java.util.ArrayList;
 public class CharactersTest {
-    @Test(timeout=50)
+    @Test
     public void MerchantTransactionTest(){
         ExampleArmour armour = new ExampleArmour(0,0);
+        HealthFlask flask = new HealthFlask(0,0);
         ArrayList<Item> items = new ArrayList<>();
         items.add(armour);
+        items.add(flask);
         Merchant merchant = new Merchant((float)0, (float)0,items, null);
+        assertTrue(merchant.getItemOwned().contains(flask));
         Player player = new Player(new Point(0,0), null);
+        player.addGold(100);
         player.collideWith(merchant);
+        player.buy(flask);
         player.buy(armour);
-        player.setArmour(armour);
-        assertEquals(player.getShield(), 30);
+        assertEquals(player.getItemOwned().size(),2);
+        assertEquals(player.getItemOwned().get(0), flask);
+        assertTrue(player.getItemOwned().contains(armour));
     }
 
     @Test(timeout=50)
