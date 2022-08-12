@@ -63,6 +63,10 @@ public class Merchant extends CollidableEntity {
         }
 
         for(int i = keys.length - 1; i >= 0; --i){
+            if(i >= itemsOwned.size()){
+                continue;
+            }
+
             if(!keys[i]){
                 continue;
             }

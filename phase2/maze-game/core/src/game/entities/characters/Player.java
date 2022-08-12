@@ -33,7 +33,7 @@ public class Player extends CollidableEntity {
     private Collection<IPlayerObserver> observers = new ArrayList<>();
     private Point gunDirection = new Point(0,0);
     private Gun gun;
-    private float armourDamageFactor = 0.0f;
+    private float armourDamageFactor = 1;
     private int shield = 0;
 
     private int goldOwned = 100;
@@ -134,14 +134,14 @@ public class Player extends CollidableEntity {
      * @param enemy the enemy collided with player
      */
     public void collideWith(Enemy enemy) {
-        float totalHealth = (health + shield) - enemy.getDamage() * (1- armourDamageFactor);
+        float totalHealth = (health + shield) - enemy.getDamage() * armourDamageFactor;
         health = (int)Math.min(totalHealth, MAX_HEALTH);
         shield = (int)totalHealth - health;
     }
 
     @Override
     public void collideWith(Mine mine){
-        health -= mine.getDamage();
+        health -= mine.getDamage() * armourDamageFactor;
         shield = 0;
     }
 

@@ -66,8 +66,8 @@ public class Room implements IDrawable {
 
     public void addMerchant(Point merchantPos) {
         ArrayList<Item> itemsOwned = new ArrayList<>();
-        Armour weakArmour = new Armour(0.4f, "Weak armour", 20);
-        Armour strongArmour = new Armour(0.9f, "String armour", 150);
+        Armour weakArmour = new Armour(0.9f, "Weak armour", 20);
+        Armour strongArmour = new Armour(0.4f, "String armour", 150);
         HealthFlask health = new HealthFlask();
         itemsOwned.add(health);
         itemsOwned.add(weakArmour);
