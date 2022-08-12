@@ -6,10 +6,7 @@ import game.entities.item.Mine;
 import game.entities.abstractions.CollidableEntity;
 import game.entities.abstractions.ICollidable;
 import game.entities.abstractions.IPlayerObserver;
-import game.entities.item.Armour;
 import game.entities.item.Gun;
-import game.entities.item.HealthFlask;
-import game.entities.item.Item;
 import manager.IEntityManager;
 import geometry.Circle;
 import geometry.Point;
@@ -17,7 +14,6 @@ import graphics.entityDrawers.player.IPlayerDrawer;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 
 /**
  * Represents the player
@@ -148,8 +144,8 @@ public class Player extends CollidableEntity {
 
     private void takeDamage(int damage){
         float totalHealth = (health + shield) - damage * armourDamageFactor;
-        health = (int)Math.max(0, Math.min(totalHealth, MAX_HEALTH));
-        shield = (int)Math.max(0, Math.min(totalHealth - health, MAX_SHIELD));
+        health = Math.round(Math.max(0, Math.min(totalHealth, MAX_HEALTH)));
+        shield = Math.round(Math.max(0, Math.min(totalHealth - health, MAX_SHIELD)));
     }
     /**
      * Inform others being collided by player.

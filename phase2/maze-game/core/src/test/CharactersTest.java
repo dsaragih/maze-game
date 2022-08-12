@@ -1,5 +1,4 @@
 
-import config.GameConstants;
 import game.entities.characters.Enemy;
 import game.entities.characters.Player;
 import game.entities.item.*;

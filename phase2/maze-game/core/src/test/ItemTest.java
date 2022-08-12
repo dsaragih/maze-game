@@ -1,5 +1,4 @@
 import game.entities.characters.Enemy;
-import game.entities.characters.Player;
 import game.entities.item.*;
 import geometry.Point;
 import manager.EntityManager;

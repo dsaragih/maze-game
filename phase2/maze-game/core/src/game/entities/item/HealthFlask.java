@@ -1,7 +1,6 @@
 package game.entities.item;
 
 import game.entities.characters.Player;
-import geometry.Circle;
 
 public class HealthFlask extends Item{
     public HealthFlask(){
