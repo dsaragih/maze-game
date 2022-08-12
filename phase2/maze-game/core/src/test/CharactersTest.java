@@ -39,16 +39,16 @@ public class CharactersTest {
     }
 
 
-//    @Test(timeout=50)
-//    public void PlayerTest(){
-//        Player player = new Player(new Point(0,0), null);
-//        assertEquals(100, player.getHealth());
-//        assertEquals(0, (int)player.getCollisionBox().getCenter().getX());
-//        assertEquals(0, (int)player.getCollisionBox().getCenter().getY());
-//        Merchant merchant = new Merchant(0,0,null, null);
-//        assertFalse(player.hasCollideWithMerchant());
-//        player.collideWith(merchant);
-//        assertTrue(player.hasCollideWithMerchant());
-//    }
+    @Test(timeout=50)
+    public void PlayerTest(){
+        Player player = new Player(new Point(0,0), null);
+        assertEquals(100, player.getHealth());
+        assertEquals(0, (int)player.getCollisionBox().getCenter().getX());
+        assertEquals(0, (int)player.getCollisionBox().getCenter().getY());
+        Merchant merchant = new Merchant(0,0,null, null);
+        assertFalse(player.hasCollideWithMerchant());
+        player.collideWith(merchant);
+        assertTrue(player.hasCollideWithMerchant());
+    }
 
 }
