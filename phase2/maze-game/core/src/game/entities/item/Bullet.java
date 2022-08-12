@@ -74,10 +74,6 @@ public class Bullet extends Weapon {
         pos.add(velocity);
     }
 
-    /** Get the bullet damage
-     * @return how much damage the bullet does
-     */
-
     public void setDamage(int damage){
         this.damage = damage;
     }

@@ -36,8 +36,9 @@ public class Player extends CollidableEntity {
     private float armourPoint = 0.0F;
     private int shield = 0;
 
-    private int goldOwned = 0;
-    private ArrayList<Item> itemOwned = new ArrayList<>(Collections.singletonList(gun));
+    private int goldOwned = 100;
+//    public ArrayList<Item> itemOwned = new ArrayList<>(Collections.singletonList(gun));
+    private ArrayList<Item> itemOwned = new ArrayList<>();
 //
     private Merchant currMerchant;
 
@@ -119,9 +120,6 @@ public class Player extends CollidableEntity {
      * @param armour the armour wear by player
      */
     public void setArmour(Armour armour){
-        if(!itemOwned.contains((armour))) {
-            itemOwned.add(armour);
-        }
         this.shield = armour.getShield();
         this.armourPoint = armour.getArmourPoint();
     }
@@ -181,14 +179,20 @@ public class Player extends CollidableEntity {
     public void informCollision(ICollidable other) {
         other.collideWith(this);
     }
-
+    public ArrayList<Item> getItemOwned(){
+        return itemOwned;
+    }
 
     public void buy(Item item){
-        Item wantToBuy = currMerchant.sellItem(item, goldOwned);
-        if (wantToBuy!=null){
-            addItem(wantToBuy);
-            goldOwned -= item.getValue();
-        }
+
+        if ((currMerchant.getItemOwned().contains(item)) && (goldOwned >= item.getValue()))
+        {itemOwned.add(item);
+        goldOwned -= item.getValue();}
+//        Item wantToBuy = currMerchant.sellItem(item, goldOwned);
+//        if (wantToBuy!=null){
+//            addItem(wantToBuy);
+//            goldOwned -= item.getValue();
+//        }
     }
 
     public void addObserver(IPlayerObserver observer){
@@ -201,7 +205,7 @@ public class Player extends CollidableEntity {
     }
     public int getShield() { return shield; }
     public int getGoldOwned(){return goldOwned;}
-    public boolean hasCollideWithMerchant(){return !(currMerchant==null);}
+    public boolean hasCollideWithMerchant(){return currMerchant!=null;}
 
     public void resetCollideWithMerchant(){currMerchant = null;}
 
@@ -211,21 +215,13 @@ public class Player extends CollidableEntity {
         return currMerchant;
     }
 
-    public void useArmour(Armour armour){
-        if (itemOwned.contains(armour)){
-            this.armourPoint = armour.getArmourPoint();
-            this.shield = armour.getShield();
-            itemOwned.remove(armour);
-        }
-    }
     public void useArmour(){
         Item toBeRemoved = null;
         for (Item i: itemOwned){
             if (i instanceof Armour){
                 toBeRemoved = i;
                 Armour armour = (Armour)i;
-                this.armourPoint=armour.getArmourPoint();
-                this.shield = armour.getShield();
+                setArmour(armour);
             }
         }
         itemOwned.remove(toBeRemoved);
@@ -235,8 +231,7 @@ public class Player extends CollidableEntity {
         Item toBeRemoved = null;
         for (Item i: itemOwned){
             if(i instanceof HealthFlask){
-                health += 30;
-                health = Math.min(100, health);
+                health = Math.min(100, health+30);
                 toBeRemoved = i;
                 break;
             }

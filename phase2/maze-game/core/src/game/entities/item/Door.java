@@ -63,11 +63,6 @@ public class Door extends CollidableEntity {
         return new Circle(pos, GameConstants.DOOR_RADIUS);
     }
 
-    /**
-     * Inform other object being collided with the door
-     * @param other the object being collided.
-     */
-
     //No other entities implemented collidewith(Door)!
 //    @Override
 //    public void informCollision(ICollidable other) {
