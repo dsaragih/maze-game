@@ -27,14 +27,16 @@ import java.util.Collections;
  */
 public class Player extends CollidableEntity {
 
-    private int MAX_HEALTH = 100;
+    public static final int MAX_HEALTH = 100;
     private int health = MAX_HEALTH;
-    private IPlayerDrawer playerDrawer;
+
+    public static final int MAX_SHIELD = 50;
+    private int shield = 0;
+    private final IPlayerDrawer playerDrawer;
     private Collection<IPlayerObserver> observers = new ArrayList<>();
     private Point gunDirection = new Point(0,0);
     private Gun gun;
-    private float armourDamageFactor = 0.0f;
-    private int shield = 0;
+    private float armourDamageFactor = 1;
 
     private int goldOwned = 100;
 //    public ArrayList<Item> itemOwned = new ArrayList<>(Collections.singletonList(gun));
@@ -134,17 +136,20 @@ public class Player extends CollidableEntity {
      * @param enemy the enemy collided with player
      */
     public void collideWith(Enemy enemy) {
-        float totalHealth = (health + shield) - enemy.getDamage() * (1- armourDamageFactor);
-        health = (int)Math.min(totalHealth, MAX_HEALTH);
-        shield = (int)totalHealth - health;
+        takeDamage(enemy.getDamage());
     }
 
     @Override
     public void collideWith(Mine mine){
-        health -= mine.getDamage();
         shield = 0;
+        takeDamage(mine.getDamage());
     }
 
+    private void takeDamage(int damage){
+        float totalHealth = (health + shield) - damage * armourDamageFactor;
+        health = (int)Math.max(0, Math.min(totalHealth, MAX_HEALTH));
+        shield = (int)Math.max(0, Math.min(totalHealth - health, MAX_SHIELD));
+    }
     /**
      * Inform others being collided by player.
      * @param other the object collided with the player
@@ -175,8 +180,13 @@ public class Player extends CollidableEntity {
     public int getGoldOwned(){return goldOwned;}
 
     public void addHealth(int healthToAdd){
-        health = Math.min(health + healthToAdd, 100);
+        health += healthToAdd;
+        health = Math.min(health, MAX_HEALTH);
     }
     public void addGold(int gold){this.goldOwned += gold;}
+
+    public void addShield(int shieldToAdd){
+        this.shield += shieldToAdd;
+    }
 
 }

@@ -3,13 +3,10 @@ package game.entities.rooms;
 import com.badlogic.gdx.math.MathUtils;
 
 import game.entities.characters.MineDropperEnemy;
-import game.entities.item.Armour;
-import game.entities.item.Door;
+import game.entities.item.*;
 import game.entities.characters.Enemy;
 import game.entities.characters.Merchant;
 import game.entities.characters.Player;
-import game.entities.item.HealthFlask;
-import game.entities.item.Item;
 import geometry.Point;
 import graphics.presenters.IDrawable;
 import graphics.presenters.IDrawerFactory;
@@ -66,12 +63,14 @@ public class Room implements IDrawable {
 
     public void addMerchant(Point merchantPos) {
         ArrayList<Item> itemsOwned = new ArrayList<>();
-        Armour weakArmour = new Armour(0.4f, "Weak armour", 20);
-        Armour strongArmour = new Armour(0.9f, "String armour", 150);
+        Armour weakArmour = new Armour(0.9f, "Weak armour", 20);
+        Armour strongArmour = new Armour(0.4f, "String armour", 100);
+        Shield shield = new Shield();
         HealthFlask health = new HealthFlask();
         itemsOwned.add(health);
         itemsOwned.add(weakArmour);
         itemsOwned.add(strongArmour);
+        itemsOwned.add(shield);
         Merchant merchant = new Merchant(merchantPos.getX(), merchantPos.getY(), itemsOwned, presenter.getMerchantDrawer());
         this.merchant = merchant;
         entityManager.addCollidableEntity(merchant);
