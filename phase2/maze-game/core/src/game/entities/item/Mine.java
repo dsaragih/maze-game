@@ -21,6 +21,11 @@ public class Mine extends CollidableEntity {
         this.mineDrawer = mineDrawer;
         this.creator = creator;
     }
+    public Mine(int x, int y, IMineDrawer mineDrawer, Entity creator) {
+        super(x, y);
+        this.mineDrawer = mineDrawer;
+        this.creator = creator;
+    }
 
     @Override
     public Circle getCollisionBox() {

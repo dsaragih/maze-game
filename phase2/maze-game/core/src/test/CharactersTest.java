@@ -1,4 +1,5 @@
 
+import config.GameConstants;
 import game.entities.characters.Enemy;
 import game.entities.characters.Player;
 import game.entities.item.*;
@@ -13,21 +14,17 @@ public class CharactersTest {
     public void MerchantTransactionTest(){
         ArrayList<Item> itemOwned = new ArrayList<>();
         itemOwned.add(new Armour((float)0.1, "Very expensive armour", 1000));
-        itemOwned.add(new Armour((float)0.2, "cheap armour", 10));
+        itemOwned.add(new Armour((float)0.2, "cheap armour", 13));
         itemOwned.add(new HealthFlask());
         Merchant merchant = new Merchant(0,0, itemOwned, null);
         Player player = new Player(new Point(0,0), null);
-        Enemy e = new Enemy(0,0,null);
-        e.setDamage(10);
-        player.collideWith(e);
         merchant.collideWith(player);
         boolean[] lst = new boolean[3];
         lst[1] = true;
         lst[2] = true;
         merchant.updateNumberKeysPressed(lst);
         assertEquals((float)0.2,player.getArmourDamageFactor(),0.01);
-        assertEquals(100, player.getHealth());
-        assertEquals(80, player.getGoldOwned());
+        assertEquals(77, player.getGoldOwned());
     }
 
     @Test
@@ -49,14 +46,13 @@ public class CharactersTest {
     public void EnemyBeingDamagedTest(){
 
         Enemy e = new Enemy(0,0,null);
-        e.setDamage(10);
-        assertEquals(10, e.getDamage());
+        assertEquals(1, e.getDamage());
         Player p = new Player(new Point(0,0), null);
         p.collideWith(e);
-        assertEquals(90, p.getHealth());
+        assertEquals(99, p.getHealth());
         Bullet bullet = new Bullet(new Point(0,0), new Point(1,0), null);
-        bullet.setDamage(100);
-        e.collideWith(bullet);
+        assertFalse(e.shouldBeRemoved());
+        for(int i = 0; i<7; i++) e.collideWith(bullet);
         assertTrue(e.shouldBeRemoved());
     }
 
@@ -71,32 +67,42 @@ public class CharactersTest {
         Player player = new Player(new Point(0,0), null);
         player.setArmour((float)0.2);
         Enemy e = new Enemy(0,0, null);
-        e.setDamage(100);
         player.collideWith(e);
-        assertEquals(80, player.getHealth());
+        assertEquals(99, player.getHealth());
         assertEquals(0, (int)player.getCollisionBox().getCenter().getX());
         assertEquals(0, (int)player.getCollisionBox().getCenter().getY());
     }
     @Test(timeout=50)
     public void PlayerBeingDamagedTest2(){
         Player player = new Player(new Point(0,0), null);
-        Enemy e = new Enemy(0,0, null);
-        e.setDamage(100);
+        Mine m = new Mine(0,0, null, null);
         player.setArmour((float)1.0);
-        player.collideWith(e);
-        assertEquals(0, player.getHealth());
-
+        player.collideWith(m);
+        assertEquals(75, player.getHealth());
+        player.setArmour((float)0.8);
+        player.collideWith(m);
+        assertEquals(55, player.getHealth());
+        player.setArmour((float)0.2);
+        player.collideWith(m);
+        assertEquals(50, player.getHealth());
+        player.setArmour((float)0.0);
+        player.collideWith(m);
+        assertEquals(50, player.getHealth());
     }
     @Test(timeout=50)
     public void PlayerBeingHealedTest(){
         Player player = new Player(new Point(0,0), null);
-        Enemy e = new Enemy(0,0, null);
-        e.setDamage(20);
-        player.collideWith(e);
-        assertEquals(80, player.getHealth());
+        Mine m = new Mine(0,0, null, null);
+        player.collideWith(m);
         HealthFlask flask = new HealthFlask();
         flask.operateOnPlayer(player);
         assertEquals(100, player.getHealth());
+        player.collideWith(m);
+        player.collideWith(m);
+        player.collideWith(m);
+        flask = new HealthFlask();
+        flask.operateOnPlayer(player);
+        assertEquals(75, player.getHealth());
     }
     @Test(timeout=50)
     public void PlayerBeingHealedTest2(){
