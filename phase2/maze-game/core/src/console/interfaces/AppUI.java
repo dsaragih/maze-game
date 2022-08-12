@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class AppUI {
-    private static int MIN = 1;//smallest acceptable username/password
     private User user;
     private UserController userController = new UserController();
     private Scanner in = new Scanner(System.in);
@@ -160,18 +159,22 @@ public class AppUI {
     }
 
     private String enter(String what) {
+        int MIN = 1; //smallest acceptable username/password
         String str;
+        boolean isInputInvalid;
         do {
             writeln("Enter " + what + ": ");
             str = in.nextLine();
-        }
-        while ((str == null || str.length() < MIN) && tooShort());
-        return str;
-    }
 
-    private boolean tooShort() {
-        writeln("Too short! Must be at least " + MIN + " characters.");
-        return true;
+            isInputInvalid = (str == null || str.length() < MIN);
+
+            if (isInputInvalid) {
+                writeln("Too short! Must be at least " + MIN + " characters.");
+            }
+        }
+        while (isInputInvalid);
+
+        return str;
     }
 
     private int getNumUpTo(int max) {
