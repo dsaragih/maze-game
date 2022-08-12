@@ -90,7 +90,6 @@ public class Player extends CollidableEntity {
         return new Point(pos.getX() + gunDirection.getX() * GameConstants.PLAYER_RADIUS, pos.getY() + gunDirection.getY() * GameConstants.PLAYER_RADIUS);
     }
 
-
     /**
      * Set the mouse position for player
      * @param mousePos the mouse position.
@@ -110,7 +109,9 @@ public class Player extends CollidableEntity {
     public void setGun(Gun gun){
         this.gun = gun;
     }
-
+    public float getArmourDamageFactor(){
+        return armourDamageFactor;
+    }
     public void setArmour(float armourDamageFactor){
         this.armourDamageFactor = armourDamageFactor;
     }

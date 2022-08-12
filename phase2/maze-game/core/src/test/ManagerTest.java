@@ -11,33 +11,25 @@ import org.junit.Test;
 public class ManagerTest {
     @Test(timeout=50)
     public void EntityManagerAddEntityTest(){
-//        ExampleArmour armour = new ExampleArmour(1,1);
-//        CirclePlayerDrawer draw = new CirclePlayerDrawer(null);
-//        HealthBarDrawer health = new HealthBarDrawer(null);
-//        Point pos = new Point(1,1);
-//        Player player = new Player(pos, draw);
-//        EntityManager entityManager = new EntityManager();
-//        entityManager.addCollidableEntity(armour);
-//        entityManager.addCollidableEntity(player);
-//        entityManager.update();
-//        assertTrue(entityManager.getEntities().contains(player));
-//        assertTrue(entityManager.getEntities().contains(armour));
+        CirclePlayerDrawer draw = new CirclePlayerDrawer(null);
+        HealthBarDrawer health = new HealthBarDrawer(null);
+        Point pos = new Point(1,1);
+        Player player = new Player(pos, draw);
+        EntityManager entityManager = new EntityManager();
+        entityManager.addCollidableEntity(player);
+        entityManager.update();
+        assertTrue(entityManager.getEntities().contains(player));
     }
 
     @Test(timeout=50)
     public void EntityManagerRemoveEntityTest(){
-//        ExampleArmour armour = new ExampleArmour(1,1);
-//        Point pos = new Point(1,1);
-//        CirclePlayerDrawer draw = new CirclePlayerDrawer(null);
-//        Player player = new Player(pos, draw);
-//        EntityManager entityManager = new EntityManager();
-//        entityManager.addCollidableEntity(armour);
-//        entityManager.addCollidableEntity(player);
-//        entityManager.update();
-//        entityManager.removeEntity(armour);
-//        entityManager.update();
-//        assertTrue(entityManager.getEntities().contains(player));
-//        assertFalse(entityManager.getEntities().contains(armour));
+        Point pos = new Point(1,1);
+        Player player = new Player(pos, null);
+        EntityManager entityManager = new EntityManager();
+        entityManager.addCollidableEntity(player);
+        entityManager.update();
+        entityManager.update();
+        assertTrue(entityManager.getEntities().contains(player));
     }
 
     @Test(timeout=50)
