@@ -65,10 +65,15 @@ public class CharactersTest {
     @Test(timeout=50)
     public void PlayerBeingDamagedTest(){
         Player player = new Player(new Point(0,0), null);
-        player.setArmour((float)0.2);
         Enemy e = new Enemy(0,0, null);
         player.collideWith(e);
         assertEquals(99, player.getHealth());
+        player.setArmour((float)0.4);
+        player.collideWith(e);
+        assertEquals(99, player.getHealth());
+        player.setArmour((float)0.6);
+        player.collideWith(e);
+        assertEquals(98, player.getHealth());
         assertEquals(0, (int)player.getCollisionBox().getCenter().getX());
         assertEquals(0, (int)player.getCollisionBox().getCenter().getY());
     }
@@ -108,8 +113,7 @@ public class CharactersTest {
     public void PlayerBeingHealedTest2(){
         Player player = new Player(new Point(0,0), null);
         Enemy e = new Enemy(0,0, null);
-        e.setDamage(90);
-        player.collideWith(e);
+        for (int i = 0; i<90; i++) player.collideWith(e);
         assertEquals(10, player.getHealth());
         HealthFlask flask = new HealthFlask();
         flask.operateOnPlayer(player);
