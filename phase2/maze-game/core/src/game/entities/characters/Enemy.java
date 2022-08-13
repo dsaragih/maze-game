@@ -21,9 +21,8 @@ public class Enemy extends CollidableEntity implements IPlayerObserver {
 
     private Point velocity = new Point(0,0);
     private IEnemyDrawer enemyDrawer;
-    private int health = 100;
+    private int health = GameConstants.ENEMY_MAX_HEALTH;
     private Point target = null;
-    private int damage = ENEMY_DAMAGE;
 
     private int value = MathUtils.random(1,3);
 
@@ -154,16 +153,13 @@ public class Enemy extends CollidableEntity implements IPlayerObserver {
         pos.add(velocity);
 
     }
-    public void setDamage(int damage){
-        this.damage = damage;
-    }
 
     /**
      * Get the damage that the enemy can deal
      * @return the damage
      */
     public int getDamage(){
-        return damage;
+        return GameConstants.ENEMY_DAMAGE;
     }
 
     /**
