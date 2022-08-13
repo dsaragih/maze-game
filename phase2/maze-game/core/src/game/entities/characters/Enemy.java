@@ -10,6 +10,7 @@ import geometry.Point;
 import graphics.entityDrawers.enemy.IEnemyDrawer;
 import com.badlogic.gdx.math.MathUtils;
 
+import static config.GameConstants.ENEMY_DAMAGE;
 
 /** Represents an enemy
  * @author Ethan
@@ -19,11 +20,11 @@ import com.badlogic.gdx.math.MathUtils;
 public class Enemy extends CollidableEntity implements IPlayerObserver {
 
     private Point velocity = new Point(0,0);
-    private final IEnemyDrawer enemyDrawer;
+    private IEnemyDrawer enemyDrawer;
     private int health = GameConstants.ENEMY_MAX_HEALTH;
     private Point target = null;
 
-    private final int value = MathUtils.random(1,3);
+    private int value = MathUtils.random(1,3);
 
     /**
      * Create an enemy
@@ -31,7 +32,7 @@ public class Enemy extends CollidableEntity implements IPlayerObserver {
      * @param y the y-coordinate of enemy
      * @param enemyDrawer the drawer of enemy
      */
-    public Enemy(final int x, final int y, final IEnemyDrawer enemyDrawer) {
+    public Enemy(int x, int y, IEnemyDrawer enemyDrawer) {
         super(x, y, true);
         this.enemyDrawer = enemyDrawer;
     }
@@ -41,7 +42,7 @@ public class Enemy extends CollidableEntity implements IPlayerObserver {
      * @param pos the position of the enemy
      * @param enemyDrawer the drawer of enemy
      */
-    public Enemy(final Point pos, final IEnemyDrawer enemyDrawer) {
+    public Enemy(Point pos, IEnemyDrawer enemyDrawer) {
         super(pos,true);
         this.enemyDrawer = enemyDrawer;
     }
@@ -61,20 +62,20 @@ public class Enemy extends CollidableEntity implements IPlayerObserver {
      * Inform the other objects being collided with.
      */
     @Override
-    public void informCollision(final ICollidable other) {
+    public void informCollision(ICollidable other) {
         other.collideWith(this);
     }
 
     @Override
-    public void collideWith(final Merchant merchant) {
+    public void collideWith(Merchant merchant) {
 
     }
     /**
      * Collide with the player.
      * @param player player being collided
      */
-    public void collideWith(final Player player) {
-        final Point dir = player.pos.distanceVector(pos).normalized();
+    public void collideWith(Player player) {
+        Point dir = player.pos.distanceVector(pos).normalized();
         dir.multiply(-1f);
         velocity.add(dir);
     }
@@ -84,8 +85,8 @@ public class Enemy extends CollidableEntity implements IPlayerObserver {
      * @param enemy the enemy being collided with the enemy
      */
     @Override
-    public void collideWith(final Enemy enemy) {
-        final Point dir = enemy.pos.distanceVector(pos).normalized();
+    public void collideWith(Enemy enemy) {
+        Point dir = enemy.pos.distanceVector(pos).normalized();
         dir.multiply(-1f);
         velocity.add(dir);
     }
@@ -95,7 +96,7 @@ public class Enemy extends CollidableEntity implements IPlayerObserver {
      * @param bullet the bullet being collided with the enemy
      */
     @Override
-    public void collideWith(final Bullet bullet) {
+    public void collideWith(Bullet bullet) {
         this.health -= bullet.getDamage();
     }
 
@@ -124,7 +125,7 @@ public class Enemy extends CollidableEntity implements IPlayerObserver {
             return;
         }
 
-        final Point dirVector = target.distanceVector(pos).normalized();
+        Point dirVector = target.distanceVector(pos).normalized();
         dirVector.multiply(GameConstants.ENEMY_ACCELERATION * Gdx.graphics.getDeltaTime());
         if(pos.getX()> GameConstants.SCREEN_WIDTH && velocity.getX() > 0){
             velocity.setX(0);
@@ -143,7 +144,7 @@ public class Enemy extends CollidableEntity implements IPlayerObserver {
         if(velocity.isZero()){
             return;
         }
-        final Point newDir = velocity.normalized();
+        Point newDir = velocity.normalized();
         if(newDir.length() > GameConstants.ENEMY_MAX_SPEED){
             newDir.multiply(GameConstants.ENEMY_MAX_SPEED);
             velocity = newDir;
@@ -165,7 +166,7 @@ public class Enemy extends CollidableEntity implements IPlayerObserver {
      * Set the target point of the enemy
      * @param newTarget The target of enemy.
      */
-    public void setTarget(final Point newTarget){
+    public void setTarget(Point newTarget){
         target = newTarget;
     }
 

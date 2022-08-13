@@ -5,15 +5,15 @@ package geometry;
  * @author Ethan
  */
 public class Circle {
-    private final Point center;
-    private final float radius;
+    private Point center;
+    private float radius;
 
     /**
      * Create a circle
      * @param center the center point
      * @param radius the radius
      */
-    public Circle(final Point center, final float radius){
+    public Circle(Point center, float radius){
         this.center = center;
         this.radius = radius;
     }
@@ -23,8 +23,8 @@ public class Circle {
      * @param other the other circle
      * @return whether two circles are intersected
      */
-    public boolean intersects(final Circle other){
-        final Point dist = center.distanceVector(other.center);
+    public boolean intersects(Circle other){
+        Point dist = center.distanceVector(other.center);
         return dist.length() <= radius + other.radius;
     }
     public Point getCenter(){

@@ -2,13 +2,13 @@ package console.entities;
 import java.io.Serializable;
 
 public class User implements Serializable {
-    private final String userName;
-    private final String password;
-    private final int userid;
-    private final boolean admin;
+    private String userName;
+    private String password;
+    private int userid;
+    private boolean admin;
     private boolean banned;
 
-    public User(final String userName, final String password, final boolean admin, final int userid){
+    public User(String userName, String password, boolean admin, int userid){
         this.userName = userName;
         this.password = password;
         this.admin = admin;
@@ -29,7 +29,7 @@ public class User implements Serializable {
     }
     public boolean isBanned() { return banned; }
 
-    public void setBanned(final boolean banned) {
+    public void setBanned(boolean banned) {
         this.banned = banned;
     }
 

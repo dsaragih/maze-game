@@ -14,7 +14,7 @@ public enum Msg {
 
     private final String msg; //Enum type fields are always made final
 
-    Msg(final String english) {
+    Msg(String english) {
         this.msg = english;
     }
     public String out(){

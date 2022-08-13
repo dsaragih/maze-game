@@ -31,7 +31,7 @@ public class MazeGame extends ApplicationAdapter {
 	 */
 	@Override
 	public void create () {
-		final Stage stage = new Stage(new ScreenViewport());
+		Stage stage = new Stage(new ScreenViewport());
 		Presenter = new UIPresenter(stage);
 		drawerFactory = new ShapeDrawerFactory(stage, GameConstants.SCREEN_WIDTH, GameConstants.SCREEN_HEIGHT);
 

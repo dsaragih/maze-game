@@ -18,7 +18,7 @@ public abstract class CollidableEntity extends Entity implements ICollidable{
      * Create a collidable entity with the position
      * @param pos position of the entity
      */
-    public CollidableEntity(final Point pos) {
+    public CollidableEntity(Point pos) {
         super(pos);
     }
 
@@ -27,66 +27,66 @@ public abstract class CollidableEntity extends Entity implements ICollidable{
      * @param x the horizontal coordinate of the entity
      * @param y the vertical coordinate of the entity
      */
-    public CollidableEntity(final float x, final float y) {
+    public CollidableEntity(float x, float y) {
         super(x, y);
     }
-    public CollidableEntity(final Point pos, final boolean needToBeKilled){super(pos, needToBeKilled);}
-    public CollidableEntity(final float x, final float y, final boolean needToBeKilled){super(x,y,needToBeKilled);}
+    public CollidableEntity(Point pos, boolean needToBeKilled){super(pos, needToBeKilled);}
+    public CollidableEntity(float x, float y, boolean needToBeKilled){super(x,y,needToBeKilled);}
 
     @Override
     public void draw() {
 
     }
 
-    public abstract Circle getCollisionBox();
+    abstract public Circle getCollisionBox();
 
     @Override
-    public void collideWith(final Player player) {
+    public void collideWith(Player player) {
 
     }
 
     @Override
-    public void collideWith(final Enemy enemy) {
+    public void collideWith(Enemy enemy) {
 
     }
 
     @Override
-    public void collideWith(final Door door) {
+    public void collideWith(Door door) {
 
     }
 
     @Override
-    public void collideWith(final Bullet bullet) {
+    public void collideWith(Bullet bullet) {
 
     }
 
     @Override
-    public void collideWith(final Item item) {
+    public void collideWith(Item item) {
 
     }
 
     @Override
-    public void informCollision(final ICollidable other) {
+    public void informCollision(ICollidable other) {
 
     }
 
     @Override
-    public void collideWith(final Merchant merchant) {
+    public void collideWith(Merchant merchant) {
 
     }
 
     @Override
-    public void collideWith(final MineDropperEnemy mineDropperEnemy){
+    public void collideWith(MineDropperEnemy mineDropperEnemy){
 
     }
 
     @Override
-    public void removeSelf(final IEntityManager entityManager){
+    public void removeSelf(IEntityManager entityManager){
         entityManager.removeEntity(this);
     }
 
     @Override
-    public void collideWith(final Mine mine){
+    public void collideWith(Mine mine){
 
     }
 }

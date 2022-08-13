@@ -11,13 +11,13 @@ import java.util.ArrayList;
 
 public class Merchant extends CollidableEntity {
     //A merchant will sell stuff to the player
-    private final ArrayList<Item> itemsOwned;
-    private final IMerchantDrawer drawer;
+    private ArrayList<Item> itemsOwned;
+    private IMerchantDrawer drawer;
     private boolean showMenu = false;
     private Player player;
     private Point playerPosOnCollision;
 
-    public Merchant(final float x, final float y, final ArrayList<Item> itemOwned, final IMerchantDrawer drawer) {
+    public Merchant(float x, float y, ArrayList<Item> itemOwned, IMerchantDrawer drawer) {
         super(x, y);
         this.itemsOwned = itemOwned;
         this.drawer = drawer;
@@ -33,14 +33,14 @@ public class Merchant extends CollidableEntity {
         return new Circle(pos, 15);
     }
     @Override
-    public void collideWith(final Player player) {
+    public void collideWith(Player player) {
         showMenu = true;
         this.player = player;
         playerPosOnCollision = player.pos.clonePoint();
     }
 
     @Override
-    public void informCollision(final ICollidable other) {
+    public void informCollision(ICollidable other) {
     other.collideWith(this);
     }
     public ArrayList<Item> getItemsOwned(){return itemsOwned;}
@@ -57,7 +57,7 @@ public class Merchant extends CollidableEntity {
         }
     }
 
-    public void updateNumberKeysPressed(final boolean[] keys){
+    public void updateNumberKeysPressed(boolean[] keys){
         if(player == null){
             return;
         }
@@ -71,7 +71,7 @@ public class Merchant extends CollidableEntity {
                 continue;
             }
 
-            final Item item = itemsOwned.get(i);
+            Item item = itemsOwned.get(i);
             if(!player.tryToPay(item.getPrice())){
                 continue;
             }

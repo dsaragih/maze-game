@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import config.GameConstants;
+import game.entities.characters.Player;
 import graphics.otherDrawers.healthbar.HealthBarDrawer;
 import graphics.otherDrawers.healthbar.IHealthBarDrawer;
 
@@ -27,14 +28,14 @@ public class UIPresenter implements IUIPresenter {
 
 
 	//Variables used to draw
-    private final SpriteBatch spriteBatch;
-	private final Stage stage;
-	private final ShapeRenderer shapeRenderer;
-	private final BitmapFont font;
-	private final OrthographicCamera camera;
+    private SpriteBatch spriteBatch;
+	private Stage stage;
+	private ShapeRenderer shapeRenderer;
+	private BitmapFont font;
+	private OrthographicCamera camera;
 
-	private final IHealthBarDrawer healthBarDrawer;
-    public UIPresenter(final Stage stage){
+	private IHealthBarDrawer healthBarDrawer;
+    public UIPresenter(Stage stage){
         spriteBatch = new SpriteBatch();
 		this.stage = stage;
 		font = new BitmapFont();
@@ -65,16 +66,16 @@ public class UIPresenter implements IUIPresenter {
     }
 
 	private void drawNoOverhead(){
-        for(final IDrawable drawable: drawables){
+        for(IDrawable drawable: drawables){
             drawable.draw();
         }
 
-		final Label.LabelStyle style = new Label.LabelStyle();
+		Label.LabelStyle style = new Label.LabelStyle();
 		style.font = font;
 		style.fontColor = Color.RED;
 
 		if(playerWins){
-			final Label label1 = new Label("YOU WIN", style);
+			Label label1 = new Label("YOU WIN", style);
 			label1.setPosition(0, GameConstants.SCREEN_HEIGHT / 2f);
 			label1.setSize(Gdx.graphics.getWidth(), 20);
 			label1.setAlignment(Align.center);
@@ -83,7 +84,7 @@ public class UIPresenter implements IUIPresenter {
 		}
 
 		if(isPlayerDead){
-			final Label label1 = new Label("YOU DIED", style);
+			Label label1 = new Label("YOU DIED", style);
 			label1.setPosition(0, GameConstants.SCREEN_HEIGHT / 2f);
 			label1.setSize(Gdx.graphics.getWidth(), 20);
 			label1.setAlignment(Align.center);
@@ -91,11 +92,11 @@ public class UIPresenter implements IUIPresenter {
 			return;
 		}
 
-		final Label shieldLabel = new Label("Shield: " + playerShield + "/" + GameConstants.PLAYER_MAX_SHIELD, style);
+		Label shieldLabel = new Label("Shield: " + playerShield + "/" + GameConstants.PLAYER_MAX_SHIELD, style);
 		shieldLabel.setPosition(30, 50);
 		stage.addActor(shieldLabel);
 
-		final Label goldLabel = new Label("Gold: " + playerGold, style);
+		Label goldLabel = new Label("Gold: " + playerGold, style);
 		goldLabel.setPosition(875, 20);
 		stage.addActor(goldLabel);
 
@@ -103,21 +104,21 @@ public class UIPresenter implements IUIPresenter {
 	}
 
 	@Override
-	public void updatePlayerShield(final int playerShield) {
+	public void updatePlayerShield(int playerShield) {
 		this.playerShield = playerShield;
 	}
 
 	@Override
-	public void updateIsPlayerDead(final boolean isPlayerDead) {
+	public void updateIsPlayerDead(boolean isPlayerDead) {
 		this.isPlayerDead = isPlayerDead;
 	}
 
 	@Override
-	public void updatePlayerGold(final int playerGold) {
+	public void updatePlayerGold(int playerGold) {
 		this.playerGold = playerGold;
 	}
 
-	public void updatePlayerHealth(final int playerHealth) {
+	public void updatePlayerHealth(int playerHealth) {
 		this.playerHealth = playerHealth;
 	}
 
@@ -127,7 +128,7 @@ public class UIPresenter implements IUIPresenter {
     }
 
     @Override
-    public void setDrawables(final Collection<IDrawable> drawables) {
+    public void setDrawables(Collection<IDrawable> drawables) {
         this.drawables = drawables;
     }
 

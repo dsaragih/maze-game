@@ -8,7 +8,7 @@ public class HealthFlask extends Item{
     }
 
     @Override
-    public void operateOnPlayer(final Player player) {
+    public void operateOnPlayer(Player player) {
         player.addHealth(50);
     }
 }

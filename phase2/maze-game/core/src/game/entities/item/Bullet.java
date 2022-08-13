@@ -14,18 +14,18 @@ import graphics.entityDrawers.bullet.IBulletDrawer;
  */
 public class Bullet extends CollidableEntity {
 
-    private final Point velocity;
+    private Point velocity;
     private boolean isHit = false;
-    private final int damage;
+    private int damage;
 
-    private final IBulletDrawer bulletDrawer;
+    private IBulletDrawer bulletDrawer;
 
     /** Creates a bullet with the specified name.
      * @param pos Position of the bullet.
      * @param direction Direction vector of the bullet.
      * @param bulletDrawer Drawer of the bullet.
      */
-    public Bullet(final Point pos, final Point direction, final IBulletDrawer bulletDrawer) {
+    public Bullet(Point pos, Point direction, IBulletDrawer bulletDrawer) {
         super(pos);
         direction.multiply(GameConstants.BULLET_SPEED);
         this.velocity = direction;
@@ -52,12 +52,12 @@ public class Bullet extends CollidableEntity {
      * @param enemy The enemy being hit by the bullet.
      */
     @Override
-    public void collideWith(final Enemy enemy) {
+    public void collideWith(Enemy enemy) {
         isHit = true;
     }
 
     @Override
-    public void collideWith(final MineDropperEnemy mineDropperEnemy){
+    public void collideWith(MineDropperEnemy mineDropperEnemy){
         isHit = true;
     }
 
@@ -65,7 +65,7 @@ public class Bullet extends CollidableEntity {
      * @param other the object being hit by this bullet
      */
     @Override
-    public void informCollision(final ICollidable other) {
+    public void informCollision(ICollidable other) {
         other.collideWith(this);
     }
 

@@ -13,7 +13,7 @@ public class Point {
      * @param x the x-coordinate of point
      * @param y the y-coordinate of point
      */
-    public Point(final float x, final float y) {
+    public Point(float x, float y) {
         this.x = x;
         this.y = y;
     }
@@ -24,10 +24,10 @@ public class Point {
     public float getY(){
         return y;
     }
-    public void setX(final float x){
+    public void setX(float x){
         this.x =x;
     }
-    public void setY(final float y){
+    public void setY(float y){
         this.y =y;
     }
 
@@ -35,7 +35,7 @@ public class Point {
      * Translate the point horizontally/vertically
      * @param p the point being added
      */
-    public void add(final Point p){
+    public void add(Point p){
         x += p.x;
         y += p.y;
     }
@@ -44,7 +44,7 @@ public class Point {
      * Stretch/Compress the point
      * @param scalar the factor of stretch/compression
      */
-    public void multiply(final float scalar){
+    public void multiply(float scalar){
         x *= scalar;
         y *= scalar;
     }
@@ -70,7 +70,7 @@ public class Point {
      * @param p the other point
      * @return their difference vector
      */
-    public Point distanceVector(final Point p) {
+    public Point distanceVector(Point p) {
         return new Point(x - p.x, y - p.y);
     }
 
@@ -79,7 +79,7 @@ public class Point {
      * @return the normalized point
      */
     public Point normalized(){
-        final float length = length();
+        float length = length();
         if(length == 0){
             throw new IllegalArgumentException("Cannot normalize the 0 vector");
         }
@@ -94,7 +94,7 @@ public class Point {
         return x ==0 && y ==0;
     }
 
-    public boolean equals(final Point p){
+    public boolean equals(Point p){
         return this.x == p.x && this.y == p.y;
     }
 

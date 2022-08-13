@@ -11,8 +11,8 @@ import config.GameConstants;
  * @author Ethan
  */
 public class DesktopLauncher {
-	public static void main (final String[] arg) {
-		final Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
+	public static void main (String[] arg) {
+		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setTitle("maze-game");
 		config.setWindowedMode(GameConstants.SCREEN_WIDTH, GameConstants.SCREEN_HEIGHT);
 		config.useVsync(true);

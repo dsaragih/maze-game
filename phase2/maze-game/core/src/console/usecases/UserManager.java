@@ -10,8 +10,8 @@ import java.util.Map;
 import java.util.HashMap;
 public class UserManager implements Serializable {
     private int lastId = 0;
-    private final Map<String, User> users = new HashMap<>();
-    private final ArrayList<Log> logHistory = new ArrayList<>();
+    private Map<String, User> users = new HashMap<>();
+    private ArrayList<Log> logHistory = new ArrayList<>();
 
     public UserManager(){
         // This constructor is only ever called in UserController.java
@@ -19,20 +19,20 @@ public class UserManager implements Serializable {
         // and a new UserManager is created instead.
         addUser("admin", "123", true);
     }
-    public void addUser(final String userName, final String password, final boolean isAdmin) {
-        final User newUser = new User(userName, password, isAdmin, lastId);
+    public void addUser(String userName, String password, boolean isAdmin) {
+        User newUser = new User(userName, password, isAdmin, lastId);
         users.put(userName, newUser);
         ++lastId;
     }
-    public User getUser(final String username){
+    public User getUser(String username){
         return users.get(username);
     }
-    public void delete(final String userName){
+    public void delete(String userName){
         users.remove(userName);
     }
 
-    public void recordLog(final int userid, final boolean launch){
-        final Log log = new Log(userid, new Date(), launch);
+    public void recordLog(int userid, boolean launch){
+        Log log = new Log(userid, new Date(), launch);
         logHistory.add(log);
     }
 

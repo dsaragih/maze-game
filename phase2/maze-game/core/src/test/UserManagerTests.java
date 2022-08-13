@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 
 public class UserManagerTests {
 
-    private final UserController userController = new UserController();
+    private UserController userController = new UserController();
     @Test(timeout = 50)
     public void testLoginNonAdmin(){
         userController.addUser("Alice", "AlicePass", false);
@@ -22,12 +22,12 @@ public class UserManagerTests {
     @Test(timeout = 50)
     public void testLoginExisting(){
         userController.addUser("Alice", "AlicePass", false);
-        final Msg response = userController.addUser("Alice", "AlicePassImpostor", false);
+        Msg response = userController.addUser("Alice", "AlicePassImpostor", false);
         assertEquals(Msg.FAILURE_USERNAME_TAKEN, response);
     }
     @Test(timeout = 50)
     public void testLoginWeak(){
-        final Msg response = userController.addUser("willywonka", "willywonka", true);
+        Msg response = userController.addUser("willywonka", "willywonka", true);
         assertEquals(Msg.FAILURE_WEAK_PASSWORD, response);
     }
     @Test(timeout = 50)
@@ -42,7 +42,7 @@ public class UserManagerTests {
     @Test(timeout = 50)
     public void testDeleteUser(){
         userController.addUser("Bob the Vanquished", "BobPass", false);
-        final Msg response = userController.deleteUser("Bob the Vanquished");
+        Msg response = userController.deleteUser("Bob the Vanquished");
         assertEquals(Msg.SUCCESS, response);
         assertNull(userController.login("Bob the Vanquished", "BobPass"));
     }
@@ -67,7 +67,7 @@ public class UserManagerTests {
     @Test(timeout = 50)
     public void testDeleteAdmin(){
         userController.addUser("Mike the Mighty", "MikePass", true);
-        final Msg response = userController.deleteUser("Mike the Mighty");
+        Msg response = userController.deleteUser("Mike the Mighty");
         assertEquals(Msg.FAILURE_USER_IS_ADMIN, response);
         assertNotNull(userController.login("Mike the Mighty", "MikePass"));
     }

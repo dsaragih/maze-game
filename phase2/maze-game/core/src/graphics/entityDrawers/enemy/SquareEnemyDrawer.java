@@ -7,12 +7,12 @@ import geometry.Point;
 
 public class SquareEnemyDrawer implements IEnemyDrawer{
 
-    private final ShapeRenderer shapeRenderer;
-    public SquareEnemyDrawer(final ShapeRenderer shapeRenderer){
+    private ShapeRenderer shapeRenderer;
+    public SquareEnemyDrawer(ShapeRenderer shapeRenderer){
         this.shapeRenderer = shapeRenderer;
     }
     @Override
-    public void drawEnemy(final Point pos) {
+    public void drawEnemy(Point pos) {
         shapeRenderer.setColor(Color.NAVY);
         shapeRenderer.rect(pos.getX(), pos.getY(), GameConstants.SQUARE_ENEMY_SIZE, GameConstants.SQUARE_ENEMY_SIZE);
     }

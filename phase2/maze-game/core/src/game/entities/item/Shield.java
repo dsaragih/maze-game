@@ -9,7 +9,7 @@ public class Shield extends Item{
         super("Small Shield", 20);
     }
     @Override
-    public void operateOnPlayer(final Player player) {
+    public void operateOnPlayer(Player player) {
         player.addShield(GameConstants.SHIELD_NORMAL);
     }
 }

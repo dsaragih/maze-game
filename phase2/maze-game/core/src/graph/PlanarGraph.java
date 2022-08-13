@@ -11,7 +11,7 @@ import java.util.Set;
  */
 public class PlanarGraph implements Iterable<PlanarNode>{
 
-    private final Set<PlanarNode> nodes = new HashSet<>();
+    private Set<PlanarNode> nodes = new HashSet<>();
 
     /**
      * Get the set of nodes
@@ -25,7 +25,7 @@ public class PlanarGraph implements Iterable<PlanarNode>{
      * Add a node
      * @param node the node being added
      */
-    public void addNode(final PlanarNode node) {
+    public void addNode(PlanarNode node) {
         nodes.add(node);
     }
 
@@ -34,7 +34,7 @@ public class PlanarGraph implements Iterable<PlanarNode>{
      * @param n1 the start node
      * @param n2 the end node
      */
-    public void addDirectedEdge(final PlanarNode n1, final PlanarNode n2) {
+    public void addDirectedEdge(PlanarNode n1, PlanarNode n2) {
         n1.addNeighbor(n2);
     }
 
@@ -43,7 +43,7 @@ public class PlanarGraph implements Iterable<PlanarNode>{
      * @param n1 the first node
      * @param n2 the second node
      */
-    public void addUndirectedEdge(final PlanarNode n1, final PlanarNode n2) {
+    public void addUndirectedEdge(PlanarNode n1, PlanarNode n2) {
         this.addDirectedEdge(n2, n1);
         this.addDirectedEdge(n1, n2);
     }
@@ -52,8 +52,8 @@ public class PlanarGraph implements Iterable<PlanarNode>{
      * Merge two graphs
      * @param g1 the graph being merged.
      */
-    public void mergeGraph(final PlanarGraph g1){
-        for (final PlanarNode node: g1.getNodes()){
+    public void mergeGraph(PlanarGraph g1){
+        for (PlanarNode node: g1.getNodes()){
             this.addNode(node);
         }
     }

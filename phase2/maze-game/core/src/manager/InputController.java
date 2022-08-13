@@ -16,14 +16,14 @@ import geometry.Point;
  * @author Daniel
  */
 public class InputController {
-    private final Level level;
-    private final OrthographicCamera camera;
+    private Level level;
+    private OrthographicCamera camera;
 
     /**
      * Create an input controller
      * @param level the level
      */
-    public InputController(final Level level){
+    public InputController(Level level){
         this.level = level;
         camera = new OrthographicCamera();
         camera.setToOrtho(false, GameConstants.SCREEN_WIDTH, GameConstants.SCREEN_HEIGHT);
@@ -33,16 +33,16 @@ public class InputController {
      * Check for input
      */
     public void checkForInput(){
-        final boolean left = areAnyKeysInListPressed(KeyBindings.MOVE_LEFT_KEYS);
-        final boolean right = areAnyKeysInListPressed(KeyBindings.MOVE_RIGHT_KEYS);
-        final boolean up = areAnyKeysInListPressed(KeyBindings.MOVE_UP_KEYS);
-        final boolean down = areAnyKeysInListPressed(KeyBindings.MOVE_DOWN_KEYS);
+        boolean left = areAnyKeysInListPressed(KeyBindings.MOVE_LEFT_KEYS);
+        boolean right = areAnyKeysInListPressed(KeyBindings.MOVE_RIGHT_KEYS);
+        boolean up = areAnyKeysInListPressed(KeyBindings.MOVE_UP_KEYS);
+        boolean down = areAnyKeysInListPressed(KeyBindings.MOVE_DOWN_KEYS);
 
-        final Point dir = new Point(dirCalc(left, right),dirCalc(down, up));
+        Point dir = new Point(dirCalc(left, right),dirCalc(down, up));
         level.movePlayer(dir);
 
         Point mousePos = new Point(Gdx.input.getX(), Gdx.input.getY());
-        final Vector3 unprotectedMousePos = camera.unproject(new Vector3(mousePos.getX(), mousePos.getY(), 0));
+        Vector3 unprotectedMousePos = camera.unproject(new Vector3(mousePos.getX(), mousePos.getY(), 0));
         mousePos = new Point(unprotectedMousePos.x, unprotectedMousePos.y);
         level.setMousePos(mousePos);
 
@@ -52,7 +52,7 @@ public class InputController {
 
 
          boolean keyPressed = false;
-         final boolean[] numberKeys = new boolean[10];
+         boolean[] numberKeys = new boolean[10];
          for(int i = 0; i < numberKeys.length; ++i){
              numberKeys[i] = Gdx.input.isKeyJustPressed(Input.Keys.NUM_1 + i);
              if(numberKeys[i]){
@@ -66,8 +66,8 @@ public class InputController {
 
     }
 
-    private boolean areAnyKeysInListPressed(final int[] keys){
-        for(final int key : keys){
+    private boolean areAnyKeysInListPressed(int[] keys){
+        for(int key : keys){
             if(Gdx.input.isKeyPressed(key)){
                 return true;
             }
@@ -82,7 +82,7 @@ public class InputController {
      * @param right indicates that the key to go right is pressed.
      * @return 1 for right, -1 for left and 0 for no movement wanted.
      */
-    private int dirCalc(final boolean left, final boolean right){
+    private int dirCalc(boolean left, boolean right){
         if(left == right){
             return 0;
         }

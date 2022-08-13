@@ -10,8 +10,8 @@ import java.util.Scanner;
 
 public class AppUI {
     private User user;
-    private final UserController userController = new UserController();
-    private final Scanner in = new Scanner(System.in);
+    private UserController userController = new UserController();
+    private Scanner in = new Scanner(System.in);
 
     public void run() {
         while (true) {
@@ -20,7 +20,7 @@ public class AppUI {
                 //Saves UserManager.ser and exits to main, where the program terminates.
                 try {
                     userController.saveUserManager();
-                } catch (final IOException e) {
+                } catch (IOException e) {
                     writeln("Error saving: " + e.getMessage());
                 }
                 return;
@@ -67,9 +67,9 @@ public class AppUI {
                 }
                 case 3: {
                     displayTitle("Signup");
-                    final String username = enter("username");
-                    final String password = enter("password");
-                    final Msg outcome = userController.addUser(username, password, false);
+                    String username = enter("username");
+                    String password = enter("password");
+                    Msg outcome = userController.addUser(username, password, false);
                     writeln(outcome.out());
                     user = userController.login(username, password);
                     state = -1;
@@ -92,7 +92,7 @@ public class AppUI {
                 writeln("6) BanUser (Admin only)");
                 writeln("7) UnbanUser (Admin only)");
             }
-            final int input = getNumUpTo(user.isAdmin() ? 7 : 3);
+            int input = getNumUpTo(user.isAdmin() ? 7 : 3);
 
             switch (input) {
                 case 0:
@@ -128,38 +128,38 @@ public class AppUI {
 
     private void log() {
         displayTitle("Activity Log");
-        final String outcome = userController.getLogsOf(user.getUserid());
+        String outcome = userController.getLogsOf(user.getUserid());
         writeln(outcome);
     }
 
-    private void addUser(final boolean admin) {
+    private void addUser(boolean admin) {
         if (admin) displayTitle("Add admin user");
         else displayTitle("Add user");
-        final Msg outcome = userController.addUser(enter("username"), enter("password"), admin);
+        Msg outcome = userController.addUser(enter("username"), enter("password"), admin);
         writeln(outcome.out());
     }
 
     private void deleteUser() {
         displayTitle("Permanently delete user");
-        final Msg outcome = userController.deleteUser(enter("username"));
+        Msg outcome = userController.deleteUser(enter("username"));
         writeln(outcome.out());
     }
 
     private void banUser() {
         displayTitle("Ban user");
-        final Msg outcome = userController.banUser(enter("username"));
+        Msg outcome = userController.banUser(enter("username"));
         writeln(outcome.out());
     }
 
     private void unbanUser() {
         displayTitle("Unban user");
-        final Msg outcome = userController.unbanUser(enter("username"));
+        Msg outcome = userController.unbanUser(enter("username"));
         writeln(outcome.out());
 
     }
 
-    private String enter(final String what) {
-        final int MIN = 1; //smallest acceptable username/password
+    private String enter(String what) {
+        int MIN = 1; //smallest acceptable username/password
         String str;
         boolean isInputInvalid;
         do {
@@ -177,12 +177,12 @@ public class AppUI {
         return str;
     }
 
-    private int getNumUpTo(final int max) {
+    private int getNumUpTo(int max) {
         int num;
 
         while (true) {
             writeln("Please enter a number between 0 and " + max + ": ");
-            final String input = in.nextLine();
+            String input = in.nextLine();
 
             try {
                 num = Integer.parseInt(input);
@@ -193,7 +193,7 @@ public class AppUI {
                 } else {
                     break;
                 }
-            } catch (final NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 writeln("Invalid input -- not a number.");
             }
         }
@@ -201,7 +201,7 @@ public class AppUI {
     }
 
 
-    private void writeln(final Object obj) {
+    private void writeln(Object obj) {
         System.out.println(obj);
     }
 
@@ -209,7 +209,7 @@ public class AppUI {
         writeln("======================================================================");
     }
 
-    private void displayTitle(final String text) {
+    private void displayTitle(String text) {
         writeln("");
         writeln(text);
         writeSeparator();
