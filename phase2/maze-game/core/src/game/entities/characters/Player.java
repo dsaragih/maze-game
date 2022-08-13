@@ -23,19 +23,16 @@ import java.util.Collection;
  */
 public class Player extends CollidableEntity {
 
-    public static final int MAX_HEALTH = 100;
-    private int health = MAX_HEALTH;
-
-    public static final int MAX_SHIELD = 50;
+    private int health = GameConstants.PLAYER_MAX_HEALTH;
     private int shield = 0;
-    private final IPlayerDrawer playerDrawer;
+    private IPlayerDrawer playerDrawer;
     private Collection<IPlayerObserver> observers = new ArrayList<>();
     private Point gunDirection = new Point(0,0);
     private Gun gun;
     private float armourDamageFactor = 1;
 
     private int goldOwned = 100;
-//    public ArrayList<Item> itemOwned = new ArrayList<>(Collections.singletonList(gun));
+
 
     /**
      * Create a player
@@ -144,8 +141,8 @@ public class Player extends CollidableEntity {
 
     private void takeDamage(int damage){
         float totalHealth = (health + shield) - damage * armourDamageFactor;
-        health = Math.round(Math.max(0, Math.min(totalHealth, MAX_HEALTH)));
-        shield = Math.round(Math.max(0, Math.min(totalHealth - health, MAX_SHIELD)));
+        health = Math.round(Math.max(0, Math.min(totalHealth, GameConstants.PLAYER_MAX_HEALTH)));
+        shield = Math.round(Math.max(0, Math.min(totalHealth - health, GameConstants.PLAYER_MAX_SHIELD)));
     }
     /**
      * Inform others being collided by player.
@@ -178,7 +175,7 @@ public class Player extends CollidableEntity {
 
     public void addHealth(int healthToAdd){
         health += healthToAdd;
-        health = Math.min(health, MAX_HEALTH);
+        health = Math.min(health, GameConstants.PLAYER_MAX_HEALTH);
     }
     public void addGold(int gold){this.goldOwned += gold;}
 

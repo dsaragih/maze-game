@@ -92,7 +92,7 @@ public class UIPresenter implements IUIPresenter {
 			return;
 		}
 
-		Label shieldLabel = new Label("Shield: " + playerShield + "/" + Player.MAX_SHIELD, style);
+		Label shieldLabel = new Label("Shield: " + playerShield + "/" + GameConstants.PLAYER_MAX_SHIELD, style);
 		shieldLabel.setPosition(30, 50);
 		stage.addActor(shieldLabel);
 
