@@ -10,8 +10,6 @@ import geometry.Point;
 import graphics.entityDrawers.enemy.IEnemyDrawer;
 import com.badlogic.gdx.math.MathUtils;
 
-import static config.GameConstants.ENEMY_DAMAGE;
-
 /** Represents an enemy
  * @author Ethan
  * @author Ian Curtis Ewing\

@@ -10,7 +10,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import config.GameConstants;
-import game.entities.characters.Player;
 import graphics.otherDrawers.healthbar.HealthBarDrawer;
 import graphics.otherDrawers.healthbar.IHealthBarDrawer;
 

@@ -50,17 +50,6 @@ public class PlanarNode extends Point {
     }
 
     /**
-     * Determine whether the point equals the object
-     * @param p the node being compared
-     * @return whether they are equal
-     */
-
-    public boolean equals(PlanarNode p)
-    {
-        return super.equals(p); //implicitly casts p to point, its parent class.
-    }
-
-    /**
      * Return integer hash code of the coordinate of the node
      * @return hash code of the coordinate of the node
      */
