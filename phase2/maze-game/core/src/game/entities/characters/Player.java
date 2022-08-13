@@ -25,8 +25,8 @@ public class Player extends CollidableEntity {
 
     private int health = GameConstants.PLAYER_MAX_HEALTH;
     private int shield = 0;
-    private IPlayerDrawer playerDrawer;
-    private Collection<IPlayerObserver> observers = new ArrayList<>();
+    private final IPlayerDrawer playerDrawer;
+    private final Collection<IPlayerObserver> observers = new ArrayList<>();
     private Point gunDirection = new Point(0,0);
     private Gun gun;
     private float armourDamageFactor = 1;
@@ -39,7 +39,7 @@ public class Player extends CollidableEntity {
      * @param pos The position of player
      * @param playerDrawer The drawer of player
      */
-    public Player(Point pos, IPlayerDrawer playerDrawer){
+    public Player(final Point pos, final IPlayerDrawer playerDrawer){
         super(pos);
         this.playerDrawer = playerDrawer;
     }
@@ -48,7 +48,7 @@ public class Player extends CollidableEntity {
      * Set up a gun manager for player
      * @param entityManager The manager of the player's guns
      */
-    public void setGunEntityManager(IEntityManager entityManager){
+    public void setGunEntityManager(final IEntityManager entityManager){
         gun.setEntityManager(entityManager);
     }
 
@@ -56,7 +56,7 @@ public class Player extends CollidableEntity {
      * Set player's attack direction
      * @param direction The direction of player
      */
-    public void fire(Point direction){
+    public void fire(final Point direction){
         gun.fire(direction);
     }
 
@@ -64,7 +64,7 @@ public class Player extends CollidableEntity {
      * Set player's move direction
      * @param direction The direction of player
      */
-    public void move(Point direction){
+    public void move(final Point direction){
         //move in the given direction
         direction.multiply(GameConstants.PLAYER_SPEED * Gdx.graphics.getDeltaTime());
         pos.add(direction);
@@ -73,7 +73,7 @@ public class Player extends CollidableEntity {
         pos.setX(Math.max(Math.min(pos.getX(), GameConstants.SCREEN_WIDTH), 0));
         pos.setY(Math.max(Math.min(pos.getY(), GameConstants.SCREEN_HEIGHT), 0));
 
-        for(IPlayerObserver observer: observers){
+        for(final IPlayerObserver observer: observers){
             observer.setTarget(pos);
         }
         gun.setPlayerPosition(calcGunPos());
@@ -88,7 +88,7 @@ public class Player extends CollidableEntity {
      * @param mousePos the mouse position.
      */
 
-    public void setMousePos(Point mousePos){
+    public void setMousePos(final Point mousePos){
         gunDirection = mousePos.distanceVector(pos);
         if(!gunDirection.isZero()){
             gunDirection = gunDirection.normalized();
@@ -99,13 +99,13 @@ public class Player extends CollidableEntity {
      * Set the gun that is hold by player
      * @param gun the gun hold by player
      */
-    public void setGun(Gun gun){
+    public void setGun(final Gun gun){
         this.gun = gun;
     }
     public float getArmourDamageFactor(){
         return armourDamageFactor;
     }
-    public void setArmour(float armourDamageFactor){
+    public void setArmour(final float armourDamageFactor){
         this.armourDamageFactor = armourDamageFactor;
     }
 
@@ -129,18 +129,18 @@ public class Player extends CollidableEntity {
      * Collide with another enemy.
      * @param enemy the enemy collided with player
      */
-    public void collideWith(Enemy enemy) {
+    public void collideWith(final Enemy enemy) {
         takeDamage(enemy.getDamage());
     }
 
     @Override
-    public void collideWith(Mine mine){
+    public void collideWith(final Mine mine){
         shield = 0;
         takeDamage(mine.getDamage());
     }
 
-    private void takeDamage(int damage){
-        float totalHealth = (health + shield) - damage * armourDamageFactor;
+    private void takeDamage(final int damage){
+        final float totalHealth = (health + shield) - damage * armourDamageFactor;
         health = Math.round(Math.max(0, Math.min(totalHealth, GameConstants.PLAYER_MAX_HEALTH)));
         shield = Math.round(Math.max(0, Math.min(totalHealth - health, GameConstants.PLAYER_MAX_SHIELD)));
     }
@@ -149,11 +149,11 @@ public class Player extends CollidableEntity {
      * @param other the object collided with the player
      */
     @Override
-    public void informCollision(ICollidable other) {
+    public void informCollision(final ICollidable other) {
         other.collideWith(this);
     }
 
-    public boolean tryToPay(int priceInGold){
+    public boolean tryToPay(final int priceInGold){
         if(priceInGold > goldOwned){
             return false;
         }
@@ -162,7 +162,7 @@ public class Player extends CollidableEntity {
         return true;
     }
 
-    public void addObserver(IPlayerObserver observer){
+    public void addObserver(final IPlayerObserver observer){
         observers.add(observer);
     }
 
@@ -173,13 +173,13 @@ public class Player extends CollidableEntity {
     public int getShield() { return shield; }
     public int getGoldOwned(){return goldOwned;}
 
-    public void addHealth(int healthToAdd){
+    public void addHealth(final int healthToAdd){
         health += healthToAdd;
         health = Math.min(health, GameConstants.PLAYER_MAX_HEALTH);
     }
-    public void addGold(int gold){this.goldOwned += gold;}
+    public void addGold(final int gold){this.goldOwned += gold;}
 
-    public void addShield(int shieldToAdd){
+    public void addShield(final int shieldToAdd){
         this.shield += shieldToAdd;
     }
 

@@ -3,14 +3,14 @@ package game.entities.item;
 import game.entities.characters.Player;
 
 public class Armour extends Item{
-    private float armourDamageFactor;
-    public Armour(float armourDamageFactor, String name, int price) {
+    private final float armourDamageFactor;
+    public Armour(final float armourDamageFactor, final String name, final int price) {
         super(name, price);
         this.armourDamageFactor = armourDamageFactor;
     }
 
     @Override
-    public void operateOnPlayer(Player player) {
+    public void operateOnPlayer(final Player player) {
         player.setArmour(armourDamageFactor);
     }
 }

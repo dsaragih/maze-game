@@ -6,17 +6,17 @@ import config.GameConstants;
 import geometry.Point;
 
 public class SimpleShapeMineDrawer implements IMineDrawer{
-    private ShapeRenderer shapeRenderer;
+    private final ShapeRenderer shapeRenderer;
 
     private boolean isLightOn = true;
     private long lastChangeFlash;
 
-    public SimpleShapeMineDrawer(ShapeRenderer shapeRenderer){
+    public SimpleShapeMineDrawer(final ShapeRenderer shapeRenderer){
         this.shapeRenderer = shapeRenderer;
         lastChangeFlash = System.currentTimeMillis();
     }
     @Override
-    public void drawMine(Point pos) {
+    public void drawMine(final Point pos) {
         shapeRenderer.setColor(Color.BLACK);
         shapeRenderer.circle(pos.getX(), pos.getY(), GameConstants.MINE_RADIUS);
 

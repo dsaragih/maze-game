@@ -17,8 +17,8 @@ public class Door extends CollidableEntity {
 
     public Room room;
     public Door door;
-    private IDoorDrawer doorDrawer;
-    private IRoomContainer roomContainer;
+    private final IDoorDrawer doorDrawer;
+    private final IRoomContainer roomContainer;
 
     /**
      * Create a door
@@ -26,7 +26,7 @@ public class Door extends CollidableEntity {
      * @param doorDrawer Drawer of the door.
      * @param roomContainer Container of the door.
      */
-    public  Door(Point pos, IDoorDrawer doorDrawer, IRoomContainer roomContainer){
+    public  Door(final Point pos, final IDoorDrawer doorDrawer, final IRoomContainer roomContainer){
         super(pos);
         this.doorDrawer = doorDrawer;
         this.roomContainer = roomContainer;
@@ -36,7 +36,7 @@ public class Door extends CollidableEntity {
      * Set the door.
      * @param door The target door.
      */
-    public void setCorrespondingDoor(Door door){
+    public void setCorrespondingDoor(final Door door){
         this.door = door;
     }
 
@@ -44,7 +44,7 @@ public class Door extends CollidableEntity {
      * Set the room
      * @param room The target room
      */
-    public void setRoom(Room room){
+    public void setRoom(final Room room){
         this.room = room;
     }
 
@@ -67,7 +67,7 @@ public class Door extends CollidableEntity {
      * Collide with the other player
      * @param player the player being collided
      */
-    public void collideWith(Player player){
+    public void collideWith(final Player player){
         roomContainer.setNewRoom(door.room);
     }
 }

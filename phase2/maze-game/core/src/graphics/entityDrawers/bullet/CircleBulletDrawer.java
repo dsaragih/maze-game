@@ -6,14 +6,14 @@ import config.GameConstants;
 import geometry.Point;
 
 public class CircleBulletDrawer implements IBulletDrawer{
-    private ShapeRenderer shapeRenderer;
+    private final ShapeRenderer shapeRenderer;
 
-    public CircleBulletDrawer(ShapeRenderer shapeRenderer){
+    public CircleBulletDrawer(final ShapeRenderer shapeRenderer){
         this.shapeRenderer = shapeRenderer;
     }
 
     @Override
-    public void drawBullet(Point pos) {
+    public void drawBullet(final Point pos) {
         shapeRenderer.setColor(Color.BLACK);
         shapeRenderer.circle(pos.getX(), pos.getY(), GameConstants.BULLET_RADIUS);
     }

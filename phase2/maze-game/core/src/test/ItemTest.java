@@ -9,12 +9,12 @@ public class ItemTest {
 
     @Test(timeout=50)
     public void BulletTest() {
-        Bullet bullet = new Bullet(new Point(0, 0), new Point(1, 0), null);
+        final Bullet bullet = new Bullet(new Point(0, 0), new Point(1, 0), null);
         bullet.update();
         assertEquals(30.0, bullet.getCollisionBox().getCenter().getX(), 0.01);
         assertEquals(0.0, bullet.getCollisionBox().getCenter().getY(), 0.01);
-        Point q1 = new Point(0,0);
-        Enemy e1 = new Enemy(q1, null);
+        final Point q1 = new Point(0,0);
+        final Enemy e1 = new Enemy(q1, null);
         bullet.collideWith(e1);
         e1.collideWith(bullet);
         assertTrue(bullet.shouldBeRemoved());
@@ -23,14 +23,14 @@ public class ItemTest {
 
     @Test(timeout=50)
     public void DoorTest(){
-        Door door = new Door(new Point(0,0), null, null);
+        final Door door = new Door(new Point(0,0), null, null);
         assertEquals(0, (int)door.getCollisionBox().getCenter().getX());
         assertEquals(0, (int)door.getCollisionBox().getCenter().getY());
     }
     @Test
     public void GunTest(){
-        Gun gun = new Gun(new Point(0,0), null, null);
-        EntityManager m = new EntityManager();
+        final Gun gun = new Gun(new Point(0,0), null, null);
+        final EntityManager m = new EntityManager();
         gun.setEntityManager(m);
         gun.fire(new Point(2,2));
         assertTrue(m.getEntities().isEmpty());

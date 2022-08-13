@@ -15,12 +15,12 @@ import java.lang.*;
  * @author Ethan
  */
 public class EntityManager implements IEntityManager{
-    private ArrayList<Entity> Entities;
-    private ArrayList<CollidableEntity> collidableEntities;
-    private ArrayList<Entity> toBeAddedEntities;
-    private ArrayList<Entity> toBeRemovedEntities;
-    private ArrayList<CollidableEntity> toBeAddedCollidable;
-    private ArrayList<CollidableEntity> toBeRemovedCollidable;
+    private final ArrayList<Entity> Entities;
+    private final ArrayList<CollidableEntity> collidableEntities;
+    private final ArrayList<Entity> toBeAddedEntities;
+    private final ArrayList<Entity> toBeRemovedEntities;
+    private final ArrayList<CollidableEntity> toBeAddedCollidable;
+    private final ArrayList<CollidableEntity> toBeRemovedCollidable;
 
     private int gold = 0;
 
@@ -58,13 +58,13 @@ public class EntityManager implements IEntityManager{
      * Add a non-collidable entity to manager
      * @param ent an entity
      */
-    public void addNonCollidableEntity (Entity ent) {toBeAddedEntities.add(ent);}
+    public void addNonCollidableEntity (final Entity ent) {toBeAddedEntities.add(ent);}
 
     /**
      * Add a collidable entity to manager
      * @param ent a collidable entity
      */
-    public void addCollidableEntity (CollidableEntity ent) {
+    public void addCollidableEntity (final CollidableEntity ent) {
         toBeAddedCollidable.add(ent);
         toBeAddedEntities.add(ent);
     }
@@ -72,7 +72,7 @@ public class EntityManager implements IEntityManager{
      * Remove a collidable entity from manager
      * @param ent a collidable entity
      */
-    public void removeEntity (CollidableEntity ent) {
+    public void removeEntity (final CollidableEntity ent) {
         toBeRemovedCollidable.add(ent);
         toBeRemovedEntities.add(ent);
     }
@@ -81,24 +81,24 @@ public class EntityManager implements IEntityManager{
      * Remove an entity to manager
      * @param ent an entity
      */
-    public void removeEntity (Entity ent) {
+    public void removeEntity (final Entity ent) {
         toBeRemovedEntities.add(ent);
     }
 
     public boolean isFinished(){
-        for (Entity entity: Entities){
+        for (final Entity entity: Entities){
             if (entity.needToBeKilled){
                 return false;
             }
         }
 
-        for (Entity entity: toBeAddedEntities){
+        for (final Entity entity: toBeAddedEntities){
             if (entity.needToBeKilled){
                 return false;
             }
         }
 
-        for (Entity entity: toBeAddedCollidable){
+        for (final Entity entity: toBeAddedCollidable){
             if (entity.needToBeKilled){
                 return false;
             }
@@ -107,10 +107,11 @@ public class EntityManager implements IEntityManager{
         return true;
     }
 
-    public void addGold(int gold){
+    public void addGold(final int gold){
         this.gold += gold;
     }
-    public int getGold(){int value =gold;
+    public int getGold(){
+        final int value =gold;
         gold = 0;
         return value;}
 
@@ -119,7 +120,7 @@ public class EntityManager implements IEntityManager{
      */
     @Override
     public void update(){
-        for(Entity entity : Entities){
+        for(final Entity entity : Entities){
             if(entity.shouldBeRemoved()){
                 entity.removeSelf(this);
             }
@@ -135,12 +136,12 @@ public class EntityManager implements IEntityManager{
         toBeRemovedEntities.clear();
         toBeRemovedCollidable.clear();
 
-        for(Entity entity: Entities){
+        for(final Entity entity: Entities){
             entity.update();
         }
 
-        for(CollidableEntity e1: collidableEntities){
-            for(CollidableEntity e2: collidableEntities){
+        for(final CollidableEntity e1: collidableEntities){
+            for(final CollidableEntity e2: collidableEntities){
                 if(e1 == e2){
                     continue;
                 }
@@ -156,7 +157,7 @@ public class EntityManager implements IEntityManager{
      */
     @Override
     public void draw() {
-        for (Entity ent: Entities) {
+        for (final Entity ent: Entities) {
             ent.draw();
         }
     }

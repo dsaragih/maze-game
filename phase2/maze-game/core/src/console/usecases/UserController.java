@@ -8,28 +8,28 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class UserController {
-    private TextFileLogger logger = new TextFileLogger("userManager.ser");
+    private final TextFileLogger logger = new TextFileLogger("userManager.ser");
     public UserManager manager;
 
     public UserController() {
-        UserManager storedManager = (UserManager) logger.readFromFile();
+        final UserManager storedManager = (UserManager) logger.readFromFile();
         this.manager = storedManager == null ? new UserManager() : storedManager;
     }
 
-    public Msg addUser(String username, String password, boolean admin) {
+    public Msg addUser(final String username, final String password, final boolean admin) {
         if (username.equalsIgnoreCase(password)) {
             return Msg.FAILURE_WEAK_PASSWORD;
         }
         if (manager.getUser(username) != null){
             return Msg.FAILURE_USERNAME_TAKEN;
         }
-        User user = new User(username, password, false, 9000);
+        final User user = new User(username, password, false, 9000);
         manager.addUser(username, password, admin);
         return Msg.SUCCESS;
     }
 
-    public Msg deleteUser(String username) {
-        User user = manager.getUser(username);
+    public Msg deleteUser(final String username) {
+        final User user = manager.getUser(username);
         if (user == null){
             return Msg.FAILURE_USER_NOT_FOUND;
         }
@@ -40,8 +40,8 @@ public class UserController {
         return Msg.SUCCESS;
     }
 
-    public Msg banUser(String username) {
-        User user = manager.getUser(username);
+    public Msg banUser(final String username) {
+        final User user = manager.getUser(username);
         if (user == null){
             return Msg.FAILURE_USER_NOT_FOUND;
         }
@@ -55,8 +55,8 @@ public class UserController {
         return Msg.SUCCESS;
     }
 
-    public Msg unbanUser(String username) {
-        User user = manager.getUser(username);
+    public Msg unbanUser(final String username) {
+        final User user = manager.getUser(username);
         if (user == null){
             return Msg.FAILURE_USER_NOT_FOUND;
         }
@@ -68,8 +68,8 @@ public class UserController {
     }
 
 
-    public User login(String userName, String password) {
-        User user = manager.getUser(userName);
+    public User login(final String userName, final String password) {
+        final User user = manager.getUser(userName);
         if (user == null || !user.getPassword().equals(password) || user.isBanned()) {
             return null;
         }
@@ -78,13 +78,13 @@ public class UserController {
 
         return user;
     }
-    public void logLaunch(int userid){
+    public void logLaunch(final int userid){
         manager.recordLog(userid, true);
     }
-    public String getLogsOf(int userid){
-        ArrayList<Log> logs = manager.getLogs();
-        StringBuilder logOutput = new StringBuilder("Your activity in chronological order:");
-        for (Log log : logs) {
+    public String getLogsOf(final int userid){
+        final ArrayList<Log> logs = manager.getLogs();
+        final StringBuilder logOutput = new StringBuilder("Your activity in chronological order:");
+        for (final Log log : logs) {
             if(log.getUserid() == userid) {
                 logOutput.append("\n").append(log.getLoginDate());
                 if(log.isLaunch()) logOutput.append(" - Launched Game.");

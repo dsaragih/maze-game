@@ -6,12 +6,12 @@ import config.GameConstants;
 import geometry.Point;
 
 public class CircleEnemyDrawer implements IEnemyDrawer{
-    private ShapeRenderer shapeRenderer;
-    public CircleEnemyDrawer(ShapeRenderer shapeRenderer){
+    private final ShapeRenderer shapeRenderer;
+    public CircleEnemyDrawer(final ShapeRenderer shapeRenderer){
         this.shapeRenderer = shapeRenderer;
     }
     @Override
-    public void drawEnemy(Point pos) {
+    public void drawEnemy(final Point pos) {
         shapeRenderer.setColor(Color.NAVY);
         shapeRenderer.circle(pos.getX(), pos.getY(), GameConstants.ENEMY_RADIUS);
     }

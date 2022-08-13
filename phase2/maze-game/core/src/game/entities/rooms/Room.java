@@ -19,27 +19,27 @@ import java.util.ArrayList;
  * Represents a room
  */
 public class Room implements IDrawable {
-    private IDrawerFactory presenter;
-    private IEntityManager entityManager = new EntityManager();
+    private final IDrawerFactory presenter;
+    private final IEntityManager entityManager = new EntityManager();
     private Merchant merchant;
 
-    public Room(IDrawerFactory presenter, Player player, int screenWidth, int screenHeight) {
+    public Room(final IDrawerFactory presenter, final Player player, final int screenWidth, final int screenHeight) {
         this.presenter = presenter;
         entityManager.addCollidableEntity(player);
 
-        int numEnemies = MathUtils.random(1, 3);
+        final int numEnemies = MathUtils.random(1, 3);
         for (int i = 0; i < numEnemies; ++i) {
-            Point enemyPos = new Point(MathUtils.random(0, screenWidth), MathUtils.random(0, screenHeight));
-            Enemy enemy = new Enemy(enemyPos, presenter.getEnemyDrawer());
+            final Point enemyPos = new Point(MathUtils.random(0, screenWidth), MathUtils.random(0, screenHeight));
+            final Enemy enemy = new Enemy(enemyPos, presenter.getEnemyDrawer());
             player.addObserver(enemy);
             entityManager.addCollidableEntity(enemy);
             entityManager.addGold(enemy.getValue());
         }
-        float padding = 0.25f;
-        Point merchantPos = new Point(MathUtils.random(screenWidth * padding, screenWidth * (1 - padding)), MathUtils.random(screenHeight * padding, screenHeight * (1 - padding)));
+        final float padding = 0.25f;
+        final Point merchantPos = new Point(MathUtils.random(screenWidth * padding, screenWidth * (1 - padding)), MathUtils.random(screenHeight * padding, screenHeight * (1 - padding)));
         addMerchant(merchantPos);
-        Point mineDropperPos = new Point(MathUtils.random(0, screenWidth), MathUtils.random(0, screenHeight));
-        MineDropperEnemy mineDropper = new MineDropperEnemy(mineDropperPos, presenter.getMineDropperEnemyDrawer(), presenter.getMineDrawer());
+        final Point mineDropperPos = new Point(MathUtils.random(0, screenWidth), MathUtils.random(0, screenHeight));
+        final MineDropperEnemy mineDropper = new MineDropperEnemy(mineDropperPos, presenter.getMineDropperEnemyDrawer(), presenter.getMineDrawer());
         mineDropper.setEntityManager(entityManager);
         entityManager.addCollidableEntity(mineDropper);
         entityManager.addGold(mineDropper.getValue());
@@ -57,26 +57,26 @@ public class Room implements IDrawable {
      * Add a door
      * @param door a door
      */
-    public void addDoor(Door door){
+    public void addDoor(final Door door){
         entityManager.addCollidableEntity(door);
     }
 
-    public void addMerchant(Point merchantPos) {
-        ArrayList<Item> itemsOwned = new ArrayList<>();
-        Armour weakArmour = new Armour(0.9f, "Weak armour", 20);
-        Armour strongArmour = new Armour(0.4f, "String armour", 100);
-        Shield shield = new Shield();
-        HealthFlask health = new HealthFlask();
+    public void addMerchant(final Point merchantPos) {
+        final ArrayList<Item> itemsOwned = new ArrayList<>();
+        final Armour weakArmour = new Armour(0.9f, "Weak armour", 20);
+        final Armour strongArmour = new Armour(0.4f, "String armour", 100);
+        final Shield shield = new Shield();
+        final HealthFlask health = new HealthFlask();
         itemsOwned.add(health);
         itemsOwned.add(weakArmour);
         itemsOwned.add(strongArmour);
         itemsOwned.add(shield);
-        Merchant merchant = new Merchant(merchantPos.getX(), merchantPos.getY(), itemsOwned, presenter.getMerchantDrawer());
+        final Merchant merchant = new Merchant(merchantPos.getX(), merchantPos.getY(), itemsOwned, presenter.getMerchantDrawer());
         this.merchant = merchant;
         entityManager.addCollidableEntity(merchant);
     }
 
-    public void updateMerchantNumberKeys(boolean[] keys){
+    public void updateMerchantNumberKeys(final boolean[] keys){
         merchant.updateNumberKeysPressed(keys);
     }
     /**

@@ -8,18 +8,18 @@ import geometry.Point;
 import java.util.Random;
 
 public class CircleDoorDrawer implements IDoorDrawer {
-    private ShapeRenderer shapeRenderer;
-    private Color color;
+    private final ShapeRenderer shapeRenderer;
+    private final Color color;
 
-    public CircleDoorDrawer(ShapeRenderer shapeRenderer){
+    public CircleDoorDrawer(final ShapeRenderer shapeRenderer){
         this.shapeRenderer = shapeRenderer;
 
-        Random rand = new Random();
+        final Random rand = new Random();
         color = new Color(rand.nextFloat(),rand.nextFloat(),rand.nextFloat(), 1);
     }
 
     @Override
-    public void drawDoor(Point pos) {
+    public void drawDoor(final Point pos) {
         shapeRenderer.setColor(color);
         shapeRenderer.circle(pos.getX(), pos.getY(), GameConstants.DOOR_RADIUS);
     }

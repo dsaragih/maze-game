@@ -11,16 +11,16 @@ import graphics.entityDrawers.mine.IMineDrawer;
 
 public class Mine extends CollidableEntity {
 
-    private IMineDrawer mineDrawer;
-    private Entity creator;
+    private final IMineDrawer mineDrawer;
+    private final Entity creator;
     private boolean hasDetonated = false;
 
-    public Mine(Point pos, IMineDrawer mineDrawer, Entity creator) {
+    public Mine(final Point pos, final IMineDrawer mineDrawer, final Entity creator) {
         super(pos);
         this.mineDrawer = mineDrawer;
         this.creator = creator;
     }
-    public Mine(int x, int y, IMineDrawer mineDrawer, Entity creator) {
+    public Mine(final int x, final int y, final IMineDrawer mineDrawer, final Entity creator) {
         super(x, y);
         this.mineDrawer = mineDrawer;
         this.creator = creator;
@@ -32,12 +32,12 @@ public class Mine extends CollidableEntity {
     }
 
     @Override
-    public void informCollision(ICollidable other){
+    public void informCollision(final ICollidable other){
         other.collideWith(this);
     }
 
     @Override
-    public void collideWith(Player player){
+    public void collideWith(final Player player){
         hasDetonated = true;
     }
 

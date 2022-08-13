@@ -7,12 +7,12 @@ import geometry.Point;
 
 public class CirclePlayerDrawer implements IPlayerDrawer{
 
-    private ShapeRenderer shapeRenderer;
-    public CirclePlayerDrawer(ShapeRenderer shapeRenderer){
+    private final ShapeRenderer shapeRenderer;
+    public CirclePlayerDrawer(final ShapeRenderer shapeRenderer){
         this.shapeRenderer = shapeRenderer;
     }
     @Override
-    public void drawPlayer(Point pos, Point gunDirection) {
+    public void drawPlayer(final Point pos, final Point gunDirection) {
         shapeRenderer.setColor(Color.GRAY);
         shapeRenderer.circle(pos.getX(), pos.getY(), GameConstants.PLAYER_RADIUS);
     }

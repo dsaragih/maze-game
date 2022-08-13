@@ -5,10 +5,10 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class SimpleShapeRoomDrawer implements IRoomDrawer{
 
-    private ShapeRenderer shapeRenderer;
-    private int screenWidth;
-    private int screenHeight;
-    public SimpleShapeRoomDrawer(ShapeRenderer shapeRenderer, int screenWidth, int screenHeight){
+    private final ShapeRenderer shapeRenderer;
+    private final int screenWidth;
+    private final int screenHeight;
+    public SimpleShapeRoomDrawer(final ShapeRenderer shapeRenderer, final int screenWidth, final int screenHeight){
         this.shapeRenderer = shapeRenderer;
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;

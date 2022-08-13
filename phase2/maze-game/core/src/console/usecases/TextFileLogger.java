@@ -2,14 +2,14 @@ package console.usecases;
 import java.io.*;
 
 public class TextFileLogger {
-    private String filePath;
-    public TextFileLogger(String filePath){
+    private final String filePath;
+    public TextFileLogger(final String filePath){
         this.filePath = filePath;
     }
 
-    public void logToFile(Serializable obj) throws IOException {
-            FileOutputStream fileOut  = new FileOutputStream(filePath);
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+    public void logToFile(final Serializable obj) throws IOException {
+            final FileOutputStream fileOut  = new FileOutputStream(filePath);
+            final ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(obj);
             out.close();
             fileOut.close();
@@ -17,13 +17,13 @@ public class TextFileLogger {
 
     public Object readFromFile() {
         try{
-            FileInputStream fileIn = new FileInputStream(filePath);
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            Object item = in.readObject();
+            final FileInputStream fileIn = new FileInputStream(filePath);
+            final ObjectInputStream in = new ObjectInputStream(fileIn);
+            final Object item = in.readObject();
             in.close();
             fileIn.close();
             return item;
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (final IOException | ClassNotFoundException e) {
             return null;
         }
 

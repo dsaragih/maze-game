@@ -7,9 +7,9 @@ public abstract class Item {
     //Item is an object that can be picked up by the player, and has a value. This is not a class we wrote in phase 1
     //An item has a value, a name, and can be picked up or dropped.
 
-    private String name;
-    private int price;
-    public Item(String name, int price) {
+    private final String name;
+    private final int price;
+    public Item(final String name, final int price) {
         this.name = name;
         this.price = price;
     }

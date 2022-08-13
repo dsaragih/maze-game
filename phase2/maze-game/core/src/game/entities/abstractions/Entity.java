@@ -18,7 +18,7 @@ public abstract class Entity implements IDrawable {
      * @param x the x-coordinate of the entity
      * @param y the x-coordinate of the entity
      */
-    public Entity(float x, float y) {
+    public Entity(final float x, final float y) {
         pos = new Point(x,y);
         this.needToBeKilled = false;
     }
@@ -27,15 +27,15 @@ public abstract class Entity implements IDrawable {
      * Create an entity
      * @param pos the position of the entity
      */
-    public Entity(Point pos) {
+    public Entity(final Point pos) {
         this.pos = pos;
         this.needToBeKilled = false;
     }
-    public Entity(Point pos, boolean needToBeKilled){
+    public Entity(final Point pos, final boolean needToBeKilled){
         this.pos = pos;
         this.needToBeKilled = needToBeKilled;
     }
-    public Entity(float x, float y, boolean needToBeKilled){
+    public Entity(final float x, final float y, final boolean needToBeKilled){
         pos = new Point(x,y);
         this.needToBeKilled = needToBeKilled;
     }
@@ -64,7 +64,7 @@ public abstract class Entity implements IDrawable {
     /**
      * This method exists to take advantage of overloading with the type of entity.
      */
-    public void removeSelf(IEntityManager entityManager){
+    public void removeSelf(final IEntityManager entityManager){
         entityManager.removeEntity(this);
     }
 }

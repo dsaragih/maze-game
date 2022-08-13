@@ -12,14 +12,14 @@ import java.util.Set;
  * @author Jack Sun
  */
 public class PlanarNode extends Point {
-    private Set<PlanarNode> neighbors;
+    private final Set<PlanarNode> neighbors;
 
     /**
      * Create a planar node
      * @param x x-coordinate of node
      * @param y y-coordinate of node
      */
-    public PlanarNode(float x, float y){
+    public PlanarNode(final float x, final float y){
         super(x,y);
         neighbors = new HashSet<>();
     }
@@ -36,7 +36,7 @@ public class PlanarNode extends Point {
      * Add a neighbour
      * @param node node being added
      */
-    public void addNeighbor(PlanarNode node){
+    public void addNeighbor(final PlanarNode node){
         neighbors.add(node);
     }
 
@@ -44,7 +44,7 @@ public class PlanarNode extends Point {
      * Join two nodes with undirected edge
      * @param n2 node to be joined
      */
-    public void joinUndirected(PlanarNode n2){
+    public void joinUndirected(final PlanarNode n2){
         this.addNeighbor(n2);
         n2.addNeighbor(this);
     }
@@ -55,7 +55,7 @@ public class PlanarNode extends Point {
      * @return whether they are equal
      */
 
-    public boolean equals(PlanarNode p)
+    public boolean equals(final PlanarNode p)
     {
         return super.equals(p); //implicitly casts p to point, its parent class.
     }

@@ -6,12 +6,12 @@ import geometry.Point;
 
 public class ShapeMineDropperDrawer implements IMineDropperDrawer{
 
-    private ShapeRenderer shapeRenderer;
-    public ShapeMineDropperDrawer(ShapeRenderer shapeRenderer){
+    private final ShapeRenderer shapeRenderer;
+    public ShapeMineDropperDrawer(final ShapeRenderer shapeRenderer){
         this.shapeRenderer = shapeRenderer;
     }
     @Override
-    public void drawMineDropper(Point pos) {
+    public void drawMineDropper(final Point pos) {
         shapeRenderer.setColor(Color.BLACK);
         shapeRenderer.circle(pos.getX(), pos.getY(), 30);
         shapeRenderer.setColor(Color.RED);

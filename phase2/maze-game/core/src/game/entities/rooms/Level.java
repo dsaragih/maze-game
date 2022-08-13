@@ -25,15 +25,15 @@ import java.util.*;
  */
 public class Level implements IRoomContainer, IDrawable {
 
-    private IDrawerFactory drawerFactory;
+    private final IDrawerFactory drawerFactory;
     private Room currentRoom;
-    private Collection<Room> rooms;
-    private ILevelDrawer levelDrawer;
-    private IUIPresenter Presenter;
-    private Random rnd = new Random();
-    private int screenWidth;
-    private int screenHeight;
-    private Player player;
+    private final Collection<Room> rooms;
+    private final ILevelDrawer levelDrawer;
+    private final IUIPresenter Presenter;
+    private final Random rnd = new Random();
+    private final int screenWidth;
+    private final int screenHeight;
+    private final Player player;
 
     /**
      * Create a level
@@ -41,7 +41,7 @@ public class Level implements IRoomContainer, IDrawable {
      * @param screenWidth  the width of screen
      * @param screenHeight the height of screen
      */
-    public Level(IDrawerFactory drawerFactory, IUIPresenter Presenter, int screenWidth, int screenHeight) {
+    public Level(final IDrawerFactory drawerFactory, final IUIPresenter Presenter, final int screenWidth, final int screenHeight) {
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
         this.Presenter = Presenter;
@@ -49,39 +49,39 @@ public class Level implements IRoomContainer, IDrawable {
         levelDrawer = drawerFactory.getLevelDrawer();
 
         player = new Player(new Point(GameConstants.SCREEN_WIDTH/2f, GameConstants.SCREEN_HEIGHT/2f), drawerFactory.getPlayerDrawer());
-        Gun gun = new Gun(new Point(screenWidth / 2f, screenHeight / 2f), drawerFactory.getGunDrawer(), drawerFactory.getBulletDrawer());
+        final Gun gun = new Gun(new Point(screenWidth / 2f, screenHeight / 2f), drawerFactory.getGunDrawer(), drawerFactory.getBulletDrawer());
         player.setGun(gun);
 
-        PlanarGraph levelLayout = new TestGraphGenerator().generate();
+        final PlanarGraph levelLayout = new TestGraphGenerator().generate();
         rooms = getRoomsFromGraph(levelLayout, drawerFactory);
         currentRoom = rooms.iterator().next();
 
         gun.setEntityManager(currentRoom.getEntityManager());
 
-        Collection<IDrawable> drawables = new ArrayList<>();
+        final Collection<IDrawable> drawables = new ArrayList<>();
         drawables.add(this);
         Presenter.setDrawables(drawables);
     }
 
-    private Collection<Room> getRoomsFromGraph(PlanarGraph levelLayout, IDrawerFactory presenter) {
-        Map<Set<PlanarNode>, Boolean> edges = getEdgeMap(levelLayout);
-        Map<PlanarNode, Room> nodeToRoom = new HashMap<>();
-        for (PlanarNode node : levelLayout) {
+    private Collection<Room> getRoomsFromGraph(final PlanarGraph levelLayout, final IDrawerFactory presenter) {
+        final Map<Set<PlanarNode>, Boolean> edges = getEdgeMap(levelLayout);
+        final Map<PlanarNode, Room> nodeToRoom = new HashMap<>();
+        for (final PlanarNode node : levelLayout) {
             nodeToRoom.put(node, new Room(presenter, player, screenWidth, screenHeight));
         }
 
-        for (PlanarNode node : levelLayout) {
-            for (PlanarNode neighbour : node.getNeighbors()) {
-                Set<PlanarNode> pair = new HashSet<>();
+        for (final PlanarNode node : levelLayout) {
+            for (final PlanarNode neighbour : node.getNeighbors()) {
+                final Set<PlanarNode> pair = new HashSet<>();
                 pair.add(node);
                 pair.add(neighbour);
                 if (!edges.get(pair)) {
-                    Room r1 = nodeToRoom.get(node);
-                    Room r2 = nodeToRoom.get(neighbour);
+                    final Room r1 = nodeToRoom.get(node);
+                    final Room r2 = nodeToRoom.get(neighbour);
 
-                    IDoorDrawer doorDrawer = presenter.getDoorDrawer();
-                    Door door1 = new Door(getRandomPointOnScreen(), doorDrawer, this);
-                    Door door2 = new Door(getRandomPointOnScreen(), doorDrawer, this);
+                    final IDoorDrawer doorDrawer = presenter.getDoorDrawer();
+                    final Door door1 = new Door(getRandomPointOnScreen(), doorDrawer, this);
+                    final Door door2 = new Door(getRandomPointOnScreen(), doorDrawer, this);
 
                     door1.setRoom(r1);
                     door2.setRoom(r2);
@@ -105,7 +105,7 @@ public class Level implements IRoomContainer, IDrawable {
      *
      * @param room a room that will be in container.
      */
-    public void setNewRoom(Room room) {
+    public void setNewRoom(final Room room) {
         if (currentRoom.allEnemiesKilled()) {
             currentRoom = room;
             player.setGunEntityManager(currentRoom.getEntityManager());
@@ -122,7 +122,7 @@ public class Level implements IRoomContainer, IDrawable {
         currentRoom.update();
 
         boolean playerWins = true;
-        for(Room room : rooms){
+        for(final Room room : rooms){
             if(!room.allEnemiesKilled()){
                 playerWins = false;
             }
@@ -157,11 +157,11 @@ public class Level implements IRoomContainer, IDrawable {
      * @param levelLayout the layout of level
      * @return a map of edges
      */
-    private Map<Set<PlanarNode>, Boolean> getEdgeMap(PlanarGraph levelLayout) {
-        Map<Set<PlanarNode>, Boolean> edges = new HashMap<>();
-        for (PlanarNode n1 : levelLayout) {
-            for (PlanarNode n2 : levelLayout) {
-                Set<PlanarNode> pair = new HashSet<>();
+    private Map<Set<PlanarNode>, Boolean> getEdgeMap(final PlanarGraph levelLayout) {
+        final Map<Set<PlanarNode>, Boolean> edges = new HashMap<>();
+        for (final PlanarNode n1 : levelLayout) {
+            for (final PlanarNode n2 : levelLayout) {
+                final Set<PlanarNode> pair = new HashSet<>();
                 pair.add(n1);
                 pair.add(n2);
                 if (n1 != n2 && !edges.containsKey(pair) && n1.getNeighbors().contains(n2)) {
@@ -187,7 +187,7 @@ public class Level implements IRoomContainer, IDrawable {
      *
      * @param dir direction
      */
-    public void movePlayer(Point dir) {
+    public void movePlayer(final Point dir) {
         player.move(dir);
     }
 
@@ -196,7 +196,7 @@ public class Level implements IRoomContainer, IDrawable {
      *
      * @param mousePos position of mouse
      */
-    public void setMousePos(Point mousePos) {
+    public void setMousePos(final Point mousePos) {
         player.setMousePos(mousePos);
     }
 
@@ -205,11 +205,11 @@ public class Level implements IRoomContainer, IDrawable {
      *
      * @param mouseDir direction of fire
      */
-    public void mouseClick(Point mouseDir) {
+    public void mouseClick(final Point mouseDir) {
         player.fire(mouseDir);
     }
 
-    public void updateMerchantNumberKeys(boolean[] keys){
+    public void updateMerchantNumberKeys(final boolean[] keys){
         currentRoom.updateMerchantNumberKeys(keys);
     }
 

@@ -28,15 +28,15 @@ import graphics.otherDrawers.room.IRoomDrawer;
 import graphics.otherDrawers.room.SandRoomDrawer;
 
 public class ShapeDrawerFactory implements IDrawerFactory {
-    private ShapeRenderer shapeRenderer;
-    private Stage stage;
-    private SpriteBatch spriteBatch;
-    private OrthographicCamera camera;
+    private final ShapeRenderer shapeRenderer;
+    private final Stage stage;
+    private final SpriteBatch spriteBatch;
+    private final OrthographicCamera camera;
 
-    private int screenWidth;
-    private int screenHeight;
+    private final int screenWidth;
+    private final int screenHeight;
 
-    public ShapeDrawerFactory(Stage stage, int screenWidth, int screenHeight){
+    public ShapeDrawerFactory(final Stage stage, final int screenWidth, final int screenHeight){
         spriteBatch = new SpriteBatch();
         this.stage = stage;
         shapeRenderer = new ShapeRenderer();
