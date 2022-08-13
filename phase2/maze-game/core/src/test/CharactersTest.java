@@ -67,8 +67,9 @@ public class CharactersTest {
         Player player = new Player(new Point(0,0), null);
         player.setArmour((float)0.2);
         Enemy e = new Enemy(0,0, null);
+        e.setDamage(10);
         player.collideWith(e);
-        assertEquals(99, player.getHealth());
+        assertEquals(98, player.getHealth());
         assertEquals(0, (int)player.getCollisionBox().getCenter().getX());
         assertEquals(0, (int)player.getCollisionBox().getCenter().getY());
     }
