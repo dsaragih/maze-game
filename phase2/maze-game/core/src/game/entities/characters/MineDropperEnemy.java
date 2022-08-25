@@ -17,9 +17,9 @@ public class MineDropperEnemy extends CollidableEntity {
     private IMineDrawer mineDrawer;
     private IEntityManager entityManager;
     private Point targetPoint;
-    private float health = 500;
+    private float health = GameConstants.MINE_DROPPER_MAX_HEALTH;
 
-    private final int value = MathUtils.random(3,6);
+    private int value = MathUtils.random(3,6);
 
     public MineDropperEnemy(Point pos, IMineDropperDrawer mineDropperDrawer, IMineDrawer mineDrawer) {
         super(pos, true);
@@ -34,7 +34,7 @@ public class MineDropperEnemy extends CollidableEntity {
 
     @Override
     public Circle getCollisionBox() {
-        return new Circle(pos, 30);
+        return new Circle(pos, GameConstants.MINE_DROPPER_RADIUS);
     }
 
     @Override
@@ -57,7 +57,7 @@ public class MineDropperEnemy extends CollidableEntity {
         float dist = pos.distanceVector(targetPoint).length();
         if(dist < GameConstants.MINE_DROPPER_SPEED){
             pos = targetPoint;
-            entityManager.addCollidableEntity(new Mine(pos.clone(), mineDrawer, this));
+            entityManager.addCollidableEntity(new Mine(pos.clonePoint(), mineDrawer, this));
             targetPoint = getNewTargetPoint();
         }else{
             Point dir = pos.distanceVector(targetPoint).normalized();

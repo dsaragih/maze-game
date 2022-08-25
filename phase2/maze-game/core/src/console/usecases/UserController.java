@@ -23,7 +23,6 @@ public class UserController {
         if (manager.getUser(username) != null){
             return Msg.FAILURE_USERNAME_TAKEN;
         }
-        User user = new User(username, password, false, 9000);
         manager.addUser(username, password, admin);
         return Msg.SUCCESS;
     }

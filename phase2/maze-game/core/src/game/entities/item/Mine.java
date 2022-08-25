@@ -12,7 +12,6 @@ import graphics.entityDrawers.mine.IMineDrawer;
 public class Mine extends CollidableEntity {
 
     private IMineDrawer mineDrawer;
-    private static float mineRadius = 10;
     private Entity creator;
     private boolean hasDetonated = false;
 
@@ -21,10 +20,15 @@ public class Mine extends CollidableEntity {
         this.mineDrawer = mineDrawer;
         this.creator = creator;
     }
+    public Mine(int x, int y, IMineDrawer mineDrawer, Entity creator) {
+        super(x, y);
+        this.mineDrawer = mineDrawer;
+        this.creator = creator;
+    }
 
     @Override
     public Circle getCollisionBox() {
-        return new Circle(pos, mineRadius);
+        return new Circle(pos, GameConstants.MINE_RADIUS);
     }
 
     @Override
@@ -43,7 +47,7 @@ public class Mine extends CollidableEntity {
     }
 
     public static float getMineRadius(){
-        return mineRadius;
+        return GameConstants.MINE_RADIUS;
     }
 
     @Override

@@ -10,11 +10,4 @@ public class KeyBindings {
     
     public static int USE_CURRENT_ITEM = Input.Buttons.LEFT;
 
-    public static int BUY_1 = Input.Keys.NUM_1;
-    public static int BUY_2 = Input.Keys.NUM_2;
-
-    public static int ADD_SHIELD = Input.Keys.J;
-
-    public static int RESTORE_HEALTH = Input.Keys.K;
-
 }

@@ -7,7 +7,6 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import config.GameConstants;
 import game.entities.rooms.Level;
-import game.entities.characters.Player;
 import graphics.presenters.IUIPresenter;
 import graphics.presenters.UIPresenter;
 import graphics.presenters.IDrawerFactory;
@@ -20,7 +19,6 @@ import manager.InputController;
  * @author Daniel
  */
 public class MazeGame extends ApplicationAdapter {
-	private Player player;
 	private Level level;
 	private IDrawerFactory drawerFactory;
 	private IUIPresenter Presenter;

@@ -6,10 +6,7 @@ import game.entities.item.Mine;
 import game.entities.abstractions.CollidableEntity;
 import game.entities.abstractions.ICollidable;
 import game.entities.abstractions.IPlayerObserver;
-import game.entities.item.Armour;
 import game.entities.item.Gun;
-import game.entities.item.HealthFlask;
-import game.entities.item.Item;
 import manager.IEntityManager;
 import geometry.Circle;
 import geometry.Point;
@@ -17,7 +14,6 @@ import graphics.entityDrawers.player.IPlayerDrawer;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 
 /**
  * Represents the player
@@ -27,19 +23,16 @@ import java.util.Collections;
  */
 public class Player extends CollidableEntity {
 
-    public static final int MAX_HEALTH = 100;
-    private int health = MAX_HEALTH;
-
-    public static final int MAX_SHIELD = 50;
+    private int health = GameConstants.PLAYER_MAX_HEALTH;
     private int shield = 0;
-    private final IPlayerDrawer playerDrawer;
+    private IPlayerDrawer playerDrawer;
     private Collection<IPlayerObserver> observers = new ArrayList<>();
     private Point gunDirection = new Point(0,0);
     private Gun gun;
     private float armourDamageFactor = 1;
 
     private int goldOwned = 100;
-//    public ArrayList<Item> itemOwned = new ArrayList<>(Collections.singletonList(gun));
+
 
     /**
      * Create a player
@@ -90,7 +83,6 @@ public class Player extends CollidableEntity {
         return new Point(pos.getX() + gunDirection.getX() * GameConstants.PLAYER_RADIUS, pos.getY() + gunDirection.getY() * GameConstants.PLAYER_RADIUS);
     }
 
-
     /**
      * Set the mouse position for player
      * @param mousePos the mouse position.
@@ -110,7 +102,9 @@ public class Player extends CollidableEntity {
     public void setGun(Gun gun){
         this.gun = gun;
     }
-
+    public float getArmourDamageFactor(){
+        return armourDamageFactor;
+    }
     public void setArmour(float armourDamageFactor){
         this.armourDamageFactor = armourDamageFactor;
     }
@@ -147,8 +141,8 @@ public class Player extends CollidableEntity {
 
     private void takeDamage(int damage){
         float totalHealth = (health + shield) - damage * armourDamageFactor;
-        health = (int)Math.max(0, Math.min(totalHealth, MAX_HEALTH));
-        shield = (int)Math.max(0, Math.min(totalHealth - health, MAX_SHIELD));
+        health = Math.round(Math.max(0, Math.min(totalHealth, GameConstants.PLAYER_MAX_HEALTH)));
+        shield = Math.round(Math.max(0, Math.min(totalHealth - health, GameConstants.PLAYER_MAX_SHIELD)));
     }
     /**
      * Inform others being collided by player.
@@ -181,7 +175,7 @@ public class Player extends CollidableEntity {
 
     public void addHealth(int healthToAdd){
         health += healthToAdd;
-        health = Math.min(health, MAX_HEALTH);
+        health = Math.min(health, GameConstants.PLAYER_MAX_HEALTH);
     }
     public void addGold(int gold){this.goldOwned += gold;}
 

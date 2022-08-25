@@ -27,8 +27,6 @@ public class TestGraphGenerator implements IGraphGenerator{
         n4.joinUndirected(n8);
         n5.joinUndirected(n6);
         n6.joinUndirected(n10);
-        n6.joinUndirected(n11);
-        n7.joinUndirected(n11);
         n8.joinUndirected(n9);
         n8.joinUndirected(n11);
         n10.joinUndirected(n12);

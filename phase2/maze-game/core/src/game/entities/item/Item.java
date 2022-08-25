@@ -1,9 +1,7 @@
 package game.entities.item;
 
-import game.entities.abstractions.CollidableEntity;
-import game.entities.abstractions.ICollidable;
 import game.entities.characters.Player;
-import geometry.Point;
+
 
 public abstract class Item {
     //Item is an object that can be picked up by the player, and has a value. This is not a class we wrote in phase 1

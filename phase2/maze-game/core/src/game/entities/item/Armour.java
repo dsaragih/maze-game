@@ -1,10 +1,6 @@
 package game.entities.item;
 
 import game.entities.characters.Player;
-import geometry.Circle;
-import geometry.Point;
-
-import static config.GameConstants.ARMOUR_RADIUS;
 
 public class Armour extends Item{
     private float armourDamageFactor;

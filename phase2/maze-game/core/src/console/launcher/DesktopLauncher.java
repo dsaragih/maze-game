@@ -4,7 +4,7 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import config.GameConstants;
 
-// Please note that on macOS your application needs to be started with the -XstartOnFirstThread JVM argument
+// Please note that on macOS your application needs to be started with the -XStartOnFirstThread JVM argument
 
 /**
  * The main class to launch desktop
