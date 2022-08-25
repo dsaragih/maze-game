@@ -1,4 +1,6 @@
 # group_0241 ~ maze-game
+## File Navigation
+The bulk of our code is at: phase2/maze-game/core/src
 
 ## Requirements
 You need JDK 17 to run this program, because libraries used in this project are not compatible with JDK 18.
