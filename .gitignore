@@ -13,5 +13,10 @@
 /phase2/out/
 /.idea/
 /phase0.iml/
+/markus-hooks
+/phase0
+/phase1
+/.required.json
+/contacts.txt
 
 /userManager.ser
